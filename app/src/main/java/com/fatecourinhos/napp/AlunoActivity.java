@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 public class AlunoActivity extends AppCompatActivity {
 
+    private int teste;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
