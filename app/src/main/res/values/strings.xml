@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Napp</string>
+
+    <string name="hint_login">Login</string>
+    <string name="hint_senha">Senha</string>
+    <string name="sobre_nap">Sobre o NAP</string>
+    <string name="btn_entrar">Entrar</string>
+    <string name="txt_cadastrar">Não tem uma conta? <b>Cadastre-se!</b></string>
+    <string name="esqueci_senha">Esqueci minha senha</string>
+    <string name="title_activity_redefinir_senha">RedefinirSenhaActivity</string>
+
+    <string name="hint_email">Insira seu e-mail</string>
+    <string name="btn_redefinir_senha">REDEFINIR SENHA</string>
+    <string name="title_activity_menu_profissional">NAPP</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+</resources>
