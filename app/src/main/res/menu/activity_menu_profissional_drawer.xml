@@ -1,50 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:id="@+id/nav_agendamento"
+            android:icon="@drawable/ic_agendamento"
             android:title="Agendamento" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_indicacoes"
+            android:icon="@drawable/ic_indicacoes"
             android:title="Indicações adicionais" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:id="@+id/nav_notificacoes"
+            android:icon="@drawable/ic_notificacoes"
             android:title="Notificações" />
         <item
-            android:id="@+id/nav_"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:id="@+id/nav_relatorios"
+            android:icon="@drawable/ic_relatorio"
             android:title="Relatórios" />
     </group>
 
     <item android:title="Cadastro">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:id="@+id/nav_profissional"
+                android:icon="@drawable/ic_profissional"
                 android:title="Profissional" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
+                android:id="@+id/nav_profissional_externo"
+                android:icon="@drawable/ic_profissional_externo"
                 android:title="Profissional Externo" />
             <item
-                android:id="@+id/nav_send1"
-                android:icon="@drawable/ic_menu_send"
+                android:id="@+id/nav_local_atendimento"
+                android:icon="@drawable/ic_local_atendimento"
                 android:title="Local de Atendimento" />
             <item
-                android:id="@+id/nav_send11"
-                android:icon="@drawable/ic_menu_send"
+                android:id="@+id/nav_horario_atendimento"
+                android:icon="@drawable/ic_local_atendimento"
                 android:title="Horário de Atendimento" />
             <item
-                android:id="@+id/nav_send111"
-                android:icon="@drawable/ic_menu_send"
+                android:id="@+id/nav_alunos"
+                android:icon="@drawable/ic_alunos"
                 android:title="Alunos" />
         </menu>
     </item>
+    <item android:title="Item" />
 
 </menu>

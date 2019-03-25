@@ -6,10 +6,14 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MenuProfissionalActivity"
-    tools:showIn="@layout/app_bar_menu_profissional">
+    tools:showIn="@layout/app_bar_menu_profissional"
+    android:id="@+id/layout_tela_do_frame">
 
     <FrameLayout
+        android:id="@+id/frame_layout_nav"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></FrameLayout>
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
