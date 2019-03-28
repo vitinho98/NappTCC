@@ -1,3 +1,5 @@
+package com.fatecourinhos.napp.Recycler;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +54,7 @@ public class ProfissionalAdapter extends RecyclerView.Adapter {
             ((ProfissionalViewHolder) holder).imgStatus.setImageResource(R.drawable.ic_clear_black_24dp);
         }
 
-        ((ProfissionalViewHolder) holder).imgEditar.setImageResource(R.drawable.ic_edit_black_24dp);
+        ((ProfissionalViewHolder) holder).imgFoto.setImageResource(R.drawable.ic_edit_black_24dp);
 
     }
 

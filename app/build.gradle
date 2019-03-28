@@ -11,9 +11,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     sourceSets{
-        main{
-            file('src/main/res/layout/fragments').listFiles().each { res.srcDirs += it.path }
-        }
+
     }
     buildTypes {
         release {

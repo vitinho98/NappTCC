@@ -2,10 +2,7 @@ package com.fatecourinhos.napp;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
+import com.fatecourinhos.napp.Fragments.ProfissionalFragment;
 
 import com.google.android.material.navigation.NavigationView;
 

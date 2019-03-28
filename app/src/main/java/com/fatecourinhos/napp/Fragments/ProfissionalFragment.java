@@ -1,10 +1,14 @@
-package com.fatecourinhos.napp;
+package com.fatecourinhos.napp.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+import com.fatecourinhos.napp.Recycler.ProfissionalAdapter;
+import com.fatecourinhos.napp.ProfissionalModel;
+import com.fatecourinhos.napp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +20,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfissionalFragment extends Fragment{
 
+    private RecyclerView recyclerView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
         View rootView = inflater.inflate(R.layout.profissional_fragment,container,false);
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_profissional);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_profissional);
 
         List<ProfissionalModel> profissionais = new ArrayList<>();
         ProfissionalModel p1 = new ProfissionalModel("teste1", "ativo");
