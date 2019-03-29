@@ -1,4 +1,4 @@
-package com.fatecourinhos.napp;
+package com.fatecourinhos.napp.model;
 
 public class ProfissionalModel {
 

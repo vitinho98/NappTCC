@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll_tela_login"
@@ -13,7 +14,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/wallpaper_tela_login"
             android:id="@+id/layout_tela_login"
-            tools:context=".LoginActivity">
+            tools:context=".view.LoginActivity">
 
                 <Button
                     android:id="@+id/btn_entrar"

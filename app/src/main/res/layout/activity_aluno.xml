@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AlunoActivity"
+        tools:context=".view.AlunoActivity"
         android:id="@+id/layout_tela_cadastro_aluno">
 
 

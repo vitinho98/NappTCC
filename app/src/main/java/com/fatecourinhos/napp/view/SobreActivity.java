@@ -1,8 +1,10 @@
-package com.fatecourinhos.napp;
+package com.fatecourinhos.napp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.fatecourinhos.napp.R;
 
 public class SobreActivity extends AppCompatActivity {
 
