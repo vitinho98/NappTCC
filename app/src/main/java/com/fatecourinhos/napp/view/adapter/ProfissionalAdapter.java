@@ -1,6 +1,8 @@
 package com.fatecourinhos.napp.view.adapter;
 
+import android.net.sip.SipSession;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapter.ViewHolder>{
 
     private List<ProfissionalModel> profissionais;
+    private Listener listener;
+
+    public static interface Listener{
+        public void onClick(ProfissionalModel profissional);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -33,6 +40,10 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
         this.profissionais=profissionais;
     }
 
+    public void setListener(Listener listener){
+        this.listener = listener;
+    }
+
     @NonNull
     @Override
     public ProfissionalAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,14 +53,14 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         CardView cardView = holder.cardView;
         ImageView imgFoto = (ImageView)cardView.findViewById(R.id.foto_profissional_lista);
         ImageView imgStatus = (ImageView)cardView.findViewById(R.id.img_status_profissional_lista);
         TextView txtNome = (TextView)cardView.findViewById(R.id.txt_nome_profissional_lista);
 
-        ProfissionalModel profissional = profissionais.get(position);
+        final ProfissionalModel profissional = profissionais.get(position);
 
         txtNome.setText(profissional.getNome());
 
@@ -60,6 +71,15 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
         }
 
         imgFoto.setImageResource(R.drawable.ic_profissional);
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener!=null){
+                    listener.onClick(profissional);
+                }
+            }
+        });
 
 
     }

@@ -27,6 +27,11 @@
 
     <!-- Tela cadastro aluno strings -->
 
+    <!-- Tela cadastro profissional strings -->
+    <string name="hint_nome">Nome</string>
+
+    <!-- Tela cadastro profissional strings -->
+
     <string name="hint_email">Insira seu e-mail</string>
     <string name="btn_redefinir_senha">REDEFINIR SENHA</string>
     <string name="title_activity_menu_profissional">NAPP</string>
