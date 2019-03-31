@@ -1,5 +1,6 @@
 package com.fatecourinhos.napp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
@@ -22,6 +23,7 @@ import android.view.View;
 
 public class MenuProfissionalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,13 +32,6 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -46,6 +41,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_profissional);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     //quando o botao da drawer na toolbar é apertado
