@@ -39,7 +39,7 @@ public class Profissional {
 
     public void setNomeProfissional(String nomeProfissional) {
         this.nomeProfissional = nomeProfissional;
-    }
+}
 
     public String getFormacao() {
         return formacao;
