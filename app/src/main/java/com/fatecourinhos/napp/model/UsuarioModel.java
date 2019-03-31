@@ -6,12 +6,12 @@ public class UsuarioModel {
     private String login;
     private String senha;
     private String tipoUsuario;
-    private boolean status;
+    private int status;
 
     public UsuarioModel() {
     }
 
-    public UsuarioModel(int idUsuario, String login, String senha, String tipoUsuario, boolean status) {
+    public UsuarioModel(int idUsuario, String login, String senha, String tipoUsuario, int status) {
         this.idUsuario = idUsuario;
         this.login = login;
         this.senha = senha;
@@ -51,11 +51,11 @@ public class UsuarioModel {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public boolean isStatus() {
+    public int isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }
