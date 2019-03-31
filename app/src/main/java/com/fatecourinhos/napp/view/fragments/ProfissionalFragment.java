@@ -51,6 +51,9 @@ public class ProfissionalFragment extends Fragment{
             }
         });
 
+
+
+
         return profissionalRecycler;
 
     }

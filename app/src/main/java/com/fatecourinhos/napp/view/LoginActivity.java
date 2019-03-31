@@ -21,5 +21,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void ir(View v){
         startActivity(new Intent(this, MenuProfissionalActivity.class));
+        finish();
     }
 }
