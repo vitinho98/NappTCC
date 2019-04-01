@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.controller;
 
-import com.fatecourinhos.napp.model.Profissional;
+import com.fatecourinhos.napp.model.ProfissionalModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProfissionalJSONParser {
-    public static List<Profissional> parseDado(String content){
+    public static List<ProfissionalModel> parseDado(String content){
         try{
 
             JSONArray jsonArray = new JSONArray();
-            List<Profissional> profissionalList = new ArrayList<>();
+            List<ProfissionalModel> profissionalList = new ArrayList<>();
 
             for(int i=0; i<jsonArray.length(); i++){
 
                 JSONObject jsonObject =jsonArray.getJSONObject(i);
-                Profissional profissional = new Profissional();
+                ProfissionalModel profissional = new ProfissionalModel();
 
                 profissional.setIdProfissional(jsonObject.getInt("id"));
                 profissional.setNomeProfissional(jsonObject.getString("nomeProfissional"));
