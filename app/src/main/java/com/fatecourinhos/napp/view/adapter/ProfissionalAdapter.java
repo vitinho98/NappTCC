@@ -1,6 +1,5 @@
 package com.fatecourinhos.napp.view.adapter;
 
-import android.net.sip.SipSession;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.ProfissionalModel;
 
+import com.fatecourinhos.napp.model.ProfissionalModel;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -62,9 +61,9 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
 
         final ProfissionalModel profissional = profissionais.get(position);
 
-        txtNome.setText(profissional.getNome());
+        txtNome.setText(profissional.getNomeProfissional());
 
-        if(profissional.getStatus().equals("ativo")){
+        if(profissional.getFkUsuario().getStatus() == 1){
             imgStatus.setImageResource(R.drawable.ic_ativo);
         }else{
             imgStatus.setImageResource(R.drawable.ic_clear_black_24dp);

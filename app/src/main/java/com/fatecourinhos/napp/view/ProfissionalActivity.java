@@ -10,7 +10,7 @@ import com.fatecourinhos.napp.R;
 
 public class ProfissionalActivity extends AppCompatActivity {
 
-    private EditText editTextNome;
+    private AppCompatEditText editTextNome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class ProfissionalActivity extends AppCompatActivity {
 
         if((getIntent().getExtras()!=null)) {
 
-            String nome = (String) getIntent().getExtras().get("nome");
+            String nome = (String) getIntent().getExtras().get("nomeProfissional");
 
             editTextNome = findViewById(R.id.edit_text_nome_profissional);
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_profissional_externo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txt_nome_profissional_externo_lista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nome"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/txt_cidade_profissional_externo_lista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cidade"
+            android:layout_marginBottom="5dp"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
+
+        <TextView
+            android:id="@+id/txt_telefone_profissional_externo_lista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="telefone"
+            android:layout_marginBottom="5dp"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

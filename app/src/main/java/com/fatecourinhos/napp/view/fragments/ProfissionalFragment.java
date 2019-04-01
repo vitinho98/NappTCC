@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.view.ProfissionalActivity;
 import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
 
+import com.fatecourinhos.napp.model.ProfissionalModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +30,8 @@ public class ProfissionalFragment extends Fragment{
 
         final List<ProfissionalModel> profissionais = new ArrayList<ProfissionalModel>();
 
-        ProfissionalModel p1 = new ProfissionalModel("Rose", "ativo");
-        ProfissionalModel p2 = new ProfissionalModel("Eunice", "inativo");
+        ProfissionalModel p1 = new ProfissionalModel();
+        ProfissionalModel p2 = new ProfissionalModel();
 
         profissionais.add(p1);
         profissionais.add(p2);
@@ -46,12 +46,10 @@ public class ProfissionalFragment extends Fragment{
             @Override
             public void onClick(ProfissionalModel profissional) {
                 Intent intent = new Intent(getActivity(), ProfissionalActivity.class);
-                intent.putExtra("nome", profissional.getNome());
+                intent.putExtra("nomeProfissional", profissional.getNomeProfissional());
                 getActivity().startActivity(intent);
             }
         });
-
-
 
 
         return profissionalRecycler;

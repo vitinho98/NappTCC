@@ -51,7 +51,7 @@ public class UsuarioModel {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public int isStatus() {
+    public int getStatus() {
         return status;
     }
 
