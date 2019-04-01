@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.view.fragments.ProfissionalFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;

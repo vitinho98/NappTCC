@@ -4,6 +4,7 @@ public class LocalAtendimentoModel {
 
     private int idLocalAtendimento;
     private String nomeLocal;
+    private String nomeBloco;
 
     public LocalAtendimentoModel() {
     }
@@ -27,5 +28,13 @@ public class LocalAtendimentoModel {
 
     public void setNomeLocal(String nomeLocal) {
         this.nomeLocal = nomeLocal;
+    }
+
+    public String getNomeBloco() {
+        return nomeBloco;
+    }
+
+    public void setNomeBloco(String nomeBloco) {
+        this.nomeBloco = nomeBloco;
     }
 }

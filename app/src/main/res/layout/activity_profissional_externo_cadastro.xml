@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_tela_cadastro_profissional_externo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_tela_cadastro_profissional_externo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".view.LoginActivity">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_nome_profissional_externo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_nome_profissional_externo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_nome"
+                android:inputType="text"
+                tools:ignore="MissingConstraints" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_cidade_profissional_externo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_nome_profissional_externo"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_cidade_profissional_externo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="cidade"
+                android:inputType="text"
+                tools:ignore="MissingConstraints" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_endereco_profissional_externo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_cidade_profissional_externo"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_endereco_profissional_externo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="endereco"
+                android:inputType="text"
+                tools:ignore="MissingConstraints" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_bairro_profissional_externo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_endereco_profissional_externo"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_bairro_profissional_externo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@bairro"
+                android:inputType="text"
+                tools:ignore="MissingConstraints" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_numero_profissional_externo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_bairro_profissional_externo"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_numero_profissional_externo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@numero"
+                android:inputType="text"
+                tools:ignore="MissingConstraints" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_email_profissional_externo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_numero_profissional_externo"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_email_profissional_externo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="email"
+                android:inputType="text"
+                tools:ignore="MissingConstraints" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_telefone_profissional_externo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_celular_profissional_externo"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_telefone_profissional_externo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="telefone"
+                android:inputType="text"
+                tools:ignore="MissingConstraints" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_celular_profissional_externo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_email_profissional_externo"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_celular_profissional_externo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="celular"
+                android:inputType="text"
+                tools:ignore="MissingConstraints" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="32dp"
+            android:text="CADASTRAR"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_telefone_profissional_externo" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

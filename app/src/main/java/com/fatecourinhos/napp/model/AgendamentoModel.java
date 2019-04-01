@@ -10,13 +10,13 @@ public class AgendamentoModel {
     private String observacao;
     private boolean Status;
     private AlunoModel fkAluno;
-    private Profissional fkProfissional;
+    private ProfissionalModel fkProfissional;
     private LocalAtendimentoModel fkLocalAtendimento;
 
     public AgendamentoModel() {
     }
 
-    public AgendamentoModel(int idAgendamento, Date dataHoraAgendamento, Date dataHoraRegistro, String observacao, boolean status, AlunoModel fkAluno, Profissional fkProfissional, LocalAtendimentoModel fkLocalAtendimento) {
+    public AgendamentoModel(int idAgendamento, Date dataHoraAgendamento, Date dataHoraRegistro, String observacao, boolean status, AlunoModel fkAluno, ProfissionalModel fkProfissional, LocalAtendimentoModel fkLocalAtendimento) {
         this.idAgendamento = idAgendamento;
         this.dataHoraAgendamento = dataHoraAgendamento;
         this.dataHoraRegistro = dataHoraRegistro;
@@ -75,11 +75,11 @@ public class AgendamentoModel {
         this.fkAluno = fkAluno;
     }
 
-    public Profissional getFkProfissional() {
+    public ProfissionalModel getFkProfissional() {
         return fkProfissional;
     }
 
-    public void setFkProfissional(Profissional fkProfissional) {
+    public void setFkProfissional(ProfissionalModel fkProfissional) {
         this.fkProfissional = fkProfissional;
     }
 
