@@ -26,18 +26,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfissionalFragment extends Fragment{
 
-    List<ProfissionalModel> profissionalList;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
-        buscarDados("http://192.168.0.43/testetcc/APIConsultarDados.php");
-
         RecyclerView profissionalRecycler = (RecyclerView)inflater.inflate(R.layout.profissional_fragment,container,false);
 
+        final List<ProfissionalModel> profissionais = new ArrayList<ProfissionalModel>();
 
-        ProfissionalAdapter adapter = new ProfissionalAdapter(profissionalList);
+        ProfissionalModel p1 = new ProfissionalModel();
+        ProfissionalModel p2 = new ProfissionalModel();
+
+        UsuarioModel u1  = new UsuarioModel();
+        UsuarioModel u2  = new UsuarioModel();
+
+        u1.setStatus(1);
+        u2.setStatus(0);
+
+        p1.setFkUsuario(u1);
+        p1.setNomeProfissional("Rose");
+
+        p2.setFkUsuario(u2);
+        p2.setNomeProfissional("Eunice");
+
+        profissionais.add(p1);
+        profissionais.add(p2);
+
+        ProfissionalAdapter adapter = new ProfissionalAdapter(profissionais);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
         profissionalRecycler.setLayoutManager(layoutManager);
@@ -51,6 +66,7 @@ public class ProfissionalFragment extends Fragment{
                 getActivity().startActivity(intent);
             }
         });
+
 
         return profissionalRecycler;
 
@@ -66,7 +82,7 @@ public class ProfissionalFragment extends Fragment{
         getActivity().setTitle("Profissionais do Núcleo");
 
     }
-
+    /*
     private void buscarDados(String uri){
         MyTask mytask = new MyTask();
         mytask.execute(uri);
@@ -89,5 +105,5 @@ public class ProfissionalFragment extends Fragment{
         }
     }
 
-
+    */
 }
