@@ -46,9 +46,9 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent;
-
+                Intent intent = new Intent(MenuProfissionalActivity.this, ProfissionalActivity.class);
+                startActivity(intent);
+                /*
                 switch (navigationView.getCheckedItem().getItemId()) {
 
                     case R.id.nav_profissional:
@@ -72,6 +72,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                         break;
 
                 }
+                */
 
             }
         });

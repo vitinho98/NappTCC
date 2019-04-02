@@ -1,6 +1,7 @@
 package com.fatecourinhos.napp.view.fragments;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.controller.HttpManager;
+import com.fatecourinhos.napp.controller.ProfissionalJSONParser;
 import com.fatecourinhos.napp.model.UsuarioModel;
 import com.fatecourinhos.napp.view.ProfissionalActivity;
 import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
@@ -23,33 +26,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfissionalFragment extends Fragment{
 
+    List<ProfissionalModel> profissionalList;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
+        buscarDados("http://192.168.0.43/testetcc/APIConsultarDados.php");
+
         RecyclerView profissionalRecycler = (RecyclerView)inflater.inflate(R.layout.profissional_fragment,container,false);
 
-        final List<ProfissionalModel> profissionais = new ArrayList<ProfissionalModel>();
 
-        ProfissionalModel p1 = new ProfissionalModel();
-        ProfissionalModel p2 = new ProfissionalModel();
-
-        UsuarioModel u1  = new UsuarioModel();
-        UsuarioModel u2  = new UsuarioModel();
-
-        u1.setStatus(1);
-        u2.setStatus(0);
-
-        p1.setFkUsuario(u1);
-        p1.setNomeProfissional("Rose");
-
-        p2.setFkUsuario(u2);
-        p2.setNomeProfissional("Eunice");
-
-        profissionais.add(p1);
-        profissionais.add(p2);
-
-        ProfissionalAdapter adapter = new ProfissionalAdapter(profissionais);
+        ProfissionalAdapter adapter = new ProfissionalAdapter(profissionalList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
         profissionalRecycler.setLayoutManager(layoutManager);
@@ -64,10 +52,11 @@ public class ProfissionalFragment extends Fragment{
             }
         });
 
-
         return profissionalRecycler;
 
     }
+
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstance){
@@ -77,5 +66,28 @@ public class ProfissionalFragment extends Fragment{
         getActivity().setTitle("Profissionais do Núcleo");
 
     }
+
+    private void buscarDados(String uri){
+        MyTask mytask = new MyTask();
+        mytask.execute(uri);
+    }
+
+    private class MyTask extends AsyncTask<String, String, List<ProfissionalModel>>{
+
+        @Override
+        protected List<ProfissionalModel> doInBackground(String... params) {
+
+            String conteudo = HttpManager.getDados(params[0]);
+            profissionalList = ProfissionalJSONParser.parseDados(conteudo);
+
+            return profissionalList;
+        }
+
+        @Override
+        protected void onPostExecute(List<ProfissionalModel> profissionalModels) {
+            //atualizarView();
+        }
+    }
+
 
 }
