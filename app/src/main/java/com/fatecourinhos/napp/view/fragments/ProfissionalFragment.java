@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.model.UsuarioModel;
 import com.fatecourinhos.napp.view.ProfissionalActivity;
 import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
 
@@ -32,6 +33,18 @@ public class ProfissionalFragment extends Fragment{
 
         ProfissionalModel p1 = new ProfissionalModel();
         ProfissionalModel p2 = new ProfissionalModel();
+
+        UsuarioModel u1  = new UsuarioModel();
+        UsuarioModel u2  = new UsuarioModel();
+
+        u1.setStatus(1);
+        u2.setStatus(0);
+
+        p1.setFkUsuario(u1);
+        p1.setNomeProfissional("Rose");
+
+        p2.setFkUsuario(u2);
+        p2.setNomeProfissional("Eunice");
 
         profissionais.add(p1);
         profissionais.add(p2);

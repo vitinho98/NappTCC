@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.view.fragments.HorarioAtendimentoFragment;
+import com.fatecourinhos.napp.view.fragments.LocalAtendimentoFragment;
+import com.fatecourinhos.napp.view.fragments.ProfissionalExternoFragment;
 import com.fatecourinhos.napp.view.fragments.ProfissionalFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -36,15 +39,40 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_profissional);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_profissional);
         navigationView.setNavigationItemSelectedListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MenuProfissionalActivity.this, ProfissionalActivity.class);
-                startActivity(intent);
+
+                Intent intent;
+
+                switch (navigationView.getCheckedItem().getItemId()) {
+
+                    case R.id.nav_profissional:
+                        intent = new Intent(MenuProfissionalActivity.this, ProfissionalActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.nav_horario_atendimento:
+                        intent = new Intent(MenuProfissionalActivity.this, CadastroHorario.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.nav_local_atendimento:
+                        intent = new Intent(MenuProfissionalActivity.this, CadastroLocal.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.nav_profissional_externo:
+                        intent = new Intent(MenuProfissionalActivity.this, ProfissionalExternoActivity.class);
+                        startActivity(intent);
+                        break;
+
+                }
+
             }
         });
 
@@ -98,7 +126,19 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         switch (itemid) {
             case R.id.nav_profissional:
                 fragment = new ProfissionalFragment();
+                break;
 
+            case R.id.nav_horario_atendimento:
+                fragment = new HorarioAtendimentoFragment();
+                break;
+
+            case R.id.nav_local_atendimento:
+                fragment = new LocalAtendimentoFragment();
+                break;
+
+            case R.id.nav_profissional_externo:
+                fragment = new ProfissionalExternoFragment();
+                break;
 
         }
 
