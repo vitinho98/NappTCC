@@ -11,6 +11,7 @@
         android:id="@+id/layout_tela_cadastro_profissional"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="50dp"
         tools:context=".view.LoginActivity">
 
         <ImageView
@@ -151,7 +152,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerProf"
             android:layout_width="244dp"
             android:layout_height="26dp"
             android:layout_marginTop="32dp"
@@ -161,7 +162,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_layout_senha_profissional" />
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/switchProf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -169,7 +170,8 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Status"
+            android:checked="true"
+            android:text="Status: Ativo"
             app:layout_constraintEnd_toStartOf="@+id/spinner"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -186,9 +188,9 @@
             android:layout_marginRight="32dp"
             android:text="CADASTRAR"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerProf" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

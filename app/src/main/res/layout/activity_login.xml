@@ -10,10 +10,10 @@
     android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_tela_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/wallpaper_tela_login"
-            android:id="@+id/layout_tela_login"
             tools:context=".view.LoginActivity">
 
                 <Button
@@ -150,6 +150,7 @@
                     android:layout_marginRight="32dp"
                     android:gravity="center"
                     android:text="@string/nap_txt"
+                    android:textColor="#42F"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toTopOf="@+id/txt_fatec"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -168,6 +169,7 @@
                     android:layout_marginRight="32dp"
                     android:layout_marginBottom="32dp"
                     android:text="@string/fatec_ourinhos"
+                    android:textColor="#42F"
                     android:textSize="30sp"
                     app:layout_constraintBottom_toTopOf="@+id/txt_layout_login"
                     app:layout_constraintEnd_toEndOf="parent"
