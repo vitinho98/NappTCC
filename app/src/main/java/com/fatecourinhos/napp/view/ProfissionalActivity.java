@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.HttpManager;
@@ -63,7 +64,7 @@ public class ProfissionalActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                enviarDados("http://192.168.0.43/testetcc/APIIncluirDados.php");
+                enviarDados("http://192.168.0.11/testetcc/APIIncluirDados.php");
 
             }
         });
@@ -79,10 +80,10 @@ public class ProfissionalActivity extends AppCompatActivity {
         usuario.setSenha(editTextSenha.getText().toString());
 
         usuario.setTipoUsuario("Administrador");
-        spinnerProf.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinnerProf.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i){
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                switch (position){
                     case 0:
                         usuario.setTipoUsuario("Administrador");
                         break;
@@ -91,14 +92,21 @@ public class ProfissionalActivity extends AppCompatActivity {
                         break;
                 }
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                usuario.setTipoUsuario("Administrador");
+            }
+
         });
+
+        usuario.setStatus(1);
 
         if(switchProf.isChecked()){
             usuario.setStatus(0);
         }else{
             usuario.setStatus(1);
         }
-
 
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
@@ -125,15 +133,22 @@ public class ProfissionalActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            String conteudo = (String) HttpManager.getDados(params[0]);
+            final String conteudo = (String) HttpManager.getDados(params[0]);
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(ProfissionalActivity.this, conteudo, Toast.LENGTH_LONG).show();
+                }
+            });
             return conteudo;
         }
 
         @Override
         protected void onPostExecute(String s) {
-            Intent intent = new Intent(ProfissionalActivity.this, MenuProfissionalActivity.class);
-            startActivity(intent);
-            finish();
+            //Intent intent = new Intent(ProfissionalActivity.this, MenuProfissionalActivity.class);
+            //startActivity(intent);
+            //finish();
         }
     }
 }
