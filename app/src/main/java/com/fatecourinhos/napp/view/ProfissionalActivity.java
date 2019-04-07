@@ -120,12 +120,12 @@ public class ProfissionalActivity extends AppCompatActivity {
         requestHttp.setParametro("tipoProfissional", usuario.getTipoUsuario());
         requestHttp.setParametro("statusProfissional", String.valueOf(usuario.getStatus()));
 
-        MyTask task = new MyTask();
+        CadProf task = new CadProf();
         task.execute(requestHttp);
     }
 
 
-    private class MyTask extends AsyncTask<RequestHttp, String, String>{
+    private class CadProf extends AsyncTask<RequestHttp, String, String>{
         @Override
         protected void onPreExecute() {
 
@@ -135,12 +135,12 @@ public class ProfissionalActivity extends AppCompatActivity {
         protected String doInBackground(RequestHttp... params) {
             final String conteudo = (String) HttpManager.getDados(params[0]);
 
-            runOnUiThread(new Runnable() {
+            /*runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     Toast.makeText(ProfissionalActivity.this, conteudo, Toast.LENGTH_LONG).show();
                 }
-            });
+            });*/
             return conteudo;
         }
 

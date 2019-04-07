@@ -25,17 +25,14 @@ public class ProfissionalJSONParser {
                 profissional.setNomeProfissional(jsonObject.getString("nomeProfissional"));
                 profissional.setCelularProfissional(jsonObject.getString("celProfissional"));
                 profissional.setEmailProfissional(jsonObject.getString("emailProfissional"));
+                usuarioModel.setLogin(jsonObject.getString("login"));
+                usuarioModel.setSenha(jsonObject.getString("senha"));
+                usuarioModel.setTipoUsuario(jsonObject.getString("tipo"));
+                usuarioModel.setStatus(jsonObject.getInt("status"));
+                profissional.setFkUsuario(usuarioModel);
 
                 profissionalList.add(profissional);
 
-                /*
-                usuarioModel.setLogin(jsonObject.getString("login"));
-                usuarioModel.setSenha(jsonObject.getString("senha"));
-                usuarioModel.setStatus(jsonObject.getInt("status"));
-                usuarioModel.setTipoUsuario(jsonObject.getString("tipo"));
-
-                profissional.setFkUsuario(usuarioModel);
-                */
             }
 
 

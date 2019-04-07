@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.fatecourinhos.napp.R;
@@ -26,11 +27,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfissionalFragment extends Fragment{
 
+    List<ProfissionalModel> profissionalList;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
+
         RecyclerView profissionalRecycler = (RecyclerView)inflater.inflate(R.layout.profissional_fragment,container,false);
+
 
         final List<ProfissionalModel> profissionais = new ArrayList<ProfissionalModel>();
 
@@ -70,6 +75,7 @@ public class ProfissionalFragment extends Fragment{
 
         return profissionalRecycler;
 
+
     }
 
 
@@ -82,28 +88,46 @@ public class ProfissionalFragment extends Fragment{
         getActivity().setTitle("Profissionais do Núcleo");
 
     }
-    /*
-    private void buscarDados(String uri){
-        MyTask mytask = new MyTask();
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        profissionalList = new ArrayList<>();
+
+        buscarDados("http://192.168.0.11/testetcc/APIConsultarDados.php");
+    }
+
+    private void buscarDados(String uri) {
+        SelectProf mytask = new SelectProf();
         mytask.execute(uri);
     }
 
-    private class MyTask extends AsyncTask<String, String, List<ProfissionalModel>>{
+    private class SelectProf extends AsyncTask<String, String, List<ProfissionalModel>>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
         @Override
         protected List<ProfissionalModel> doInBackground(String... params) {
-
-            String conteudo = HttpManager.getDados(params[0]);
+            final String conteudo = HttpManager.getDados(params[0]);
             profissionalList = ProfissionalJSONParser.parseDados(conteudo);
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(), conteudo, Toast.LENGTH_LONG).show();
+                }
+            });
 
             return profissionalList;
         }
 
         @Override
         protected void onPostExecute(List<ProfissionalModel> profissionalModels) {
-            //atualizarView();
+            super.onPostExecute(profissionalModels);
         }
     }
-
-    */
 }
