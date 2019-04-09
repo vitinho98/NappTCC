@@ -13,7 +13,7 @@ public class ProfissionalJSONParser {
     public static List<ProfissionalModel> parseDados(String content){
         try{
 
-            JSONArray jsonArray = new JSONArray();
+            JSONArray jsonArray = new JSONArray(content);
             List<ProfissionalModel> profissionalList = new ArrayList<>();
             UsuarioModel usuarioModel = new UsuarioModel();
 

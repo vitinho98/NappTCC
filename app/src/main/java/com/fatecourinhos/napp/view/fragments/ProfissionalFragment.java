@@ -95,12 +95,16 @@ public class ProfissionalFragment extends Fragment{
 
         profissionalList = new ArrayList<>();
 
-        buscarDados("http://192.168.0.11/testetcc/APIConsultarDados.php");
+        buscarDados("http://185.201.11.219/public_html/napp/APIConsultarDados.php");
     }
 
     private void buscarDados(String uri) {
         SelectProf mytask = new SelectProf();
         mytask.execute(uri);
+    }
+
+    private void atualizarView(List<ProfissionalModel> profissionalList){
+        ProfissionalAdapter adapter = new ProfissionalAdapter(profissionalList);
     }
 
     private class SelectProf extends AsyncTask<String, String, List<ProfissionalModel>>{
@@ -118,16 +122,19 @@ public class ProfissionalFragment extends Fragment{
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+
                     Toast.makeText(getActivity(), conteudo, Toast.LENGTH_LONG).show();
                 }
             });
+
 
             return profissionalList;
         }
 
         @Override
-        protected void onPostExecute(List<ProfissionalModel> profissionalModels) {
-            super.onPostExecute(profissionalModels);
+        protected void onPostExecute(final List<ProfissionalModel> profissionalModel) {
+            super.onPostExecute(profissionalModel);
+            //atualizarView(profissionalModel);
         }
     }
 }

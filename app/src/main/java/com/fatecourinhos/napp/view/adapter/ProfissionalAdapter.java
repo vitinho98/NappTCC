@@ -48,6 +48,7 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
     public ProfissionalAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         CardView cv = (CardView)LayoutInflater.from(parent.getContext()).inflate(R.layout.view_holder_profissional,parent,false);
+        cv.setMinimumWidth(2000);
         return new ViewHolder(cv);
     }
 
