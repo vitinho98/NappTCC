@@ -95,7 +95,7 @@ public class ProfissionalFragment extends Fragment{
 
         profissionalList = new ArrayList<>();
 
-        buscarDados("http://185.201.11.219/public_html/napp/APIConsultarDados.php");
+        buscarDados("http://vitorsilva.xyz/napp/APIConsultarDados.php");
     }
 
     private void buscarDados(String uri) {

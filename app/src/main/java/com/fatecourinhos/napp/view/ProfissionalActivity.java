@@ -135,12 +135,12 @@ public class ProfissionalActivity extends AppCompatActivity {
         protected String doInBackground(RequestHttp... params) {
             final String conteudo = (String) HttpManager.getDados(params[0]);
 
-            /*runOnUiThread(new Runnable() {
+            runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     Toast.makeText(ProfissionalActivity.this, conteudo, Toast.LENGTH_LONG).show();
                 }
-            });*/
+            });
             return conteudo;
         }
 
