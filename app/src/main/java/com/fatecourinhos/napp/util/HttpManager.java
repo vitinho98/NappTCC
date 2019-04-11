@@ -1,5 +1,7 @@
-package com.fatecourinhos.napp.controller;
+package com.fatecourinhos.napp.util;
 
+
+import com.fatecourinhos.napp.util.RequestHttp;
 
 import org.json.JSONObject;
 

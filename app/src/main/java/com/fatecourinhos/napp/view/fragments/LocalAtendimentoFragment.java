@@ -1,6 +1,5 @@
 package com.fatecourinhos.napp.view.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +7,7 @@ import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.LocalAtendimentoModel;
-import com.fatecourinhos.napp.model.ProfissionalExternoModel;
-import com.fatecourinhos.napp.view.ProfissionalExternoActivity;
 import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
-import com.fatecourinhos.napp.view.adapter.ProfissionalExternoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +23,7 @@ public class LocalAtendimentoFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
-        RecyclerView localAtendimentoRecycler = (RecyclerView)inflater.inflate(R.layout.local_atendimento_fragment,container,false);
+        RecyclerView localAtendimentoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_local_atendimento,container,false);
 
         final List<LocalAtendimentoModel> locaisAtendimento = new ArrayList<LocalAtendimentoModel>();
 

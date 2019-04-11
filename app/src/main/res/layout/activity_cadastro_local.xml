@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.CadastroLocal">
+    tools:context=".view.LocalAtendimentoCadastro">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txt_layout_nome_bloco"
@@ -17,7 +17,7 @@
             android:id="@+id/edit_text_nome_bloco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Bloco"
+            android:hint="@string/hint_bloco"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -32,7 +32,7 @@
             android:id="@+id/edit_text_nome_sala"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Sala"
+            android:hint="@string/hint_sala"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>

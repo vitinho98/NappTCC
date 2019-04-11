@@ -33,10 +33,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txt_nome_profissional_lista"
+                android:id="@+id/txt_nome_profissional_cab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="nome"
+                android:text=""
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
         </LinearLayout>

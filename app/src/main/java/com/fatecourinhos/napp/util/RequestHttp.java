@@ -1,4 +1,4 @@
-package com.fatecourinhos.napp.controller;
+package com.fatecourinhos.napp.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

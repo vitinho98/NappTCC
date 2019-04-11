@@ -1,17 +1,13 @@
 <resources>
     <string name="app_name">Napp</string>
-    <string name="title_activity_redefinir_senha">RedefinirSenhaActivity</string>
 
     <!-- Tela de login strings -->
-    <string name="hint_login">Login</string>
-    <string name="hint_senha">Senha</string>
     <string name="sobre_nap">Sobre o NAP</string>
     <string name="btn_entrar">Entrar</string>
     <string name="txt_cadastrar">Não tem uma conta? <b>Cadastre-se!</b></string>
     <string name="esqueci_senha">Esqueci minha senha</string>
     <string name="nap_txt">Núcleo de Apoio Psicopedagógico</string>
     <string name="fatec_ourinhos">Fatec Ourinhos</string>
-    <!-- Tela de login strings -->
 
     <!-- Tela sobre strings -->
     <string name="nap_txt_abreviado"><b>SOBRE O NAP</b></string>
@@ -21,19 +17,21 @@
     <string name="txt_objetivo_2">- Auxiliar e proporcionar aos discentes informações diversas relacionadas às suas carreiras acadêmica e profissional;</string>
     <string name="txt_objetivo_3">- Detectar problemas diversos no âmbito educacional, proporcionando acompanhamentos que possibilitem resultados diretos na melhoria e desenvolvimento do curso;</string>
     <string name="txt_objetivo_4">- Estabelecer convênios, parcerias e encaminhamentos que possam trazer informações e benefícios aos alunos do ADS.</string>
-    <!-- Tela sobre strings -->
 
-    <!-- Tela cadastro aluno strings -->
+    <!-- Itens Menu -->
+    <string name="item_agendamento">Agendamento</string>
+    <string name="item_alunos">Alunos</string>
+    <string name="item_indicacoes_adicionais">Indicações adicionais</string>
+    <string name="item_notificacoes">Notificações</string>
+    <string name="item_relatorios">Relatórios</string>
+    <string name="item_profissional">Profissional</string>
+    <string name="item_profissional_externo">Profissional Externo</string>
+    <string name="item_local_atendimento">Local de Atendimento</string>
+    <string name="item_horario_atendimento">Horário de Atendimento</string>
+    <string name="item_responsavel">Responsavel</string>
+    <string name="item_sair">Sair</string>
 
-    <!-- Tela cadastro aluno strings -->
-
-    <!-- Tela cadastro profissional strings -->
-    <string name="hint_nome">Nome</string>
-
-    <!-- Tela cadastro profissional strings -->
-
-    <string name="hint_email">Insira seu e-mail</string>
-    <string name="btn_redefinir_senha">REDEFINIR SENHA</string>
+    <!-- Sei la de onde saiu isso -->
     <string name="title_activity_menu_profissional">NAPP</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -42,10 +40,44 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Cadastros/Listas -->
+    <string name="txt_bloco">Bloco:</string>
+    <string name="txt_local">Local:</string>
+    <string name="txt_dia">Dia:</string>
+    <string name="txt_horario">Horário:</string>
+    <string name="btn_salvar">SALVAR</string>
+    <string name="txt_status">Status:</string>
+    <string name="txt_dia_da_semana">Dia da semana</string>
+
+    <!-- Hints -->
+    <string name="hint_nome">Nome</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_senha">Senha</string>
+    <string name="hint_horario">Horário</string>
+    <string name="hint_telefone">Telefone</string>
+    <string name="hint_celular">Celular</string>
+    <string name="hint_bloco">Bloco</string>
+    <string name="hint_sala">Sala</string>
+    <string name="hint_cidade">Cidade</string>
+    <string name="hint_endereco">Endereço</string>
+    <string name="hint_bairro">bairro</string>
+    <string name="hint_numero_casa">Número</string>
+    <string name="hint_email">E-mail</string>
+
     <!-- Spinner -->
     <string-array name="tipo_prof_array">
         <item>Administrador</item>
         <item>Profissional</item>
+    </string-array>
+
+    <!-- Spinner -->
+    <string-array name="dia_semana_array">
+        <item>Segunda-Feira</item>
+        <item>Terça-Feira</item>
+        <item>Quarta-Feira</item>
+        <item>Quinta-Feira</item>
+        <item>Sexta-Feira</item>
+        <item>Sábado</item>
     </string-array>
 
 </resources>

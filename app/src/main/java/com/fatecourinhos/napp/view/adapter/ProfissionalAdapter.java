@@ -5,12 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.fatecourinhos.napp.R;
-
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,7 +55,7 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
         CardView cardView = holder.cardView;
         ImageView imgFoto = (ImageView)cardView.findViewById(R.id.foto_profissional_lista);
         ImageView imgStatus = (ImageView)cardView.findViewById(R.id.img_status_profissional_lista);
-        TextView txtNome = (TextView)cardView.findViewById(R.id.txt_nome_profissional_lista);
+        TextView txtNome = (TextView)cardView.findViewById(R.id.txt_nome_profissional_cab);
 
         final ProfissionalModel profissional = profissionais.get(position);
 
@@ -81,13 +78,15 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
             }
         });
 
-
     }
 
     @Override
     public int getItemCount() {
-        return profissionais.size();
-    }
 
+        if(profissionais != null)
+            return profissionais.size();
+        else
+            return 0;
+    }
 
 }

@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.AgendaProfissionalModel;
-import com.fatecourinhos.napp.model.LocalAtendimentoModel;
 import com.fatecourinhos.napp.view.adapter.HorarioAtendimentoAdapter;
-import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +23,7 @@ public class HorarioAtendimentoFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
-        RecyclerView horarioAtendimentoRecycler = (RecyclerView)inflater.inflate(R.layout.horario_atendimento_fragment,container,false);
+        RecyclerView horarioAtendimentoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_horario_atendimento,container,false);
 
         final List<AgendaProfissionalModel> agendaProfissionais = new ArrayList<AgendaProfissionalModel>();
 

@@ -1,4 +1,4 @@
-package com.fatecourinhos.napp.controller;
+package com.fatecourinhos.napp.json;
 
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.UsuarioModel;

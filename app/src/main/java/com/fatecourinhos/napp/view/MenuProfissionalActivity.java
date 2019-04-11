@@ -1,6 +1,5 @@
 package com.fatecourinhos.napp.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
@@ -46,28 +45,31 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MenuProfissionalActivity.this, ProfissionalActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(MenuProfissionalActivity.this, ProfissionalCadastro.class);
+                //startActivity(intent);
+                HorarioCadastro cadastroHorario = new HorarioCadastro();
+                cadastroHorario.show(getSupportFragmentManager(), "a");
+
                 /*
                 switch (navigationView.getCheckedItem().getItemId()) {
 
                     case R.id.nav_profissional:
-                        intent = new Intent(MenuProfissionalActivity.this, ProfissionalActivity.class);
+                        intent = new Intent(MenuProfissionalActivity.this, ProfissionalCadastro.class);
                         startActivity(intent);
                         break;
 
                     case R.id.nav_horario_atendimento:
-                        intent = new Intent(MenuProfissionalActivity.this, CadastroHorario.class);
+                        intent = new Intent(MenuProfissionalActivity.this, HorarioCadastro.class);
                         startActivity(intent);
                         break;
 
                     case R.id.nav_local_atendimento:
-                        intent = new Intent(MenuProfissionalActivity.this, CadastroLocal.class);
+                        intent = new Intent(MenuProfissionalActivity.this, LocalAtendimentoCadastro.class);
                         startActivity(intent);
                         break;
 
                     case R.id.nav_profissional_externo:
-                        intent = new Intent(MenuProfissionalActivity.this, ProfissionalExternoActivity.class);
+                        intent = new Intent(MenuProfissionalActivity.this, ProfissionalExternoCadastro.class);
                         startActivity(intent);
                         break;
 

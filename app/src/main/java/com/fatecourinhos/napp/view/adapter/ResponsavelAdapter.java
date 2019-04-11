@@ -79,7 +79,10 @@ public class ResponsavelAdapter extends RecyclerView.Adapter<ResponsavelAdapter.
 
     @Override
     public int getItemCount() {
-        return responsaveis.size();
+        if(responsaveis != null)
+            return responsaveis.size();
+        else
+            return 0;
     }
 
 

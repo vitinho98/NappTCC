@@ -2,19 +2,19 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scroll_tela_cadastro_profissional"
+    android:id="@+id/scroll_tela_profissional_consulta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_tela_cadastro_profissional"
+        android:id="@+id/layout_tela_profissional"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".view.LoginActivity">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/img_profissional"
             android:layout_width="112dp"
             android:layout_height="105dp"
             android:layout_marginStart="32dp"
@@ -39,7 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/img_profissional"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -53,7 +53,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_layout_telefone_profissional"
+            android:id="@+id/txt_layout_celular_profissional"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="32dp"
@@ -68,10 +68,10 @@
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edit_text_telefone_profissional"
+                android:id="@+id/edit_text_celular_profissional"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Telefone"
+                android:hint="@string/hint_celular"
                 android:inputType="phone"
                 tools:ignore="MissingConstraints" />
 
@@ -89,21 +89,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_layout_telefone_profissional"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_celular_profissional"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edit_text_email_profissional"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="E-mail"
+                android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
                 tools:ignore="MissingConstraints" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerTipoUsuario_consulta"
             android:layout_width="244dp"
             android:layout_height="26dp"
             android:layout_marginTop="32dp"
@@ -113,7 +113,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_layout_email_profissional" />
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/switchStatus_consulta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -122,13 +122,13 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:text="Status"
-            app:layout_constraintEnd_toStartOf="@+id/spinner"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerTipoUsuario_consulta"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_layout_email_profissional" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_salvar_profissional_consulta"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -136,12 +136,11 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
-            android:text="SALVAR"
+            android:text="@string/btn_salvar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
+            app:layout_constraintTop_toBottomOf="@+id/spinnerTipoUsuario_consulta" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

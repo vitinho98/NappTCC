@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.ProfissionalExternoModel;
 import com.fatecourinhos.napp.model.ResponsavelModel;
-import com.fatecourinhos.napp.view.ProfissionalExternoActivity;
-import com.fatecourinhos.napp.view.ResponsavelActivity;
+import com.fatecourinhos.napp.view.ResponsavelCadastro;
 import com.fatecourinhos.napp.view.adapter.ResponsavelAdapter;
 
 import java.util.ArrayList;
@@ -27,7 +25,7 @@ public class ResponsavelFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
-        RecyclerView responsavelRecycler = (RecyclerView)inflater.inflate(R.layout.responsavel_fragment,container,false);
+        RecyclerView responsavelRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_responsavel,container,false);
 
         final List<ResponsavelModel> responsaveis = new ArrayList<ResponsavelModel>();
 
@@ -41,7 +39,7 @@ public class ResponsavelFragment extends Fragment{
         adapter.setListener(new ResponsavelAdapter.Listener() {
             @Override
             public void onClick(ResponsavelModel responsavelModel) {
-                Intent intent = new Intent(getActivity(), ResponsavelActivity.class);
+                Intent intent = new Intent(getActivity(), ResponsavelCadastro.class);
                 intent.putExtra("nomeResponsavel", responsavelModel.getNomeResponsavel());
                 getActivity().startActivity(intent);
             }

@@ -13,7 +13,11 @@ import android.view.View;
 
 import com.fatecourinhos.napp.R;
 
-public class CadastroLocal extends AppCompatDialogFragment {
+public class LocalAtendimentoCadastro extends AppCompatDialogFragment {
+
+    public LocalAtendimentoCadastro(){
+
+    }
 
     @NonNull
     @Override
@@ -42,6 +46,11 @@ public class CadastroLocal extends AppCompatDialogFragment {
 
         return builder.create();
 
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
 }

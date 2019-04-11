@@ -9,23 +9,23 @@
         <item
             android:id="@+id/nav_agendamento"
             android:icon="@drawable/ic_agendamento"
-            android:title="Agendamento" />
+            android:title="@string/item_agendamento" />
         <item
             android:id="@+id/nav_alunos"
             android:icon="@drawable/ic_alunos"
-            android:title="Alunos" />
+            android:title="@string/item_alunos" />
         <item
             android:id="@+id/nav_indicacoes"
             android:icon="@drawable/ic_indicacoes"
-            android:title="Indicações adicionais" />
+            android:title="@string/item_indicacoes_adicionais" />
         <item
             android:id="@+id/nav_notificacoes"
-            android:icon="@drawable/ic_notificacoes"
-            android:title="Notificações" />
+            android:icon="@drawable/ic_notifications"
+            android:title="@string/item_notificacoes" />
         <item
             android:id="@+id/nav_relatorios"
             android:icon="@drawable/ic_relatorio"
-            android:title="Relatórios" />
+            android:title="@string/item_relatorios" />
     </group>
 
     <item android:title="Cadastro">
@@ -33,23 +33,23 @@
             <item
                 android:id="@+id/nav_profissional"
                 android:icon="@drawable/ic_profissional"
-                android:title="Profissional" />
+                android:title="@string/item_profissional" />
             <item
                 android:id="@+id/nav_profissional_externo"
                 android:icon="@drawable/ic_profissional_externo"
-                android:title="Profissional Externo" />
+                android:title="@string/item_profissional_externo" />
             <item
                 android:id="@+id/nav_local_atendimento"
                 android:icon="@drawable/ic_local_atendimento"
-                android:title="Local de Atendimento" />
+                android:title="@string/item_local_atendimento" />
             <item
                 android:id="@+id/nav_horario_atendimento"
-                android:icon="@drawable/ic_local_atendimento"
-                android:title="Horário de Atendimento" />
+                android:icon="@drawable/ic_horario"
+                android:title="@string/item_horario_atendimento" />
             <item
                 android:id="@+id/nav_responsavel"
-                android:icon="@drawable/ic_alunos"
-                android:title="Responsavel" />
+                android:icon="@drawable/ic_responsavel"
+                android:title="@string/item_responsavel" />
         </menu>
     </item>
 

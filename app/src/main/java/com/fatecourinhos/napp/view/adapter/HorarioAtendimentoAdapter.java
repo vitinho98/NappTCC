@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.AgendaProfissionalModel;
-import com.fatecourinhos.napp.model.LocalAtendimentoModel;
 
 import java.util.List;
 
@@ -55,8 +54,8 @@ public class HorarioAtendimentoAdapter extends RecyclerView.Adapter<HorarioAtend
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         CardView cardView = holder.cardView;
-        TextView txtDia = (TextView)cardView.findViewById(R.id.txt_dia_atendimento);
-        TextView txtHora = (TextView)cardView.findViewById(R.id.txt_horario_atendimento);
+        TextView txtDia = (TextView)cardView.findViewById(R.id.txt_dia_atendimento_lista);
+        TextView txtHora = (TextView)cardView.findViewById(R.id.txt_horario_atendimento_lista);
 
 
         final AgendaProfissionalModel agendaProfissional = agendaProfisisonais.get(position);
