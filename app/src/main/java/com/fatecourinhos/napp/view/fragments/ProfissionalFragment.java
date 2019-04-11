@@ -1,23 +1,19 @@
 package com.fatecourinhos.napp.view.fragments;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.HttpManager;
 import com.fatecourinhos.napp.controller.ProfissionalController;
-import com.fatecourinhos.napp.controller.ProfissionalJSONParser;
 import com.fatecourinhos.napp.view.ProfissionalCadastro;
 import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
 
 import com.fatecourinhos.napp.model.ProfissionalModel;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import androidx.annotation.Nullable;
@@ -37,7 +33,7 @@ public class ProfissionalFragment extends Fragment{
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
-        profissionalRecycler = (RecyclerView)inflater.inflate(R.layout.profissional_fragment,container,false);
+        profissionalRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_profissional,container,false);
         profissionalRecycler.setLayoutManager(layoutManager);
 
         return profissionalRecycler;

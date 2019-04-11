@@ -55,7 +55,7 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
         CardView cardView = holder.cardView;
         ImageView imgFoto = (ImageView)cardView.findViewById(R.id.foto_profissional_lista);
         ImageView imgStatus = (ImageView)cardView.findViewById(R.id.img_status_profissional_lista);
-        TextView txtNome = (TextView)cardView.findViewById(R.id.txt_nome_profissional_lista);
+        TextView txtNome = (TextView)cardView.findViewById(R.id.txt_nome_profissional_cab);
 
         final ProfissionalModel profissional = profissionais.get(position);
 

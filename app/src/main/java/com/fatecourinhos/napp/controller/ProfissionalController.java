@@ -1,11 +1,12 @@
 package com.fatecourinhos.napp.controller;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import java.util.List;
+
+import com.fatecourinhos.napp.json.ProfissionalJSONParser;
 import com.fatecourinhos.napp.model.ProfissionalModel;
-import com.fatecourinhos.napp.view.ProfissionalCadastro;
-import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
+import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 
 public class ProfissionalController {
 

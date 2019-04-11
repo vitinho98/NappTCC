@@ -55,7 +55,7 @@
                 android:id="@+id/edit_text_cidade_profissional_externo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="cidade"
+                android:hint="@string/hint_cidade"
                 android:inputType="text"
                 tools:ignore="MissingConstraints" />
 
@@ -79,7 +79,7 @@
                 android:id="@+id/edit_text_endereco_profissional_externo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="endereco"
+                android:hint="@string/hint_endereco"
                 android:inputType="text"
                 tools:ignore="MissingConstraints" />
 
@@ -103,7 +103,7 @@
                 android:id="@+id/edit_text_bairro_profissional_externo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@bairro"
+                android:hint="@string/hint_bairro"
                 android:inputType="text"
                 tools:ignore="MissingConstraints" />
 
@@ -127,8 +127,9 @@
                 android:id="@+id/edit_text_numero_profissional_externo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@numero"
-                android:inputType="text"
+                android:hint="@string/hint_numero_casa"
+                android:inputType="number"
+                android:digits="1234567890"
                 tools:ignore="MissingConstraints" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -151,8 +152,8 @@
                 android:id="@+id/edit_text_email_profissional_externo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="email"
-                android:inputType="text"
+                android:hint="@string/hint_email"
+                android:inputType="textEmailAddress"
                 tools:ignore="MissingConstraints" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -175,8 +176,8 @@
                 android:id="@+id/edit_text_telefone_profissional_externo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="telefone"
-                android:inputType="text"
+                android:hint="@string/hint_telefone"
+                android:inputType="phone"
                 tools:ignore="MissingConstraints" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -199,14 +200,14 @@
                 android:id="@+id/edit_text_celular_profissional_externo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="celular"
-                android:inputType="text"
+                android:hint="@string/hint_celular"
+                android:inputType="phone"
                 tools:ignore="MissingConstraints" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_salvar_profissional_externo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -215,15 +216,15 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:layout_marginBottom="32dp"
-            android:text="CADASTRAR"
+            android:text="@string/btn_salvar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerTipo" />
 
         <Spinner
-            android:id="@+id/spinner2"
+            android:id="@+id/spinnerResponsavel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -236,7 +237,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_layout_telefone_profissional_externo" />
 
         <Spinner
-            android:id="@+id/spinner3"
+            android:id="@+id/spinnerTipo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -249,9 +250,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner2"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerResponsavel"
             app:layout_constraintVertical_bias="0.0" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

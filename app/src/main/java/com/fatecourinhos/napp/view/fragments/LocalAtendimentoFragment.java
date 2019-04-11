@@ -23,7 +23,7 @@ public class LocalAtendimentoFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
-        RecyclerView localAtendimentoRecycler = (RecyclerView)inflater.inflate(R.layout.local_atendimento_fragment,container,false);
+        RecyclerView localAtendimentoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_local_atendimento,container,false);
 
         final List<LocalAtendimentoModel> locaisAtendimento = new ArrayList<LocalAtendimentoModel>();
 

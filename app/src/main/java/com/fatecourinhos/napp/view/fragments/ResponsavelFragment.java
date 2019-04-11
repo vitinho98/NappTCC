@@ -25,7 +25,7 @@ public class ResponsavelFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
-        RecyclerView responsavelRecycler = (RecyclerView)inflater.inflate(R.layout.responsavel_fragment,container,false);
+        RecyclerView responsavelRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_responsavel,container,false);
 
         final List<ResponsavelModel> responsaveis = new ArrayList<ResponsavelModel>();
 

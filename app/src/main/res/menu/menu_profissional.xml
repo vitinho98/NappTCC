@@ -5,6 +5,6 @@
     <item
         android:id="@+id/sair"
         android:orderInCategory="100"
-        android:title="Sair"
+        android:title="@string/item_sair"
         app:showAsAction="never" />
 </menu>

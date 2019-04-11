@@ -25,7 +25,7 @@ public class ProfissionalExternoFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
-        RecyclerView profissionalExternoRecycler = (RecyclerView)inflater.inflate(R.layout.profissional_externo_fragment,container,false);
+        RecyclerView profissionalExternoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_profissional_externo,container,false);
 
         final List<ProfissionalExternoModel> profissionaisExterno = new ArrayList<ProfissionalExternoModel>();
 

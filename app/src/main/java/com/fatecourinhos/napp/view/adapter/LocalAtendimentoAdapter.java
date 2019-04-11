@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.LocalAtendimentoModel;
-import com.fatecourinhos.napp.model.ProfissionalExternoModel;
 
 import java.util.List;
 
@@ -55,8 +54,8 @@ public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimen
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         CardView cardView = holder.cardView;
-        TextView txtBloco = (TextView)cardView.findViewById(R.id.txt_bloco_local_atendimento);
-        TextView txtLocal = (TextView)cardView.findViewById(R.id.txt_local_atendimento);
+        TextView txtBloco = (TextView)cardView.findViewById(R.id.txt_bloco_local_atendimento_lista);
+        TextView txtLocal = (TextView)cardView.findViewById(R.id.txt_local_atendimento_lista);
 
 
         final LocalAtendimentoModel localAtendimento = locaisAtendimento.get(position);

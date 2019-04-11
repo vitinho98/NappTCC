@@ -3,22 +3,17 @@ package com.fatecourinhos.napp.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.HttpManager;
 import com.fatecourinhos.napp.controller.ProfissionalController;
-import com.fatecourinhos.napp.controller.RequestHttp;
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.UsuarioModel;
 
@@ -38,18 +33,18 @@ public class ProfissionalCadastro extends AppCompatActivity {
         setContentView(R.layout.activity_profissional_cadastro);
 
         editTextNome = findViewById(R.id.edit_text_nome_profissional);
-        editTextCel = findViewById(R.id.edit_text_telefone_profissional);
+        editTextCel = findViewById(R.id.edit_text_celular_profissional);
         editTextEmail = findViewById(R.id.edit_text_email_profissional);
         editTextLogin = findViewById(R.id.edit_text_login_profissional);
         editTextSenha = findViewById(R.id.edit_text_senha_profissional);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipo_prof_array, android.R.layout.simple_spinner_item);
         spinnerProf.setAdapter(adapter);
-        spinnerProf = findViewById(R.id.spinnerProf);
+        spinnerProf = findViewById(R.id.spinnerTipoUsuario);
 
-        switchProf = findViewById(R.id.switchProf);
+        switchProf = findViewById(R.id.switchStatus);
 
-        btn_cadastrar_profissional = findViewById(R.id.btn_cadastrar_profissional);
+        btn_cadastrar_profissional = findViewById(R.id.btn_salvar_profissional);
 
         if ((getIntent().getExtras() != null)) {
 
