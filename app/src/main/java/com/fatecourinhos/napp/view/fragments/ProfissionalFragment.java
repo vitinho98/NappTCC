@@ -27,57 +27,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfissionalFragment extends Fragment{
 
-    List<ProfissionalModel> profissionalList;
+    List<ProfissionalModel> profissionais;
+    ProfissionalAdapter adapter;
+    RecyclerView profissionalRecycler;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
-
-        RecyclerView profissionalRecycler = (RecyclerView)inflater.inflate(R.layout.profissional_fragment,container,false);
-
-
-        final List<ProfissionalModel> profissionais = new ArrayList<ProfissionalModel>();
-
-        ProfissionalModel p1 = new ProfissionalModel();
-        ProfissionalModel p2 = new ProfissionalModel();
-
-        UsuarioModel u1  = new UsuarioModel();
-        UsuarioModel u2  = new UsuarioModel();
-
-        u1.setStatus(1);
-        u2.setStatus(0);
-
-        p1.setFkUsuario(u1);
-        p1.setNomeProfissional("Rose");
-
-        p2.setFkUsuario(u2);
-        p2.setNomeProfissional("Eunice");
-
-        profissionais.add(p1);
-        profissionais.add(p2);
-
-        ProfissionalAdapter adapter = new ProfissionalAdapter(profissionais);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
+        profissionalRecycler = (RecyclerView)inflater.inflate(R.layout.profissional_fragment,container,false);
+
         profissionalRecycler.setLayoutManager(layoutManager);
-        profissionalRecycler.setAdapter(adapter);
-
-        adapter.setListener(new ProfissionalAdapter.Listener() {
-            @Override
-            public void onClick(ProfissionalModel profissional) {
-                Intent intent = new Intent(getActivity(), ProfissionalActivity.class);
-                intent.putExtra("nomeProfissional", profissional.getNomeProfissional());
-                getActivity().startActivity(intent);
-            }
-        });
-
 
         return profissionalRecycler;
 
-
     }
-
 
 
     @Override
@@ -93,18 +59,14 @@ public class ProfissionalFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        profissionalList = new ArrayList<>();
+        profissionais = new ArrayList<>();
 
-        buscarDados("http://185.201.11.219/public_html/napp/APIConsultarDados.php");
+        buscarDados("http:vitorsilva.xyz/napp/APIConsultarDados.php");
     }
 
     private void buscarDados(String uri) {
         SelectProf mytask = new SelectProf();
         mytask.execute(uri);
-    }
-
-    private void atualizarView(List<ProfissionalModel> profissionalList){
-        ProfissionalAdapter adapter = new ProfissionalAdapter(profissionalList);
     }
 
     private class SelectProf extends AsyncTask<String, String, List<ProfissionalModel>>{
@@ -117,7 +79,7 @@ public class ProfissionalFragment extends Fragment{
         @Override
         protected List<ProfissionalModel> doInBackground(String... params) {
             final String conteudo = HttpManager.getDados(params[0]);
-            profissionalList = ProfissionalJSONParser.parseDados(conteudo);
+            profissionais = ProfissionalJSONParser.parseDados(conteudo);
 
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -128,13 +90,23 @@ public class ProfissionalFragment extends Fragment{
             });
 
 
-            return profissionalList;
+            return profissionais;
         }
 
         @Override
-        protected void onPostExecute(final List<ProfissionalModel> profissionalModel) {
-            super.onPostExecute(profissionalModel);
-            //atualizarView(profissionalModel);
+        protected void onPostExecute(final List<ProfissionalModel> profissional) {
+            super.onPostExecute(profissionais);
+            adapter = new ProfissionalAdapter(profissionais);
+            profissionalRecycler.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            adapter.setListener(new ProfissionalAdapter.Listener() {
+                @Override
+                public void onClick(ProfissionalModel profissional) {
+                    Intent intent = new Intent(getActivity(), ProfissionalActivity.class);
+                    intent.putExtra("nomeProfissional", profissional.getNomeProfissional());
+                    getActivity().startActivity(intent);
+                }
+            });
         }
     }
 }

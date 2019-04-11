@@ -86,7 +86,11 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
 
     @Override
     public int getItemCount() {
-        return profissionais.size();
+
+        if(profissionais != null)
+            return profissionais.size();
+        else
+            return 0;
     }
 
 
