@@ -17,11 +17,12 @@ import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.HttpManager;
+import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.controller.RequestHttp;
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.UsuarioModel;
 
-public class ProfissionalActivity extends AppCompatActivity {
+public class ProfissionalCadastro extends AppCompatActivity {
 
     final ProfissionalModel profissional = new ProfissionalModel();
     final UsuarioModel usuario = new UsuarioModel();
@@ -41,49 +42,65 @@ public class ProfissionalActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.edit_text_email_profissional);
         editTextLogin = findViewById(R.id.edit_text_login_profissional);
         editTextSenha = findViewById(R.id.edit_text_senha_profissional);
-        spinnerProf = findViewById(R.id.spinnerProf);
-        switchProf = findViewById(R.id.switchProf);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipo_prof_array, android.R.layout.simple_spinner_item);
         spinnerProf.setAdapter(adapter);
+        spinnerProf = findViewById(R.id.spinnerProf);
+
+        switchProf = findViewById(R.id.switchProf);
 
         btn_cadastrar_profissional = findViewById(R.id.btn_cadastrar_profissional);
 
-
-
-        if((getIntent().getExtras()!=null)) {
+        if ((getIntent().getExtras() != null)) {
 
             String nome = (String) getIntent().getExtras().get("nomeProfissional");
+            String celular = (String) getIntent().getExtras().get("celularProfissional");
+            String email = (String) getIntent().getExtras().get("emailProfissional");
+            String login = (String) getIntent().getExtras().get("loginProfissional");
+            String senha = (String) getIntent().getExtras().get("senhaProfissional");
+            String tipo = (String) getIntent().getExtras().get("tipoProfissional");
+            String status = (String) getIntent().getExtras().get("statusProfissional");
 
-            editTextNome = findViewById(R.id.edit_text_nome_profissional);
-
+            editTextCel.setText(celular);
+            editTextEmail.setText(email);
+            editTextLogin.setText(login);
+            editTextSenha.setText(senha);
             editTextNome.setText(nome);
+
+            if(tipo.equals("Administrador")){
+                spinnerProf.setSelection(0);
+            }else{
+                spinnerProf.setSelection(1);
+            }
+
+            if(Integer.parseInt(status) == 1){
+                switchProf.setChecked(false);
+            }else{
+                switchProf.setChecked(true);
+            }
         }
 
         btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                enviarDados("http://vitorsilva.xyz/napp/APIIncluirDados.php");
-
+                enviarDados();
             }
         });
 
-
     }
 
-    private void enviarDados(String uri){
+    private void enviarDados() {
         profissional.setNomeProfissional(editTextNome.getText().toString());
         profissional.setCelularProfissional(editTextCel.getText().toString());
         profissional.setEmailProfissional(editTextEmail.getText().toString());
+
         usuario.setLogin(editTextLogin.getText().toString());
         usuario.setSenha(editTextSenha.getText().toString());
 
-        usuario.setTipoUsuario("Administrador");
         spinnerProf.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0:
                         usuario.setTipoUsuario("Administrador");
                         break;
@@ -100,55 +117,23 @@ public class ProfissionalActivity extends AppCompatActivity {
 
         });
 
-        usuario.setStatus(1);
-
-        if(switchProf.isChecked()){
+        if (switchProf.isChecked()) {
             usuario.setStatus(0);
-        }else{
+        } else {
             usuario.setStatus(1);
         }
 
-        RequestHttp requestHttp = new RequestHttp();
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
+        profissional.setFkUsuario(usuario);
 
-        requestHttp.setParametro("nomeProfissional", profissional.getNomeProfissional());
-        requestHttp.setParametro("celProfissional", profissional.getCelularProfissional());
-        requestHttp.setParametro("emailProfissional", profissional.getEmailProfissional());
-        requestHttp.setParametro("loginProfissional", usuario.getLogin());
-        requestHttp.setParametro("senhaProfissional", usuario.getSenha());
-        requestHttp.setParametro("tipoProfissional", usuario.getTipoUsuario());
-        requestHttp.setParametro("statusProfissional", String.valueOf(usuario.getStatus()));
+        if(ProfissionalController.conferirDados(profissional)){
+            if(ProfissionalController.inserir(profissional))
+                Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_LONG);
+            else
+                Toast.makeText(this, "Erro ao inserir", Toast.LENGTH_LONG);
+        }else
+            Toast.makeText(this, "Insira todos os campos!", Toast.LENGTH_LONG);
 
-        CadProf task = new CadProf();
-        task.execute(requestHttp);
     }
 
-
-    private class CadProf extends AsyncTask<RequestHttp, String, String>{
-        @Override
-        protected void onPreExecute() {
-
-        }
-
-        @Override
-        protected String doInBackground(RequestHttp... params) {
-            final String conteudo = (String) HttpManager.getDados(params[0]);
-
-            /*runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(ProfissionalActivity.this, conteudo, Toast.LENGTH_LONG).show();
-                }
-            });*/
-            return conteudo;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            //Intent intent = new Intent(ProfissionalActivity.this, MenuProfissionalActivity.class);
-            //startActivity(intent);
-            //finish();
-        }
-    }
 }
+

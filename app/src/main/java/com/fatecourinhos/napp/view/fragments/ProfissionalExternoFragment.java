@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.ProfissionalExternoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
-import com.fatecourinhos.napp.view.ProfissionalExternoActivity;
+import com.fatecourinhos.napp.view.ProfissionalExternoCadastro;
 import com.fatecourinhos.napp.view.adapter.ProfissionalExternoAdapter;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class ProfissionalExternoFragment extends Fragment{
         adapter.setListener(new ProfissionalExternoAdapter.Listener() {
             @Override
             public void onClick(ProfissionalExternoModel profissionalExterno) {
-                Intent intent = new Intent(getActivity(), ProfissionalExternoActivity.class);
+                Intent intent = new Intent(getActivity(), ProfissionalExternoCadastro.class);
                 intent.putExtra("nomeProfissionalExterno", profissionalExterno.getNomeProfissionalExterno());
                 getActivity().startActivity(intent);
             }

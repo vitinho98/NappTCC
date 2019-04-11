@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TimePicker;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.view.CadastroHorario;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.appcompat.widget.AppCompatEditText;
 
-public class CadastroHorario extends AppCompatDialogFragment {
+public class HorarioCadastro extends AppCompatDialogFragment {
 
     AppCompatEditText editTextHorario;
     TimePickerDialog timePickerDialog;
@@ -70,5 +69,10 @@ public class CadastroHorario extends AppCompatDialogFragment {
         return builder.create();
 
     }//fim oncreate
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
 }//fim classe

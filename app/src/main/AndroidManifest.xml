@@ -16,14 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.CadastroLocal"></activity>
+
         <activity android:name=".view.AlunoActivity" />
-        <activity android:name=".view.ProfissionalActivity" />
+
+        <activity android:name=".view.ProfissionalCadastro" />
+
         <activity
             android:name=".view.MenuProfissionalActivity"
             android:label="@string/title_activity_menu_profissional"
             android:theme="@style/AppTheme.NoActionBar" />
+        
         <activity android:name=".view.SobreActivity" />
+
         <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

@@ -11,9 +11,9 @@ import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.HttpManager;
+import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.controller.ProfissionalJSONParser;
-import com.fatecourinhos.napp.model.UsuarioModel;
-import com.fatecourinhos.napp.view.ProfissionalActivity;
+import com.fatecourinhos.napp.view.ProfissionalCadastro;
 import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
 
 import com.fatecourinhos.napp.model.ProfissionalModel;
@@ -38,13 +38,10 @@ public class ProfissionalFragment extends Fragment{
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
         profissionalRecycler = (RecyclerView)inflater.inflate(R.layout.profissional_fragment,container,false);
-
         profissionalRecycler.setLayoutManager(layoutManager);
 
         return profissionalRecycler;
-
     }
-
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstance){
@@ -59,54 +56,31 @@ public class ProfissionalFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        profissionais = new ArrayList<>();
+        profissionais = ProfissionalController.buscarProfisisonais();
 
-        buscarDados("http:vitorsilva.xyz/napp/APIConsultarDados.php");
+        adapter = new ProfissionalAdapter(profissionais);
+
+        profissionalRecycler.setAdapter(adapter);
+
+        adapter.setListener(new ProfissionalAdapter.Listener() {
+            @Override
+            public void onClick(ProfissionalModel profissional) {
+                Intent intent = new Intent(getActivity(), ProfissionalCadastro.class);
+
+                intent.putExtra("idProfissional", profissional.getIdProfissional());
+                intent.putExtra("nomeProfissional", profissional.getNomeProfissional());
+                intent.putExtra("emailProfissional", profissional.getEmailProfissional());
+                intent.putExtra("celularProfissional", profissional.getCelularProfissional());
+                intent.putExtra("idUsuario", profissional.getFkUsuario().getIdUsuario());
+                intent.putExtra("loginProfissional", profissional.getFkUsuario().getLogin());
+                intent.putExtra("senhaProfissional", profissional.getFkUsuario().getSenha());
+                intent.putExtra("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
+                intent.putExtra("statusProfissional", profissional.getFkUsuario().getStatus());
+                intent.putExtra("operacao", "alterar");
+
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
-    private void buscarDados(String uri) {
-        SelectProf mytask = new SelectProf();
-        mytask.execute(uri);
-    }
-
-    private class SelectProf extends AsyncTask<String, String, List<ProfissionalModel>>{
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected List<ProfissionalModel> doInBackground(String... params) {
-            final String conteudo = HttpManager.getDados(params[0]);
-            profissionais = ProfissionalJSONParser.parseDados(conteudo);
-
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                    Toast.makeText(getActivity(), conteudo, Toast.LENGTH_LONG).show();
-                }
-            });
-
-
-            return profissionais;
-        }
-
-        @Override
-        protected void onPostExecute(final List<ProfissionalModel> profissional) {
-            super.onPostExecute(profissionais);
-            adapter = new ProfissionalAdapter(profissionais);
-            profissionalRecycler.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-            adapter.setListener(new ProfissionalAdapter.Listener() {
-                @Override
-                public void onClick(ProfissionalModel profissional) {
-                    Intent intent = new Intent(getActivity(), ProfissionalActivity.class);
-                    intent.putExtra("nomeProfissional", profissional.getNomeProfissional());
-                    getActivity().startActivity(intent);
-                }
-            });
-        }
-    }
 }

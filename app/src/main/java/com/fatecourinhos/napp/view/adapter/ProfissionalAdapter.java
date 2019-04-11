@@ -5,12 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.fatecourinhos.napp.R;
-
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -81,7 +78,6 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
             }
         });
 
-
     }
 
     @Override
@@ -92,6 +88,5 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
         else
             return 0;
     }
-
 
 }
