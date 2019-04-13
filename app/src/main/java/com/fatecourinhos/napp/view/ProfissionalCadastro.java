@@ -38,14 +38,15 @@ public class ProfissionalCadastro extends AppCompatActivity {
         editTextLogin = findViewById(R.id.edit_text_login_profissional);
         editTextSenha = findViewById(R.id.edit_text_senha_profissional);
 
+        spinnerProf = findViewById(R.id.spinnerTipoUsuario);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipo_prof_array, android.R.layout.simple_spinner_item);
         spinnerProf.setAdapter(adapter);
-        spinnerProf = findViewById(R.id.spinnerTipoUsuario);
+
 
         switchProf = findViewById(R.id.switchStatus);
 
         btn_cadastrar_profissional = findViewById(R.id.btn_salvar_profissional);
-
+        /*
         if ((getIntent().getExtras() != null)) {
 
             String nome = (String) getIntent().getExtras().get("nomeProfissional");
@@ -74,6 +75,7 @@ public class ProfissionalCadastro extends AppCompatActivity {
                 switchProf.setChecked(true);
             }
         }
+        */
 
         btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
             @Override
