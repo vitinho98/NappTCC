@@ -4,7 +4,7 @@ public class ProfissionalModel {
 
     private int idProfissional;
     private String nomeProfissional;
-    private String campoAtuacao;
+    private CampoAtuacaoModel campoAtuacao;
     private String celularProfissional;
     private byte[] foto;
     private String emailProfissional;
@@ -13,7 +13,7 @@ public class ProfissionalModel {
     public ProfissionalModel() {
     }
 
-    public ProfissionalModel(int idProfissional, String nomeProfissional, String campoAtuacao, String celularProfissional, byte[] foto, String emailProfissional, UsuarioModel fkUsuario) {
+    public ProfissionalModel(int idProfissional, String nomeProfissional, CampoAtuacaoModel campoAtuacao, String celularProfissional, byte[] foto, String emailProfissional, UsuarioModel fkUsuario) {
         this.idProfissional = idProfissional;
         this.nomeProfissional = nomeProfissional;
         this.campoAtuacao = campoAtuacao;
@@ -39,11 +39,11 @@ public class ProfissionalModel {
         this.nomeProfissional = nomeProfissional;
 }
 
-    public String getCampoAtuacao() {
+    public CampoAtuacaoModel getCampoAtuacao() {
         return campoAtuacao;
     }
 
-    public void setCampoAtuacao(String campoAtuacao) {
+    public void setCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
         this.campoAtuacao = campoAtuacao;
     }
 

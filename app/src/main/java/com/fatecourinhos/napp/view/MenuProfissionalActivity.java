@@ -1,5 +1,6 @@
 package com.fatecourinhos.napp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
@@ -16,11 +17,15 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class MenuProfissionalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -47,34 +52,36 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
             public void onClick(View view) {
                 //Intent intent = new Intent(MenuProfissionalActivity.this, ProfissionalCadastro.class);
                 //startActivity(intent);
-                HorarioCadastro cadastroHorario = new HorarioCadastro();
-                cadastroHorario.show(getSupportFragmentManager(), "a");
 
-                /*
-                switch (navigationView.getCheckedItem().getItemId()) {
 
-                    case R.id.nav_profissional:
-                        intent = new Intent(MenuProfissionalActivity.this, ProfissionalCadastro.class);
-                        startActivity(intent);
-                        break;
-
-                    case R.id.nav_horario_atendimento:
-                        intent = new Intent(MenuProfissionalActivity.this, HorarioCadastro.class);
-                        startActivity(intent);
-                        break;
-
-                    case R.id.nav_local_atendimento:
-                        intent = new Intent(MenuProfissionalActivity.this, LocalAtendimentoCadastro.class);
-                        startActivity(intent);
-                        break;
-
-                    case R.id.nav_profissional_externo:
-                        intent = new Intent(MenuProfissionalActivity.this, ProfissionalExternoCadastro.class);
-                        startActivity(intent);
-                        break;
-
+                Fragment ativo = new Fragment();
+                FragmentManager fragmentManager = MenuProfissionalActivity.this.getSupportFragmentManager();
+                List<Fragment> fragments = fragmentManager.getFragments();
+                if(fragments!=null){
+                    for(Fragment fragment : fragments){
+                        if(fragment != null && fragment.isVisible()){
+                            ativo = fragment;
+                        }
+                    }
                 }
-                */
+
+                switch(ativo.getTag()){
+                    case("PROFISSIONAL"):
+                        Intent intent = new Intent(MenuProfissionalActivity.this, ProfissionalCadastro.class);
+                        startActivity(intent);
+                        break;
+                    case("HORARIO"):
+                        HorarioCadastro cadastroHorario = new HorarioCadastro();
+                        cadastroHorario.show(getSupportFragmentManager(), "HORARIO");
+                        break;
+                    case("LOCAL"):
+                        break;
+                    case("EXTERNO"):
+                        break;
+                }
+
+
+
 
             }
         });
@@ -129,28 +136,43 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         switch (itemid) {
             case R.id.nav_profissional:
                 fragment = new ProfissionalFragment();
+                if (fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_layout_nav, fragment,"PROFISSIONAL");
+                    ft.commit();
+                }
                 break;
 
             case R.id.nav_horario_atendimento:
                 fragment = new HorarioAtendimentoFragment();
+                if (fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_layout_nav, fragment,"HORARIO");
+                    ft.commit();
+                }
                 break;
 
             case R.id.nav_local_atendimento:
                 fragment = new LocalAtendimentoFragment();
+                if (fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_layout_nav, fragment, "LOCAL");
+                    ft.commit();
+                }
                 break;
 
             case R.id.nav_profissional_externo:
                 fragment = new ProfissionalExternoFragment();
+                if (fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_layout_nav, fragment, "EXTERNO");
+                    ft.commit();
+                }
                 break;
 
         }
 
 
-        if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frame_layout_nav, fragment);
-            ft.commit();
-        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
