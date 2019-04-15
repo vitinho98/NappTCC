@@ -1,4 +1,4 @@
-package com.fatecourinhos.napp.view.cadastros;
+package com.fatecourinhos.napp.view;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +13,9 @@ import android.view.View;
 
 import com.fatecourinhos.napp.R;
 
-public class CadastroLocalAtendimento extends AppCompatDialogFragment {
+public class LocalAtendimentoCadastro extends AppCompatDialogFragment {
 
-    public CadastroLocalAtendimento(){
+    public LocalAtendimentoCadastro(){
 
     }
 

@@ -1,4 +1,4 @@
-package com.fatecourinhos.napp.view.cadastros;
+package com.fatecourinhos.napp.view;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -17,7 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.appcompat.widget.AppCompatEditText;
 
-public class CadastroHorario extends AppCompatDialogFragment {
+public class HorarioCadastro extends AppCompatDialogFragment {
 
     AppCompatEditText editTextHorario;
     TimePickerDialog timePickerDialog;

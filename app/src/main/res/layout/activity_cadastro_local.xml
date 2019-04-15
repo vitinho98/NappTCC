@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.cadastros.CadastroLocalAtendimento">
+    tools:context=".view.LocalAtendimentoCadastro">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txt_layout_nome_bloco"

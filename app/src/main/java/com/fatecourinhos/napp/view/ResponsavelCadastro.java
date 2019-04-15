@@ -1,4 +1,4 @@
-package com.fatecourinhos.napp.view.cadastros;
+package com.fatecourinhos.napp.view;
 
 import android.os.Bundle;
 
@@ -7,13 +7,13 @@ import com.fatecourinhos.napp.R;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
-public class CadastroProfissionalExterno extends AppCompatActivity {
+public class ResponsavelCadastro extends AppCompatActivity {
 
     private AppCompatEditText editTextNome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profissional_externo_cadastro);
+        setContentView(R.layout.activity_responsavel);
     }
 }

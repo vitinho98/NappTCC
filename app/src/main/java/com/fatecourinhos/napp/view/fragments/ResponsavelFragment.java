@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.ResponsavelModel;
-import com.fatecourinhos.napp.view.cadastros.CadastroResponsavel;
+import com.fatecourinhos.napp.view.ResponsavelCadastro;
 import com.fatecourinhos.napp.view.adapter.ResponsavelAdapter;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class ResponsavelFragment extends Fragment{
         adapter.setListener(new ResponsavelAdapter.Listener() {
             @Override
             public void onClick(ResponsavelModel responsavelModel) {
-                Intent intent = new Intent(getActivity(), CadastroResponsavel.class);
+                Intent intent = new Intent(getActivity(), ResponsavelCadastro.class);
                 intent.putExtra("nomeResponsavel", responsavelModel.getNomeResponsavel());
                 getActivity().startActivity(intent);
             }
