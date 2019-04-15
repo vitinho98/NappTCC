@@ -19,13 +19,13 @@
 
         <activity android:name=".view.AlunoActivity" />
 
-        <activity android:name=".view.ProfissionalCadastro" />
+        <activity android:name=".view.cadastros.CadastroProfissional" />
 
         <activity
             android:name=".view.MenuProfissionalActivity"
             android:label="@string/title_activity_menu_profissional"
             android:theme="@style/AppTheme.NoActionBar" />
-        
+
         <activity android:name=".view.SobreActivity" />
 
         <activity android:name=".view.LoginActivity">

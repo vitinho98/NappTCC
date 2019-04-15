@@ -3,6 +3,7 @@ package com.fatecourinhos.napp.view;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.view.cadastros.CadastroHorario;
 import com.fatecourinhos.napp.view.fragments.HorarioAtendimentoFragment;
 import com.fatecourinhos.napp.view.fragments.LocalAtendimentoFragment;
 import com.fatecourinhos.napp.view.fragments.ProfissionalExternoFragment;
@@ -45,31 +46,31 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(MenuProfissionalActivity.this, ProfissionalCadastro.class);
+                //Intent intent = new Intent(MenuProfissionalActivity.this, CadastroProfissional.class);
                 //startActivity(intent);
-                HorarioCadastro cadastroHorario = new HorarioCadastro();
+                CadastroHorario cadastroHorario = new CadastroHorario();
                 cadastroHorario.show(getSupportFragmentManager(), "a");
 
                 /*
                 switch (navigationView.getCheckedItem().getItemId()) {
 
                     case R.id.nav_profissional:
-                        intent = new Intent(MenuProfissionalActivity.this, ProfissionalCadastro.class);
+                        intent = new Intent(MenuProfissionalActivity.this, CadastroProfissional.class);
                         startActivity(intent);
                         break;
 
                     case R.id.nav_horario_atendimento:
-                        intent = new Intent(MenuProfissionalActivity.this, HorarioCadastro.class);
+                        intent = new Intent(MenuProfissionalActivity.this, CadastroHorario.class);
                         startActivity(intent);
                         break;
 
                     case R.id.nav_local_atendimento:
-                        intent = new Intent(MenuProfissionalActivity.this, LocalAtendimentoCadastro.class);
+                        intent = new Intent(MenuProfissionalActivity.this, CadastroLocalAtendimento.class);
                         startActivity(intent);
                         break;
 
                     case R.id.nav_profissional_externo:
-                        intent = new Intent(MenuProfissionalActivity.this, ProfissionalExternoCadastro.class);
+                        intent = new Intent(MenuProfissionalActivity.this, CadastroProfissionalExterno.class);
                         startActivity(intent);
                         break;
 
