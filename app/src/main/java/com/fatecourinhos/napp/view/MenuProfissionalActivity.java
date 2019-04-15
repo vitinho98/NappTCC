@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.view.cadastros.CadastroHorario;
 import com.fatecourinhos.napp.view.fragments.HorarioAtendimentoFragment;
 import com.fatecourinhos.napp.view.fragments.LocalAtendimentoFragment;
 import com.fatecourinhos.napp.view.fragments.ProfissionalExternoFragment;
@@ -50,10 +51,16 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(MenuProfissionalActivity.this, ProfissionalCadastro.class);
+                //Intent intent = new Intent(MenuProfissionalActivity.this, CadastroProfissional.class);
                 //startActivity(intent);
+<<<<<<< HEAD
+=======
+                CadastroHorario cadastroHorario = new CadastroHorario();
+                cadastroHorario.show(getSupportFragmentManager(), "a");
+>>>>>>> parent of 845690f... Revert "m"
 
 
+<<<<<<< HEAD
                 Fragment ativo = new Fragment();
                 FragmentManager fragmentManager = MenuProfissionalActivity.this.getSupportFragmentManager();
                 List<Fragment> fragments = fragmentManager.getFragments();
@@ -77,6 +84,26 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                     case("LOCAL"):
                         break;
                     case("EXTERNO"):
+=======
+                    case R.id.nav_profissional:
+                        intent = new Intent(MenuProfissionalActivity.this, CadastroProfissional.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.nav_horario_atendimento:
+                        intent = new Intent(MenuProfissionalActivity.this, CadastroHorario.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.nav_local_atendimento:
+                        intent = new Intent(MenuProfissionalActivity.this, CadastroLocalAtendimento.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.nav_profissional_externo:
+                        intent = new Intent(MenuProfissionalActivity.this, CadastroProfissionalExterno.class);
+                        startActivity(intent);
+>>>>>>> parent of 845690f... Revert "m"
                         break;
                 }
 

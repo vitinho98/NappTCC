@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.ProfissionalController;
-import com.fatecourinhos.napp.view.ProfissionalCadastro;
+import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
 
 import com.fatecourinhos.napp.model.ProfissionalModel;
@@ -61,7 +61,7 @@ public class ProfissionalFragment extends Fragment{
         adapter.setListener(new ProfissionalAdapter.Listener() {
             @Override
             public void onClick(ProfissionalModel profissional) {
-                Intent intent = new Intent(getActivity(), ProfissionalCadastro.class);
+                Intent intent = new Intent(getActivity(), CadastroProfissional.class);
 
                 intent.putExtra("idProfissional", profissional.getIdProfissional());
                 intent.putExtra("nomeProfissional", profissional.getNomeProfissional());
