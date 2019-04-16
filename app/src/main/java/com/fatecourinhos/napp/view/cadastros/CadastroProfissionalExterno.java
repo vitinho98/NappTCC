@@ -14,6 +14,6 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profissional_externo_cadastro);
+        setContentView(R.layout.cadastro_activity_profissional_externo);
     }
 }

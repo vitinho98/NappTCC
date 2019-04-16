@@ -29,7 +29,7 @@ public class CadastroHorario extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.activity_cadastro_horario, null);
+        View view = inflater.inflate(R.layout.cadastro_activity_horario, null);
 
         builder.setView(view).setTitle("Horário de Atendimento");
 

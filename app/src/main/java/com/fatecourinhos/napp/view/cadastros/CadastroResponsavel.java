@@ -14,6 +14,6 @@ public class CadastroResponsavel extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_responsavel);
+        setContentView(R.layout.cadastro_activity_responsavel);
     }
 }

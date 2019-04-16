@@ -1,10 +1,5 @@
 package com.fatecourinhos.napp.view.cadastros;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDialogFragment;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,9 +8,14 @@ import android.view.View;
 
 import com.fatecourinhos.napp.R;
 
-public class CadastroLocalAtendimento extends AppCompatDialogFragment {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
 
-    public CadastroLocalAtendimento(){
+public class CadastroAreaAtuacao extends AppCompatDialogFragment {
+
+    public CadastroAreaAtuacao(){
 
     }
 
@@ -26,9 +26,9 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.cadastro_activity_local, null);
+        View view = inflater.inflate(R.layout.cadastro_activity_area_atuacao, null);
 
-        builder.setView(view).setTitle("Local de Atendimento");
+        builder.setView(view).setTitle("Área de atuação");
 
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override

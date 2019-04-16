@@ -30,7 +30,7 @@ public class CadastroProfissional extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profissional_cadastro);
+        setContentView(R.layout.cadastro_activity_profissional);
 
         editTextNome = findViewById(R.id.edit_text_nome_profissional);
         editTextCel = findViewById(R.id.edit_text_celular_profissional);
