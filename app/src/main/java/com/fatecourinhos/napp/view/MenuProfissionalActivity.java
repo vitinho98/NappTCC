@@ -50,8 +50,6 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(MenuProfissionalActivity.this, ProfissionalCadastro.class);
-                //startActivity(intent);
 
 
                 Fragment ativo = new Fragment();
