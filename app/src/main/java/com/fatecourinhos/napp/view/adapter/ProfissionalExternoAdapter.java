@@ -75,13 +75,14 @@ public class ProfissionalExternoAdapter extends RecyclerView.Adapter<Profissiona
             }
         });
 
-
     }
 
     @Override
     public int getItemCount() {
-        return profissionaisExterno.size();
+        if(profissionaisExterno != null)
+            return profissionaisExterno.size();
+        else
+            return 0;
     }
-
 
 }

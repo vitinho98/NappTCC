@@ -7,7 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.controller.ProfissionalController;
+import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.ResponsavelModel;
+import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
+import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 import com.fatecourinhos.napp.view.cadastros.CadastroResponsavel;
 import com.fatecourinhos.napp.view.adapter.ResponsavelAdapter;
 
@@ -21,31 +25,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ResponsavelFragment extends Fragment{
 
+    List<ResponsavelModel> responsaveis;
+    ResponsavelAdapter adapter;
+    RecyclerView responsavelRecycler;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
-        RecyclerView responsavelRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_responsavel,container,false);
-
-        final List<ResponsavelModel> responsaveis = new ArrayList<ResponsavelModel>();
-
-
-        ResponsavelAdapter adapter = new ResponsavelAdapter(responsaveis);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
+        responsavelRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_responsavel,container,false);
         responsavelRecycler.setLayoutManager(layoutManager);
-        responsavelRecycler.setAdapter(adapter);
-
-        adapter.setListener(new ResponsavelAdapter.Listener() {
-            @Override
-            public void onClick(ResponsavelModel responsavelModel) {
-                Intent intent = new Intent(getActivity(), CadastroResponsavel.class);
-                intent.putExtra("nomeResponsavel", responsavelModel.getNomeResponsavel());
-                getActivity().startActivity(intent);
-            }
-
-        });
-
 
         return responsavelRecycler;
 
@@ -58,6 +49,26 @@ public class ResponsavelFragment extends Fragment{
 
         getActivity().setTitle("Profissionais Externos");
 
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        responsaveis = ResponsavelController.buscarResponsaveis();
+
+        adapter = new ResponsavelAdapter(responsaveis);
+
+        responsavelRecycler.setAdapter(adapter);
+
+        adapter.setListener(new ResponsavelAdapter.Listener() {
+            @Override
+            public void onClick(ResponsavelModel responsavel) {
+                Intent intent = new Intent(getActivity(), CadastroProfissional.class);
+
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
 }

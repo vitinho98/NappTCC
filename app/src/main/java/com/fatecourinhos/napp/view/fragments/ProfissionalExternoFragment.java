@@ -7,7 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.model.ProfissionalExternoModel;
+import com.fatecourinhos.napp.model.ProfissionalModel;
+import com.fatecourinhos.napp.view.adapter.ProfissionalExternoAdapter;
+import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissionalExterno;
 import com.fatecourinhos.napp.view.adapter.ProfissionalExternoAdapter;
 
@@ -21,31 +25,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfissionalExternoFragment extends Fragment{
 
+    List<ProfissionalExternoModel> profissionaisExterno;
+    ProfissionalExternoAdapter adapter;
+    RecyclerView profissionalExternoRecycler;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
-        RecyclerView profissionalExternoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_profissional_externo,container,false);
-
-        final List<ProfissionalExternoModel> profissionaisExterno = new ArrayList<ProfissionalExternoModel>();
-
-
-        ProfissionalExternoAdapter adapter = new ProfissionalExternoAdapter(profissionaisExterno);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
+        profissionalExternoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_profissional_externo,container,false);
         profissionalExternoRecycler.setLayoutManager(layoutManager);
-        profissionalExternoRecycler.setAdapter(adapter);
-
-        adapter.setListener(new ProfissionalExternoAdapter.Listener() {
-            @Override
-            public void onClick(ProfissionalExternoModel profissionalExterno) {
-                Intent intent = new Intent(getActivity(), CadastroProfissionalExterno.class);
-                intent.putExtra("nomeProfissionalExterno", profissionalExterno.getNomeProfissionalExterno());
-                getActivity().startActivity(intent);
-            }
-
-        });
-
 
         return profissionalExternoRecycler;
 
@@ -58,6 +49,26 @@ public class ProfissionalExternoFragment extends Fragment{
 
         getActivity().setTitle("Profissionais Externos");
 
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+
+        profissionaisExterno = ProfissionalExternoController.buscarProfisisonaisExterno();
+
+        adapter = new ProfissionalExternoAdapter(profissionaisExterno);
+
+        profissionalExternoRecycler.setAdapter(adapter);
+
+        adapter.setListener(new ProfissionalExternoAdapter.Listener() {
+            @Override
+            public void onClick(ProfissionalExternoModel profissionalExterno) {
+                Intent intent = new Intent(getActivity(), CadastroProfissionalExterno.class);
+
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
 }

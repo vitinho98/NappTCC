@@ -72,13 +72,14 @@ public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimen
             }
         });
 
-
     }
 
     @Override
     public int getItemCount() {
-        return locaisAtendimento.size();
+        if(locaisAtendimento != null)
+            return locaisAtendimento.size();
+        else
+            return 0;
     }
-
 
 }

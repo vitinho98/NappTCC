@@ -72,13 +72,14 @@ public class HorarioAtendimentoAdapter extends RecyclerView.Adapter<HorarioAtend
             }
         });
 
-
     }
 
     @Override
     public int getItemCount() {
-        return agendaProfisisonais.size();
+        if(agendaProfisisonais != null)
+            return agendaProfisisonais.size();
+        else
+            return 0;
     }
-
 
 }

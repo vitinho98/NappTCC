@@ -6,30 +6,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.ProfissionalController;
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
-import com.fatecourinhos.napp.model.LocalAtendimentoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
-import com.fatecourinhos.napp.view.adapter.CampoAtuacaoAdapter;
-import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
-import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
-import com.fatecourinhos.napp.view.cadastros.CadastroAreaAtuacao;
-import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class AreaAtuacaoFragment extends Fragment{
+import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.controller.ProfissionalController;
+import com.fatecourinhos.napp.model.CampoAtuacaoModel;
+import com.fatecourinhos.napp.model.DiagnosticoModel;
+import com.fatecourinhos.napp.model.LocalAtendimentoModel;
+import com.fatecourinhos.napp.model.ProfissionalModel;
+import com.fatecourinhos.napp.view.adapter.DiagnosticoAdapter;
+import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
+import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
+import com.fatecourinhos.napp.view.cadastros.CadastroDiagnostico;
+import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 
-    List<CampoAtuacaoModel> camposAtuacao;
-    CampoAtuacaoAdapter adapter;
-    RecyclerView campoAtuacaoRecycler;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DiagnosticoFragment extends Fragment{
+
+    List<DiagnosticoModel> diagnosticos;
+    DiagnosticoAdapter adapter;
+    RecyclerView diagnosticoRecycler;
 
     @Nullable
     @Override
@@ -37,10 +38,10 @@ public class AreaAtuacaoFragment extends Fragment{
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
-        campoAtuacaoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_area_atuacao,container,false);
-        campoAtuacaoRecycler.setLayoutManager(layoutManager);
+        diagnosticoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_diagnostico,container,false);
+        diagnosticoRecycler.setLayoutManager(layoutManager);
 
-        return campoAtuacaoRecycler;
+        return diagnosticoRecycler;
     }
 
     @Override
@@ -48,7 +49,7 @@ public class AreaAtuacaoFragment extends Fragment{
 
         super.onViewCreated(view, savedInstance);
 
-        getActivity().setTitle("Campos de Atuação");
+        getActivity().setTitle("Diagnosticos");
 
     }
 
@@ -56,16 +57,16 @@ public class AreaAtuacaoFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        camposAtuacao = CampoAtuacaoController.buscarCamposAtuacao();
+        diagnosticos = DiagnosticoController.buscarDiagnosticos();
 
-        adapter = new CampoAtuacaoAdapter(camposAtuacao);
+        adapter = new DiagnosticoAdapter(diagnosticos);
 
-        campoAtuacaoRecycler.setAdapter(adapter);
+        diagnosticoRecycler.setAdapter(adapter);
 
-        adapter.setListener(new CampoAtuacaoAdapter.Listener() {
+        adapter.setListener(new DiagnosticoAdapter.Listener() {
             @Override
-            public void onClick(CampoAtuacaoModel campoAtuacao) {
-                Intent intent = new Intent(getActivity(), CadastroAreaAtuacao.class);
+            public void onClick(DiagnosticoModel diagnostico) {
+                Intent intent = new Intent(getActivity(), CadastroDiagnostico.class);
 
                 getActivity().startActivity(intent);
             }

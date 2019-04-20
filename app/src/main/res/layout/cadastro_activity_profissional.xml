@@ -96,7 +96,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edit_text_email_profissional"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="41dp"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
                 tools:ignore="MissingConstraints" />
@@ -113,8 +113,9 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_layout_email_profissional"
+            app:layout_constraintTop_toBottomOf="@+id/spinner"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -192,6 +193,20 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerTipoUsuario" />
+
+        <Spinner
+            android:id="@+id/spinnerCampoAtuacao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_email_profissional" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

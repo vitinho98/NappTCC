@@ -74,7 +74,6 @@ public class ResponsavelAdapter extends RecyclerView.Adapter<ResponsavelAdapter.
             }
         });
 
-
     }
 
     @Override
@@ -84,6 +83,5 @@ public class ResponsavelAdapter extends RecyclerView.Adapter<ResponsavelAdapter.
         else
             return 0;
     }
-
 
 }
