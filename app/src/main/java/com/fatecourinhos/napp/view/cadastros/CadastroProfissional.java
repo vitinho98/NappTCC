@@ -1,4 +1,4 @@
-package com.fatecourinhos.napp.view;
+package com.fatecourinhos.napp.view.cadastros;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -17,7 +17,7 @@ import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.UsuarioModel;
 
-public class ProfissionalCadastro extends AppCompatActivity {
+public class CadastroProfissional extends AppCompatActivity {
 
     final ProfissionalModel profissional = new ProfissionalModel();
     final UsuarioModel usuario = new UsuarioModel();
@@ -30,7 +30,7 @@ public class ProfissionalCadastro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profissional_cadastro);
+        setContentView(R.layout.cadastro_activity_profissional);
 
         editTextNome = findViewById(R.id.edit_text_nome_profissional);
         editTextCel = findViewById(R.id.edit_text_celular_profissional);

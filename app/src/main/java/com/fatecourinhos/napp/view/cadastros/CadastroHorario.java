@@ -1,4 +1,4 @@
-package com.fatecourinhos.napp.view;
+package com.fatecourinhos.napp.view.cadastros;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -17,7 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.appcompat.widget.AppCompatEditText;
 
-public class HorarioCadastro extends AppCompatDialogFragment {
+public class CadastroHorario extends AppCompatDialogFragment {
 
     AppCompatEditText editTextHorario;
     TimePickerDialog timePickerDialog;
@@ -29,7 +29,7 @@ public class HorarioCadastro extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.activity_cadastro_horario, null);
+        View view = inflater.inflate(R.layout.cadastro_activity_horario, null);
 
         builder.setView(view).setTitle("Horário de Atendimento");
 

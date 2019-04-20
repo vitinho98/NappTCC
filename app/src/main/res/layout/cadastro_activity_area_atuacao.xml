@@ -4,33 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.HorarioCadastro">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/txt_dia_da_semana"
-        android:gravity="center"/>
-
-    <Spinner
-        android:id="@+id/spinnerDiaDaSemana"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"/>
+    android:orientation="vertical">
+    <!--tools:context=""-->
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txt_layout_hora"
+        android:id="@+id/txt_layout_nome_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edit_text_hora"
+            android:id="@+id/edit_text_nome_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_horario" />
+            android:hint="@string/hint_bloco"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

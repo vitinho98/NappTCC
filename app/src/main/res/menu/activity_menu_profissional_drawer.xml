@@ -31,8 +31,12 @@
     <item android:title="Cadastro">
         <menu>
             <item
-                android:id="@+id/nav_profissional"
+                android:id="@+id/nav_diagnostico"
                 android:icon="@drawable/ic_profissional"
+                android:title="@string/item_diagnostico" />
+            <item
+                android:id="@+id/nav_profissional"
+                android:icon="@drawable/ic_diagnostico"
                 android:title="@string/item_profissional" />
             <item
                 android:id="@+id/nav_profissional_externo"
