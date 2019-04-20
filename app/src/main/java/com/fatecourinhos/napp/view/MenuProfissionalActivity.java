@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.view.cadastros.CadastroHorario;
+import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 import com.fatecourinhos.napp.view.fragments.HorarioAtendimentoFragment;
 import com.fatecourinhos.napp.view.fragments.LocalAtendimentoFragment;
 import com.fatecourinhos.napp.view.fragments.ProfissionalExternoFragment;
@@ -50,8 +52,8 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                //Intent intent = new Intent(MenuProfissionalActivity.this, CadastroProfissional.class);
+                //startActivity(intent);
                 Fragment ativo = new Fragment();
                 FragmentManager fragmentManager = MenuProfissionalActivity.this.getSupportFragmentManager();
                 List<Fragment> fragments = fragmentManager.getFragments();
@@ -65,11 +67,11 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
 
                 switch(ativo.getTag()){
                     case("PROFISSIONAL"):
-                        Intent intent = new Intent(MenuProfissionalActivity.this, ProfissionalCadastro.class);
+                        Intent intent = new Intent(MenuProfissionalActivity.this, CadastroProfissional.class);
                         startActivity(intent);
                         break;
                     case("HORARIO"):
-                        HorarioCadastro cadastroHorario = new HorarioCadastro();
+                        CadastroHorario cadastroHorario = new CadastroHorario();
                         cadastroHorario.show(getSupportFragmentManager(), "HORARIO");
                         break;
                     case("LOCAL"):
