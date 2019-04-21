@@ -11,13 +11,13 @@ public class ProfissionalExternoModel {
     private String emailProfissionalExterno;
     private String telefoneProfissionalExterno;
     private String celularProfissionalExterno;
-    private String tipoProfissionalExterno;
+    private CampoAtuacaoModel campoAtuacao;
     private ResponsavelModel fkResponsavel;
 
     public ProfissionalExternoModel() {
     }
 
-    public ProfissionalExternoModel(int idProfissionalExterno, String nomeProfissionalExterno, String cidadeProfissionalExterno, String bairro, String endereco, String numero, String emailProfissionalExterno, String telefoneProfissionalExterno, String celularProfissionalExterno, String tipoProfissionalExterno, ResponsavelModel fkResponsavel) {
+    public ProfissionalExternoModel(int idProfissionalExterno, String nomeProfissionalExterno, String cidadeProfissionalExterno, String bairro, String endereco, String numero, String emailProfissionalExterno, String telefoneProfissionalExterno, String celularProfissionalExterno, CampoAtuacaoModel campoAtuacao, ResponsavelModel fkResponsavel) {
         this.idProfissionalExterno = idProfissionalExterno;
         this.nomeProfissionalExterno = nomeProfissionalExterno;
         this.cidadeProfissionalExterno = cidadeProfissionalExterno;
@@ -27,7 +27,7 @@ public class ProfissionalExternoModel {
         this.emailProfissionalExterno = emailProfissionalExterno;
         this.telefoneProfissionalExterno = telefoneProfissionalExterno;
         this.celularProfissionalExterno = celularProfissionalExterno;
-        this.tipoProfissionalExterno = tipoProfissionalExterno;
+        this.campoAtuacao = campoAtuacao;
         this.fkResponsavel = fkResponsavel;
     }
 
@@ -103,12 +103,12 @@ public class ProfissionalExternoModel {
         this.celularProfissionalExterno = celularProfissionalExterno;
     }
 
-    public String getTipoProfissionalExterno() {
-        return tipoProfissionalExterno;
+    public CampoAtuacaoModel getCampoAtuacao() {
+        return campoAtuacao;
     }
 
-    public void setTipoProfissionalExterno(String tipoProfissionalExterno) {
-        this.tipoProfissionalExterno = tipoProfissionalExterno;
+    public void setCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
+        this.campoAtuacao = campoAtuacao;
     }
 
     public ResponsavelModel getFkResponsavel() {

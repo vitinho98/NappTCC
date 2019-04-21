@@ -38,7 +38,6 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_profissional"
             tools:ignore="MissingConstraints">
@@ -63,7 +62,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_layout_nome_profissional"
             tools:ignore="MissingConstraints">
@@ -88,7 +87,6 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_layout_celular_profissional"
             tools:ignore="MissingConstraints">
@@ -113,9 +111,8 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_email_profissional"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -155,17 +152,20 @@
 
         <Spinner
             android:id="@+id/spinnerTipoUsuario"
-            android:layout_width="244dp"
-            android:layout_height="26dp"
+            android:layout_width="259dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_layout_senha_profissional" />
+            app:layout_constraintStart_toEndOf="@+id/switchStatus"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCampoAtuacao" />
 
         <Switch
             android:id="@+id/switchStatus"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
@@ -175,9 +175,8 @@
             android:checked="true"
             android:text="@string/txt_status"
             app:layout_constraintEnd_toStartOf="@+id/spinnerTipoUsuario_consulta"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_layout_senha_profissional" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCampoAtuacao" />
 
         <Button
             android:id="@+id/btn_salvar_profissional"
@@ -190,7 +189,6 @@
             android:layout_marginRight="32dp"
             android:text="@string/btn_salvar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerTipoUsuario" />
 
@@ -204,9 +202,8 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_layout_email_profissional" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_senha_profissional" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

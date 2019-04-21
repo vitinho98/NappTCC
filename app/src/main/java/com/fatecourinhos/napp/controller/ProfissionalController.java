@@ -35,7 +35,7 @@ public class ProfissionalController {
 
     public static boolean inserir(ProfissionalModel profissional){
 
-        String uri = "http://vitorsilva.xyz/napp/APIIncluirDados.php";
+        String uri = "";
 
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
@@ -47,6 +47,7 @@ public class ProfissionalController {
         requestHttp.setParametro("loginProfissional", profissional.getFkUsuario().getLogin());
         requestHttp.setParametro("senhaProfissional", profissional.getFkUsuario().getSenha());
         requestHttp.setParametro("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
+        requestHttp.setParametro("campoAtuacaoProfissional", String.valueOf(profissional.getCampoAtuacao().getIdCampoAtuacao()));
         requestHttp.setParametro("statusProfissional", String.valueOf(profissional.getFkUsuario().getStatus()));
 
         CadProf task = new CadProf();
@@ -58,7 +59,7 @@ public class ProfissionalController {
 
     public static List<ProfissionalModel> buscarProfisisonais(){
 
-        String uri = "http:vitorsilva.xyz/napp/APIConsultarDados.php";
+        String uri = "";
 
         SelectProf mytask = new SelectProf();
         mytask.execute(uri);
@@ -82,7 +83,7 @@ public class ProfissionalController {
         }
 
         @Override
-        protected void onPostExecute(final List<ProfissionalModel> profissional) {
+        protected void onPostExecute(List<ProfissionalModel> profissionais) {
             super.onPostExecute(profissionais);
 
         }

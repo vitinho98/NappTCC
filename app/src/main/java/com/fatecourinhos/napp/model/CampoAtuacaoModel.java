@@ -4,11 +4,11 @@ public class CampoAtuacaoModel {
     private int idCampoAtuacao;
     private String nomeCampoAtuacao;
 
-    CampoAtuacaoModel(){
+    public CampoAtuacaoModel(){
 
     }
 
-    CampoAtuacaoModel(int idCampoAtuacao, String nomeCampoAtuacao){
+    public CampoAtuacaoModel(int idCampoAtuacao, String nomeCampoAtuacao){
         this.idCampoAtuacao = idCampoAtuacao;
         this.nomeCampoAtuacao = nomeCampoAtuacao;
     }
