@@ -12,7 +12,7 @@ public class AlunoModel {
     private String curso;
     private int semestre;
     private String anoEntrada;
-    private int idade;
+    private Date dataNascimento;
     private String sexo;
     private String cidadeAluno;
     private String estadoCivil;
@@ -24,7 +24,7 @@ public class AlunoModel {
     public AlunoModel() {
     }
 
-    public AlunoModel(int idAluno, String nomeAluno, String ra, String cpf, String celularAluno, String curso, int semestre, String anoEntrada, int idade, String sexo, String cidadeAluno, String estadoCivil, boolean empregado, String emailAluno, Date dataCadAluno, UsuarioModel fkUsuario) {
+    public AlunoModel(int idAluno, String nomeAluno, String ra, String cpf, String celularAluno, String curso, int semestre, String anoEntrada, Date dataNascimento, String sexo, String cidadeAluno, String estadoCivil, boolean empregado, String emailAluno, Date dataCadAluno, UsuarioModel fkUsuario) {
         this.idAluno = idAluno;
         this.nomeAluno = nomeAluno;
         this.ra = ra;
@@ -33,7 +33,7 @@ public class AlunoModel {
         this.curso = curso;
         this.semestre = semestre;
         this.anoEntrada = anoEntrada;
-        this.idade = idade;
+        this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.cidadeAluno = cidadeAluno;
         this.estadoCivil = estadoCivil;
@@ -107,14 +107,6 @@ public class AlunoModel {
         this.anoEntrada = anoEntrada;
     }
 
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
     public String getSexo() {
         return sexo;
     }
@@ -161,6 +153,14 @@ public class AlunoModel {
 
     public void setDataCadAluno(Date dataCadAluno) {
         this.dataCadAluno = dataCadAluno;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public UsuarioModel getFkUsuario() {

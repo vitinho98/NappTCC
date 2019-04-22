@@ -11,7 +11,7 @@ public class ProfissionalExternoModel {
     private String emailProfissionalExterno;
     private String telefoneProfissionalExterno;
     private String celularProfissionalExterno;
-    private CampoAtuacaoModel campoAtuacao;
+    private CampoAtuacaoModel fkCampoAtuacao;
     private ResponsavelModel fkResponsavel;
 
     public ProfissionalExternoModel() {
@@ -27,7 +27,7 @@ public class ProfissionalExternoModel {
         this.emailProfissionalExterno = emailProfissionalExterno;
         this.telefoneProfissionalExterno = telefoneProfissionalExterno;
         this.celularProfissionalExterno = celularProfissionalExterno;
-        this.campoAtuacao = campoAtuacao;
+        this.fkCampoAtuacao = campoAtuacao;
         this.fkResponsavel = fkResponsavel;
     }
 
@@ -104,11 +104,11 @@ public class ProfissionalExternoModel {
     }
 
     public CampoAtuacaoModel getCampoAtuacao() {
-        return campoAtuacao;
+        return fkCampoAtuacao;
     }
 
     public void setCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
-        this.campoAtuacao = campoAtuacao;
+        this.fkCampoAtuacao = campoAtuacao;
     }
 
     public ResponsavelModel getFkResponsavel() {

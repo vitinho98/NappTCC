@@ -14,7 +14,6 @@ import java.net.URL;
 
 public class HttpManager {
 
-
     public static String getDados(RequestHttp requestHttp){
         BufferedReader reader = null;
         String uri = requestHttp.getUrl();
@@ -33,14 +32,12 @@ public class HttpManager {
                 JSONObject jsonObject = new JSONObject(requestHttp.getParametros());
                 String parametros = jsonObject.toString();
 
-
                 con.setDoOutput(true);
                 OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream());
                 writer.write(parametros);
                 writer.flush();
 
             }
-
 
             StringBuilder stringBuilder = new StringBuilder();
             reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -51,6 +48,7 @@ public class HttpManager {
             }
 
             return stringBuilder.toString();
+
         }catch (Exception e){
             e.printStackTrace();
             return null;

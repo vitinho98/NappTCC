@@ -52,14 +52,16 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         navigationView.setNavigationItemSelectedListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        //TO DO --> Abrir a tela adequeada
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(MenuProfissionalActivity.this, CadastroProfissional.class);
-                //startActivity(intent);
+
                 Fragment ativo = new Fragment();
                 FragmentManager fragmentManager = MenuProfissionalActivity.this.getSupportFragmentManager();
                 List<Fragment> fragments = fragmentManager.getFragments();
+
                 if(fragments!=null){
                     for(Fragment fragment : fragments){
                         if(fragment != null && fragment.isVisible()){
@@ -88,7 +90,6 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
 
             }
         });
-
     }
 
     //quando o botao da drawer na toolbar é apertado
@@ -115,22 +116,13 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
 
         int id = item.getItemId();
 
+        //TO DO --> Voltar para a tela de login
         if (id == R.id.sair) {
 
             return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private boolean isOnline(){
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        if(networkInfo != null && networkInfo.isConnected()){
-            return true;
-        }else{
-            return false;
-        }
     }
 
     //quando clica em algum menu do drawer chama o metodo display
@@ -141,6 +133,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         return true;
     }
 
+    //TO DO --> Adicionar todas as telas par
     //método chamado quando algum item do drawer é clicado
     private void displaySeletecScreen(int itemid) {
 
@@ -185,10 +178,18 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
 
         }
 
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    private boolean isOnline(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

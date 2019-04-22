@@ -27,13 +27,13 @@ public class ProfissionalExternoJSONParser {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                profissionalExternoModel.setBairro(jsonObject.getString("bairroProfissionalExterno"));
+                profissionalExternoModel.setBairro(jsonObject.getString("bairro"));
                 profissionalExternoModel.setCelularProfissionalExterno(jsonObject.getString("celularProfissionalExterno"));
                 profissionalExternoModel.setTelefoneProfissionalExterno(jsonObject.getString("telefoneProfissionalExterno"));
                 profissionalExternoModel.setCidadeProfissionalExterno(jsonObject.getString("cidadeProfissionalExterno"));
-                profissionalExternoModel.setEndereco(jsonObject.getString("enderecoProfissionalExterno"));
+                profissionalExternoModel.setEndereco(jsonObject.getString("endereco"));
                 profissionalExternoModel.setIdProfissionalExterno(jsonObject.getInt("idProfissionalExterno"));
-                profissionalExternoModel.setNumero(jsonObject.getString("numeroProfissionalExterno"));
+                profissionalExternoModel.setNumero(jsonObject.getString("numero"));
                 profissionalExternoModel.setEmailProfissionalExterno(jsonObject.getString("emailProfissionalExterno"));
                 profissionalExternoModel.setNomeProfissionalExterno(jsonObject.getString("nomeProfissionalExterno"));
 
