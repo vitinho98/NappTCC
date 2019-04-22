@@ -1,6 +1,9 @@
 package com.fatecourinhos.napp.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
@@ -118,6 +121,16 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean isOnline(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     //quando clica em algum menu do drawer chama o metodo display
