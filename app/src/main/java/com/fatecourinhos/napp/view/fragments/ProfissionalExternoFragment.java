@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.ProfissionalController;
+import com.fatecourinhos.napp.controller.ProfissionalExternoController;
 import com.fatecourinhos.napp.model.ProfissionalExternoModel;
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.view.adapter.ProfissionalExternoAdapter;
@@ -55,7 +56,7 @@ public class ProfissionalExternoFragment extends Fragment{
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
 
-        profissionaisExterno = ProfissionalExternoController.buscarProfisisonaisExterno();
+        profissionaisExterno = ProfissionalExternoController.buscarProfissionaisExternos();
 
         adapter = new ProfissionalExternoAdapter(profissionaisExterno);
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.controller.LocalAtendimentoController;
 import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.model.LocalAtendimentoModel;
 import com.fatecourinhos.napp.model.ProfissionalModel;
@@ -55,7 +56,7 @@ public class LocalAtendimentoFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        locaisAtendimento = LocalAtendimentoController.buscarLocaisAtendimento();
+        locaisAtendimento = LocalAtendimentoController.buscarDiagnostico();
 
         adapter = new LocalAtendimentoAdapter(locaisAtendimento);
 
