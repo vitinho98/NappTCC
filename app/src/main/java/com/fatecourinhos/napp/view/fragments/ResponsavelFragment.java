@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.ProfissionalController;
+import com.fatecourinhos.napp.controller.ResponsavelController;
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.ResponsavelModel;
 import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;

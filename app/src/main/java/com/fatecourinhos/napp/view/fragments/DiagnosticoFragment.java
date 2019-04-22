@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.controller.DiagnosticoController;
 import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.model.CampoAtuacaoModel;
 import com.fatecourinhos.napp.model.DiagnosticoModel;
@@ -57,7 +58,7 @@ public class DiagnosticoFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        diagnosticos = DiagnosticoController.buscarDiagnosticos();
+        diagnosticos = DiagnosticoController.buscarDiagnostico();
 
         adapter = new DiagnosticoAdapter(diagnosticos);
 

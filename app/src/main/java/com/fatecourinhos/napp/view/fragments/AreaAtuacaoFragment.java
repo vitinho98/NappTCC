@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.controller.CampoAtuacaoController;
 import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.model.CampoAtuacaoModel;
 import com.fatecourinhos.napp.model.LocalAtendimentoModel;
