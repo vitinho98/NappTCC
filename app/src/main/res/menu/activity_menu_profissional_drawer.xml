@@ -35,6 +35,11 @@
                 android:icon="@drawable/ic_profissional"
                 android:title="@string/item_diagnostico" />
             <item
+                android:id="@+id/nav_campo_atuacao"
+                android:icon="@drawable/ic_campo_atuacao"
+                android:title="@string/item_campo_atuacao" />
+
+            <item
                 android:id="@+id/nav_profissional"
                 android:icon="@drawable/ic_diagnostico"
                 android:title="@string/item_profissional" />

@@ -26,7 +26,6 @@ public class CadastroProfissional extends AppCompatActivity {
     private Button btn_cadastrar_profissional;
     private Switch switchProf;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +41,10 @@ public class CadastroProfissional extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipo_prof_array, android.R.layout.simple_spinner_item);
         spinnerProf.setAdapter(adapter);
 
-
         switchProf = findViewById(R.id.switchStatus);
 
         btn_cadastrar_profissional = findViewById(R.id.btn_salvar_profissional);
-        /*
+
         if ((getIntent().getExtras() != null)) {
 
             String nome = (String) getIntent().getExtras().get("nomeProfissional");
@@ -74,16 +72,24 @@ public class CadastroProfissional extends AppCompatActivity {
             }else{
                 switchProf.setChecked(true);
             }
+
+            btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+        }else{
+
+            btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    enviarDados();
+                }
+            });
+
         }
-        */
-
-        btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enviarDados();
-            }
-        });
-
     }
 
     private void enviarDados() {
@@ -128,9 +134,8 @@ public class CadastroProfissional extends AppCompatActivity {
             else
                 Toast.makeText(this, "Erro ao inserir", Toast.LENGTH_LONG);
         }else
-            Toast.makeText(this, "Insira todos os campos!", Toast.LENGTH_LONG);
+            Toast.makeText(this, "Insira todos os campos corretamente!", Toast.LENGTH_LONG);
 
     }
-
 }
 

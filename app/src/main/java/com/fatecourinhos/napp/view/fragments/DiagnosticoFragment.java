@@ -67,9 +67,16 @@ public class DiagnosticoFragment extends Fragment{
         adapter.setListener(new DiagnosticoAdapter.Listener() {
             @Override
             public void onClick(DiagnosticoModel diagnostico) {
-                Intent intent = new Intent(getActivity(), CadastroDiagnostico.class);
 
-                getActivity().startActivity(intent);
+                Bundle data = new Bundle();
+                data.putInt("idDiagnostico", diagnostico.getIdDiagostico());
+                data.putString("nomeDiagnostico", diagnostico.getNomeDiagnotico());
+                data.putString("operação", "alteração");
+
+                CadastroDiagnostico cadastroDiagnostico = new CadastroDiagnostico();
+                cadastroDiagnostico.setArguments(data);
+                cadastroDiagnostico.show(getFragmentManager(), "DIAGNOSTICO");
+
             }
         });
     }

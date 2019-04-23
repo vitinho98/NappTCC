@@ -64,9 +64,16 @@ public class HorarioAtendimentoFragment extends Fragment{
         adapter.setListener(new HorarioAtendimentoAdapter.Listener() {
             @Override
             public void onClick(AgendaProfissionalModel agendaProfissional) {
-                Intent intent = new Intent(getActivity(), CadastroHorario.class);
 
-                getActivity().startActivity(intent);
+                Bundle data = new Bundle();
+                data.putInt("idAgendaProfissional", agendaProfissional.getIdAgendaProfissional());
+                data.putString("horario", agendaProfissional.getHorario());
+                data.putString("diaDaSemana", agendaProfissional.getDiaDaSemana());
+
+                CadastroHorario cadastroHorario = new CadastroHorario();
+                cadastroHorario.setArguments(data);
+                cadastroHorario.show(getFragmentManager(), "HORARIO");
+
             }
         });
     }

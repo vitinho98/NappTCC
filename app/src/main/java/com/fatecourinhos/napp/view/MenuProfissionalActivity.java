@@ -7,8 +7,14 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.view.cadastros.CadastroAreaAtuacao;
+import com.fatecourinhos.napp.view.cadastros.CadastroDiagnostico;
 import com.fatecourinhos.napp.view.cadastros.CadastroHorario;
+import com.fatecourinhos.napp.view.cadastros.CadastroLocalAtendimento;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
+import com.fatecourinhos.napp.view.cadastros.CadastroProfissionalExterno;
+import com.fatecourinhos.napp.view.fragments.AreaAtuacaoFragment;
+import com.fatecourinhos.napp.view.fragments.DiagnosticoFragment;
 import com.fatecourinhos.napp.view.fragments.HorarioAtendimentoFragment;
 import com.fatecourinhos.napp.view.fragments.LocalAtendimentoFragment;
 import com.fatecourinhos.napp.view.fragments.ProfissionalExternoFragment;
@@ -80,14 +86,26 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                         cadastroHorario.show(getSupportFragmentManager(), "HORARIO");
                         break;
                     case("LOCAL"):
+                        CadastroLocalAtendimento cadastroLocalAtendimento = new CadastroLocalAtendimento();
+                        cadastroLocalAtendimento.show(getSupportFragmentManager(), "LOCAL");
                         break;
                     case("EXTERNO"):
+                        Intent intent1 = new Intent(MenuProfissionalActivity.this, CadastroProfissionalExterno.class);
+                        startActivity(intent1);
+                        break;
+                    case("DIAGNOSTICO"):
+                        CadastroDiagnostico cadastroDiagnostico = new CadastroDiagnostico();
+                        cadastroDiagnostico.show(getSupportFragmentManager(), "DIAGNOSTICO");
+                        break;
+                    case("CAMPOATUACAO"):
+                        CadastroAreaAtuacao cadastroAreaAtuacao = new CadastroAreaAtuacao();
+                        cadastroAreaAtuacao.show(getSupportFragmentManager(), "CAMPOATUACAO");
+                        break;
+                    case("RESPONSAVEL"):
+                        Intent intent2 = new Intent(MenuProfissionalActivity.this, CadastroProfissional.class);
+                        startActivity(intent2);
                         break;
                 }
-
-
-
-
             }
         });
     }
@@ -176,6 +194,33 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                 }
                 break;
 
+            case R.id.nav_diagnostico:
+                fragment = new DiagnosticoFragment();
+                if(fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_layout_nav, fragment, "DIAGNOSTICO");
+                    ft.commit();
+                }
+                break;
+
+            case R.id.nav_campo_atuacao:
+                fragment = new AreaAtuacaoFragment();
+                if(fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_layout_nav, fragment, "CAMPOATUACAO");
+                    ft.commit();
+                }
+                break;
+
+            case R.id.nav_responsavel:
+                fragment = new HorarioAtendimentoFragment();
+                if(fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_layout_nav, fragment, "RESPONSAVEL");
+                    ft.commit();
+                }
+                break;
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -191,5 +236,4 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
             return false;
         }
     }
-
 }

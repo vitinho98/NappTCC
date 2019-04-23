@@ -64,6 +64,7 @@
     <string name="hint_numero_casa">Número</string>
     <string name="hint_email">E-mail</string>
     <string name="item_diagnostico">Diagnóstico</string>
+    <string name="item_campo_atuacao">Campo de atuação</string>
 
     <!-- Spinner -->
     <string-array name="tipo_prof_array">

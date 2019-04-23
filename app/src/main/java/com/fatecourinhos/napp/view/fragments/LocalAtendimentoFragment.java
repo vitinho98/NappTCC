@@ -65,9 +65,16 @@ public class LocalAtendimentoFragment extends Fragment{
         adapter.setListener(new LocalAtendimentoAdapter.Listener() {
             @Override
             public void onClick(LocalAtendimentoModel localAtendimento) {
-                Intent intent = new Intent(getActivity(), CadastroLocalAtendimento.class);
 
-                getActivity().startActivity(intent);
+                Bundle data = new Bundle();
+                data.putInt("idLocalAtendimento", localAtendimento.getIdLocalAtendimento());
+                data.putString("nomeLocal", localAtendimento.getNomeLocal());
+                data.putString("nomeBloco", localAtendimento.getNomeBloco());
+
+                CadastroLocalAtendimento cadastroLocalAtendimento = new CadastroLocalAtendimento();
+                cadastroLocalAtendimento.setArguments(data);
+                cadastroLocalAtendimento.show(getFragmentManager(), "LOCAL");
+
             }
         });
     }

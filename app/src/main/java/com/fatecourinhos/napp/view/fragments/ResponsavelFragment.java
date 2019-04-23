@@ -65,11 +65,16 @@ public class ResponsavelFragment extends Fragment{
         adapter.setListener(new ResponsavelAdapter.Listener() {
             @Override
             public void onClick(ResponsavelModel responsavel) {
-                Intent intent = new Intent(getActivity(), CadastroProfissional.class);
+                Intent intent = new Intent(getActivity(), CadastroResponsavel.class);
+
+                intent.putExtra("idResponsavel", responsavel.getIdResponsavel());
+                intent.putExtra("nomeResponsavel", responsavel.getNomeResponsavel());
+                intent.putExtra("emailResponsavel", responsavel.getEmailResponsavel());
+                intent.putExtra("celularResponsavel", responsavel.getCelularResponsavel());
+                intent.putExtra("telefoneResponsavel", responsavel.getTelefoneResponsavel());
 
                 getActivity().startActivity(intent);
             }
         });
     }
-
 }

@@ -1,28 +1,19 @@
 package com.fatecourinhos.napp.view.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.CampoAtuacaoController;
-import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.model.CampoAtuacaoModel;
-import com.fatecourinhos.napp.model.LocalAtendimentoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
+import com.fatecourinhos.napp.view.MenuProfissionalActivity;
 import com.fatecourinhos.napp.view.adapter.CampoAtuacaoAdapter;
-import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
-import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroAreaAtuacao;
-import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -66,11 +57,18 @@ public class AreaAtuacaoFragment extends Fragment{
         adapter.setListener(new CampoAtuacaoAdapter.Listener() {
             @Override
             public void onClick(CampoAtuacaoModel campoAtuacao) {
-                Intent intent = new Intent(getActivity(), CadastroAreaAtuacao.class);
 
-                getActivity().startActivity(intent);
+                Bundle data = new Bundle();
+                data.putInt("idCampoAtuacao", campoAtuacao.getIdCampoAtuacao());
+                data.putString("nomeCampoAtuacao", campoAtuacao.getNomeCampoAtuacao());
+                data.putString("operação", "alteração");
+
+                CadastroAreaAtuacao cadastroAreaAtuacao = new CadastroAreaAtuacao();
+                cadastroAreaAtuacao.setArguments(data);
+
+                cadastroAreaAtuacao.show(getFragmentManager(), "CAMPOATUACAO");
+
             }
         });
     }
-
 }

@@ -9,88 +9,13 @@
     tools:ignore="MissingDefaultResource">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_tela_profissional"
+        android:id="@+id/layout_tela_responsavel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".view.LoginActivity">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_layout_nome_profissional"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edit_text_nome_profissional"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_nome"
-                android:inputType="text"
-                tools:ignore="MissingConstraints" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_layout_celular_profissional"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_layout_nome_profissional"
-            tools:ignore="MissingConstraints">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edit_text_celular_profissional"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_telefone"
-                android:inputType="phone"
-                tools:ignore="MissingConstraints" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_layout_celular_profissional"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_layout_celular_profissional"
-            tools:ignore="MissingConstraints">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edit_text_celular_profissional"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_celular"
-                android:inputType="phone"
-                tools:ignore="MissingConstraints" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_layout_email_profissional"
+            android:id="@+id/txt_layout_nome_responsavel"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="32dp"
@@ -101,11 +26,86 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_layout_celular_profissional"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edit_text_email_profissional"
+                android:id="@+id/edit_text_nome_responsavel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_nome"
+                android:inputType="text"
+                tools:ignore="MissingConstraints" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_telefone_responsavel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_celular_responsavel"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_telefone_responsavel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_telefone"
+                android:inputType="phone"
+                tools:ignore="MissingConstraints" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_celular_responsavel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_nome_responsavel"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_celular_responsavel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_celular"
+                android:inputType="phone"
+                tools:ignore="MissingConstraints" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_email_responsavel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_telefone_responsavel"
+            tools:ignore="MissingConstraints">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_email_responsavel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_email"
@@ -123,13 +123,13 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/btn_salvar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_layout_email_profissional"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_email_responsavel"
             app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,15 +66,20 @@ public class ProfissionalFragment extends Fragment{
                 Intent intent = new Intent(getActivity(), CadastroProfissional.class);
 
                 intent.putExtra("idProfissional", profissional.getIdProfissional());
+                intent.putExtra("foto", profissional.getFoto());
                 intent.putExtra("nomeProfissional", profissional.getNomeProfissional());
                 intent.putExtra("emailProfissional", profissional.getEmailProfissional());
                 intent.putExtra("celularProfissional", profissional.getCelularProfissional());
+
                 intent.putExtra("idUsuario", profissional.getFkUsuario().getIdUsuario());
                 intent.putExtra("loginProfissional", profissional.getFkUsuario().getLogin());
                 intent.putExtra("senhaProfissional", profissional.getFkUsuario().getSenha());
                 intent.putExtra("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
                 intent.putExtra("statusProfissional", profissional.getFkUsuario().getStatus());
+
                 intent.putExtra("campoAtuacao",profissional.getCampoAtuacao().getNomeCampoAtuacao());
+                intent.putExtra("idCampoAtuacao", profissional.getCampoAtuacao().getIdCampoAtuacao());
+
                 intent.putExtra("operacao", "alterar");
 
                 getActivity().startActivity(intent);

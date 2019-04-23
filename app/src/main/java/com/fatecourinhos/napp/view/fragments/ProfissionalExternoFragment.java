@@ -67,6 +67,20 @@ public class ProfissionalExternoFragment extends Fragment{
             public void onClick(ProfissionalExternoModel profissionalExterno) {
                 Intent intent = new Intent(getActivity(), CadastroProfissionalExterno.class);
 
+                intent.putExtra("idProfissionalExterno", profissionalExterno.getIdProfissionalExterno());
+                intent.putExtra("emailProfissionalExterno", profissionalExterno.getEmailProfissionalExterno());
+                intent.putExtra("nomeProfissionalExterno", profissionalExterno.getNomeProfissionalExterno());
+                intent.putExtra("cidadeProfissionalExterno", profissionalExterno.getCidadeProfissionalExterno());
+                intent.putExtra("numero", profissionalExterno.getNumero());
+                intent.putExtra("bairro", profissionalExterno.getBairro());
+                intent.putExtra("endereco", profissionalExterno.getEndereco());
+                intent.putExtra("celularProfissionalExterno", profissionalExterno.getCelularProfissionalExterno());
+                intent.putExtra("telefoneProfissionalExterno", profissionalExterno.getTelefoneProfissionalExterno());
+
+                intent.putExtra("nomeCampoAtuacao", profissionalExterno.getCampoAtuacao().getNomeCampoAtuacao());
+
+                intent.putExtra("nomeResponsavel", profissionalExterno.getFkResponsavel().getNomeResponsavel());
+
                 getActivity().startActivity(intent);
             }
         });
