@@ -5,8 +5,8 @@
 
     <dist:module dist:instant="true" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,18 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".view.AlunoActivity" />
-
+        <activity
+            android:name=".view.MenuAlunoActivity"
+            android:label="@string/title_activity_menu_aluno"></activity>
+        <activity android:name=".view.cadastros.CadastroAluno" />
         <activity android:name=".view.cadastros.CadastroProfissional" />
-
         <activity
             android:name=".view.MenuProfissionalActivity"
             android:label="@string/title_activity_menu_profissional"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity android:name=".view.SobreActivity" />
-
         <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

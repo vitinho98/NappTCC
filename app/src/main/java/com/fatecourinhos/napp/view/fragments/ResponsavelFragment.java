@@ -48,7 +48,7 @@ public class ResponsavelFragment extends Fragment{
 
         super.onViewCreated(view, savedInstance);
 
-        getActivity().setTitle("Profissionais Externos");
+        getActivity().setTitle("Responsaveis");
 
     }
 
