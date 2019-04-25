@@ -4,61 +4,214 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.UsuarioController;
+import com.fatecourinhos.napp.json.UsuarioJSONParser;
+import com.fatecourinhos.napp.model.AlunoModel;
+import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.UsuarioModel;
+import com.fatecourinhos.napp.view.cadastros.CadastroAluno;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
     AppCompatEditText editTextLogin, editTextSenha;
+    TextInputLayout textInputLayoutLogin, textInputLayoutSenha;
+    ImageView imgSobre;
+    TextView txtCadastrar;
+    Button btnLogin;
+    SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        txtCadastrar = findViewById(R.id.txt_cadastrar);
+
+        imgSobre = findViewById(R.id.img_sobre);
+
+        textInputLayoutLogin = findViewById(R.id.txt_layout_login);
+        textInputLayoutSenha = findViewById(R.id.txt_layout_senha);
+
         editTextLogin = findViewById(R.id.edit_text_login);
         editTextSenha = findViewById(R.id.edit_text_senha);
 
-        Button btn = (Button) findViewById(R.id.btn_entrar);
-    }
+        btnLogin = findViewById(R.id.btn_entrar);
 
-    public void ir(View v){
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        UsuarioModel usuarioModel = new UsuarioModel();
-        usuarioModel.setLogin(editTextLogin.getText().toString());
-        usuarioModel.setSenha(editTextSenha.getText().toString());
+                if(conferirShared()){
 
-        UsuarioController.autenticarUsuario(usuarioModel);
-        if(UsuarioController.usuarioModelList != null){
+                    String tipoUsuario = preferences.getString("tipoUsuario", null);
 
-            //usuarioModel = UsuarioController.usuarioModelList.get(0);
-
-            if(usuarioModel.getTipoUsuario().equals("aluno")){
-
-                startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
-
-            }else{
-
-                if(usuarioModel.getStatus() == 0){
-
-                    startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
+                    if(tipoUsuario.equals("aluno")){
+                        startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
+                        finish();
+                    }else{
+                        startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
+                        finish();
+                    }
 
                 }else{
 
-                    Toast.makeText(LoginActivity.this,"Usuário desativado!",Toast.LENGTH_LONG).show();
+                    if(validarForm()){
 
+                        UsuarioModel usuarioModel = new UsuarioModel();
+                        UsuarioController usuarioController = new UsuarioController();
+
+                        usuarioModel.setLogin(editTextLogin.getText().toString());
+                        usuarioModel.setSenha(editTextSenha.getText().toString());
+
+                        String conteudo = usuarioController.autenticarUsuario(usuarioModel);
+                        String tipoUsuario = verificarTipoUsuario(conteudo);
+                        conteudo = criarJson(conteudo);
+
+                        if(tipoUsuario.equals("aluno")){
+
+                            List<UsuarioModel> listUsuario = UsuarioJSONParser.parseDados()
+
+                            usuarioModel = usuarioModelList.get(0);
+
+                            if(usuarioModel.getTipoUsuario().equals("aluno")){
+                                startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
+                                finish();
+                            }else{
+
+                                if(usuarioModel.getStatus() == 0){
+                                    startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
+                                    finish();
+                                }else{
+                                    Toast.makeText(LoginActivity.this,"Usuário desativado!",Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        }else{
+                            Toast.makeText(LoginActivity.this,"Usuário não encontrado!",Toast.LENGTH_LONG).show();
+                        }
+                    }
                 }
-
             }
+
+        });
+
+        imgSobre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SobreActivity.class));
+            }
+        });
+
+        txtCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, CadastroAluno.class));
+            }
+        });
+    }
+
+    private boolean validarForm(){
+
+        boolean retornoLogin, retornoSenha;
+
+        if(editTextSenha.getText().toString().isEmpty()){
+            textInputLayoutSenha.setErrorEnabled(true);
+            textInputLayoutSenha.setError("Insira a senha");
+            retornoSenha = false;
         }else{
-            Toast.makeText(LoginActivity.this,"Usuário não encontrado!",Toast.LENGTH_LONG).show();
+            textInputLayoutSenha.setErrorEnabled(false);
+            retornoSenha = true;
+        }
+
+        if(editTextLogin.getText().toString().isEmpty()){
+            textInputLayoutLogin.setErrorEnabled(true);
+            textInputLayoutLogin.setError("Insira o login");
+            retornoLogin = false;
+        }else{
+            textInputLayoutLogin.setErrorEnabled(false);
+            retornoLogin = true;
+        }
+
+        if(retornoLogin == true && retornoSenha == true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private void adicionarPreferencesAluno(AlunoModel aluno){
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("idUsuario", aluno.getFkUsuario().getIdUsuario());
+        editor.putString("tipoUsuario", aluno.getFkUsuario().getTipoUsuario());
+        editor.putInt("status", aluno.getFkUsuario().getStatus());
+
+        editor.putInt("idAluno", aluno.getIdAluno());
+
+        editor.putBoolean("conected", true);
+
+        editor.commit();
+
+    }
+
+    private void adicionarPreferencesProfissional(ProfissionalModel profissional){
+
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putInt("idUsuario", profissional.getFkUsuario().getIdUsuario());
+        editor.putString("tipoUsuario", profissional.getFkUsuario().getTipoUsuario());
+        editor.putInt("status", profissional.getFkUsuario().getStatus());
+
+        editor.putInt("idProfissional", profissional.getIdProfissional());
+
+        editor.putBoolean("conected", true);
+
+        editor.commit();
+
+    }
+
+    private boolean conferirShared(){
+
+        boolean resultado = preferences.getBoolean("conected", false);
+
+        if(resultado){
+            return true;
+        }else{
+            return false;
         }
 
     }
+
+    private String verificarTipoUsuario(String conteudo){
+
+        int fim = conteudo.indexOf("@");
+
+        String tipo = conteudo.substring(0, fim);
+
+        return tipo;
+
+    }
+
+    private String criarJson(String conteudo){
+
+        int inicio = conteudo.indexOf("@");
+
+        String json = conteudo.substring(inicio+1);
+
+        return json;
+
+    }
+
 }

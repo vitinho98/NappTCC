@@ -12,12 +12,9 @@ import java.util.List;
 
 public class UsuarioController {
 
-    public static boolean sucesso;
-    public static List<UsuarioModel> usuarioModelList;
+    public static String tipoLista;
 
-    public static boolean autenticarUsuario(UsuarioModel usuario) {
-
-        sucesso = false;
+    public String autenticarUsuario(UsuarioModel usuario) {
 
         String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
 
@@ -31,31 +28,28 @@ public class UsuarioController {
         autenticarUsuario task = new autenticarUsuario();
         task.execute(requestHttp);
 
-        return sucesso;
+        return tipoLista;
     }
 
-    private static class autenticarUsuario extends AsyncTask<RequestHttp, String, List<UsuarioModel>> {
+    private static class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
 
         }
 
         @Override
-        protected List<UsuarioModel> doInBackground(RequestHttp... params) {
+        protected String doInBackground(RequestHttp... params) {
             final String conteudo = (String) HttpManager.getDados(params[0]);
 
             if(conteudo.equals("Vazio"))
                 return null;
             else {
-                usuarioModelList = UsuarioJSONParser.parseDados(conteudo);
-                return usuarioModelList;
+                return conteudo;
             }
         }
 
         @Override
-        protected void onPostExecute(List<UsuarioModel> usuarioModelList) {
-
-            usuarioModelList = usuarioModelList;
+        protected void onPostExecute(String conteudo) {
 
         }
     }
