@@ -30,12 +30,12 @@ public class AgendamentoAlunoFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
-        agendamentoAlunoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_agendamento_aluno,container,false);
-        agendamentoAlunoRecycler.setLayoutManager(layoutManager);
+        //agendamentoAlunoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_agendamento_aluno,container,false);
+        //agendamentoAlunoRecycler.setLayoutManager(layoutManager);
 
-        return agendamentoAlunoRecycler;
+        return null;
     }
 
     @Override
@@ -51,17 +51,17 @@ public class AgendamentoAlunoFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        agendamento = Aluno.buscarAgendamentos();
+        //agendamento = Aluno.buscarAgendamentos();
 
-        adapter = new AgendamentoAlunoAdapter(agendamento);
+        //adapter = new AgendamentoAlunoAdapter(agendamento);
 
-        agendamentoAlunoRecycler.setAdapter(adapter);
+        //agendamentoAlunoRecycler.setAdapter(adapter);
 
-        adapter.setListener(new AgendamentoAlunoAdapter.Listener() {
+        /*adapter.setListener(new AgendamentoAlunoAdapter.Listener() {
             @Override
             public void onClick(AgendamentoModel agendamentoModel) {
 
             }
-        });
+        });*/
     }
 }
