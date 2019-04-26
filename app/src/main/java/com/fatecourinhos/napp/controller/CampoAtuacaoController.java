@@ -16,9 +16,9 @@ public class CampoAtuacaoController {
     public static boolean sucesso;
     public static List<CampoAtuacaoModel> camposAtuacao;
 
-    public static boolean inserir(CampoAtuacaoModel campoAtuacao) {
+    public static boolean inserirCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
 
-        String uri = "";
+        String uri = "http://vitorsilva.xyz/napp/campoAtuacao/inserirCampoAtuacao.php";
 
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
@@ -26,24 +26,42 @@ public class CampoAtuacaoController {
 
         requestHttp.setParametro("nomeCampoAtuacao", campoAtuacao.getNomeCampoAtuacao());
 
-        CadCampoAtuacao task = new CadCampoAtuacao();
+        InserirCampoAtuacao task = new InserirCampoAtuacao();
         task.execute(requestHttp);
 
         return sucesso;
 
     }
 
-    public static List<CampoAtuacaoModel> buscarCamposAtuacao() {
+    public static boolean alterarCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
 
-        String uri = "";
+        String uri = "http://vitorsilva.xyz/napp/campoAtuacao/alterarCampoAtuacao.php";
 
-        SelectCampoAtuacao mytask = new SelectCampoAtuacao();
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("idCampoAtuacao", String.valueOf(campoAtuacao.getIdCampoAtuacao()));
+        requestHttp.setParametro("nomeCampoAtuacao", campoAtuacao.getNomeCampoAtuacao());
+
+        AlterarCampoAtuacao task = new AlterarCampoAtuacao();
+        task.execute(requestHttp);
+
+        return sucesso;
+
+    }
+
+    public static List<CampoAtuacaoModel> selecionarCamposAtuacao() {
+
+        String uri = "http://vitorsilva.xyz/napp/campoAtuacao/selecionarCamposAtuacao.php";
+
+        SelecionarCamposAtuacao mytask = new SelecionarCamposAtuacao();
         mytask.execute(uri);
 
         return camposAtuacao;
     }
 
-    private static class SelectCampoAtuacao extends AsyncTask<String, String, List<CampoAtuacaoModel>> {
+    private static class SelecionarCamposAtuacao extends AsyncTask<String, String, List<CampoAtuacaoModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -65,24 +83,51 @@ public class CampoAtuacaoController {
         }
     }
 
-    private static class CadCampoAtuacao extends AsyncTask<RequestHttp, String, String> {
+    private static class InserirCampoAtuacao extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
-
+            super.onPreExecute();
         }
 
         @Override
         protected String doInBackground(RequestHttp... params) {
             final String conteudo = (String) HttpManager.getDados(params[0]);
 
+            if(conteudo.equals("Sucessoo"))
+                sucesso = true;
+            else
+                sucesso = false;
+
             return conteudo;
         }
 
         @Override
         protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
 
-            sucesso = true;
+    private static class AlterarCampoAtuacao extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            final String conteudo = (String) HttpManager.getDados(params[0]);
+
+            if(conteudo.equals("Sucessoo"))
+                sucesso = true;
+            else
+                sucesso = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
         }
     }
 }

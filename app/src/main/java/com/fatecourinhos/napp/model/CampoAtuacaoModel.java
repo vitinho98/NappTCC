@@ -1,6 +1,7 @@
 package com.fatecourinhos.napp.model;
 
 public class CampoAtuacaoModel {
+
     private int idCampoAtuacao;
     private String nomeCampoAtuacao;
 

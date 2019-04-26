@@ -14,7 +14,8 @@ import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.UsuarioController;
-import com.fatecourinhos.napp.json.UsuarioJSONParser;
+import com.fatecourinhos.napp.json.AlunoJSONParser;
+import com.fatecourinhos.napp.json.ProfissionalJSONParser;
 import com.fatecourinhos.napp.model.AlunoModel;
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.UsuarioModel;
@@ -53,21 +54,34 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(conferirShared()){
+                if (conferirShared()) {
 
                     String tipoUsuario = preferences.getString("tipoUsuario", null);
 
-                    if(tipoUsuario.equals("aluno")){
+                    if (tipoUsuario.equals("aluno")) {
                         startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
                         finish();
-                    }else{
-                        startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
-                        finish();
+                    } else {
+
+                        UsuarioModel usuarioModel = new UsuarioModel();
+                        usuarioModel.setIdUsuario(preferences.getInt("idUsuario",0));
+
+                        UsuarioController usuarioController = new UsuarioController();
+
+                        if(usuarioController.isAtivo(usuarioModel)){
+
+                            startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
+                            finish();
+
+                        }else{
+                            Toast.makeText(LoginActivity.this,"O usuário está desativado!", Toast.LENGTH_LONG).show();
+                        }
+
                     }
 
-                }else{
+                } else {
 
-                    if(validarForm()){
+                    if (validarForm()) {
 
                         UsuarioModel usuarioModel = new UsuarioModel();
                         UsuarioController usuarioController = new UsuarioController();
@@ -76,35 +90,44 @@ public class LoginActivity extends AppCompatActivity {
                         usuarioModel.setSenha(editTextSenha.getText().toString());
 
                         String conteudo = usuarioController.autenticarUsuario(usuarioModel);
-                        String tipoUsuario = verificarTipoUsuario(conteudo);
-                        conteudo = criarJson(conteudo);
 
-                        if(tipoUsuario.equals("aluno")){
+                        if (conteudo.isEmpty()) {
 
-                            List<UsuarioModel> listUsuario = UsuarioJSONParser.parseDados()
+                            Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
 
-                            usuarioModel = usuarioModelList.get(0);
+                        } else {
 
-                            if(usuarioModel.getTipoUsuario().equals("aluno")){
+                            String tipoUsuario = verificarTipoUsuario(conteudo);
+                            conteudo = criarJson(conteudo);
+
+                            if (tipoUsuario.equals("aluno")) {
+
+                                List<AlunoModel> alunosModel = AlunoJSONParser.parseDados(conteudo);
+                                AlunoModel alunoModel = alunosModel.get(0);
+
+                                adicionarPreferencesAluno(alunoModel);
                                 startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
                                 finish();
-                            }else{
 
-                                if(usuarioModel.getStatus() == 0){
+                            } else {
+
+                                List<ProfissionalModel> profissionaisModel = ProfissionalJSONParser.parseDados(conteudo);
+                                ProfissionalModel profissionalModel = profissionaisModel.get(0);
+
+                                if (profissionalModel.getFkUsuario().getStatus() == 0) {
+
+                                    adicionarPreferencesProfissional(profissionalModel);
                                     startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
                                     finish();
-                                }else{
-                                    Toast.makeText(LoginActivity.this,"Usuário desativado!",Toast.LENGTH_LONG).show();
-                                }
 
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Usuário desativado!", Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }else{
-                            Toast.makeText(LoginActivity.this,"Usuário não encontrado!",Toast.LENGTH_LONG).show();
                         }
                     }
                 }
             }
-
         });
 
         imgSobre.setOnClickListener(new View.OnClickListener() {

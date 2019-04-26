@@ -15,9 +15,9 @@ public class AgendaProfissionalController {
     public static boolean sucesso;
     public static List<AgendaProfissionalModel> agendasProfissional;
 
-    public static boolean inserir(AgendaProfissionalModel agendaProfissional) {
+    public static boolean inserirAgendaProfissional(AgendaProfissionalModel agendaProfissional) {
 
-        String uri = "";
+        String uri = "http://vitorsilva.xyz/napp/agendaProfissional/inserirAgendaProfissional.php";
 
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
@@ -27,28 +27,48 @@ public class AgendaProfissionalController {
         requestHttp.setParametro("horario", agendaProfissional.getHorario());
         requestHttp.setParametro("idProfissional", String.valueOf(agendaProfissional.getFkProfissional().getIdProfissional()));
 
-        CadAgendaProfissional task = new CadAgendaProfissional();
+        InserirAgendaProfissional task = new InserirAgendaProfissional();
         task.execute(requestHttp);
 
         return sucesso;
 
     }
 
-    public static List<AgendaProfissionalModel> buscarAgendaProfissional() {
+    public static boolean alterarAgendaProfissional(AgendaProfissionalModel agendaProfissional) {
 
-        String uri = "";
+        String uri = "http://vitorsilva.xyz/napp/agendaProfissional/alterarAgendaProfissional.php";
 
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
-        SelectAgendaProfissional mytask = new SelectAgendaProfissional();
+        requestHttp.setParametro("idAgendaUsuario", String.valueOf(agendaProfissional.getIdAgendaProfissional()));
+        requestHttp.setParametro("diaDaSemana", agendaProfissional.getDiaDaSemana());
+        requestHttp.setParametro("horario", agendaProfissional.getHorario());
+        requestHttp.setParametro("idProfissional", String.valueOf(agendaProfissional.getFkProfissional().getIdProfissional()));
+
+        AlterarAgendaProfissional task = new AlterarAgendaProfissional();
+        task.execute(requestHttp);
+
+        return sucesso;
+
+    }
+
+    public static List<AgendaProfissionalModel> selecionarAgendaProfissional() {
+
+        String uri = "http://vitorsilva.xyz/napp/agendaProfissional/selecionarAgendaProfissional.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        SelecionarAgendaProfissional mytask = new SelecionarAgendaProfissional();
         mytask.execute(uri);
 
         return agendasProfissional;
     }
 
-    private static class SelectAgendaProfissional extends AsyncTask<String, String, List<AgendaProfissionalModel>> {
+    private static class SelecionarAgendaProfissional extends AsyncTask<String, String, List<AgendaProfissionalModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -70,24 +90,51 @@ public class AgendaProfissionalController {
         }
     }
 
-    private static class CadAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
+    private static class InserirAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
-
+            super.onPreExecute();
         }
 
         @Override
         protected String doInBackground(RequestHttp... params) {
             final String conteudo = (String) HttpManager.getDados(params[0]);
 
+            if(conteudo.equals("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
             return conteudo;
         }
 
         @Override
         protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
 
-            sucesso = true;
+    private static class AlterarAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            final String conteudo = (String) HttpManager.getDados(params[0]);
+
+            if(conteudo.equals("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
         }
     }
 }

@@ -13,29 +13,9 @@ public class ProfissionalController {
     public static boolean sucesso;
     public static List<ProfissionalModel> profissionais;
 
-    public static boolean conferirDados(ProfissionalModel profissional){
+    public static boolean inserirProfissional(ProfissionalModel profissional){
 
-        sucesso = true;
-
-        if(profissional.getNomeProfissional() == null)
-            sucesso = false;
-        else if(profissional.getCelularProfissional() == null)
-            sucesso = false;
-        else if(profissional.getEmailProfissional() == null)
-            sucesso = false;
-        else if(profissional.getFkUsuario().getLogin() == null)
-            sucesso = false;
-        else if(profissional.getFkUsuario().getSenha() == null)
-            sucesso = false;
-        else if(profissional.getFkUsuario().getTipoUsuario() == null)
-            sucesso = false;
-
-        return sucesso;
-    }
-
-    public static boolean inserir(ProfissionalModel profissional){
-
-        String uri = "";
+        String uri = "http://vitorsilva.xyz/napp/profissional/inserirProfissional.php";
 
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
@@ -50,24 +30,49 @@ public class ProfissionalController {
         requestHttp.setParametro("campoAtuacaoProfissional", String.valueOf(profissional.getCampoAtuacao().getIdCampoAtuacao()));
         requestHttp.setParametro("statusProfissional", String.valueOf(profissional.getFkUsuario().getStatus()));
 
-        CadProf task = new CadProf();
+        InserirProfissional task = new InserirProfissional();
         task.execute(requestHttp);
 
         return sucesso;
 
     }
 
-    public static List<ProfissionalModel> buscarProfisisonais(){
+    public static boolean alterarProfissional(ProfissionalModel profissional){
 
-        String uri = "";
+        String uri = "http://vitorsilva.xyz/napp/profissional/alterarProfissional.php";
 
-        SelectProf mytask = new SelectProf();
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("idProfissional", String.valueOf(profissional.getIdProfissional()));
+        requestHttp.setParametro("nomeProfissional", profissional.getNomeProfissional());
+        requestHttp.setParametro("celProfissional", profissional.getCelularProfissional());
+        requestHttp.setParametro("emailProfissional", profissional.getEmailProfissional());
+        requestHttp.setParametro("loginProfissional", profissional.getFkUsuario().getLogin());
+        requestHttp.setParametro("senhaProfissional", profissional.getFkUsuario().getSenha());
+        requestHttp.setParametro("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
+        requestHttp.setParametro("campoAtuacaoProfissional", String.valueOf(profissional.getCampoAtuacao().getIdCampoAtuacao()));
+        requestHttp.setParametro("statusProfissional", String.valueOf(profissional.getFkUsuario().getStatus()));
+
+        AlterarProfissional task = new AlterarProfissional();
+        task.execute(requestHttp);
+
+        return sucesso;
+
+    }
+
+    public static List<ProfissionalModel> selecionarProfisisonais(){
+
+        String uri = "http://vitorsilva.xyz/napp/profissional/selecionarProfissionais.php";
+
+        SelecionarProfissionais mytask = new SelecionarProfissionais();
         mytask.execute(uri);
 
         return profissionais;
     }
 
-    private static class SelectProf extends AsyncTask<String, String, List<ProfissionalModel>>{
+    private static class SelecionarProfissionais extends AsyncTask<String, String, List<ProfissionalModel>>{
 
         @Override
         protected void onPreExecute() {
@@ -89,26 +94,52 @@ public class ProfissionalController {
         }
     }
 
-    private static class CadProf extends AsyncTask<RequestHttp, String, String> {
+    private static class InserirProfissional extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
-
+            super.onPreExecute();
         }
 
         @Override
         protected String doInBackground(RequestHttp... params) {
             final String conteudo = (String) HttpManager.getDados(params[0]);
 
+            if(conteudo.equals("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
             return conteudo;
         }
 
         @Override
         protected void onPostExecute(String s) {
-
-            sucesso = true;
-
+            super.onPostExecute(s);
         }
     }
 
+    private static class AlterarProfissional extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            final String conteudo = (String) HttpManager.getDados(params[0]);
+
+            if(conteudo.equals("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
 }
 

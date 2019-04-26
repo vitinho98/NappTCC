@@ -16,9 +16,9 @@ public class LocalAtendimentoController {
     public static boolean sucesso;
     public static List<LocalAtendimentoModel> locaisAtendimento;
 
-    public static boolean inserir(LocalAtendimentoModel localAtendimento) {
+    public static boolean inserirLocalAtendimento(LocalAtendimentoModel localAtendimento) {
 
-        String uri = "";
+        String uri = "http://vitorsilva.xyz/napp/localAtendimento/inserirLocalAtendimento.php";
 
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
@@ -27,24 +27,43 @@ public class LocalAtendimentoController {
         requestHttp.setParametro("nomeBloco", localAtendimento.getNomeBloco());
         requestHttp.setParametro("nomeLocal", localAtendimento.getNomeLocal());
 
-        CadLocalAtendimento task = new CadLocalAtendimento();
+        InserirLocalAtendimento task = new InserirLocalAtendimento();
         task.execute(requestHttp);
 
         return sucesso;
 
     }
 
-    public static List<LocalAtendimentoModel> buscarDiagnostico() {
+    public static boolean alterarLocalAtendimento(LocalAtendimentoModel localAtendimento) {
 
-        String uri = "";
+        String uri = "http://vitorsilva.xyz/napp/localAtendimento/alterarLocalAtendimento.php";
 
-        SelectLocalAtendimento mytask = new SelectLocalAtendimento();
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("idLocalAtendimento", String.valueOf(localAtendimento.getIdLocalAtendimento()));
+        requestHttp.setParametro("nomeBloco", localAtendimento.getNomeBloco());
+        requestHttp.setParametro("nomeLocal", localAtendimento.getNomeLocal());
+
+        AlterarLocalAtendimento task = new AlterarLocalAtendimento();
+        task.execute(requestHttp);
+
+        return sucesso;
+
+    }
+
+    public static List<LocalAtendimentoModel> selecionarLocalAtendimento() {
+
+        String uri = "http://vitorsilva.xyz/napp/localAtendimento/selecionarLocaisAtendimento.php";
+
+        SelecionarLocaisAtendimento mytask = new SelecionarLocaisAtendimento();
         mytask.execute(uri);
 
         return locaisAtendimento;
     }
 
-    private static class SelectLocalAtendimento extends AsyncTask<String, String, List<LocalAtendimentoModel>> {
+    private static class SelecionarLocaisAtendimento extends AsyncTask<String, String, List<LocalAtendimentoModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -66,7 +85,7 @@ public class LocalAtendimentoController {
         }
     }
 
-    private static class CadLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
+    private static class InserirLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
 
@@ -76,14 +95,41 @@ public class LocalAtendimentoController {
         protected String doInBackground(RequestHttp... params) {
             final String conteudo = (String) HttpManager.getDados(params[0]);
 
+            if(conteudo.equals("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
             return conteudo;
         }
 
         @Override
         protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
 
-            sucesso = true;
+    private static class AlterarLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
 
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            final String conteudo = (String) HttpManager.getDados(params[0]);
+
+            if(conteudo.equals("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
         }
     }
 }
