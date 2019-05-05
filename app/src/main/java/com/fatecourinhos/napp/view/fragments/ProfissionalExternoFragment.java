@@ -56,7 +56,9 @@ public class ProfissionalExternoFragment extends Fragment{
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
 
-        profissionaisExterno = ProfissionalExternoController.buscarProfissionaisExternos();
+        ProfissionalExternoController profissionalExternoController = new ProfissionalExternoController();
+
+        profissionaisExterno = profissionalExternoController.selecionarProfissionaisExternos();
 
         adapter = new ProfissionalExternoAdapter(profissionaisExterno);
 

@@ -32,8 +32,7 @@ public class AlunoJSONParser {
                 aluno.setSexo(jsonObject.getString("sexo"));
                 aluno.setCidadeAluno(jsonObject.getString("cidadeAluno"));
                 aluno.setCpf(jsonObject.getString("cpf"));
-                //aluno.setDataCadAluno(jsonObject.getString("dataCadAluno"));
-                //aluno.setDataNascimento(jsonObject.getString("dataNascimento"));
+                aluno.setDataNascimento(jsonObject.getString("dataNascimento"));
                 aluno.setEmailAluno(jsonObject.getString("emailAluno"));
                 aluno.setCurso(jsonObject.getString("curso"));
                 aluno.setEmpregado(jsonObject.getBoolean("empregado"));

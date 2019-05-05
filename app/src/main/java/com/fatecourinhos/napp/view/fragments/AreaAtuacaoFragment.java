@@ -48,7 +48,9 @@ public class AreaAtuacaoFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        camposAtuacao = CampoAtuacaoController.buscarCamposAtuacao();
+        CampoAtuacaoController campoAtuacaoController = new CampoAtuacaoController();
+
+        camposAtuacao = campoAtuacaoController.selecionarCamposAtuacao();
 
         adapter = new CampoAtuacaoAdapter(camposAtuacao);
 

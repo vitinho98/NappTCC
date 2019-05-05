@@ -56,7 +56,9 @@ public class LocalAtendimentoFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        locaisAtendimento = LocalAtendimentoController.buscarDiagnostico();
+        LocalAtendimentoController localAtendimentoController = new LocalAtendimentoController();
+
+        locaisAtendimento = localAtendimentoController.selecionarLocalAtendimento();
 
         adapter = new LocalAtendimentoAdapter(locaisAtendimento);
 

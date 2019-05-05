@@ -58,7 +58,9 @@ public class DiagnosticoFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        diagnosticos = DiagnosticoController.buscarDiagnostico();
+        DiagnosticoController diagnosticoController = new DiagnosticoController();
+
+        diagnosticos = diagnosticoController.selecionarDiagnosticos();
 
         adapter = new DiagnosticoAdapter(diagnosticos);
 

@@ -55,7 +55,9 @@ public class HorarioAtendimentoFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        agendaProfissional = AgendaProfissionalController.buscarAgendaProfissional();
+        AgendaProfissionalController agendaProfissionalController = new AgendaProfissionalController();
+
+        agendaProfissional = agendaProfissionalController.selecionarAgendaProfissional();
 
         adapter = new HorarioAtendimentoAdapter(agendaProfissional);
 

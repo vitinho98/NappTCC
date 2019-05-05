@@ -61,7 +61,7 @@ public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlu
         final AgendamentoModel agendamentoModel = agendamento.get(position);
 
         txtNomeProfissional.setText(agendamentoModel.getFkProfissional().getNomeProfissional());
-        txtDataHora.setText((CharSequence) agendamentoModel.getDataHoraAgendamento());
+        txtDataHora.setText(agendamentoModel.getDataAgendamento() + " " + agendamentoModel.getHoraAgendamento());
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

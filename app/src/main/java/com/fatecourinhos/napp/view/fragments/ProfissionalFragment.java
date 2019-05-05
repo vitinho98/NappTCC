@@ -54,7 +54,9 @@ public class ProfissionalFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        profissionais = ProfissionalController.buscarProfisisonais();
+        ProfissionalController profissionalController = new ProfissionalController();
+
+        profissionais = profissionalController.selecionarProfisisonais();
 
         adapter = new ProfissionalAdapter(profissionais);
 

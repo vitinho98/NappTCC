@@ -56,7 +56,9 @@ public class ResponsavelFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        responsaveis = ResponsavelController.buscarResponsaveis();
+        ResponsavelController responsavelController = new ResponsavelController();
+
+        responsaveis = responsavelController.selecionarResponsaveis();
 
         adapter = new ResponsavelAdapter(responsaveis);
 

@@ -5,10 +5,12 @@ import java.util.Date;
 public class AgendamentoModel {
 
     private int idAgendamento;
-    private Date dataHoraAgendamento;
-    private Date dataHoraRegistro;
+    private String dataAgendamento;
+    private String horaAgendamento;
+    private String dataRegistro;
+    private String horaRegistro;
     private String observacao;
-    private boolean Status;
+    private boolean status;
     private AlunoModel fkAluno;
     private ProfissionalModel fkProfissional;
     private LocalAtendimentoModel fkLocalAtendimento;
@@ -16,12 +18,14 @@ public class AgendamentoModel {
     public AgendamentoModel() {
     }
 
-    public AgendamentoModel(int idAgendamento, Date dataHoraAgendamento, Date dataHoraRegistro, String observacao, boolean status, AlunoModel fkAluno, ProfissionalModel fkProfissional, LocalAtendimentoModel fkLocalAtendimento) {
+    public AgendamentoModel(int idAgendamento, String dataAgendamento, String horaAgendamento, String dataRegistro, String horaRegistro, String observacao, boolean status, AlunoModel fkAluno, ProfissionalModel fkProfissional, LocalAtendimentoModel fkLocalAtendimento) {
         this.idAgendamento = idAgendamento;
-        this.dataHoraAgendamento = dataHoraAgendamento;
-        this.dataHoraRegistro = dataHoraRegistro;
+        this.dataAgendamento = dataAgendamento;
+        this.horaAgendamento = horaAgendamento;
+        this.dataRegistro = dataRegistro;
+        this.horaRegistro = horaRegistro;
         this.observacao = observacao;
-        Status = status;
+        this.status = status;
         this.fkAluno = fkAluno;
         this.fkProfissional = fkProfissional;
         this.fkLocalAtendimento = fkLocalAtendimento;
@@ -35,20 +39,36 @@ public class AgendamentoModel {
         this.idAgendamento = idAgendamento;
     }
 
-    public Date getDataHoraAgendamento() {
-        return dataHoraAgendamento;
+    public String getDataAgendamento() {
+        return dataAgendamento;
     }
 
-    public void setDataHoraAgendamento(Date dataHoraAgendamento) {
-        this.dataHoraAgendamento = dataHoraAgendamento;
+    public void setDataAgendamento(String dataAgendamento) {
+        this.dataAgendamento = dataAgendamento;
     }
 
-    public Date getDataHoraRegistro() {
-        return dataHoraRegistro;
+    public String getHoraAgendamento() {
+        return horaAgendamento;
     }
 
-    public void setDataHoraRegistro(Date dataHoraRegistro) {
-        this.dataHoraRegistro = dataHoraRegistro;
+    public void setHoraAgendamento(String horaAgendamento) {
+        this.horaAgendamento = horaAgendamento;
+    }
+
+    public String getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(String dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
+    public String getHoraRegistro() {
+        return horaRegistro;
+    }
+
+    public void setHoraRegistro(String horaRegistro) {
+        this.horaRegistro = horaRegistro;
     }
 
     public String getObservacao() {
@@ -60,11 +80,11 @@ public class AgendamentoModel {
     }
 
     public boolean isStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(boolean status) {
-        Status = status;
+        status = status;
     }
 
     public AlunoModel getFkAluno() {

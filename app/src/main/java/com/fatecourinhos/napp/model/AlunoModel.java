@@ -12,19 +12,18 @@ public class AlunoModel {
     private String curso;
     private int semestre;
     private String anoEntrada;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String sexo;
     private String cidadeAluno;
     private String estadoCivil;
     private boolean empregado;
     private String emailAluno;
-    private Date dataCadAluno;
     private UsuarioModel fkUsuario;
 
     public AlunoModel() {
     }
 
-    public AlunoModel(int idAluno, String nomeAluno, String ra, String cpf, String celularAluno, String curso, int semestre, String anoEntrada, Date dataNascimento, String sexo, String cidadeAluno, String estadoCivil, boolean empregado, String emailAluno, Date dataCadAluno, UsuarioModel fkUsuario) {
+    public AlunoModel(int idAluno, String nomeAluno, String ra, String cpf, String celularAluno, String curso, int semestre, String anoEntrada, String dataNascimento, String sexo, String cidadeAluno, String estadoCivil, boolean empregado, String emailAluno,  UsuarioModel fkUsuario) {
         this.idAluno = idAluno;
         this.nomeAluno = nomeAluno;
         this.ra = ra;
@@ -39,7 +38,6 @@ public class AlunoModel {
         this.estadoCivil = estadoCivil;
         this.empregado = empregado;
         this.emailAluno = emailAluno;
-        this.dataCadAluno = dataCadAluno;
         this.fkUsuario = fkUsuario;
     }
 
@@ -147,19 +145,11 @@ public class AlunoModel {
         this.emailAluno = emailAluno;
     }
 
-    public Date getDataCadAluno() {
-        return dataCadAluno;
-    }
-
-    public void setDataCadAluno(Date dataCadAluno) {
-        this.dataCadAluno = dataCadAluno;
-    }
-
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

@@ -71,8 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
                     finish();
 
-                } else {
-                    Toast.makeText(LoginActivity.this, "O usuário está desativado!", Toast.LENGTH_LONG).show();
                 }
             }
         }
