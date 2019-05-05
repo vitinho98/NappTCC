@@ -12,8 +12,8 @@ import java.util.List;
 
 public class ResponsavelController {
 
-    public static boolean sucesso;
-    public static List<ResponsavelModel> responsaveis;
+    public boolean sucesso;
+    public List<ResponsavelModel> responsaveis;
 
     public boolean inserirResponsavel(ResponsavelModel responsavel) {
 
@@ -56,7 +56,7 @@ public class ResponsavelController {
 
     }
 
-    public static List<ResponsavelModel> selecionarResponsaveis() {
+    public List<ResponsavelModel> selecionarResponsaveis() {
 
         String uri = "http://vitorsilva.xyz/napp/responsavel/selecionarResponsaveis.php";
 
@@ -66,7 +66,7 @@ public class ResponsavelController {
         return responsaveis;
     }
 
-    private static class SelecionarResponsaveis extends AsyncTask<String, String, List<ResponsavelModel>> {
+    private class SelecionarResponsaveis extends AsyncTask<String, String, List<ResponsavelModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -88,7 +88,7 @@ public class ResponsavelController {
         }
     }
 
-    private static class CadastrarResponsavel extends AsyncTask<RequestHttp, String, String> {
+    private class CadastrarResponsavel extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -112,7 +112,7 @@ public class ResponsavelController {
         }
     }
 
-    private static class AlterarResponsavel extends AsyncTask<RequestHttp, String, String> {
+    private class AlterarResponsavel extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

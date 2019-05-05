@@ -50,79 +50,78 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btn_entrar);
 
+        if (conferirShared()) {
+
+            String tipoUsuario = preferences.getString("tipoUsuario", null);
+
+            if (tipoUsuario.equals("aluno")) {
+
+                startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
+                finish();
+
+            } else {
+
+                UsuarioModel usuarioModel = new UsuarioModel();
+                usuarioModel.setIdUsuario(preferences.getInt("idUsuario", 0));
+
+                UsuarioController usuarioController = new UsuarioController();
+
+                if (usuarioController.isAtivo(usuarioModel)) {
+
+                    startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
+                    finish();
+
+                } else {
+                    Toast.makeText(LoginActivity.this, "O usuário está desativado!", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (conferirShared()) {
+                if (validarForm()) {
 
-                    String tipoUsuario = preferences.getString("tipoUsuario", null);
+                    UsuarioModel usuarioModel = new UsuarioModel();
+                    UsuarioController usuarioController = new UsuarioController();
 
-                    if (tipoUsuario.equals("aluno")) {
-                        startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
-                        finish();
+                    usuarioModel.setLogin(editTextLogin.getText().toString());
+                    usuarioModel.setSenha(editTextSenha.getText().toString());
+
+                    String conteudo = usuarioController.autenticarUsuario(usuarioModel);
+
+                    if (conteudo.isEmpty()) {
+
+                        Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
+
                     } else {
 
-                        UsuarioModel usuarioModel = new UsuarioModel();
-                        usuarioModel.setIdUsuario(preferences.getInt("idUsuario",0));
+                        String tipoUsuario = verificarTipoUsuario(conteudo);
+                        conteudo = criarJson(conteudo);
 
-                        UsuarioController usuarioController = new UsuarioController();
+                        if (tipoUsuario.equals("aluno")) {
 
-                        if(usuarioController.isAtivo(usuarioModel)){
+                            List<AlunoModel> alunosModel = AlunoJSONParser.parseDados(conteudo);
+                            AlunoModel alunoModel = alunosModel.get(0);
 
-                            startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
+                            adicionarPreferencesAluno(alunoModel);
+                            startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
                             finish();
-
-                        }else{
-                            Toast.makeText(LoginActivity.this,"O usuário está desativado!", Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-
-                } else {
-
-                    if (validarForm()) {
-
-                        UsuarioModel usuarioModel = new UsuarioModel();
-                        UsuarioController usuarioController = new UsuarioController();
-
-                        usuarioModel.setLogin(editTextLogin.getText().toString());
-                        usuarioModel.setSenha(editTextSenha.getText().toString());
-
-                        String conteudo = usuarioController.autenticarUsuario(usuarioModel);
-
-                        if (conteudo.isEmpty()) {
-
-                            Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
 
                         } else {
 
-                            String tipoUsuario = verificarTipoUsuario(conteudo);
-                            conteudo = criarJson(conteudo);
+                            List<ProfissionalModel> profissionaisModel = ProfissionalJSONParser.parseDados(conteudo);
+                            ProfissionalModel profissionalModel = profissionaisModel.get(0);
 
-                            if (tipoUsuario.equals("aluno")) {
+                            if (profissionalModel.getFkUsuario().getStatus() == 0) {
 
-                                List<AlunoModel> alunosModel = AlunoJSONParser.parseDados(conteudo);
-                                AlunoModel alunoModel = alunosModel.get(0);
-
-                                adicionarPreferencesAluno(alunoModel);
-                                startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
+                                adicionarPreferencesProfissional(profissionalModel);
+                                startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
                                 finish();
 
                             } else {
-
-                                List<ProfissionalModel> profissionaisModel = ProfissionalJSONParser.parseDados(conteudo);
-                                ProfissionalModel profissionalModel = profissionaisModel.get(0);
-
-                                if (profissionalModel.getFkUsuario().getStatus() == 0) {
-
-                                    adicionarPreferencesProfissional(profissionalModel);
-                                    startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
-                                    finish();
-
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Usuário desativado!", Toast.LENGTH_LONG).show();
-                                }
+                                Toast.makeText(LoginActivity.this, "Usuário desativado!", Toast.LENGTH_LONG).show();
                             }
                         }
                     }

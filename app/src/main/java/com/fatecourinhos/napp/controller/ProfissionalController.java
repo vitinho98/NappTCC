@@ -10,10 +10,10 @@ import com.fatecourinhos.napp.util.RequestHttp;
 
 public class ProfissionalController {
 
-    public static boolean sucesso;
-    public static List<ProfissionalModel> profissionais;
+    public boolean sucesso;
+    public List<ProfissionalModel> profissionais;
 
-    public static boolean inserirProfissional(ProfissionalModel profissional){
+    public boolean inserirProfissional(ProfissionalModel profissional){
 
         String uri = "http://vitorsilva.xyz/napp/profissional/inserirProfissional.php";
 
@@ -37,7 +37,7 @@ public class ProfissionalController {
 
     }
 
-    public static boolean alterarProfissional(ProfissionalModel profissional){
+    public boolean alterarProfissional(ProfissionalModel profissional){
 
         String uri = "http://vitorsilva.xyz/napp/profissional/alterarProfissional.php";
 
@@ -62,7 +62,7 @@ public class ProfissionalController {
 
     }
 
-    public static List<ProfissionalModel> selecionarProfisisonais(){
+    public List<ProfissionalModel> selecionarProfisisonais(){
 
         String uri = "http://vitorsilva.xyz/napp/profissional/selecionarProfissionais.php";
 
@@ -72,7 +72,7 @@ public class ProfissionalController {
         return profissionais;
     }
 
-    private static class SelecionarProfissionais extends AsyncTask<String, String, List<ProfissionalModel>>{
+    private class SelecionarProfissionais extends AsyncTask<String, String, List<ProfissionalModel>>{
 
         @Override
         protected void onPreExecute() {
@@ -94,7 +94,7 @@ public class ProfissionalController {
         }
     }
 
-    private static class InserirProfissional extends AsyncTask<RequestHttp, String, String> {
+    private class InserirProfissional extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -118,7 +118,7 @@ public class ProfissionalController {
         }
     }
 
-    private static class AlterarProfissional extends AsyncTask<RequestHttp, String, String> {
+    private class AlterarProfissional extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

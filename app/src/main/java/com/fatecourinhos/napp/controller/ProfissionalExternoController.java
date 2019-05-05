@@ -12,10 +12,10 @@ import java.util.List;
 
 public class ProfissionalExternoController {
 
-    public static boolean sucesso;
-    public static List<ProfissionalExternoModel> profissionaisExternos;
+    public boolean sucesso;
+    public List<ProfissionalExternoModel> profissionaisExternos;
 
-    public static boolean inserirProfissionalExterno(ProfissionalExternoModel profissionalExterno) {
+    public boolean inserirProfissionalExterno(ProfissionalExternoModel profissionalExterno) {
 
         String uri = "http://vitorsilva.xyz/napp/profissionalExterno/inserirProfissionalExterno.php";
 
@@ -41,7 +41,7 @@ public class ProfissionalExternoController {
 
     }
 
-    public static boolean alterarProfissionalExterno(ProfissionalExternoModel profissionalExterno) {
+    public boolean alterarProfissionalExterno(ProfissionalExternoModel profissionalExterno) {
 
         String uri = "http://vitorsilva.xyz/napp/profissionalExterno/alterarProfissionalExterno.php";
 
@@ -68,7 +68,7 @@ public class ProfissionalExternoController {
 
     }
 
-    public static List<ProfissionalExternoModel> selecionarProfissionaisExternos() {
+    public List<ProfissionalExternoModel> selecionarProfissionaisExternos() {
 
         String uri = "http://vitorsilva.xyz/napp/profissionalExterno/selecionarProfissionaisExternos.php";
 
@@ -78,7 +78,7 @@ public class ProfissionalExternoController {
         return profissionaisExternos;
     }
 
-    private static class SelecionarProfissionaisExternos extends AsyncTask<String, String, List<ProfissionalExternoModel>> {
+    private class SelecionarProfissionaisExternos extends AsyncTask<String, String, List<ProfissionalExternoModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -100,7 +100,7 @@ public class ProfissionalExternoController {
         }
     }
 
-    private static class CadastrarProfissionalExterno extends AsyncTask<RequestHttp, String, String> {
+    private class CadastrarProfissionalExterno extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -124,7 +124,7 @@ public class ProfissionalExternoController {
         }
     }
 
-    private static class AlterarProfissionalExterno extends AsyncTask<RequestHttp, String, String> {
+    private class AlterarProfissionalExterno extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

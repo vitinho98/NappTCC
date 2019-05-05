@@ -13,10 +13,10 @@ import java.util.List;
 public class LocalAtendimentoController {
 
 
-    public static boolean sucesso;
-    public static List<LocalAtendimentoModel> locaisAtendimento;
+    public boolean sucesso;
+    public List<LocalAtendimentoModel> locaisAtendimento;
 
-    public static boolean inserirLocalAtendimento(LocalAtendimentoModel localAtendimento) {
+    public boolean inserirLocalAtendimento(LocalAtendimentoModel localAtendimento) {
 
         String uri = "http://vitorsilva.xyz/napp/localAtendimento/inserirLocalAtendimento.php";
 
@@ -34,7 +34,7 @@ public class LocalAtendimentoController {
 
     }
 
-    public static boolean alterarLocalAtendimento(LocalAtendimentoModel localAtendimento) {
+    public boolean alterarLocalAtendimento(LocalAtendimentoModel localAtendimento) {
 
         String uri = "http://vitorsilva.xyz/napp/localAtendimento/alterarLocalAtendimento.php";
 
@@ -53,7 +53,7 @@ public class LocalAtendimentoController {
 
     }
 
-    public static List<LocalAtendimentoModel> selecionarLocalAtendimento() {
+    public List<LocalAtendimentoModel> selecionarLocalAtendimento() {
 
         String uri = "http://vitorsilva.xyz/napp/localAtendimento/selecionarLocaisAtendimento.php";
 
@@ -63,7 +63,7 @@ public class LocalAtendimentoController {
         return locaisAtendimento;
     }
 
-    private static class SelecionarLocaisAtendimento extends AsyncTask<String, String, List<LocalAtendimentoModel>> {
+    private class SelecionarLocaisAtendimento extends AsyncTask<String, String, List<LocalAtendimentoModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -85,7 +85,7 @@ public class LocalAtendimentoController {
         }
     }
 
-    private static class InserirLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
+    private class InserirLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
 
@@ -109,7 +109,7 @@ public class LocalAtendimentoController {
         }
     }
 
-    private static class AlterarLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
+    private class AlterarLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
 

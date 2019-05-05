@@ -13,10 +13,10 @@ import java.util.List;
 public class CampoAtuacaoController {
 
 
-    public static boolean sucesso;
-    public static List<CampoAtuacaoModel> camposAtuacao;
+    public boolean sucesso;
+    public List<CampoAtuacaoModel> camposAtuacao;
 
-    public static boolean inserirCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
+    public boolean inserirCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/inserirCampoAtuacao.php";
 
@@ -33,7 +33,7 @@ public class CampoAtuacaoController {
 
     }
 
-    public static boolean alterarCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
+    public boolean alterarCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/alterarCampoAtuacao.php";
 
@@ -51,7 +51,7 @@ public class CampoAtuacaoController {
 
     }
 
-    public static List<CampoAtuacaoModel> selecionarCamposAtuacao() {
+    public List<CampoAtuacaoModel> selecionarCamposAtuacao() {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/selecionarCamposAtuacao.php";
 
@@ -61,7 +61,7 @@ public class CampoAtuacaoController {
         return camposAtuacao;
     }
 
-    private static class SelecionarCamposAtuacao extends AsyncTask<String, String, List<CampoAtuacaoModel>> {
+    private class SelecionarCamposAtuacao extends AsyncTask<String, String, List<CampoAtuacaoModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -83,7 +83,7 @@ public class CampoAtuacaoController {
         }
     }
 
-    private static class InserirCampoAtuacao extends AsyncTask<RequestHttp, String, String> {
+    private class InserirCampoAtuacao extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -107,7 +107,7 @@ public class CampoAtuacaoController {
         }
     }
 
-    private static class AlterarCampoAtuacao extends AsyncTask<RequestHttp, String, String> {
+    private class AlterarCampoAtuacao extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

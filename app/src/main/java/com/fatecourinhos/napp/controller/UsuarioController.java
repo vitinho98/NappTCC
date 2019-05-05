@@ -9,8 +9,8 @@ import com.fatecourinhos.napp.util.RequestHttp;
 
 public class UsuarioController {
 
-    public static String conteudo;
-    public static boolean ativo;
+    public String conteudo;
+    public boolean ativo;
 
     public boolean isAtivo(UsuarioModel usuario){
 
@@ -45,7 +45,7 @@ public class UsuarioController {
         return conteudo;
     }
 
-    private static class isAtivo extends AsyncTask<RequestHttp, String, String>{
+    private class isAtivo extends AsyncTask<RequestHttp, String, String>{
 
         @Override
         protected void onPreExecute() {
@@ -71,7 +71,7 @@ public class UsuarioController {
         }
     }
 
-    private static class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
+    private class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

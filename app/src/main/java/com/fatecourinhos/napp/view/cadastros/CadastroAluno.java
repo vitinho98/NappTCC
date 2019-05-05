@@ -8,8 +8,6 @@ import com.fatecourinhos.napp.R;
 
 public class CadastroAluno extends AppCompatActivity {
 
-    private int teste;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
