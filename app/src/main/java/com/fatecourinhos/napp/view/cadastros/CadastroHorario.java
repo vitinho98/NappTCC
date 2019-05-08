@@ -7,9 +7,12 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.model.AgendaProfissionalModel;
+import com.fatecourinhos.napp.model.ProfissionalModel;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,6 +40,8 @@ public class CadastroHorario extends AppCompatDialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                dialog.dismiss();
+
             }
         });
 
@@ -46,6 +51,14 @@ public class CadastroHorario extends AppCompatDialogFragment {
             final int hora, minuto;
 
             //Colocar aqui a data e hora e passar para a o create
+            AgendaProfissionalModel agendaProfissionalModel = new AgendaProfissionalModel();
+            agendaProfissionalModel.setDiaDaSemana(data.getString("diaDaSemana"));
+            agendaProfissionalModel.setHorario(data.getString("horario"));
+            agendaProfissionalModel.setIdAgendaProfissional(data.getInt("idAgendaProfissional"));
+
+            ProfissionalModel profissionalModel = new ProfissionalModel();
+            profissionalModel.setIdProfissional(data.getInt("idProfissional"));
+            agendaProfissionalModel.setFkProfissional(profissionalModel);
 
             editTextHorario.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,6 +104,9 @@ public class CadastroHorario extends AppCompatDialogFragment {
             builder.setPositiveButton("Cadastrar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+
+                    AgendaProfissionalModel agendaProfissionalModel = new AgendaProfissionalModel();
+                    agendaProfissionalModel.setHorario(editTextHorario.getText().toString());
 
                 }
             });

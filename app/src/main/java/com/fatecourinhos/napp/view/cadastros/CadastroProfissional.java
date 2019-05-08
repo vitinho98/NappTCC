@@ -128,13 +128,26 @@ public class CadastroProfissional extends AppCompatActivity {
 
         profissional.setFkUsuario(usuario);
 
-        if(ProfissionalController.conferirDados(profissional)){
-            if(ProfissionalController.inserir(profissional))
+        if(conferirDados(profissional)){
+            if(ProfissionalController.inserirProfissional(profissional)) {
                 Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_LONG);
-            else
+                limparDados();
+            }else
                 Toast.makeText(this, "Erro ao inserir", Toast.LENGTH_LONG);
         }else
             Toast.makeText(this, "Insira todos os campos corretamente!", Toast.LENGTH_LONG);
+
+    }
+
+    public boolean conferirDados(ProfissionalModel profissional){
+
+        boolean retorno = true;
+
+
+        return retorno;
+    }
+
+    public void limparDados(){
 
     }
 }

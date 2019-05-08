@@ -71,6 +71,7 @@ public class HorarioAtendimentoFragment extends Fragment{
                 data.putInt("idAgendaProfissional", agendaProfissional.getIdAgendaProfissional());
                 data.putString("horario", agendaProfissional.getHorario());
                 data.putString("diaDaSemana", agendaProfissional.getDiaDaSemana());
+                data.putInt("idProfissional", agendaProfissional.getFkProfissional().getIdProfissional());
 
                 CadastroHorario cadastroHorario = new CadastroHorario();
                 cadastroHorario.setArguments(data);

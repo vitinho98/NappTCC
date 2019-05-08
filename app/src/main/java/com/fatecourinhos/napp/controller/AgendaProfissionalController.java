@@ -12,10 +12,10 @@ import java.util.List;
 
 public class AgendaProfissionalController {
 
-    public boolean sucesso;
-    public List<AgendaProfissionalModel> agendasProfissional;
+    public static boolean sucesso;
+    public static List<AgendaProfissionalModel> agendasProfissional;
 
-    public boolean inserirAgendaProfissional(AgendaProfissionalModel agendaProfissional) {
+    public static boolean inserirAgendaProfissional(AgendaProfissionalModel agendaProfissional) {
 
         String uri = "http://vitorsilva.xyz/napp/agendaProfissional/inserirAgendaProfissional.php";
 
@@ -34,7 +34,7 @@ public class AgendaProfissionalController {
 
     }
 
-    public boolean alterarAgendaProfissional(AgendaProfissionalModel agendaProfissional) {
+    public static boolean alterarAgendaProfissional(AgendaProfissionalModel agendaProfissional) {
 
         String uri = "http://vitorsilva.xyz/napp/agendaProfissional/alterarAgendaProfissional.php";
 
@@ -54,7 +54,7 @@ public class AgendaProfissionalController {
 
     }
 
-    public List<AgendaProfissionalModel> selecionarAgendaProfissional() {
+    public static List<AgendaProfissionalModel> selecionarAgendaProfissional() {
 
         String uri = "http://vitorsilva.xyz/napp/agendaProfissional/selecionarAgendaProfissional.php";
 
@@ -68,7 +68,7 @@ public class AgendaProfissionalController {
         return agendasProfissional;
     }
 
-    private class SelecionarAgendaProfissional extends AsyncTask<String, String, List<AgendaProfissionalModel>> {
+    private static class SelecionarAgendaProfissional extends AsyncTask<String, String, List<AgendaProfissionalModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -90,7 +90,7 @@ public class AgendaProfissionalController {
         }
     }
 
-    private class InserirAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
+    private static class InserirAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -114,7 +114,7 @@ public class AgendaProfissionalController {
         }
     }
 
-    private class AlterarAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
+    private static class AlterarAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

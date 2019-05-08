@@ -13,10 +13,10 @@ import java.util.List;
 
 public class DiagnosticoController {
 
-    public boolean sucesso;
-    public List<DiagnosticoModel> diagnosticos;
+    public static boolean sucesso;
+    public static List<DiagnosticoModel> diagnosticos;
 
-    public boolean inserirDiagnostico(DiagnosticoModel diagnostico){
+    public static boolean inserirDiagnostico(DiagnosticoModel diagnostico){
 
         String uri = "http://vitorsilva.xyz/napp/diagnostico/inserirDiagnostico.php";
 
@@ -33,7 +33,7 @@ public class DiagnosticoController {
 
     }
 
-    public boolean alterarDiagnostico(DiagnosticoModel diagnostico){
+    public static boolean alterarDiagnostico(DiagnosticoModel diagnostico){
 
         String uri = "http://vitorsilva.xyz/napp/diagnostico/alterarDiagnostico.php";
 
@@ -51,7 +51,7 @@ public class DiagnosticoController {
 
     }
 
-    public List<DiagnosticoModel> selecionarDiagnosticos(){
+    public static List<DiagnosticoModel> selecionarDiagnosticos(){
 
         String uri = "http://vitorsilva.xyz/napp/diagnostico/selecionarDiagnosticos.php";
 
@@ -61,7 +61,7 @@ public class DiagnosticoController {
         return diagnosticos;
     }
 
-    private class SelecionarDiagnosticos extends AsyncTask<String, String, List<DiagnosticoModel>> {
+    private static class SelecionarDiagnosticos extends AsyncTask<String, String, List<DiagnosticoModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -83,7 +83,7 @@ public class DiagnosticoController {
         }
     }
 
-    private class InserirDiagnostico extends AsyncTask<RequestHttp, String, String> {
+    private static class InserirDiagnostico extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -107,7 +107,7 @@ public class DiagnosticoController {
         }
     }
 
-    private class AlterarDiagnostico extends AsyncTask<RequestHttp, String, String> {
+    private static class AlterarDiagnostico extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
