@@ -16,17 +16,19 @@ public class ResponsavelJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<ResponsavelModel> responsavelList = new ArrayList<>();
 
-            ResponsavelModel responsavelModel = new ResponsavelModel();
+            ResponsavelModel responsavel = new ResponsavelModel();
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                responsavelModel.setCelularResponsavel(jsonObject.getString("celularResponsavel"));
-                responsavelModel.setEmailResponsavel(jsonObject.getString("emailResponsavel"));
-                responsavelModel.setIdResponsavel(jsonObject.getInt("idResponsavel"));
-                responsavelModel.setNomeResponsavel(jsonObject.getString("nomeResponsavel"));
-                responsavelModel.setTelefoneResponsavel(jsonObject.getString("telefoneResponsavel"));
+                responsavel.setCelularResponsavel(jsonObject.getString("celularResponsavel"));
+                responsavel.setEmailResponsavel(jsonObject.getString("emailResponsavel"));
+                responsavel.setIdResponsavel(jsonObject.getInt("idResponsavel"));
+                responsavel.setNomeResponsavel(jsonObject.getString("nomeResponsavel"));
+                responsavel.setTelefoneResponsavel(jsonObject.getString("telefoneResponsavel"));
+
+                responsavelList.add(responsavel);
 
             }
 

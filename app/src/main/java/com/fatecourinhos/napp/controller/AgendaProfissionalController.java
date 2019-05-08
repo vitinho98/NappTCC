@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.AgendaProfissionalJSONParser;
 import com.fatecourinhos.napp.model.AgendaProfissionalModel;
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
@@ -24,7 +23,7 @@ public class AgendaProfissionalController {
         requestHttp.setUrl(uri);
 
         requestHttp.setParametro("diaDaSemana", agendaProfissional.getDiaDaSemana());
-        requestHttp.setParametro("horario", agendaProfissional.getHorario());
+        requestHttp.setParametro("horario", agendaProfissional.getHora());
         requestHttp.setParametro("idProfissional", String.valueOf(agendaProfissional.getFkProfissional().getIdProfissional()));
 
         InserirAgendaProfissional task = new InserirAgendaProfissional();
@@ -44,7 +43,7 @@ public class AgendaProfissionalController {
 
         requestHttp.setParametro("idAgendaUsuario", String.valueOf(agendaProfissional.getIdAgendaProfissional()));
         requestHttp.setParametro("diaDaSemana", agendaProfissional.getDiaDaSemana());
-        requestHttp.setParametro("horario", agendaProfissional.getHorario());
+        requestHttp.setParametro("horario", agendaProfissional.getHora());
         requestHttp.setParametro("idProfissional", String.valueOf(agendaProfissional.getFkProfissional().getIdProfissional()));
 
         AlterarAgendaProfissional task = new AlterarAgendaProfissional();

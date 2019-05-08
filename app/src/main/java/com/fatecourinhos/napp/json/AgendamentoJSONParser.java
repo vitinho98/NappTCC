@@ -1,6 +1,5 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.AgendaProfissionalModel;
 import com.fatecourinhos.napp.model.AgendamentoModel;
 import com.fatecourinhos.napp.model.AlunoModel;
 import com.fatecourinhos.napp.model.LocalAtendimentoModel;
@@ -20,7 +19,7 @@ public class AgendamentoJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<AgendamentoModel> agendamento = new ArrayList<>();
 
-            LocalAtendimentoModel localAtendimentoModel = new LocalAtendimentoModel();
+            LocalAtendimentoModel localAtendimento = new LocalAtendimentoModel();
             AgendamentoModel objAgendamento = new AgendamentoModel();
             AlunoModel aluno = new AlunoModel();
             ProfissionalModel profissional = new ProfissionalModel();
@@ -32,15 +31,15 @@ public class AgendamentoJSONParser {
                 objAgendamento.setDataAgendamento(jsonObject.getString("dataAgendamento"));
                 objAgendamento.setHoraAgendamento(jsonObject.getString("horaAgendamento"));
                 objAgendamento.setDataRegistro(jsonObject.getString("dataRegistro"));
-                objAgendamento.setDataRegistro(jsonObject.getString("horaRegistro"));
+                objAgendamento.setHoraRegistro(jsonObject.getString("horaRegistro"));
                 objAgendamento.setIdAgendamento(jsonObject.getInt("idAgendamento"));
                 objAgendamento.setStatus(jsonObject.getBoolean("status"));
                 objAgendamento.setObservacao(jsonObject.getString("observacao"));
 
-                localAtendimentoModel.setIdLocalAtendimento(jsonObject.getInt("idLocalAtendimento"));
-                localAtendimentoModel.setNomeBloco(jsonObject.getString("nomeBloco"));
-                localAtendimentoModel.setNomeLocal(jsonObject.getString("nomeLocal"));
-                objAgendamento.setFkLocalAtendimento(localAtendimentoModel);
+                localAtendimento.setIdLocalAtendimento(jsonObject.getInt("idLocalAtendimento"));
+                localAtendimento.setNomeBloco(jsonObject.getString("nomeBloco"));
+                localAtendimento.setNomeLocal(jsonObject.getString("nomeLocal"));
+                objAgendamento.setFkLocalAtendimento(localAtendimento);
 
                 aluno.setIdAluno(jsonObject.getInt("idAluno"));
                 aluno.setNomeAluno(jsonObject.getString("nomeAluno"));

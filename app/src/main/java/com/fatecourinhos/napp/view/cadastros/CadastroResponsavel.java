@@ -1,9 +1,13 @@
 package com.fatecourinhos.napp.view.cadastros;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.controller.ResponsavelController;
+import com.fatecourinhos.napp.model.ResponsavelModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -27,12 +31,93 @@ public class CadastroResponsavel extends AppCompatActivity {
 
         if(getIntent().getExtras() != null){
 
-            editTextTelefoneResponsavel.setText(getIntent().getExtras().getString("telefoneResponsavel"));
-            editTextNomeResponsavel.setText(getIntent().getExtras().getString("nomeResponsavel"));
-            editTextCelularResponsavel.setText(getIntent().getExtras().getString("celularResponsavel"));
-            editTextEmailResponsavel.setText(getIntent().getExtras().getString("emailResponsavel"));
+            final ResponsavelModel responsavel = new ResponsavelModel();
 
+            responsavel.setIdResponsavel(getIntent().getExtras().getInt("idResponsavel"));
+            responsavel.setCelularResponsavel(getIntent().getExtras().getString("celularResponsavel"));
+            responsavel.setEmailResponsavel(getIntent().getExtras().getString("emailResponsavel"));
+            responsavel.setNomeResponsavel(getIntent().getExtras().getString("nomeResponsavel"));
+            responsavel.setTelefoneResponsavel(getIntent().getExtras().getString("telefoneResponsavel"));
+
+            editTextTelefoneResponsavel.setText(responsavel.getTelefoneResponsavel());
+            editTextNomeResponsavel.setText(responsavel.getNomeResponsavel());
+            editTextCelularResponsavel.setText(responsavel.getCelularResponsavel());
+            editTextEmailResponsavel.setText(responsavel.getEmailResponsavel());
+            btn_cadastrar_responsavel.setText(R.string.btn_salvar);
+
+            btn_cadastrar_responsavel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(conferirDados()){
+
+                        responsavel.setTelefoneResponsavel(editTextTelefoneResponsavel.getText().toString());
+                        responsavel.setNomeResponsavel(editTextNomeResponsavel.getText().toString());
+                        responsavel.setEmailResponsavel(editTextEmailResponsavel.getText().toString());
+                        responsavel.setCelularResponsavel(editTextCelularResponsavel.getText().toString());
+
+                        if(ResponsavelController.alterarResponsavel(responsavel)){
+
+                            Toast.makeText(CadastroResponsavel.this,"Alterado com sucesso", Toast.LENGTH_SHORT).show();
+
+                        }else{
+
+                            Toast.makeText(CadastroResponsavel.this,"Erro ao alterar", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }else{
+
+                        Toast.makeText(CadastroResponsavel.this,"Insira todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+            });
+
+        }else{
+
+            btn_cadastrar_responsavel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    ResponsavelModel responsavelModel = new ResponsavelModel();
+
+                    if(conferirDados()){
+
+                        responsavelModel.setTelefoneResponsavel(editTextTelefoneResponsavel.getText().toString());
+                        responsavelModel.setNomeResponsavel(editTextNomeResponsavel.getText().toString());
+                        responsavelModel.setEmailResponsavel(editTextEmailResponsavel.getText().toString());
+                        responsavelModel.setCelularResponsavel(editTextCelularResponsavel.getText().toString());
+
+                        if(ResponsavelController.inserirResponsavel(responsavelModel)){
+
+                            Toast.makeText(CadastroResponsavel.this,"Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+
+                        }else{
+
+                            Toast.makeText(CadastroResponsavel.this,"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }else{
+
+                        Toast.makeText(CadastroResponsavel.this,"Insira todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
+        }
+    }
+
+    public boolean conferirDados(){
+
+        if(editTextNomeResponsavel.getText().toString().isEmpty()){
+            return false;
+        }else{
+            return true;
         }
 
     }
+
 }

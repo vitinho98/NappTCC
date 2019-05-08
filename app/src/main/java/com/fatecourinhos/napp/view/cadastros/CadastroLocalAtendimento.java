@@ -26,10 +26,11 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.cadastro_activity_local, null);
 
+        View view = inflater.inflate(R.layout.cadastro_activity_local, null);
         final AppCompatEditText editTextNomeBloco = (AppCompatEditText)getActivity().findViewById(R.id.edit_text_nome_bloco);
         final AppCompatEditText editTextNomeLocal = (AppCompatEditText)getActivity().findViewById(R.id.edit_text_nome_sala);
 
@@ -38,7 +39,9 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 dialog.dismiss();
+
             }
         });
 
@@ -57,19 +60,25 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
                 public void onClick(DialogInterface dialog, int which) {
 
                     if(editTextNomeBloco.getText().toString().isEmpty() && editTextNomeLocal.getText().toString().isEmpty()){
+
                         Toast.makeText(getContext(), "Insira todos os campos", Toast.LENGTH_SHORT).show();
+
                     }else{
+
                         localAtendimentoModel.setNomeBloco(editTextNomeBloco.getText().toString());
                         localAtendimentoModel.setNomeLocal(editTextNomeLocal.getText().toString());
 
                         if(LocalAtendimentoController.alterarLocalAtendimento(localAtendimentoModel)){
+
                             Toast.makeText(getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
+
                         }else{
+
                             Toast.makeText(getContext(), "Erro ao alterar", Toast.LENGTH_SHORT).show();
+
                         }
                     }
-
                 }
             });
 
@@ -80,16 +89,24 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
                 public void onClick(DialogInterface dialog, int which) {
 
                     if(editTextNomeBloco.getText().toString().isEmpty() && editTextNomeLocal.getText().toString().isEmpty()) {
+
                         Toast.makeText(getContext(), "Insira todos os campos", Toast.LENGTH_SHORT).show();
+
                     }else{
+
                         LocalAtendimentoModel localAtendimento = new LocalAtendimentoModel();
                         localAtendimento.setNomeLocal(editTextNomeLocal.getText().toString());
                         localAtendimento.setNomeBloco(editTextNomeBloco.getText().toString());
+
                         if(LocalAtendimentoController.inserirLocalAtendimento(localAtendimento)){
+
                             Toast.makeText(getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
+
                         }else{
+
                             Toast.makeText(getContext(), "Erro ao cadastrar", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 }

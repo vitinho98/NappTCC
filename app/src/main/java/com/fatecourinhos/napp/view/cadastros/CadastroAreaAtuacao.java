@@ -26,8 +26,10 @@ public class CadastroAreaAtuacao extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
+
         View view = inflater.inflate(R.layout.cadastro_activity_area_atuacao, null);
         final AppCompatEditText editTextNomeArea = (AppCompatEditText) getActivity().findViewById(R.id.edit_text_nome_area);
 
@@ -47,14 +49,20 @@ public class CadastroAreaAtuacao extends AppCompatDialogFragment {
                 public void onClick(DialogInterface dialog, int which) {
 
                     if(editTextNomeArea.getText().toString().isEmpty()){
+
                         Toast.makeText(getContext(),"Insira o nome do campo de atuação", Toast.LENGTH_SHORT).show();
+
                     }else {
+
                         campoAtuacao.setNomeCampoAtuacao(editTextNomeArea.getText().toString());
 
                         if(CampoAtuacaoController.alterarCampoAtuacao(campoAtuacao)) {
+
                             Toast.makeText(getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
+
                         }else
+
                             Toast.makeText(getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
                     }
 
@@ -68,14 +76,21 @@ public class CadastroAreaAtuacao extends AppCompatDialogFragment {
                 public void onClick(DialogInterface dialog, int which) {
 
                     if(editTextNomeArea.getText().toString().isEmpty()) {
+
                         Toast.makeText(getContext(), "Insira o nome do campo de atuação", Toast.LENGTH_SHORT).show();
+
                     }else{
+
                         CampoAtuacaoModel campoAtuacaoModel = new CampoAtuacaoModel();
                         campoAtuacaoModel.setNomeCampoAtuacao(editTextNomeArea.getText().toString());
+
                         if(CampoAtuacaoController.inserirCampoAtuacao(campoAtuacaoModel)) {
+
                             Toast.makeText(getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
+
                         }else
+
                             Toast.makeText(getContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
                     }
                 }

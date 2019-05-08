@@ -18,7 +18,7 @@ public class AlunoJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<AlunoModel> alunoList = new ArrayList<>();
 
-            UsuarioModel usuarioModel = new UsuarioModel();
+            UsuarioModel usuario = new UsuarioModel();
             AlunoModel aluno = new AlunoModel();
 
             for(int i=0; i<jsonArray.length(); i++){
@@ -40,12 +40,12 @@ public class AlunoJSONParser {
                 aluno.setRa(jsonObject.getString("ra"));
                 aluno.setEstadoCivil(jsonObject.getString("estadoCivil"));
 
-                usuarioModel.setIdUsuario(jsonObject.getInt("idUsuario"));
-                usuarioModel.setLogin(jsonObject.getString("login"));
-                usuarioModel.setSenha(jsonObject.getString("senha"));
-                usuarioModel.setTipoUsuario(jsonObject.getString("tipo"));
-                usuarioModel.setStatus(jsonObject.getInt("status"));
-                aluno.setFkUsuario(usuarioModel);
+                usuario.setIdUsuario(jsonObject.getInt("idUsuario"));
+                usuario.setLogin(jsonObject.getString("login"));
+                usuario.setSenha(jsonObject.getString("senha"));
+                usuario.setTipoUsuario(jsonObject.getString("tipo"));
+                usuario.setStatus(jsonObject.getInt("status"));
+                aluno.setFkUsuario(usuario);
 
                 alunoList.add(aluno);
 

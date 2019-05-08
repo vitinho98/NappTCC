@@ -32,6 +32,9 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         editTextNomeProfissionalExterno = (AppCompatEditText) findViewById(R.id.edit_text_nome_profissional_externo);
         editTextNumero = (AppCompatEditText) findViewById(R.id.edit_text_numero_profissional_externo);
 
+        spinnerTipo = (Spinner) findViewById(R.id.spinnerTipo);
+        spinnerResponsavel = (Spinner) findViewById(R.id.spinnerResponsavel);
+
         btn_cadastrar_responsavel = (Button) findViewById(R.id.btn_salvar_responsavel);
 
         if(getIntent().getExtras() != null){

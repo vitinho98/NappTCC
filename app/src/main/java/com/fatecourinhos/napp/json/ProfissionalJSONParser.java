@@ -18,8 +18,8 @@ public class ProfissionalJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<ProfissionalModel> profissionalList = new ArrayList<>();
 
-            UsuarioModel usuarioModel = new UsuarioModel();
-            CampoAtuacaoModel campoAtuacaoModel = new CampoAtuacaoModel();
+            UsuarioModel usuario = new UsuarioModel();
+            CampoAtuacaoModel campoAtuacao = new CampoAtuacaoModel();
             ProfissionalModel profissional = new ProfissionalModel();
 
             for(int i=0; i<jsonArray.length(); i++){
@@ -31,16 +31,16 @@ public class ProfissionalJSONParser {
                 profissional.setCelularProfissional(jsonObject.getString("celProfissional"));
                 profissional.setEmailProfissional(jsonObject.getString("emailProfissional"));
 
-                usuarioModel.setIdUsuario(jsonObject.getInt("idUsuario"));
-                usuarioModel.setLogin(jsonObject.getString("login"));
-                usuarioModel.setSenha(jsonObject.getString("senha"));
-                usuarioModel.setTipoUsuario(jsonObject.getString("tipo"));
-                usuarioModel.setStatus(jsonObject.getInt("status"));
-                profissional.setFkUsuario(usuarioModel);
+                usuario.setIdUsuario(jsonObject.getInt("idUsuario"));
+                usuario.setLogin(jsonObject.getString("login"));
+                usuario.setSenha(jsonObject.getString("senha"));
+                usuario.setTipoUsuario(jsonObject.getString("tipo"));
+                usuario.setStatus(jsonObject.getInt("status"));
+                profissional.setFkUsuario(usuario);
 
-                campoAtuacaoModel.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
-                campoAtuacaoModel.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
-                profissional.setCampoAtuacao(campoAtuacaoModel);
+                campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
+                campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
+                profissional.setCampoAtuacao(campoAtuacao);
 
                 profissionalList.add(profissional);
 
