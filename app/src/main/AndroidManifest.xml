@@ -24,14 +24,16 @@
         <activity
             android:name=".view.MenuProfissionalActivity"
             android:label="@string/title_activity_menu_profissional"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.SobreActivity" />
-        <activity android:name=".view.LoginActivity">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".view.SobreActivity" />
+        <activity android:name=".view.LoginActivity">
+
         </activity>
     </application>
 
