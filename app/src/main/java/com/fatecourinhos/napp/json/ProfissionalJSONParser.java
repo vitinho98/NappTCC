@@ -28,7 +28,7 @@ public class ProfissionalJSONParser {
 
                 profissional.setIdProfissional(jsonObject.getInt("idProfissional"));
                 profissional.setNomeProfissional(jsonObject.getString("nomeProfissional"));
-                profissional.setCelularProfissional(jsonObject.getString("celProfissional"));
+                profissional.setCelularProfissional(jsonObject.getString("celularProfissional"));
                 profissional.setEmailProfissional(jsonObject.getString("emailProfissional"));
 
                 usuario.setIdUsuario(jsonObject.getInt("idUsuario"));

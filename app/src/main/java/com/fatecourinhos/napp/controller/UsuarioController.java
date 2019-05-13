@@ -2,10 +2,12 @@ package com.fatecourinhos.napp.controller;
 
 import android.app.DownloadManager;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.fatecourinhos.napp.model.UsuarioModel;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
+import com.fatecourinhos.napp.view.LoginActivity;
 
 public class UsuarioController {
 
@@ -38,6 +40,7 @@ public class UsuarioController {
 
         requestHttp.setParametro("login", usuario.getLogin());
         requestHttp.setParametro("senha", usuario.getSenha());
+        Log.e("login", usuario.getLogin());Log.e("senha", usuario.getSenha());
 
         autenticarUsuario task = new autenticarUsuario();
         task.execute(requestHttp);
@@ -68,6 +71,9 @@ public class UsuarioController {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            LoginActivity loginActivity = new LoginActivity();
+            loginActivity.login(conteudo);
+            Log.e("haa", ":9");
         }
     }
 
@@ -80,6 +86,8 @@ public class UsuarioController {
         @Override
         protected String doInBackground(RequestHttp... params) {
             conteudo = (String) HttpManager.getDados(params[0]);
+
+            Log.e("aqui", conteudo);
 
             if(conteudo.equals("Vazio"))
                 return null;

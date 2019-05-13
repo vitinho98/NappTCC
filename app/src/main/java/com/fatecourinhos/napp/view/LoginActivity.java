@@ -33,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtCadastrar;
     Button btnLogin;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,43 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                     usuarioModel.setSenha(editTextSenha.getText().toString());
 
                     String conteudo = usuarioController.autenticarUsuario(usuarioModel);
-
-                    if (conteudo == null) {
-
-                        Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
-
-                    } else {
-
-                        String tipoUsuario = verificarTipoUsuario(conteudo);
-                        conteudo = criarJson(conteudo);
-
-                        Log.e("CHEGOU ATE AQUI?", conteudo);
-
-                        if (tipoUsuario.equals("aluno")) {
-
-                            List<AlunoModel> alunosModel = AlunoJSONParser.parseDados(conteudo);
-                            AlunoModel alunoModel = alunosModel.get(0);
-
-                            adicionarPreferencesAluno(alunoModel);
-                            startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
-                            finish();
-
-                        } else {
-
-                            List<ProfissionalModel> profissionaisModel = ProfissionalJSONParser.parseDados(conteudo);
-                            ProfissionalModel profissionalModel = profissionaisModel.get(0);
-
-                            if (profissionalModel.getFkUsuario().getStatus() == 0) {
-
-                                adicionarPreferencesProfissional(profissionalModel);
-                                startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
-                                finish();
-
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Usuário desativado!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    }
                 }
             }
         });
@@ -175,13 +137,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void adicionarPreferencesAluno(AlunoModel aluno){
-        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
+        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+
         editor.putInt("idUsuario", aluno.getFkUsuario().getIdUsuario());
         editor.putString("tipoUsuario", aluno.getFkUsuario().getTipoUsuario());
-        editor.putInt("status", aluno.getFkUsuario().getStatus());
 
+        editor.putInt("status", aluno.getFkUsuario().getStatus());
         editor.putInt("idAluno", aluno.getIdAluno());
 
         editor.putBoolean("conected", true);
@@ -197,8 +160,8 @@ public class LoginActivity extends AppCompatActivity {
 
         editor.putInt("idUsuario", profissional.getFkUsuario().getIdUsuario());
         editor.putString("tipoUsuario", profissional.getFkUsuario().getTipoUsuario());
-        editor.putInt("status", profissional.getFkUsuario().getStatus());
 
+        editor.putInt("status", profissional.getFkUsuario().getStatus());
         editor.putInt("idProfissional", profissional.getIdProfissional());
 
         editor.putBoolean("conected", true);
@@ -238,6 +201,47 @@ public class LoginActivity extends AppCompatActivity {
 
         return json;
 
+    }
+
+    public void login(String conteudo){
+        if (conteudo == null) {
+
+            Log.e("CHEGOU ATE AQUI?", "taaq");
+
+            Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            String tipoUsuario = verificarTipoUsuario(conteudo);
+            conteudo = criarJson(conteudo);
+
+            Log.e("CHEGOU ATE AQUI?", conteudo);
+
+            if (tipoUsuario.equals("aluno")) {
+
+                List<AlunoModel> alunosModel = AlunoJSONParser.parseDados(conteudo);
+                AlunoModel alunoModel = alunosModel.get(0);
+
+                adicionarPreferencesAluno(alunoModel);
+                startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
+                finish();
+
+            } else {
+
+                List<ProfissionalModel> profissionaisModel = ProfissionalJSONParser.parseDados(conteudo);
+                ProfissionalModel profissionalModel = profissionaisModel.get(0);
+
+                if (profissionalModel.getFkUsuario().getStatus() == 0) {
+
+                    adicionarPreferencesProfissional(profissionalModel);
+                    startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
+                    finish();
+
+                } else {
+                    Toast.makeText(LoginActivity.this, "Usuário desativado!", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 
 }
