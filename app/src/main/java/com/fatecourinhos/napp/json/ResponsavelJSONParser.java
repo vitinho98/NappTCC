@@ -28,6 +28,8 @@ public class ResponsavelJSONParser {
                 responsavelModel.setNomeResponsavel(jsonObject.getString("nomeResponsavel"));
                 responsavelModel.setTelefoneResponsavel(jsonObject.getString("telefoneResponsavel"));
 
+                responsavelList.add(responsavelModel);
+
             }
 
             return responsavelList;
