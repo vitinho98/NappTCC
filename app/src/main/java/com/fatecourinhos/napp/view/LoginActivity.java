@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,13 +32,13 @@ public class LoginActivity extends AppCompatActivity {
     ImageView imgSobre;
     TextView txtCadastrar;
     Button btnLogin;
-    SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
         txtCadastrar = findViewById(R.id.txt_cadastrar);
 
         imgSobre = findViewById(R.id.img_sobre);
@@ -89,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     String conteudo = usuarioController.autenticarUsuario(usuarioModel);
 
-                    if (conteudo.isEmpty()) {
+                    if (conteudo == null) {
 
                         Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
 
@@ -97,6 +98,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         String tipoUsuario = verificarTipoUsuario(conteudo);
                         conteudo = criarJson(conteudo);
+
+                        Log.e("CHEGOU ATE AQUI?", conteudo);
 
                         if (tipoUsuario.equals("aluno")) {
 
@@ -172,6 +175,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void adicionarPreferencesAluno(AlunoModel aluno){
+        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("idUsuario", aluno.getFkUsuario().getIdUsuario());
@@ -187,6 +191,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void adicionarPreferencesProfissional(ProfissionalModel profissional){
+        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
         SharedPreferences.Editor editor = preferences.edit();
 
@@ -203,6 +208,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean conferirShared(){
+        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
         boolean resultado = preferences.getBoolean("conected", false);
 
