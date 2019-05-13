@@ -31,13 +31,12 @@ public class LoginActivity extends AppCompatActivity {
     ImageView imgSobre;
     TextView txtCadastrar;
     Button btnLogin;
+    SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
         txtCadastrar = findViewById(R.id.txt_cadastrar);
 
@@ -173,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void adicionarPreferencesAluno(AlunoModel aluno){
-        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
+
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("idUsuario", aluno.getFkUsuario().getIdUsuario());
         editor.putString("tipoUsuario", aluno.getFkUsuario().getTipoUsuario());
@@ -188,7 +187,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void adicionarPreferencesProfissional(ProfissionalModel profissional){
-        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
         SharedPreferences.Editor editor = preferences.edit();
 
@@ -205,7 +203,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean conferirShared(){
-        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
+
         boolean resultado = preferences.getBoolean("conected", false);
 
         if(resultado){
