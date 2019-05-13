@@ -30,6 +30,8 @@ public class ResponsavelJSONParser {
 
                 responsavelList.add(responsavel);
 
+                responsavelList.add(responsavelModel);
+
             }
 
             return responsavelList;
