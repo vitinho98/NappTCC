@@ -16,16 +16,16 @@ public class CampoAtuacaoJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<CampoAtuacaoModel> campoAtuacaoList = new ArrayList<>();
 
-            CampoAtuacaoModel campoAtuacaoModel = new CampoAtuacaoModel();
+            CampoAtuacaoModel campoAtuacao = new CampoAtuacaoModel();
 
             for(int i=0; i<jsonArray.length(); i++){
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                campoAtuacaoModel.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
-                campoAtuacaoModel.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
+                campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
+                campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
 
-                campoAtuacaoList.add(campoAtuacaoModel);
+                campoAtuacaoList.add(campoAtuacao);
 
             }
 

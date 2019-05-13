@@ -3,16 +3,18 @@ package com.fatecourinhos.napp.model;
 public class AgendaProfissionalModel {
 
     private int idAgendaProfissional;
-    private String horario;
+    private String hora;
+    private String minutos;
     private String diaDaSemana;
     private ProfissionalModel fkProfissional;
 
     public AgendaProfissionalModel() {
     }
 
-    public AgendaProfissionalModel(int idAgendaProfissional, String horario, String diaDaSemana, ProfissionalModel fkProfissional) {
+    public AgendaProfissionalModel(int idAgendaProfissional, String hora, String minutos, String diaDaSemana, ProfissionalModel fkProfissional) {
         this.idAgendaProfissional = idAgendaProfissional;
-        this.horario = horario;
+        this.hora = hora;
+        this.minutos = minutos;
         this.diaDaSemana = diaDaSemana;
         this.fkProfissional = fkProfissional;
     }
@@ -25,12 +27,20 @@ public class AgendaProfissionalModel {
         this.idAgendaProfissional = idAgendaProfissional;
     }
 
-    public String getHorario() {
-        return horario;
+    public String getMinutos() {
+        return minutos;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setMinutos(String minutos) {
+        this.minutos = minutos;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     public String getDiaDaSemana() {

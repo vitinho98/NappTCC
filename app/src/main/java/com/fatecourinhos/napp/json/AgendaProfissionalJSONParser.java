@@ -21,19 +21,28 @@ public class AgendaProfissionalJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<AgendaProfissionalModel> agendaProfissionalList = new ArrayList<>();
 
+<<<<<<< HEAD
             AgendaProfissionalModel agendaProfissionalModel = new AgendaProfissionalModel();
             ProfissionalModel profissionalModel = new ProfissionalModel();
             UsuarioModel usuarioModel = new UsuarioModel();
             CampoAtuacaoModel campoAtuacaoModel = new CampoAtuacaoModel();
+=======
+            ProfissionalModel profissional = new ProfissionalModel();
+            UsuarioModel usuario = new UsuarioModel();
+            CampoAtuacaoModel campoAtuacao = new CampoAtuacaoModel();
+            AgendaProfissionalModel agendaProfissional = new AgendaProfissionalModel();
+>>>>>>> b16e1f8f21dc2b931eaf8d51f9c4da8a1aca1255
 
             for(int i=0; i<jsonArray.length(); i++){
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                agendaProfissionalModel.setDiaDaSemana(jsonObject.getString("diaDaSemana"));
-                agendaProfissionalModel.setHorario(jsonObject.getString("horario"));
-                agendaProfissionalModel.setIdAgendaProfissional(jsonObject.getInt("idAgendaProfissional"));
+                profissional.setIdProfissional(jsonObject.getInt("idProfissional"));
+                profissional.setNomeProfissional(jsonObject.getString("nomeProfissional"));
+                profissional.setCelularProfissional(jsonObject.getString("celProfissional"));
+                profissional.setEmailProfissional(jsonObject.getString("emailProfissional"));
 
+<<<<<<< HEAD
                 profissionalModel.setIdProfissional(jsonObject.getInt("idProfissional"));
                 profissionalModel.setNomeProfissional(jsonObject.getString("nomeProfissional"));
                 profissionalModel.setCelularProfissional(jsonObject.getString("celProfissional"));
@@ -53,6 +62,25 @@ public class AgendaProfissionalJSONParser {
                 agendaProfissionalModel.setFkProfissional(profissionalModel);
 
                 agendaProfissionalList.add(agendaProfissionalModel);
+=======
+                usuario.setIdUsuario(jsonObject.getInt("idUsuario"));
+                usuario.setLogin(jsonObject.getString("login"));
+                usuario.setSenha(jsonObject.getString("senha"));
+                usuario.setTipoUsuario(jsonObject.getString("tipo"));
+                usuario.setStatus(jsonObject.getInt("status"));
+                profissional.setFkUsuario(usuario);
+
+                campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
+                campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
+                profissional.setCampoAtuacao(campoAtuacao);
+
+                agendaProfissional.setDiaDaSemana(jsonObject.getString("diaDaSemana"));
+                agendaProfissional.setHora(jsonObject.getString("hora"));
+                agendaProfissional.setMinutos(jsonObject.getString("minutos"));
+                agendaProfissional.setIdAgendaProfissional(jsonObject.getInt("idAgendaProfissional"));
+
+                agendaProfissionalList.add(agendaProfissional);
+>>>>>>> b16e1f8f21dc2b931eaf8d51f9c4da8a1aca1255
             }
 
             return agendaProfissionalList;

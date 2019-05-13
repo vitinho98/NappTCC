@@ -9,10 +9,10 @@ import com.fatecourinhos.napp.util.RequestHttp;
 
 public class UsuarioController {
 
-    public String conteudo;
-    public boolean ativo;
+    public static String conteudo;
+    public static boolean ativo;
 
-    public boolean isAtivo(UsuarioModel usuario){
+    public static boolean isAtivo(UsuarioModel usuario){
 
         String uri = "http://vitorsilva.xyz/napp/usuario/verificarStatus.php";
 
@@ -28,7 +28,7 @@ public class UsuarioController {
         return ativo;
     }
 
-    public String autenticarUsuario(UsuarioModel usuario) {
+    public static String autenticarUsuario(UsuarioModel usuario) {
 
         String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
 
@@ -45,7 +45,7 @@ public class UsuarioController {
         return conteudo;
     }
 
-    private class isAtivo extends AsyncTask<RequestHttp, String, String>{
+    private static class isAtivo extends AsyncTask<RequestHttp, String, String>{
 
         @Override
         protected void onPreExecute() {
@@ -71,7 +71,7 @@ public class UsuarioController {
         }
     }
 
-    private class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
+    private static class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

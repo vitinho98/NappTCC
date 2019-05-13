@@ -18,36 +18,36 @@ public class ProfissionalExternoJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<ProfissionalExternoModel> profissionaExternolList = new ArrayList<>();
 
-            ResponsavelModel responsavelModel = new ResponsavelModel();
-            CampoAtuacaoModel campoAtuacaoModel = new CampoAtuacaoModel();
-            ProfissionalExternoModel profissionalExternoModel = new ProfissionalExternoModel();
+            ResponsavelModel responsavel = new ResponsavelModel();
+            CampoAtuacaoModel campoAtuacao = new CampoAtuacaoModel();
+            ProfissionalExternoModel profissionalExterno = new ProfissionalExternoModel();
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                profissionalExternoModel.setBairro(jsonObject.getString("bairro"));
-                profissionalExternoModel.setCelularProfissionalExterno(jsonObject.getString("celularProfissionalExterno"));
-                profissionalExternoModel.setTelefoneProfissionalExterno(jsonObject.getString("telefoneProfissionalExterno"));
-                profissionalExternoModel.setCidadeProfissionalExterno(jsonObject.getString("cidadeProfissionalExterno"));
-                profissionalExternoModel.setEndereco(jsonObject.getString("endereco"));
-                profissionalExternoModel.setIdProfissionalExterno(jsonObject.getInt("idProfissionalExterno"));
-                profissionalExternoModel.setNumero(jsonObject.getString("numero"));
-                profissionalExternoModel.setEmailProfissionalExterno(jsonObject.getString("emailProfissionalExterno"));
-                profissionalExternoModel.setNomeProfissionalExterno(jsonObject.getString("nomeProfissionalExterno"));
+                profissionalExterno.setBairro(jsonObject.getString("bairro"));
+                profissionalExterno.setCelularProfissionalExterno(jsonObject.getString("celularProfissionalExterno"));
+                profissionalExterno.setTelefoneProfissionalExterno(jsonObject.getString("telefoneProfissionalExterno"));
+                profissionalExterno.setCidadeProfissionalExterno(jsonObject.getString("cidadeProfissionalExterno"));
+                profissionalExterno.setEndereco(jsonObject.getString("endereco"));
+                profissionalExterno.setIdProfissionalExterno(jsonObject.getInt("idProfissionalExterno"));
+                profissionalExterno.setNumero(jsonObject.getString("numero"));
+                profissionalExterno.setEmailProfissionalExterno(jsonObject.getString("emailProfissionalExterno"));
+                profissionalExterno.setNomeProfissionalExterno(jsonObject.getString("nomeProfissionalExterno"));
 
-                campoAtuacaoModel.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
-                campoAtuacaoModel.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
-                profissionalExternoModel.setCampoAtuacao(campoAtuacaoModel);
+                campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
+                campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
+                profissionalExterno.setCampoAtuacao(campoAtuacao);
 
-                responsavelModel.setCelularResponsavel(jsonObject.getString("celularResponsavel"));
-                responsavelModel.setEmailResponsavel(jsonObject.getString("emailResponsavel"));
-                responsavelModel.setIdResponsavel(jsonObject.getInt("idResponsavel"));
-                responsavelModel.setNomeResponsavel(jsonObject.getString("nomeResponsavel"));
-                responsavelModel.setTelefoneResponsavel(jsonObject.getString("telefoneResponsavel"));
-                profissionalExternoModel.setFkResponsavel(responsavelModel);
+                responsavel.setCelularResponsavel(jsonObject.getString("celularResponsavel"));
+                responsavel.setEmailResponsavel(jsonObject.getString("emailResponsavel"));
+                responsavel.setIdResponsavel(jsonObject.getInt("idResponsavel"));
+                responsavel.setNomeResponsavel(jsonObject.getString("nomeResponsavel"));
+                responsavel.setTelefoneResponsavel(jsonObject.getString("telefoneResponsavel"));
+                profissionalExterno.setFkResponsavel(responsavel);
 
-                profissionaExternolList.add(profissionalExternoModel);
+                profissionaExternolList.add(profissionalExterno);
 
             }
 

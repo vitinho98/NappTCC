@@ -1,7 +1,5 @@
 package com.fatecourinhos.napp.model;
 
-import java.util.Date;
-
 public class AlunoModel {
 
     private int idAluno;

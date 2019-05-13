@@ -14,10 +14,10 @@ import java.util.List;
 
 public class AlunoController {
 
-    public boolean sucesso;
-    public List<AgendamentoModel> agendamento;
+    public static boolean sucesso;
+    public static List<AgendamentoModel> agendamento;
 
-    public List<AgendamentoModel> selecionarAgendamento(int idUsuario) {
+    public static List<AgendamentoModel> selecionarAgendamento(int idUsuario) {
 
         String uri = "http://vitorsilva.xyz/napp/agendamento/selecionarAgendamentoAluno.php";
 
@@ -33,7 +33,7 @@ public class AlunoController {
         return agendamento;
     }
 
-    private class SelecionarAgendamento extends AsyncTask<String, String, List<AgendamentoModel>> {
+    private static class SelecionarAgendamento extends AsyncTask<String, String, List<AgendamentoModel>> {
 
         @Override
         protected void onPreExecute() {

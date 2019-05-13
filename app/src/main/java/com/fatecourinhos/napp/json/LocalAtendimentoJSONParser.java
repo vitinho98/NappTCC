@@ -16,17 +16,17 @@ public class LocalAtendimentoJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<LocalAtendimentoModel> localAtendimentoList = new ArrayList<>();
 
-            LocalAtendimentoModel localAtendimentoModel = new LocalAtendimentoModel();
+            LocalAtendimentoModel localAtendimento = new LocalAtendimentoModel();
 
             for(int i=0; i<jsonArray.length(); i++){
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                localAtendimentoModel.setIdLocalAtendimento(jsonObject.getInt("idLocalAtendimento"));
-                localAtendimentoModel.setNomeBloco(jsonObject.getString("nomeBloco"));
-                localAtendimentoModel.setNomeLocal(jsonObject.getString("nomeLocal"));
+                localAtendimento.setIdLocalAtendimento(jsonObject.getInt("idLocalAtendimento"));
+                localAtendimento.setNomeBloco(jsonObject.getString("nomeBloco"));
+                localAtendimento.setNomeLocal(jsonObject.getString("nomeLocal"));
 
-                localAtendimentoList.add(localAtendimentoModel);
+                localAtendimentoList.add(localAtendimento);
             }
 
             return localAtendimentoList;

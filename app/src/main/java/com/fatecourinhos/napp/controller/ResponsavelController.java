@@ -12,10 +12,10 @@ import java.util.List;
 
 public class ResponsavelController {
 
-    public boolean sucesso;
-    public List<ResponsavelModel> responsaveis;
+    public static boolean sucesso;
+    public static List<ResponsavelModel> responsaveis;
 
-    public boolean inserirResponsavel(ResponsavelModel responsavel) {
+    public static boolean inserirResponsavel(ResponsavelModel responsavel) {
 
         String uri = "http://vitorsilva.xyz/napp/responsavel/inserirResponsavel.php";
 
@@ -35,7 +35,7 @@ public class ResponsavelController {
 
     }
 
-    public boolean alterarResponsavel(ResponsavelModel responsavel) {
+    public static boolean alterarResponsavel(ResponsavelModel responsavel) {
 
         String uri = "http://vitorsilva.xyz/napp/responsavel/alterarResponsavel.php";
 
@@ -56,7 +56,7 @@ public class ResponsavelController {
 
     }
 
-    public List<ResponsavelModel> selecionarResponsaveis() {
+    public static List<ResponsavelModel> selecionarResponsaveis() {
 
         String uri = "http://vitorsilva.xyz/napp/responsavel/selecionarResponsaveis.php";
 
@@ -66,7 +66,7 @@ public class ResponsavelController {
         return responsaveis;
     }
 
-    private class SelecionarResponsaveis extends AsyncTask<String, String, List<ResponsavelModel>> {
+    private static class SelecionarResponsaveis extends AsyncTask<String, String, List<ResponsavelModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -88,7 +88,7 @@ public class ResponsavelController {
         }
     }
 
-    private class CadastrarResponsavel extends AsyncTask<RequestHttp, String, String> {
+    private static class CadastrarResponsavel extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -112,7 +112,7 @@ public class ResponsavelController {
         }
     }
 
-    private class AlterarResponsavel extends AsyncTask<RequestHttp, String, String> {
+    private static class AlterarResponsavel extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

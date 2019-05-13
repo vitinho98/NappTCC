@@ -16,20 +16,20 @@ public class UsuarioJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<UsuarioModel> usuarioModelList = new ArrayList<>();
 
-            UsuarioModel usuarioModel = new UsuarioModel();
+            UsuarioModel usuario = new UsuarioModel();
 
             for(int i=0; i<jsonArray.length(); i++){
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                usuarioModel.setIdUsuario(jsonObject.getInt("idUsuario"));
-                usuarioModel.setLogin(jsonObject.getString("login"));
-                usuarioModel.setSenha(jsonObject.getString("senha"));
-                usuarioModel.setTipoUsuario(jsonObject.getString("tipoUsuario"));
-                usuarioModel.setStatus(jsonObject.getInt("status"));
+                usuario.setIdUsuario(jsonObject.getInt("idUsuario"));
+                usuario.setLogin(jsonObject.getString("login"));
+                usuario.setSenha(jsonObject.getString("senha"));
+                usuario.setTipoUsuario(jsonObject.getString("tipoUsuario"));
+                usuario.setStatus(jsonObject.getInt("status"));
                 //0 --> ATIVO
 
-                usuarioModelList.add(usuarioModel);
+                usuarioModelList.add(usuario);
             }
 
             return usuarioModelList;

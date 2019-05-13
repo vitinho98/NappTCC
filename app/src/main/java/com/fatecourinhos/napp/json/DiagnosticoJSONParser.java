@@ -16,16 +16,16 @@ public class DiagnosticoJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<DiagnosticoModel> diagnosticoList = new ArrayList<>();
 
-            DiagnosticoModel diagnosticoModel= new DiagnosticoModel();
+            DiagnosticoModel diagnostico= new DiagnosticoModel();
 
             for(int i=0; i<jsonArray.length(); i++){
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                diagnosticoModel.setIdDiagostico(jsonObject.getInt("idDiagnostico"));
-                diagnosticoModel.setNomeDiagnotico(jsonObject.getString("nomeDiagnostico"));
+                diagnostico.setIdDiagostico(jsonObject.getInt("idDiagnostico"));
+                diagnostico.setNomeDiagnotico(jsonObject.getString("nomeDiagnostico"));
 
-                diagnosticoList.add(diagnosticoModel);
+                diagnosticoList.add(diagnostico);
             }
 
             return diagnosticoList;

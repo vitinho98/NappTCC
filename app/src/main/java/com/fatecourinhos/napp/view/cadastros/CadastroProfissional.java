@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.ProfissionalController;
+import com.fatecourinhos.napp.model.CampoAtuacaoModel;
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.UsuarioModel;
 
@@ -21,7 +23,10 @@ public class CadastroProfissional extends AppCompatActivity {
 
     final ProfissionalModel profissional = new ProfissionalModel();
     final UsuarioModel usuario = new UsuarioModel();
+    final CampoAtuacaoModel campoAtuacao = new CampoAtuacaoModel();
+
     private AppCompatEditText editTextNome, editTextCel, editTextEmail, editTextLogin, editTextSenha;
+    private ImageView foto;
     private Spinner spinnerProf;
     private Button btn_cadastrar_profissional;
     private Switch switchProf;
@@ -30,6 +35,8 @@ public class CadastroProfissional extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro_activity_profissional);
+
+        foto = findViewById(R.id.img_profissional);
 
         editTextNome = findViewById(R.id.edit_text_nome_profissional);
         editTextCel = findViewById(R.id.edit_text_celular_profissional);
@@ -47,36 +54,51 @@ public class CadastroProfissional extends AppCompatActivity {
 
         if ((getIntent().getExtras() != null)) {
 
-            String nome = (String) getIntent().getExtras().get("nomeProfissional");
-            String celular = (String) getIntent().getExtras().get("celularProfissional");
-            String email = (String) getIntent().getExtras().get("emailProfissional");
-            String login = (String) getIntent().getExtras().get("loginProfissional");
-            String senha = (String) getIntent().getExtras().get("senhaProfissional");
-            String tipo = (String) getIntent().getExtras().get("tipoProfissional");
-            String status = (String) getIntent().getExtras().get("statusProfissional");
+            profissional.setNomeProfissional((String) getIntent().getExtras().get("nomeProfissional"));
+            profissional.setCelularProfissional((String) getIntent().getExtras().get("celularProfissional"));
+            profissional.setEmailProfissional((String) getIntent().getExtras().get("emailProfissional"));
+            profissional.setIdProfissional(getIntent().getExtras().getInt("idProfissional"));
+            profissional.setFoto((byte[]) getIntent().getExtras().get("foto"));
 
-            editTextCel.setText(celular);
-            editTextEmail.setText(email);
-            editTextLogin.setText(login);
-            editTextSenha.setText(senha);
-            editTextNome.setText(nome);
+            campoAtuacao.setNomeCampoAtuacao((String) getIntent().getExtras().get("nomeCampoAtuacao"));
+            campoAtuacao.setIdCampoAtuacao((Integer) getIntent().getExtras().get("idCampoAtuacao"));
 
-            if(tipo.equals("Administrador")){
+            usuario.setLogin((String) getIntent().getExtras().get("loginProfissional"));
+            usuario.setSenha((String) getIntent().getExtras().get("senhaProfissional"));
+            usuario.setTipoUsuario((String) getIntent().getExtras().get("tipoProfissional"));
+            usuario.setStatus((Integer) getIntent().getExtras().get("statusProfissional"));
+
+            profissional.setFkUsuario(usuario);
+            profissional.setCampoAtuacao(campoAtuacao);
+
+            editTextCel.setText(profissional.getCelularProfissional());
+            editTextEmail.setText(profissional.getEmailProfissional());
+            editTextLogin.setText(profissional.getFkUsuario().getLogin());
+            editTextSenha.setText(profissional.getFkUsuario().getSenha());
+            editTextNome.setText(profissional.getNomeProfissional());
+
+            if(profissional.getFkUsuario().getTipoUsuario().equals("Administrador")){
                 spinnerProf.setSelection(0);
             }else{
                 spinnerProf.setSelection(1);
             }
 
-            if(Integer.parseInt(status) == 1){
-                switchProf.setChecked(false);
-            }else{
-                switchProf.setChecked(true);
+            try {
+
+                if (profissional.getFkUsuario().getStatus() == 1) {
+                    switchProf.setChecked(false);
+                } else {
+                    switchProf.setChecked(true);
+                }
+
+            }catch (Exception e){
+                System.out.println(e.toString());
             }
 
             btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    enviarDados(false);
                 }
             });
 
@@ -85,14 +107,15 @@ public class CadastroProfissional extends AppCompatActivity {
             btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    enviarDados();
+                    enviarDados(true);
                 }
             });
 
         }
     }
 
-    private void enviarDados() {
+    private void enviarDados(boolean inserir) {
+
         profissional.setNomeProfissional(editTextNome.getText().toString());
         profissional.setCelularProfissional(editTextCel.getText().toString());
         profissional.setEmailProfissional(editTextEmail.getText().toString());
@@ -128,13 +151,47 @@ public class CadastroProfissional extends AppCompatActivity {
 
         profissional.setFkUsuario(usuario);
 
-        if(ProfissionalController.conferirDados(profissional)){
-            if(ProfissionalController.inserir(profissional))
-                Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_LONG);
-            else
-                Toast.makeText(this, "Erro ao inserir", Toast.LENGTH_LONG);
+        if(conferirDados(profissional)){
+
+            if(inserir == true){
+
+                if(ProfissionalController.inserirProfissional(profissional)) {
+                    Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_LONG);
+                    limparDados();
+                }else
+                    Toast.makeText(this, "Erro ao inserir", Toast.LENGTH_LONG);
+
+            }else{
+
+                if(ProfissionalController.alterarProfissional(profissional)){
+                    Toast.makeText(this, "Alterado com sucesso", Toast.LENGTH_LONG);
+                    limparDados();
+                }else
+                    Toast.makeText(this, "Erro ao alterar", Toast.LENGTH_LONG);
+            }
+
         }else
             Toast.makeText(this, "Insira todos os campos corretamente!", Toast.LENGTH_LONG);
+
+    }
+
+    public boolean conferirDados(ProfissionalModel profissional){
+
+        boolean retorno = true;
+
+
+        return retorno;
+    }
+
+    public void limparDados(){
+
+        editTextCel.setText(null);
+        editTextEmail.setText(null);
+        editTextLogin.setText(null);
+        editTextSenha.setText(null);
+        editTextNome.setText(null);
+
+        foto.setImageBitmap(null);
 
     }
 }
