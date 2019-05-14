@@ -30,7 +30,7 @@ public class UsuarioController {
         return ativo;
     }
 
-    public static String autenticarUsuario(UsuarioModel usuario) {
+    public static void autenticarUsuario(UsuarioModel usuario) {
 
         String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
 
@@ -45,7 +45,6 @@ public class UsuarioController {
         autenticarUsuario task = new autenticarUsuario();
         task.execute(requestHttp);
 
-        return conteudo;
     }
 
     private static class isAtivo extends AsyncTask<RequestHttp, String, String>{
@@ -71,9 +70,6 @@ public class UsuarioController {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            LoginActivity loginActivity = new LoginActivity();
-            loginActivity.login(conteudo);
-            Log.e("haa", ":9");
         }
     }
 
@@ -98,7 +94,9 @@ public class UsuarioController {
 
         @Override
         protected void onPostExecute(String conteudo) {
-            super.onPostExecute(conteudo);
+            LoginActivity loginActivity = new LoginActivity();
+            loginActivity.login(conteudo);
+            Log.e("haa", ":9");
         }
     }
 }

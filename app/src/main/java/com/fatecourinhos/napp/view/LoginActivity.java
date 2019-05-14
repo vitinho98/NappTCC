@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                     usuarioModel.setLogin(editTextLogin.getText().toString());
                     usuarioModel.setSenha(editTextSenha.getText().toString());
 
-                    String conteudo = usuarioController.autenticarUsuario(usuarioModel);
+                    UsuarioController.autenticarUsuario(usuarioModel);
                 }
             }
         });
@@ -204,6 +204,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(String conteudo){
+
         if (conteudo == null) {
 
             Log.e("CHEGOU ATE AQUI?", "taaq");
