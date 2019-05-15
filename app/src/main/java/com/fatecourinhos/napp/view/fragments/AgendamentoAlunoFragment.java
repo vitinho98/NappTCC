@@ -21,6 +21,7 @@ import com.fatecourinhos.napp.model.MensagemModel;
 import com.fatecourinhos.napp.view.adapter.AgendamentoAlunoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroAgendamento;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AgendamentoAlunoFragment extends Fragment{
@@ -65,7 +66,7 @@ public class AgendamentoAlunoFragment extends Fragment{
 
         AlunoController alunoController = new AlunoController();
 
-        agendamento = alunoController.selecionarAgendamento(preferences.getInt("idUsuario", 0));
+        agendamento = new ArrayList<>();//alunoController.selecionarAgendamento(preferences.getInt("idUsuario", 0));
 
         adapter = new AgendamentoAlunoAdapter(agendamento);
 
