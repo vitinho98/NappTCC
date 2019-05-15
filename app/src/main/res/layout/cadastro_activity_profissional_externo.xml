@@ -217,6 +217,8 @@
             android:layout_marginRight="32dp"
             android:layout_marginBottom="32dp"
             android:text="@string/btn_salvar"
+            android:background="@drawable/btn_customizado"
+            android:textColor="@drawable/btn_customizado"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

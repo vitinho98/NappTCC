@@ -20,6 +20,8 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:text="ANAMNESE"
+            android:background="@drawable/btn_customizado"
+            android:textColor="@drawable/btn_customizado"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,6 +36,8 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:text="PROGNOSTICO"
+            android:background="@drawable/btn_customizado"
+            android:textColor="@drawable/btn_customizado"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button6" />
@@ -48,6 +52,8 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:text="DIAGNOSTICO"
+            android:background="@drawable/btn_customizado"
+            android:textColor="@drawable/btn_customizado"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button7" />
@@ -61,6 +67,8 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:text="ENCAMINHAMENTOS"
+            android:background="@drawable/btn_customizado"
+            android:textColor="@drawable/btn_customizado"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button8" />

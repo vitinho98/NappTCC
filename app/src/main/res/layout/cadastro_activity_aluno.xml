@@ -72,6 +72,8 @@
             android:layout_marginRight="32dp"
             android:layout_marginBottom="8dp"
             android:text="@string/btn_cadastrar"
+            android:background="@drawable/btn_customizado"
+            android:textColor="@drawable/btn_customizado"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

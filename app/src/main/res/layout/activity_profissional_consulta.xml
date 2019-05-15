@@ -106,11 +106,11 @@
             android:id="@+id/spinnerTipoUsuario_consulta"
             android:layout_width="244dp"
             android:layout_height="26dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCampoAtuacaoConsulta" />
 
         <Switch
             android:id="@+id/switchStatus_consulta"
@@ -118,14 +118,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:text="Status"
             app:layout_constraintEnd_toStartOf="@+id/spinnerTipoUsuario_consulta"
             app:layout_constraintHorizontal_bias="0.281"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCampoAtuacaoConsulta" />
 
         <Button
             android:id="@+id/btn_salvar_profissional_consulta"
@@ -137,6 +137,8 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:text="@string/btn_salvar"
+            android:background="@drawable/btn_customizado"
+            android:textColor="@drawable/btn_customizado"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

@@ -10,13 +10,13 @@
     <string name="fatec_ourinhos">Fatec Ourinhos</string>
 
     <!-- Tela sobre strings -->
-    <string name="nap_txt_abreviado"><b>SOBRE O NAP</b></string>
+    <string name="nap_txt_abreviado">SOBRE O NAP</string>
     <string name="txt_explicando_nap">O Núcleo de Apoio Psicopedagógico aos alunos da Fatec Ourinhos, foi implantado a partir do segundo semestre de 2017, tendo como colaboradoras as professoras Rose Prado(Pedagoga), Eunice Sanches Belotti(Psicóloga), Marcela Penteado Rossini e Elaine Pasqualini, tendo como finalidade oferecer recursos que auxilie o aluno no desempenho da sua atividade educativa como também a compreensão das relações intersubjetivas entre aluno-professor-disciplina-mundo do trabalho, em situação escolar resultante de um complexo conjunto de influências psicológicas, sociais, formais e informais</string>
-    <string name="txt_objetivos"><b>OBJETIVOS</b></string>
-    <string name="txt_objetivo_1">- Apoiar alunos que desejam orientação quanto ao aprendizado dos conteúdos abordados no curso;</string>
-    <string name="txt_objetivo_2">- Auxiliar e proporcionar aos discentes informações diversas relacionadas às suas carreiras acadêmica e profissional;</string>
-    <string name="txt_objetivo_3">- Detectar problemas diversos no âmbito educacional, proporcionando acompanhamentos que possibilitem resultados diretos na melhoria e desenvolvimento do curso;</string>
-    <string name="txt_objetivo_4">- Estabelecer convênios, parcerias e encaminhamentos que possam trazer informações e benefícios aos alunos do ADS.</string>
+    <string name="txt_objetivos">OBJETIVOS</string>
+    <string name="txt_objetivo_1"><b>&#8226;</b> Apoiar alunos que desejam orientação quanto ao aprendizado dos conteúdos abordados no curso;</string>
+    <string name="txt_objetivo_2"><b>&#8226;</b> Auxiliar e proporcionar aos discentes informações diversas relacionadas às suas carreiras acadêmica e profissional;</string>
+    <string name="txt_objetivo_3"><b>&#8226;</b> Detectar problemas diversos no âmbito educacional, proporcionando acompanhamentos que possibilitem resultados diretos na melhoria e desenvolvimento do curso;</string>
+    <string name="txt_objetivo_4"><b>&#8226;</b> Estabelecer convênios, parcerias e encaminhamentos que possam trazer informações e benefícios aos alunos do ADS.</string>
 
     <!-- Itens Menu -->
     <string name="item_agendamento">Agendamento</string>
