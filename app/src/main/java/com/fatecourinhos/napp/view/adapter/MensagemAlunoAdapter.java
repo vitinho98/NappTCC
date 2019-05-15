@@ -10,18 +10,17 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.AgendamentoModel;
 import com.fatecourinhos.napp.model.MensagemModel;
 
 import java.util.List;
 
-public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlunoAdapter.ViewHolder>{
+public class MensagemAlunoAdapter extends RecyclerView.Adapter<MensagemAlunoAdapter.ViewHolder>{
 
-    private List<AgendamentoModel> agendamento;
+    private List<MensagemModel> mensagens;
     private Listener listener;
 
     public static interface Listener{
-        public void onClick(AgendamentoModel agendamentoModel);
+        public void onClick(MensagemModel mensagemModel);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -35,8 +34,8 @@ public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlu
         }
     }
 
-    public AgendamentoAlunoAdapter(List<AgendamentoModel> agendamento){
-        this.agendamento=agendamento;
+    public MensagemAlunoAdapter(List<MensagemModel> mensagens){
+        this.mensagens=mensagens;
     }
 
     public void setListener(Listener listener){
@@ -45,9 +44,9 @@ public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlu
 
     @NonNull
     @Override
-    public AgendamentoAlunoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MensagemAlunoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        CardView cv = (CardView)LayoutInflater.from(parent.getContext()).inflate(R.layout.view_holder_agendamento_aluno,parent,false);
+        CardView cv = (CardView)LayoutInflater.from(parent.getContext()).inflate(R.layout.view_holder_mensagens_aluno,parent,false);
         return new ViewHolder(cv);
     }
 
@@ -55,19 +54,22 @@ public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlu
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         CardView cardView = holder.cardView;
-        TextView txtNomeProfissional = (TextView) cardView.findViewById(R.id.txt_nome_profissional_ag_aluno);
-        TextView txtDataHora = (TextView) cardView.findViewById(R.id.txt_data_hora_ag_aluno);
 
-        final AgendamentoModel agendamentoModel = agendamento.get(position);
+        TextView enviadorPor = (TextView) cardView.findViewById(R.id.txt_enviado_por);
+        TextView txtNomeProfissional = (TextView) cardView.findViewById(R.id.txt_nome_profissional_enviou);
+        TextView txtDataHora = (TextView) cardView.findViewById(R.id.txt_data_hora_mensagem_aluno);
+        TextView txtMsg = (TextView) cardView.findViewById(R.id.txt_msg_aluno);
 
-        txtNomeProfissional.setText(agendamentoModel.getFkProfissional().getNomeProfissional());
-        txtDataHora.setText(agendamentoModel.getDataAgendamento() + " " + agendamentoModel.getHoraAgendamento());
+        final MensagemModel mensagemModel = mensagens.get(position);
 
+        txtMsg.setText(mensagemModel.getMensagem());
+        txtNomeProfissional.setText(mensagemModel.getFkProfissional().getNomeProfissional());
+        txtDataHora.setText(mensagemModel.getData() + " " + mensagemModel.getHora());
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(listener!=null){
-                    listener.onClick(agendamentoModel);
+                    listener.onClick(mensagemModel);
                 }
             }
         });
@@ -76,8 +78,8 @@ public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlu
 
     @Override
     public int getItemCount() {
-        if(agendamento != null)
-            return agendamento.size();
+        if(mensagens != null)
+            return mensagens.size();
         else
             return 0;
     }

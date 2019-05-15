@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.CampoAtuacaoController;
-import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.controller.ProfissionalExternoController;
 import com.fatecourinhos.napp.controller.ResponsavelController;
 import com.fatecourinhos.napp.model.CampoAtuacaoModel;

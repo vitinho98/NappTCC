@@ -3,10 +3,8 @@ package com.fatecourinhos.napp.controller;
 import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.AgendamentoJSONParser;
-import com.fatecourinhos.napp.json.DiagnosticoJSONParser;
 import com.fatecourinhos.napp.model.AgendamentoModel;
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
-import com.fatecourinhos.napp.model.DiagnosticoModel;
+import com.fatecourinhos.napp.model.MensagemModel;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 

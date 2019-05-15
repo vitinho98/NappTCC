@@ -1,6 +1,7 @@
 package com.fatecourinhos.napp.json;
 
 import com.fatecourinhos.napp.model.AgendamentoModel;
+import com.fatecourinhos.napp.model.MensagemModel;
 import com.fatecourinhos.napp.model.AlunoModel;
 import com.fatecourinhos.napp.model.LocalAtendimentoModel;
 import com.fatecourinhos.napp.model.ProfissionalModel;
@@ -33,7 +34,7 @@ public class AgendamentoJSONParser {
                 objAgendamento.setDataRegistro(jsonObject.getString("dataRegistro"));
                 objAgendamento.setHoraRegistro(jsonObject.getString("horaRegistro"));
                 objAgendamento.setIdAgendamento(jsonObject.getInt("idAgendamento"));
-                objAgendamento.setStatus(jsonObject.getBoolean("status"));
+                objAgendamento.setStatus(jsonObject.getInt("status"));
                 objAgendamento.setObservacao(jsonObject.getString("observacao"));
 
                 localAtendimento.setIdLocalAtendimento(jsonObject.getInt("idLocalAtendimento"));
