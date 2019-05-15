@@ -10,17 +10,18 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.model.AgendamentoModel;
 import com.fatecourinhos.napp.model.MensagemModel;
 
 import java.util.List;
 
 public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlunoAdapter.ViewHolder>{
 
-    private List<MensagemModel> agendamento;
+    private List<AgendamentoModel> agendamento;
     private Listener listener;
 
     public static interface Listener{
-        public void onClick(MensagemModel agendamentoModel);
+        public void onClick(AgendamentoModel agendamentoModel);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -34,7 +35,7 @@ public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlu
         }
     }
 
-    public AgendamentoAlunoAdapter(List<MensagemModel> agendamento){
+    public AgendamentoAlunoAdapter(List<AgendamentoModel> agendamento){
         this.agendamento=agendamento;
     }
 
@@ -57,7 +58,7 @@ public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlu
         TextView txtNomeProfissional = (TextView) cardView.findViewById(R.id.txt_nome_profissional_ag_aluno);
         TextView txtDataHora = (TextView) cardView.findViewById(R.id.txt_data_hora_ag_aluno);
 
-        final MensagemModel agendamentoModel = agendamento.get(position);
+        final AgendamentoModel agendamentoModel = agendamento.get(position);
 
         txtNomeProfissional.setText(agendamentoModel.getFkProfissional().getNomeProfissional());
         txtDataHora.setText(agendamentoModel.getDataAgendamento() + " " + agendamentoModel.getHoraAgendamento());

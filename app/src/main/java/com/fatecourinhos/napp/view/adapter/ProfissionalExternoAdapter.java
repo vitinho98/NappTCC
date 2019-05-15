@@ -3,12 +3,10 @@ package com.fatecourinhos.napp.view.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.ProfissionalExternoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
 
 import java.util.List;
 

@@ -3,6 +3,7 @@ package com.fatecourinhos.napp.view.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -19,7 +20,7 @@ public class MensagemAlunoAdapter extends RecyclerView.Adapter<MensagemAlunoAdap
     private Listener listener;
 
     public static interface Listener{
-        public void onClick(MensagemModel agendamentoModel);
+        public void onClick(MensagemModel mensagemModel);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -53,14 +54,17 @@ public class MensagemAlunoAdapter extends RecyclerView.Adapter<MensagemAlunoAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         CardView cardView = holder.cardView;
-        //TextView txtNomeProfissional = (TextView) cardView.findViewById(R.id.txt_nome_profissional_ag_aluno);
-        //TextView txtDataHora = (TextView) cardView.findViewById(R.id.txt_data_hora_ag_aluno);
+
+        TextView enviadorPor = (TextView) cardView.findViewById(R.id.txt_enviado_por);
+        TextView txtNomeProfissional = (TextView) cardView.findViewById(R.id.txt_nome_profissional_enviou);
+        TextView txtDataHora = (TextView) cardView.findViewById(R.id.txt_data_hora_mensagem_aluno);
+        TextView txtMsg = (TextView) cardView.findViewById(R.id.txt_msg_aluno);
 
         final MensagemModel mensagemModel = mensagens.get(position);
 
-        //txtNomeProfissional.setText(agendamentoModel.getFkProfissional().getNomeProfissional());
-        //txtDataHora.setText(agendamentoModel.getDataAgendamento() + " " + agendamentoModel.getHoraAgendamento());
-
+        txtMsg.setText(mensagemModel.getMensagem());
+        txtNomeProfissional.setText(mensagemModel.getFkProfissional().getNomeProfissional());
+        txtDataHora.setText(mensagemModel.getData() + " " + mensagemModel.getHora());
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

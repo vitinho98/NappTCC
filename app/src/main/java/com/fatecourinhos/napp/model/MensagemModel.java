@@ -4,20 +4,12 @@ public class MensagemModel {
 
     private int idMensagem;
     private AlunoModel fkAluno;
-    private ProfissionalExternoModel fkProfissionalExterno;
+    private ProfissionalModel fkProfissional;
     private String mensagem;
     private String data;
     private String hora;
 
     public MensagemModel() {
-    }
-
-    public MensagemModel(AlunoModel fkAluno, ProfissionalExternoModel fkProfissionalExterno, String mensagem, String data, String hora) {
-        this.fkAluno = fkAluno;
-        this.fkProfissionalExterno = fkProfissionalExterno;
-        this.mensagem = mensagem;
-        this.data = data;
-        this.hora = hora;
     }
 
     public int getIdMensagem() {
@@ -36,12 +28,12 @@ public class MensagemModel {
         this.fkAluno = fkAluno;
     }
 
-    public ProfissionalExternoModel getFkProfissionalExterno() {
-        return fkProfissionalExterno;
+    public ProfissionalModel getFkProfissional() {
+        return fkProfissional;
     }
 
-    public void setFkProfissionalExterno(ProfissionalExternoModel fkProfissionalExterno) {
-        this.fkProfissionalExterno = fkProfissionalExterno;
+    public void setFkProfissional(ProfissionalModel fkProfissional) {
+        this.fkProfissional = fkProfissional;
     }
 
     public String getMensagem() {

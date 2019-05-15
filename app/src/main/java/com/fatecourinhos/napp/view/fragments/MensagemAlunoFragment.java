@@ -18,6 +18,7 @@ import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.AlunoController;
 import com.fatecourinhos.napp.model.MensagemModel;
 import com.fatecourinhos.napp.view.adapter.AgendamentoAlunoAdapter;
+import com.fatecourinhos.napp.view.adapter.MensagemAlunoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroAgendamento;
 import com.fatecourinhos.napp.view.cadastros.Mensagens;
 
@@ -26,7 +27,7 @@ import java.util.List;
 public class MensagemAlunoFragment extends Fragment{
 
     List<MensagemModel> mensagens;
-    AgendamentoAlunoAdapter adapter;
+    MensagemAlunoAdapter adapter;
     RecyclerView mensagensAlunoRecycler;
     SharedPreferences preferences = this.getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
 
@@ -59,17 +60,20 @@ public class MensagemAlunoFragment extends Fragment{
 
         mensagens = alunoController.selecionarAgendamento(preferences.getInt("idUsuario", 0));
 
-        adapter = new AgendamentoAlunoAdapter(mensagens);
+        adapter = new MensagemAlunoAdapter(mensagens);
 
         mensagensAlunoRecycler.setAdapter(adapter);
 
-        adapter.setListener(new AgendamentoAlunoAdapter.Listener() {
+        adapter.setListener(new MensagemAlunoAdapter.Listener() {
             @Override
-            public void onClick(MensagemModel agendamentoModel) {
+            public void onClick(MensagemModel mensagemModel) {
+
                 Intent intent = new Intent(getActivity(), Mensagens.class);
 
                 startActivity(intent);
+
             }
         });
+
     }
 }

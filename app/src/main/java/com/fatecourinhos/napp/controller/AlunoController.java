@@ -3,6 +3,7 @@ package com.fatecourinhos.napp.controller;
 import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.AgendamentoJSONParser;
+import com.fatecourinhos.napp.model.AgendamentoModel;
 import com.fatecourinhos.napp.model.MensagemModel;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
@@ -12,9 +13,9 @@ import java.util.List;
 public class AlunoController {
 
     public static boolean sucesso;
-    public static List<MensagemModel> agendamento;
+    public static List<AgendamentoModel> agendamento;
 
-    public static List<MensagemModel> selecionarAgendamento(int idUsuario) {
+    public static List<AgendamentoModel> selecionarAgendamento(int idUsuario) {
 
         String uri = "http://vitorsilva.xyz/napp/agendamento/selecionarAgendamentoAluno.php";
 
@@ -30,7 +31,7 @@ public class AlunoController {
         return agendamento;
     }
 
-    private static class SelecionarAgendamento extends AsyncTask<String, String, List<MensagemModel>> {
+    private static class SelecionarAgendamento extends AsyncTask<String, String, List<AgendamentoModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -38,7 +39,7 @@ public class AlunoController {
         }
 
         @Override
-        protected List<MensagemModel> doInBackground(String... params) {
+        protected List<AgendamentoModel> doInBackground(String... params) {
             final String conteudo = HttpManager.getDados(params[0]);
             agendamento = AgendamentoJSONParser.parseDados(conteudo);
 
@@ -46,7 +47,7 @@ public class AlunoController {
         }
 
         @Override
-        protected void onPostExecute(final List<MensagemModel> agendamento) {
+        protected void onPostExecute(final List<AgendamentoModel> agendamento) {
             super.onPostExecute(agendamento);
 
         }
