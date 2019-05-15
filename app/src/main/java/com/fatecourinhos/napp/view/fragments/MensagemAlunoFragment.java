@@ -19,14 +19,15 @@ import com.fatecourinhos.napp.controller.AlunoController;
 import com.fatecourinhos.napp.model.MensagemModel;
 import com.fatecourinhos.napp.view.adapter.AgendamentoAlunoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroAgendamento;
+import com.fatecourinhos.napp.view.cadastros.Mensagens;
 
 import java.util.List;
 
-public class AgendamentoAlunoFragment extends Fragment{
+public class MensagemAlunoFragment extends Fragment{
 
-    List<MensagemModel> agendamento;
+    List<MensagemModel> mensagens;
     AgendamentoAlunoAdapter adapter;
-    RecyclerView agendamentoAlunoRecycler;
+    RecyclerView mensagensAlunoRecycler;
     SharedPreferences preferences = this.getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
 
     @Nullable
@@ -35,16 +36,8 @@ public class AgendamentoAlunoFragment extends Fragment{
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
-        agendamentoAlunoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_agendamento_aluno,container,false);
-        agendamentoAlunoRecycler.setLayoutManager(layoutManager);
-
-        Button btnNovoAgendamento = getActivity().findViewById(R.id.btn_novo_agendamento);
-        btnNovoAgendamento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CadastroAgendamento.class));
-            }
-        });
+        mensagensAlunoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_mensagens,container,false);
+        mensagensAlunoRecycler.setLayoutManager(layoutManager);
 
         return null;
     }
@@ -54,7 +47,7 @@ public class AgendamentoAlunoFragment extends Fragment{
 
         super.onViewCreated(view, savedInstance);
 
-        getActivity().setTitle("Agendamento");
+        getActivity().setTitle("Mensagens");
 
     }
 
@@ -64,16 +57,18 @@ public class AgendamentoAlunoFragment extends Fragment{
 
         AlunoController alunoController = new AlunoController();
 
-        agendamento = alunoController.selecionarAgendamento(preferences.getInt("idUsuario", 0));
+        mensagens = alunoController.selecionarAgendamento(preferences.getInt("idUsuario", 0));
 
-        adapter = new AgendamentoAlunoAdapter(agendamento);
+        adapter = new AgendamentoAlunoAdapter(mensagens);
 
-        agendamentoAlunoRecycler.setAdapter(adapter);
+        mensagensAlunoRecycler.setAdapter(adapter);
 
         adapter.setListener(new AgendamentoAlunoAdapter.Listener() {
             @Override
             public void onClick(MensagemModel agendamentoModel) {
+                Intent intent = new Intent(getActivity(), Mensagens.class);
 
+                startActivity(intent);
             }
         });
     }

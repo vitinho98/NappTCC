@@ -1,5 +1,7 @@
 package com.fatecourinhos.napp.model;
 
+import java.util.List;
+
 public class AlunoModel {
 
     private int idAluno;
@@ -17,6 +19,7 @@ public class AlunoModel {
     private boolean empregado;
     private String emailAluno;
     private UsuarioModel fkUsuario;
+    private List<DiagnosticoModel> diagnostico;
 
     public AlunoModel() {
     }
@@ -37,6 +40,14 @@ public class AlunoModel {
         this.empregado = empregado;
         this.emailAluno = emailAluno;
         this.fkUsuario = fkUsuario;
+    }
+
+    public List<DiagnosticoModel> getDiagnostico() {
+        return diagnostico;
+    }
+
+    public void setDiagnostico(List<DiagnosticoModel> diagnostico) {
+        this.diagnostico = diagnostico;
     }
 
     public int getIdAluno() {

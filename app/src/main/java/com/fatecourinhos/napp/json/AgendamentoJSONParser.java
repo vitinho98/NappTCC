@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.AgendamentoModel;
+import com.fatecourinhos.napp.model.MensagemModel;
 import com.fatecourinhos.napp.model.AlunoModel;
 import com.fatecourinhos.napp.model.LocalAtendimentoModel;
 import com.fatecourinhos.napp.model.ProfissionalModel;
@@ -13,14 +13,14 @@ import java.util.List;
 
 public class AgendamentoJSONParser {
 
-    public static List<AgendamentoModel> parseDados(String content){
+    public static List<MensagemModel> parseDados(String content){
         try{
 
             JSONArray jsonArray = new JSONArray(content);
-            List<AgendamentoModel> agendamento = new ArrayList<>();
+            List<MensagemModel> agendamento = new ArrayList<>();
 
             LocalAtendimentoModel localAtendimento = new LocalAtendimentoModel();
-            AgendamentoModel objAgendamento = new AgendamentoModel();
+            MensagemModel objAgendamento = new MensagemModel();
             AlunoModel aluno = new AlunoModel();
             ProfissionalModel profissional = new ProfissionalModel();
 
