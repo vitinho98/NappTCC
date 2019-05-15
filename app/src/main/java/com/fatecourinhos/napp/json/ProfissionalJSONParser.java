@@ -34,7 +34,7 @@ public class ProfissionalJSONParser {
                 usuario.setIdUsuario(jsonObject.getInt("idUsuario"));
                 usuario.setLogin(jsonObject.getString("login"));
                 usuario.setSenha(jsonObject.getString("senha"));
-                usuario.setTipoUsuario(jsonObject.getString("tipo"));
+                usuario.setTipoUsuario(jsonObject.getString("tipoUsuario"));
                 usuario.setStatus(jsonObject.getInt("status"));
                 profissional.setFkUsuario(usuario);
 
