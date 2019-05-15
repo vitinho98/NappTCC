@@ -212,11 +212,13 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
 
         } else {
+            Log.e("CHEGOU ATE AQUI?", conteudo);
+
 
             String tipoUsuario = verificarTipoUsuario(conteudo);
             conteudo = criarJson(conteudo);
 
-            Log.e("CHEGOU ATE AQUI?", conteudo);
+
 
             if (tipoUsuario.equals("aluno")) {
 
