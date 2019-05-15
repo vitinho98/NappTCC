@@ -19,10 +19,6 @@
             android:icon="@drawable/ic_indicacoes"
             android:title="@string/item_indicacoes_adicionais" />
         <item
-            android:id="@+id/nav_notificacoes"
-            android:icon="@drawable/ic_notifications"
-            android:title="@string/item_notificacoes" />
-        <item
             android:id="@+id/nav_relatorios"
             android:icon="@drawable/ic_relatorio"
             android:title="@string/item_relatorios" />
