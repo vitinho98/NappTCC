@@ -39,6 +39,13 @@
                 android:text="Segunda feira 12:30"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_local_ag_aluno"
+                android:text="local: sala 1 bloco 2"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
+
         </LinearLayout>
 
         <LinearLayout
