@@ -30,7 +30,7 @@ public class MensagemAlunoFragment extends Fragment{
     List<MensagemModel> mensagens;
     MensagemAlunoAdapter adapter;
     RecyclerView mensagensAlunoRecycler;
-    SharedPreferences preferences = this.getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
+    //SharedPreferences preferences = this.getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
 
     @Nullable
     @Override
