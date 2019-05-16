@@ -14,6 +14,8 @@ public class Feedback extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
 
+        getActivity().setTitle("Feedback");
+
         return inflater.inflate(R.layout.fragment_feedback_nucleo,null);
     }
 }

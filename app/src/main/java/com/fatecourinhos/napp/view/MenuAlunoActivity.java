@@ -24,7 +24,7 @@ public class MenuAlunoActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-            Fragment fragment = null;
+            Fragment fragment;
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
             switch (item.getItemId()) {
@@ -33,23 +33,23 @@ public class MenuAlunoActivity extends AppCompatActivity {
                     fragment = new AgendamentoAlunoFragment();
                     ft.replace(R.id.frame_layout_aluno, fragment);
                     ft.commit();
-
                     return true;
+
                 case R.id.nav_mensagem:
 
                     fragment = new MensagemAlunoFragment();
                     ft.replace(R.id.frame_layout_aluno, fragment);
                     ft.commit();
-
                     return true;
+
                 case R.id.nav_feedback:
 
                     fragment = new Feedback();
                     ft.replace(R.id.frame_layout_aluno, fragment);
                     ft.commit();
-
                     return true;
             }
+
             return false;
         }
     };
@@ -58,15 +58,15 @@ public class MenuAlunoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_aluno);
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
 
-        Fragment fragment = null;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        fragment = new AgendamentoAlunoFragment();
+        Fragment fragment  = new AgendamentoAlunoFragment();
         ft.replace(R.id.frame_layout_aluno, fragment);
         ft.commit();
     }

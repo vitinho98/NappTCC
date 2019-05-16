@@ -37,13 +37,14 @@ public class AgendamentoAlunoFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
+        View rootView = inflater.inflate(R.layout.fragment_agendamento_aluno,container,false);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
-        agendamentoAlunoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_agendamento_aluno,container,false);
+        agendamentoAlunoRecycler = rootView.findViewById(R.id.listaagendamentoid);
         agendamentoAlunoRecycler.setLayoutManager(layoutManager);
 
-
-        return agendamentoAlunoRecycler;
+        return rootView;
     }
 
     @Override
