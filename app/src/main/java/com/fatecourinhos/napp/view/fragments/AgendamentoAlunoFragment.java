@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.AlunoController;
 import com.fatecourinhos.napp.model.AgendamentoModel;
+import com.fatecourinhos.napp.model.LocalAtendimentoModel;
 import com.fatecourinhos.napp.model.MensagemModel;
+import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.view.adapter.AgendamentoAlunoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroAgendamento;
 
@@ -29,7 +31,7 @@ public class AgendamentoAlunoFragment extends Fragment{
     List<AgendamentoModel> agendamento;
     AgendamentoAlunoAdapter adapter;
     RecyclerView agendamentoAlunoRecycler;
-    SharedPreferences preferences = this.getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
+    //SharedPreferences preferences = this.getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
 
     @Nullable
     @Override
@@ -40,15 +42,8 @@ public class AgendamentoAlunoFragment extends Fragment{
         agendamentoAlunoRecycler = (RecyclerView)inflater.inflate(R.layout.fragment_agendamento_aluno,container,false);
         agendamentoAlunoRecycler.setLayoutManager(layoutManager);
 
-        Button btnNovoAgendamento = getActivity().findViewById(R.id.btn_novo_agendamento);
-        btnNovoAgendamento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CadastroAgendamento.class));
-            }
-        });
 
-        return null;
+        return agendamentoAlunoRecycler;
     }
 
     @Override
@@ -67,6 +62,20 @@ public class AgendamentoAlunoFragment extends Fragment{
         AlunoController alunoController = new AlunoController();
 
         agendamento = new ArrayList<>();//alunoController.selecionarAgendamento(preferences.getInt("idUsuario", 0));
+
+        AgendamentoModel agendamentoModel = new AgendamentoModel();
+
+        agendamentoModel.setDataAgendamento("12/2");
+        agendamentoModel.setHoraAgendamento("2100");
+        ProfissionalModel profissionalModel = new ProfissionalModel();
+        profissionalModel.setNomeProfissional("prof");
+        agendamentoModel.setFkProfissional(profissionalModel);
+
+        LocalAtendimentoModel localAtendimentoModel = new LocalAtendimentoModel();
+        localAtendimentoModel.setNomeLocal("nome");
+        agendamentoModel.setFkLocalAtendimento(localAtendimentoModel);
+
+        agendamento.add(agendamentoModel);
 
         adapter = new AgendamentoAlunoAdapter(agendamento);
 

@@ -59,6 +59,12 @@ public class MenuAlunoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_aluno);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        Fragment fragment = null;
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        fragment = new AgendamentoAlunoFragment();
+        ft.replace(R.id.frame_layout_aluno, fragment);
+        ft.commit();
     }
 
 }
