@@ -2,7 +2,7 @@ package com.fatecourinhos.napp.model;
 
 public class CampoAtuacaoModel {
 
-    private int idCampoAtuacao;
+    private Integer idCampoAtuacao;
     private String nomeCampoAtuacao;
 
     public CampoAtuacaoModel(){
@@ -14,11 +14,11 @@ public class CampoAtuacaoModel {
         this.nomeCampoAtuacao = nomeCampoAtuacao;
     }
 
-    public int getIdCampoAtuacao() {
+    public Integer getIdCampoAtuacao() {
         return idCampoAtuacao;
     }
 
-    public void setIdCampoAtuacao(int idCampoAtuacao) {
+    public void setIdCampoAtuacao(Integer idCampoAtuacao) {
         this.idCampoAtuacao = idCampoAtuacao;
     }
 

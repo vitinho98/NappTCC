@@ -3,9 +3,11 @@ package com.fatecourinhos.napp.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,8 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
     AppCompatEditText editTextLogin, editTextSenha;
     TextInputLayout textInputLayoutLogin, textInputLayoutSenha;
     ImageView imgSobre;
@@ -37,9 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
+        preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
         txtCadastrar = findViewById(R.id.txt_cadastrar);
-
         imgSobre = findViewById(R.id.img_sobre);
 
         textInputLayoutLogin = findViewById(R.id.txt_layout_login);
@@ -139,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
     private void adicionarPreferencesAluno(AlunoModel aluno){
 
         SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        editor = preferences.edit();
 
         editor.putInt("idUsuario", aluno.getFkUsuario().getIdUsuario());
         editor.putString("tipoUsuario", aluno.getFkUsuario().getTipoUsuario());
@@ -154,10 +157,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void adicionarPreferencesProfissional(ProfissionalModel profissional){
-        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
-        SharedPreferences.Editor editor = preferences.edit();
-
+        editor = preferences.edit();
+        Log.e("a", "aaa");
         editor.putInt("idUsuario", profissional.getFkUsuario().getIdUsuario());
         editor.putString("tipoUsuario", profissional.getFkUsuario().getTipoUsuario());
 
@@ -171,7 +173,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean conferirShared(){
-        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
         boolean resultado = preferences.getBoolean("conected", false);
 

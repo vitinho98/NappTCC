@@ -38,9 +38,18 @@ public class ProfissionalJSONParser {
                 usuario.setStatus(jsonObject.getInt("status"));
                 profissional.setFkUsuario(usuario);
 
-                campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
-                campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
-                profissional.setCampoAtuacao(campoAtuacao);
+                try{
+                    campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
+                    campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
+                    profissional.setCampoAtuacao(campoAtuacao);
+
+                }catch (Exception e){
+                    campoAtuacao.setNomeCampoAtuacao(null);
+                    campoAtuacao.setIdCampoAtuacao(null);
+                    profissional.setCampoAtuacao(campoAtuacao);
+
+                    e.printStackTrace();
+                }
 
                 profissionalList.add(profissional);
 
