@@ -280,50 +280,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //tarefa assincrona que recebe os dados do banco de dados
-    private class autenticarUsuario extends AsyncTask<RequestHttp, Boolean, Boolean> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Boolean doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
-
-            if(conteudo.equals("Vazio"))
-                return false;
-            else {
-                return true;
-            }
-
-        }
-
-        protected void onPostExecute(boolean sucess) {
-            super.onPostExecute(sucess);
-
-            if(sucess == true)
-                login(conteudo);
-            else
-                Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void autenticarUsuario(UsuarioModel usuario) {
-
-        String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
-
-        RequestHttp requestHttp = new RequestHttp();
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-
-        requestHttp.setParametro("login", usuario.getLogin());
-        requestHttp.setParametro("senha", usuario.getSenha());
-
-        autenticarUsuario task = new autenticarUsuario();
-        task.execute(requestHttp);
-
-    }
-
     private class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
@@ -332,25 +288,24 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            String conteudo = (String) HttpManager.getDados(params[0]);
+            conteudo = HttpManager.getDados(params[0]);
 
-            Log.e("aqui", conteudo);
-
-            /*
             if(conteudo.equals("Vazio"))
                 sucess = false;
             else {
                 sucess = true;
             }
-            */
 
             return conteudo;
-
         }
 
-        @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+            if(sucess == true)
+                login(conteudo);
+            else
+                Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
         }
     }
 
