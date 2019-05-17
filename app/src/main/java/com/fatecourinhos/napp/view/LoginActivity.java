@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.fatecourinhos.napp.json.ProfissionalJSONParser;
 import com.fatecourinhos.napp.model.AlunoModel;
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.UsuarioModel;
+import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.cadastros.CadastroAluno;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -34,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
     ImageView imgSobre;
     TextView txtCadastrar;
     Button btnLogin;
+    boolean sucess;
+    String conteudo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
                     usuarioModel.setLogin(editTextLogin.getText().toString());
                     usuarioModel.setSenha(editTextSenha.getText().toString());
 
-                    login(UsuarioController.autenticarUsuario(usuarioModel));
+                    autenticarUsuario(usuarioModel);
 
                 }
             }
@@ -224,42 +229,82 @@ public class LoginActivity extends AppCompatActivity {
     //verifica o retorno do webservice e chama o menu adequado ou informa que não foi possível encontrar o usuário
     private void login(String conteudo){
 
-        if (conteudo == null) {
+        Log.e("CHEGOU ATE AQUI?", conteudo);
 
-            Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
+        String tipoUsuario = verificarTipoUsuario(conteudo);
+        conteudo = criarJson(conteudo);
+
+        if (tipoUsuario.equals("aluno")) {
+
+            List<AlunoModel> alunosModel = AlunoJSONParser.parseDados(conteudo);
+            AlunoModel alunoModel = alunosModel.get(0);
+
+            adicionarPreferences(alunoModel);
+
+            startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
+            finish();
 
         } else {
-            Log.e("CHEGOU ATE AQUI?", conteudo);
 
-            String tipoUsuario = verificarTipoUsuario(conteudo);
-            conteudo = criarJson(conteudo);
+            List<ProfissionalModel> profissionaisModel = ProfissionalJSONParser.parseDados(conteudo);
+            ProfissionalModel profissionalModel = profissionaisModel.get(0);
 
-            if (tipoUsuario.equals("aluno")) {
+            if (profissionalModel.getFkUsuario().getStatus() == 0) {
 
-                List<AlunoModel> alunosModel = AlunoJSONParser.parseDados(conteudo);
-                AlunoModel alunoModel = alunosModel.get(0);
+                adicionarPreferences(profissionalModel);
 
-                adicionarPreferences(alunoModel);
-
-                startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
+                startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
                 finish();
 
             } else {
-
-                List<ProfissionalModel> profissionaisModel = ProfissionalJSONParser.parseDados(conteudo);
-                ProfissionalModel profissionalModel = profissionaisModel.get(0);
-
-                if (profissionalModel.getFkUsuario().getStatus() == 0) {
-
-                    adicionarPreferences(profissionalModel);
-
-                    startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
-                    finish();
-
-                } else {
-                    Toast.makeText(LoginActivity.this, "Usuário desativado!", Toast.LENGTH_LONG).show();
-                }
+                Toast.makeText(LoginActivity.this, "Usuário desativado!", Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    //realiza as configurações para enviar dados ao banco de dados
+    public void autenticarUsuario(UsuarioModel usuario) {
+
+        String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("login", usuario.getLogin());
+        requestHttp.setParametro("senha", usuario.getSenha());
+
+        autenticarUsuario task = new autenticarUsuario();
+        task.execute(requestHttp);
+
+    }
+
+    //tarefa assincrona que recebe os dados do banco de dados
+    private class autenticarUsuario extends AsyncTask<RequestHttp, Boolean, Boolean> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            if(conteudo.equals("Vazio"))
+                return false;
+            else {
+                return true;
+            }
+
+        }
+
+        protected void onPostExecute(boolean sucess) {
+            super.onPostExecute(sucess);
+
+            if(sucess == true)
+                login(conteudo);
+            else
+                Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
         }
     }
 

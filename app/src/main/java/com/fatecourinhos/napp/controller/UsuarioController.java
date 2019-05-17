@@ -12,7 +12,6 @@ public class UsuarioController {
 
     public static String conteudo;
     public static boolean ativo;
-    public static boolean sucess = false;
 
     public static boolean isAtivo(UsuarioModel usuario){
 
@@ -56,52 +55,5 @@ public class UsuarioController {
         }
     }
 
-    public static String autenticarUsuario(UsuarioModel usuario) {
 
-        String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
-
-        RequestHttp requestHttp = new RequestHttp();
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-
-        requestHttp.setParametro("login", usuario.getLogin());
-        requestHttp.setParametro("senha", usuario.getSenha());
-
-        autenticarUsuario task = new autenticarUsuario();
-        task.execute(requestHttp);
-
-        if(sucess == true)
-            return conteudo;
-        else
-            return null;
-
-    }
-
-    private static class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(RequestHttp... params) {
-            conteudo = (String) HttpManager.getDados(params[0]);
-
-            Log.e("aqui", conteudo);
-
-            if(conteudo.equals("Vazio"))
-                sucess = false;
-            else {
-                sucess = true;
-            }
-
-            return conteudo;
-
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }
 }
