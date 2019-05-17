@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.fatecourinhos.napp.json.ProfissionalJSONParser;
 import com.fatecourinhos.napp.model.AlunoModel;
 import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.UsuarioModel;
+import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.cadastros.CadastroAluno;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -173,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
                     usuarioModel.setLogin(editTextLogin.getText().toString());
                     usuarioModel.setSenha(editTextSenha.getText().toString());
 
-                    login(UsuarioController.autenticarUsuario(usuarioModel));
+                    //login(UsuarioController.autenticarUsuario(usuarioModel));
 
                 }
             }
@@ -260,6 +263,52 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Usuário desativado!", Toast.LENGTH_LONG).show();
                 }
             }
+        }
+    }
+
+    public void autenticarUsuario(UsuarioModel usuario) {
+
+        String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("login", usuario.getLogin());
+        requestHttp.setParametro("senha", usuario.getSenha());
+
+        autenticarUsuario task = new autenticarUsuario();
+        task.execute(requestHttp);
+
+    }
+
+    private static class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            String conteudo = (String) HttpManager.getDados(params[0]);
+
+            Log.e("aqui", conteudo);
+
+            /*
+            if(conteudo.equals("Vazio"))
+                sucess = false;
+            else {
+                sucess = true;
+            }
+            */
+
+            return conteudo;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
         }
     }
 
