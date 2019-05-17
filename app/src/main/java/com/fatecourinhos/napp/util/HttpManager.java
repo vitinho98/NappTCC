@@ -1,8 +1,5 @@
 package com.fatecourinhos.napp.util;
 
-
-import com.fatecourinhos.napp.util.RequestHttp;
-
 import org.json.JSONObject;
 
 import java.io.BufferedReader;

@@ -1,7 +1,6 @@
 package com.fatecourinhos.napp.json;
 
 import com.fatecourinhos.napp.model.AgendamentoModel;
-import com.fatecourinhos.napp.model.MensagemModel;
 import com.fatecourinhos.napp.model.AlunoModel;
 import com.fatecourinhos.napp.model.LocalAtendimentoModel;
 import com.fatecourinhos.napp.model.ProfissionalModel;
