@@ -282,7 +282,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private static class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
+    private class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
