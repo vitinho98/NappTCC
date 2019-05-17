@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        app:srcCompat="@android:drawable/ic_input_add"/>
+        app:maxImageSize="40dp"
+        app:srcCompat="@drawable/ic_add_white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

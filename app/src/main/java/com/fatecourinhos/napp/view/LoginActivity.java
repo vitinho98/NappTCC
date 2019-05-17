@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     boolean sucess;
     String conteudo;
+    ProgressBar pgBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,9 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextLogin = findViewById(R.id.edit_text_login);
         editTextSenha = findViewById(R.id.edit_text_senha);
+
+        pgBar = findViewById(R.id.pgBarLogin);
+        pgBar.setVisibility(View.INVISIBLE);
     }
 
     //valida se login e senha foram digitados
@@ -283,6 +288,7 @@ public class LoginActivity extends AppCompatActivity {
     private class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
+            pgBar.setVisibility(View.VISIBLE);
             super.onPreExecute();
         }
 
@@ -300,6 +306,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String s) {
+            pgBar.setVisibility(View.INVISIBLE);
             super.onPostExecute(s);
 
             if(sucess == true)
