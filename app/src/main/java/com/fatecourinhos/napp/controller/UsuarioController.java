@@ -1,6 +1,5 @@
 package com.fatecourinhos.napp.controller;
 
-import android.app.DownloadManager;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -13,6 +12,7 @@ public class UsuarioController {
 
     public static String conteudo;
     public static boolean ativo;
+    public static boolean sucess = false;
 
     public static boolean isAtivo(UsuarioModel usuario){
 
@@ -28,23 +28,6 @@ public class UsuarioController {
         task.execute(requestHttp);
 
         return ativo;
-    }
-
-    public static void autenticarUsuario(UsuarioModel usuario) {
-
-        String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
-
-        RequestHttp requestHttp = new RequestHttp();
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-
-        requestHttp.setParametro("login", usuario.getLogin());
-        requestHttp.setParametro("senha", usuario.getSenha());
-        Log.e("login", usuario.getLogin());Log.e("senha", usuario.getSenha());
-
-        autenticarUsuario task = new autenticarUsuario();
-        task.execute(requestHttp);
-
     }
 
     private static class isAtivo extends AsyncTask<RequestHttp, String, String>{
@@ -73,6 +56,27 @@ public class UsuarioController {
         }
     }
 
+    public static String autenticarUsuario(UsuarioModel usuario) {
+
+        String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("login", usuario.getLogin());
+        requestHttp.setParametro("senha", usuario.getSenha());
+
+        autenticarUsuario task = new autenticarUsuario();
+        task.execute(requestHttp);
+
+        if(sucess == true)
+            return conteudo;
+        else
+            return null;
+
+    }
+
     private static class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
@@ -86,17 +90,18 @@ public class UsuarioController {
             Log.e("aqui", conteudo);
 
             if(conteudo.equals("Vazio"))
-                return null;
+                sucess = false;
             else {
-                return conteudo;
+                sucess = true;
             }
+
+            return conteudo;
+
         }
 
         @Override
-        protected void onPostExecute(String conteudo) {
-            LoginActivity loginActivity = new LoginActivity();
-            loginActivity.login(conteudo);
-            Log.e("haa", ":9");
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
         }
     }
 }

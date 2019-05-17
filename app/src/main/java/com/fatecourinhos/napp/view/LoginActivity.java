@@ -3,11 +3,9 @@ package com.fatecourinhos.napp.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -41,7 +39,46 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        getComponentes();
+
+        if(validarShared()){
+
+            if(preferences.contains("tipoUsuario")){
+
+                String tipoUsuario = preferences.getString("tipoUsuario", null);
+
+                if(tipoUsuario.equals("aluno")) {
+
+                    startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
+                    finish();
+
+                } else if(tipoUsuario.equals("profissional") || tipoUsuario.equals("administrador")) {
+
+                    UsuarioModel usuarioModel = new UsuarioModel();
+                    usuarioModel.setIdUsuario(preferences.getInt("idUsuario", 0));
+
+                    if (UsuarioController.isAtivo(usuarioModel)) {
+
+                        startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
+                        finish();
+
+                    }
+                }
+            }
+        }
+
+        setOnClicks();
+
+    }
+
+    //chama os componentes da tela
+    private void getComponentes(){
+
         preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
+        editor = preferences.edit();
+
+        btnLogin = findViewById(R.id.btn_entrar);
         txtCadastrar = findViewById(R.id.txt_cadastrar);
         imgSobre = findViewById(R.id.img_sobre);
 
@@ -50,66 +87,9 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextLogin = findViewById(R.id.edit_text_login);
         editTextSenha = findViewById(R.id.edit_text_senha);
-
-        btnLogin = findViewById(R.id.btn_entrar);
-
-        if (conferirShared()) {
-
-            String tipoUsuario = preferences.getString("tipoUsuario", null);
-
-            if (tipoUsuario.equals("aluno")) {
-
-                startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
-                finish();
-
-            } else {
-
-                UsuarioModel usuarioModel = new UsuarioModel();
-                usuarioModel.setIdUsuario(preferences.getInt("idUsuario", 0));
-
-                UsuarioController usuarioController = new UsuarioController();
-
-                if (usuarioController.isAtivo(usuarioModel)) {
-
-                    startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
-                    finish();
-
-                }
-            }
-        }
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (validarForm()) {
-
-                    UsuarioModel usuarioModel = new UsuarioModel();
-                    UsuarioController usuarioController = new UsuarioController();
-
-                    usuarioModel.setLogin(editTextLogin.getText().toString());
-                    usuarioModel.setSenha(editTextSenha.getText().toString());
-
-                    UsuarioController.autenticarUsuario(usuarioModel);
-                }
-            }
-        });
-
-        imgSobre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SobreActivity.class));
-            }
-        });
-
-        txtCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, CadastroAluno.class));
-            }
-        });
     }
 
+    //valida se login e senha foram digitados
     private boolean validarForm(){
 
         boolean retornoLogin, retornoSenha;
@@ -139,51 +119,26 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void adicionarPreferencesAluno(AlunoModel aluno){
+    //valida se já possui uma conta logada no dispositivo
+    private boolean validarShared(){
 
-        SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
-        editor = preferences.edit();
+        if(preferences.contains("conected")) {
 
-        editor.putInt("idUsuario", aluno.getFkUsuario().getIdUsuario());
-        editor.putString("tipoUsuario", aluno.getFkUsuario().getTipoUsuario());
+            boolean resultado = preferences.getBoolean("conected", false);
 
-        editor.putInt("status", aluno.getFkUsuario().getStatus());
-        editor.putInt("idAluno", aluno.getIdAluno());
+            if(resultado){
+                return true;
+            }else{
+                return false;
+            }
 
-        editor.putBoolean("conected", true);
-
-        editor.commit();
-
-    }
-
-    private void adicionarPreferencesProfissional(ProfissionalModel profissional){
-
-        editor = preferences.edit();
-        Log.e("a", "aaa");
-        editor.putInt("idUsuario", profissional.getFkUsuario().getIdUsuario());
-        editor.putString("tipoUsuario", profissional.getFkUsuario().getTipoUsuario());
-
-        editor.putInt("status", profissional.getFkUsuario().getStatus());
-        editor.putInt("idProfissional", profissional.getIdProfissional());
-
-        editor.putBoolean("conected", true);
-
-        editor.commit();
-
-    }
-
-    private boolean conferirShared(){
-
-        boolean resultado = preferences.getBoolean("conected", false);
-
-        if(resultado){
-            return true;
         }else{
             return false;
         }
 
     }
 
+    //pega o retorno do web service e retorna o tipo de usuário
     private String verificarTipoUsuario(String conteudo){
 
         int fim = conteudo.indexOf("@");
@@ -194,6 +149,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    //pega o retorno do web service e retorna o json
     private String criarJson(String conteudo){
 
         int inicio = conteudo.indexOf("@");
@@ -204,29 +160,87 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void login(String conteudo){
+    //seta o evento on click dos componentes
+    private void setOnClicks(){
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (validarForm()) {
+
+                    UsuarioModel usuarioModel = new UsuarioModel();
+                    usuarioModel.setLogin(editTextLogin.getText().toString());
+                    usuarioModel.setSenha(editTextSenha.getText().toString());
+
+                    login(UsuarioController.autenticarUsuario(usuarioModel));
+
+                }
+            }
+        });
+
+        imgSobre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SobreActivity.class));
+            }
+        });
+
+        txtCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, CadastroAluno.class));
+            }
+        });
+
+    }
+
+    //adiciona no sharedpreferences
+    private void adicionarPreferences(AlunoModel aluno){
+
+        editor.putInt("idUsuario", aluno.getFkUsuario().getIdUsuario());
+        editor.putString("tipoUsuario", aluno.getFkUsuario().getTipoUsuario());
+        editor.putInt("status", aluno.getFkUsuario().getStatus());
+        editor.putInt("idAluno", aluno.getIdAluno());
+        editor.putBoolean("conected", true);
+
+        editor.commit();
+
+    }
+
+    //adiciona no sharedpreferences
+    private void adicionarPreferences(ProfissionalModel profissional){
+
+        editor.putInt("idUsuario", profissional.getFkUsuario().getIdUsuario());
+        editor.putString("tipoUsuario", profissional.getFkUsuario().getTipoUsuario());
+        editor.putInt("status", profissional.getFkUsuario().getStatus());
+        editor.putInt("idProfissional", profissional.getIdProfissional());
+        editor.putBoolean("conected", true);
+
+        editor.commit();
+
+    }
+
+    //verifica o retorno do webservice e chama o menu adequado ou informa que não foi possível encontrar o usuário
+    private void login(String conteudo){
 
         if (conteudo == null) {
-
-            Log.e("CHEGOU ATE AQUI?", "taaq");
 
             Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
 
         } else {
             Log.e("CHEGOU ATE AQUI?", conteudo);
 
-
             String tipoUsuario = verificarTipoUsuario(conteudo);
             conteudo = criarJson(conteudo);
-
-
 
             if (tipoUsuario.equals("aluno")) {
 
                 List<AlunoModel> alunosModel = AlunoJSONParser.parseDados(conteudo);
                 AlunoModel alunoModel = alunosModel.get(0);
 
-                adicionarPreferencesAluno(alunoModel);
+                adicionarPreferences(alunoModel);
+
                 startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
                 finish();
 
@@ -237,7 +251,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (profissionalModel.getFkUsuario().getStatus() == 0) {
 
-                    adicionarPreferencesProfissional(profissionalModel);
+                    adicionarPreferences(profissionalModel);
+
                     startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
                     finish();
 
