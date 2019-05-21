@@ -156,22 +156,22 @@ public class CadastroProfissional extends AppCompatActivity {
             if(inserir == true){
 
                 if(ProfissionalController.inserirProfissional(profissional)) {
-                    Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_LONG);
+                    Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_LONG).show();
                     limparDados();
                 }else
-                    Toast.makeText(this, "Erro ao inserir", Toast.LENGTH_LONG);
+                    Toast.makeText(this, "Erro ao inserir", Toast.LENGTH_LONG).show();
 
             }else{
 
                 if(ProfissionalController.alterarProfissional(profissional)){
-                    Toast.makeText(this, "Alterado com sucesso", Toast.LENGTH_LONG);
+                    Toast.makeText(this, "Alterado com sucesso", Toast.LENGTH_LONG).show();
                     limparDados();
                 }else
-                    Toast.makeText(this, "Erro ao alterar", Toast.LENGTH_LONG);
+                    Toast.makeText(this, "Erro ao alterar", Toast.LENGTH_LONG).show();
             }
 
         }else
-            Toast.makeText(this, "Insira todos os campos corretamente!", Toast.LENGTH_LONG);
+            Toast.makeText(this, "Insira todos os campos corretamente!", Toast.LENGTH_LONG).show();
 
     }
 

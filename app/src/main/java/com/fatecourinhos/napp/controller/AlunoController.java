@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import com.fatecourinhos.napp.json.AgendamentoJSONParser;
 import com.fatecourinhos.napp.model.AgendamentoModel;
 import com.fatecourinhos.napp.model.MensagemModel;
+import com.fatecourinhos.napp.model.UsuarioModel;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
@@ -15,13 +16,26 @@ public class AlunoController {
     public static boolean sucesso;
     public static List<AgendamentoModel> agendamento;
 
+    public static boolean inserirAluno(UsuarioModel usuario){
+
+        String uri = "http://vitorsilva.xyz/napp/aluno/incluirAluno.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        InserirAluno task = new InserirAluno();
+        task.execute(requestHttp);
+
+        return sucesso;
+    }
+
     public static List<AgendamentoModel> selecionarAgendamento(int idUsuario) {
 
         String uri = "http://vitorsilva.xyz/napp/agendamento/selecionarAgendamentoAluno.php";
 
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
 
         requestHttp.setParametro("idUsuario", String.valueOf(idUsuario));
 
@@ -52,5 +66,31 @@ public class AlunoController {
 
         }
     }
+
+    private static class InserirAluno extends AsyncTask<RequestHttp, String, String>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            final String conteudo = (String) HttpManager.getDados(params[0]);
+
+            if(conteudo.equals("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
+
 
 }
