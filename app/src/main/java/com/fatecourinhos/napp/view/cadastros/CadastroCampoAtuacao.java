@@ -58,16 +58,8 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
                         Toast.makeText(getContext(),"Insira o nome do campo de atuação", Toast.LENGTH_SHORT).show();
 
                     else {
-
                         campoAtuacao.setNomeCampoAtuacao(editTextNomeArea.getText().toString());
-
-                        if (CampoAtuacaoController.alterarCampoAtuacao(campoAtuacao)) {
-
-                            Toast.makeText(getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-
-                        }else
-                            Toast.makeText(getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
+                        alterarCampoAtuacao(campoAtuacao, dialog);
                     }
                 }
             });
@@ -129,7 +121,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
     }
 
-    public void alterarCampoAtuacao(CampoAtuacao campoAtuacao) {
+    public void alterarCampoAtuacao(CampoAtuacao campoAtuacao, DialogInterface dialog) {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/alterarCampoAtuacao.php";
 
@@ -155,7 +147,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         protected String doInBackground(RequestHttp... params) {
             final String conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.equals("Sucessoo"))
+            if(conteudo.contains("Sucesso"))
                 sucesso = true;
             else
                 sucesso = false;
@@ -179,7 +171,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         protected String doInBackground(RequestHttp... params) {
             final String conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.equals("Sucessoo"))
+            if(conteudo.contains("Sucesso"))
                 sucesso = true;
             else
                 sucesso = false;
@@ -190,6 +182,11 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            if (sucesso) {
+                Toast.makeText(getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            } else
+                Toast.makeText(getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
     }
 
