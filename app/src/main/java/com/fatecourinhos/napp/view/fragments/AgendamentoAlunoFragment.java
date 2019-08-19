@@ -1,13 +1,9 @@
 package com.fatecourinhos.napp.view.fragments;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,10 +14,8 @@ import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.AlunoController;
 import com.fatecourinhos.napp.model.AgendamentoModel;
 import com.fatecourinhos.napp.model.LocalAtendimentoModel;
-import com.fatecourinhos.napp.model.MensagemModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
+import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.view.adapter.AgendamentoAlunoAdapter;
-import com.fatecourinhos.napp.view.cadastros.CadastroAgendamento;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,9 +62,9 @@ public class AgendamentoAlunoFragment extends Fragment{
 
         agendamentoModel.setDataAgendamento("12/2");
         agendamentoModel.setHoraAgendamento("2100");
-        ProfissionalModel profissionalModel = new ProfissionalModel();
-        profissionalModel.setNomeProfissional("prof");
-        agendamentoModel.setFkProfissional(profissionalModel);
+        Profissional profissional = new Profissional();
+        profissional.setNomeProfissional("prof");
+        agendamentoModel.setFkProfissional(profissional);
 
         LocalAtendimentoModel localAtendimentoModel = new LocalAtendimentoModel();
         localAtendimentoModel.setNomeLocal("nome");

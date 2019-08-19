@@ -6,12 +6,12 @@ public class AgendaProfissionalModel {
     private String hora;
     private String minutos;
     private String diaDaSemana;
-    private ProfissionalModel fkProfissional;
+    private Profissional fkProfissional;
 
     public AgendaProfissionalModel() {
     }
 
-    public AgendaProfissionalModel(int idAgendaProfissional, String hora, String minutos, String diaDaSemana, ProfissionalModel fkProfissional) {
+    public AgendaProfissionalModel(int idAgendaProfissional, String hora, String minutos, String diaDaSemana, Profissional fkProfissional) {
         this.idAgendaProfissional = idAgendaProfissional;
         this.hora = hora;
         this.minutos = minutos;
@@ -51,11 +51,11 @@ public class AgendaProfissionalModel {
         this.diaDaSemana = diaDaSemana;
     }
 
-    public ProfissionalModel getFkProfissional() {
+    public Profissional getFkProfissional() {
         return fkProfissional;
     }
 
-    public void setFkProfissional(ProfissionalModel fkProfissional) {
+    public void setFkProfissional(Profissional fkProfissional) {
         this.fkProfissional = fkProfissional;
     }
 }

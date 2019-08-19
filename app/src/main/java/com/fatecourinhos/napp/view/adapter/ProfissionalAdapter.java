@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.ProfissionalModel;
+import com.fatecourinhos.napp.model.Profissional;
 import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapter.ViewHolder>{
 
-    private List<ProfissionalModel> profissionais;
+    private List<Profissional> profissionais;
     private Listener listener;
 
     public static interface Listener{
-        public void onClick(ProfissionalModel profissional);
+        public void onClick(Profissional profissional);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -32,7 +32,7 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
         }
     }
 
-    public ProfissionalAdapter(List<ProfissionalModel> profissionais){
+    public ProfissionalAdapter(List<Profissional> profissionais){
         this.profissionais=profissionais;
     }
 
@@ -57,7 +57,7 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
         ImageView imgStatus = (ImageView)cardView.findViewById(R.id.img_status_profissional_lista);
         TextView txtNome = (TextView)cardView.findViewById(R.id.txt_nome_profissional_cab);
 
-        final ProfissionalModel profissional = profissionais.get(position);
+        final Profissional profissional = profissionais.get(position);
 
         txtNome.setText(profissional.getNomeProfissional());
 

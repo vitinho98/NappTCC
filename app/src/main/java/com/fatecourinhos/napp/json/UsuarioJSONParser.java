@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.UsuarioModel;
+import com.fatecourinhos.napp.model.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,13 +10,13 @@ import java.util.List;
 
 public class UsuarioJSONParser {
 
-    public static List<UsuarioModel> parseDados(String content){
+    public static List<Usuario> parseDados(String content){
         try{
 
             JSONArray jsonArray = new JSONArray(content);
-            List<UsuarioModel> usuarioModelList = new ArrayList<>();
+            List<Usuario> usuarioList = new ArrayList<>();
 
-            UsuarioModel usuario = new UsuarioModel();
+            Usuario usuario = new Usuario();
 
             for(int i=0; i<jsonArray.length(); i++){
 
@@ -29,10 +29,10 @@ public class UsuarioJSONParser {
                 usuario.setStatus(jsonObject.getInt("status"));
                 //0 --> ATIVO
 
-                usuarioModelList.add(usuario);
+                usuarioList.add(usuario);
             }
 
-            return usuarioModelList;
+            return usuarioList;
 
         }catch (Exception e){
             e.printStackTrace();

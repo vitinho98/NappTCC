@@ -1,24 +1,22 @@
 package com.fatecourinhos.napp.model;
 
-public class ProfissionalModel {
+public class Profissional {
 
     private int idProfissional;
     private String nomeProfissional;
     private CampoAtuacaoModel fkCampoAtuacao;
     private String celularProfissional;
-    private byte[] foto;
     private String emailProfissional;
-    private UsuarioModel fkUsuario;
+    private Usuario fkUsuario;
 
-    public ProfissionalModel() {
+    public Profissional() {
     }
 
-    public ProfissionalModel(int idProfissional, String nomeProfissional, CampoAtuacaoModel campoAtuacao, String celularProfissional, byte[] foto, String emailProfissional, UsuarioModel fkUsuario) {
+    public Profissional(int idProfissional, String nomeProfissional, CampoAtuacaoModel campoAtuacao, String celularProfissional, String emailProfissional, Usuario fkUsuario) {
         this.idProfissional = idProfissional;
         this.nomeProfissional = nomeProfissional;
         this.fkCampoAtuacao = campoAtuacao;
         this.celularProfissional = celularProfissional;
-        this.foto = foto;
         this.emailProfissional = emailProfissional;
         this.fkUsuario = fkUsuario;
     }
@@ -55,14 +53,6 @@ public class ProfissionalModel {
         this.celularProfissional = celularProfissional;
     }
 
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
-
     public String getEmailProfissional() {
         return emailProfissional;
     }
@@ -71,11 +61,11 @@ public class ProfissionalModel {
         this.emailProfissional = emailProfissional;
     }
 
-    public UsuarioModel getFkUsuario() {
+    public Usuario getFkUsuario() {
         return fkUsuario;
     }
 
-    public void setFkUsuario(UsuarioModel fkUsuario) {
+    public void setFkUsuario(Usuario fkUsuario) {
         this.fkUsuario = fkUsuario;
     }
 }

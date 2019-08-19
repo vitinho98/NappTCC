@@ -2,7 +2,7 @@ package com.fatecourinhos.napp.model;
 
 import java.util.List;
 
-public class AlunoModel {
+public class Aluno {
 
     private int idAluno;
     private String nomeAluno;
@@ -16,15 +16,14 @@ public class AlunoModel {
     private String sexo;
     private String cidadeAluno;
     private String estadoCivil;
-    private boolean empregado;
     private String emailAluno;
-    private UsuarioModel fkUsuario;
+    private Usuario fkUsuario;
     private List<DiagnosticoModel> diagnostico;
 
-    public AlunoModel() {
+    public Aluno() {
     }
 
-    public AlunoModel(int idAluno, String nomeAluno, String ra, String cpf, String celularAluno, String curso, int semestre, String anoEntrada, String dataNascimento, String sexo, String cidadeAluno, String estadoCivil, boolean empregado, String emailAluno,  UsuarioModel fkUsuario) {
+    public Aluno(int idAluno, String nomeAluno, String ra, String cpf, String celularAluno, String curso, int semestre, String anoEntrada, String dataNascimento, String sexo, String cidadeAluno, String estadoCivil, String emailAluno, Usuario fkUsuario) {
         this.idAluno = idAluno;
         this.nomeAluno = nomeAluno;
         this.ra = ra;
@@ -37,7 +36,6 @@ public class AlunoModel {
         this.sexo = sexo;
         this.cidadeAluno = cidadeAluno;
         this.estadoCivil = estadoCivil;
-        this.empregado = empregado;
         this.emailAluno = emailAluno;
         this.fkUsuario = fkUsuario;
     }
@@ -138,14 +136,6 @@ public class AlunoModel {
         this.estadoCivil = estadoCivil;
     }
 
-    public boolean isEmpregado() {
-        return empregado;
-    }
-
-    public void setEmpregado(boolean empregado) {
-        this.empregado = empregado;
-    }
-
     public String getEmailAluno() {
         return emailAluno;
     }
@@ -162,11 +152,11 @@ public class AlunoModel {
         this.dataNascimento = dataNascimento;
     }
 
-    public UsuarioModel getFkUsuario() {
+    public Usuario getFkUsuario() {
         return fkUsuario;
     }
 
-    public void setFkUsuario(UsuarioModel fkUsuario) {
+    public void setFkUsuario(Usuario fkUsuario) {
         this.fkUsuario = fkUsuario;
     }
 }

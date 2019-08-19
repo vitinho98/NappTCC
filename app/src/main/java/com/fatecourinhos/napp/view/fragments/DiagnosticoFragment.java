@@ -1,6 +1,5 @@
 package com.fatecourinhos.napp.view.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,18 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.DiagnosticoController;
-import com.fatecourinhos.napp.controller.ProfissionalController;
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
 import com.fatecourinhos.napp.model.DiagnosticoModel;
-import com.fatecourinhos.napp.model.LocalAtendimentoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.view.adapter.DiagnosticoAdapter;
-import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
-import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroDiagnostico;
-import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DiagnosticoFragment extends Fragment{

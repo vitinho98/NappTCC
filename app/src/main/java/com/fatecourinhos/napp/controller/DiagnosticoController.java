@@ -3,9 +3,7 @@ package com.fatecourinhos.napp.controller;
 import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.DiagnosticoJSONParser;
-import com.fatecourinhos.napp.json.ProfissionalJSONParser;
 import com.fatecourinhos.napp.model.DiagnosticoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 

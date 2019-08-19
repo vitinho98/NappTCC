@@ -1,11 +1,9 @@
 package com.fatecourinhos.napp.json;
 
-import android.os.CpuUsageInfo;
-
 import com.fatecourinhos.napp.model.AgendaProfissionalModel;
 import com.fatecourinhos.napp.model.CampoAtuacaoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
-import com.fatecourinhos.napp.model.UsuarioModel;
+import com.fatecourinhos.napp.model.Profissional;
+import com.fatecourinhos.napp.model.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,10 +20,10 @@ public class AgendaProfissionalJSONParser {
             List<AgendaProfissionalModel> agendaProfissionalList = new ArrayList<>();
             AgendaProfissionalModel agendaProfissionalModel = new AgendaProfissionalModel();
 
-            ProfissionalModel profissionalModel = new ProfissionalModel();
-            UsuarioModel usuarioModel = new UsuarioModel();
+            Profissional profissionalModel = new Profissional();
+            Usuario usuario = new Usuario();
             CampoAtuacaoModel campoAtuacaoModel = new CampoAtuacaoModel();
-            ProfissionalModel profissional = new ProfissionalModel();
+            Profissional profissional = new Profissional();
 
             for(int i=0; i<jsonArray.length(); i++){
 
@@ -36,12 +34,12 @@ public class AgendaProfissionalJSONParser {
                 profissional.setCelularProfissional(jsonObject.getString("celProfissional"));
                 profissional.setEmailProfissional(jsonObject.getString("emailProfissional"));
 
-                usuarioModel.setIdUsuario(jsonObject.getInt("idUsuario"));
-                usuarioModel.setLogin(jsonObject.getString("login"));
-                usuarioModel.setSenha(jsonObject.getString("senha"));
-                usuarioModel.setTipoUsuario(jsonObject.getString("tipo"));
-                usuarioModel.setStatus(jsonObject.getInt("status"));
-                profissionalModel.setFkUsuario(usuarioModel);
+                usuario.setIdUsuario(jsonObject.getInt("idUsuario"));
+                usuario.setLogin(jsonObject.getString("login"));
+                usuario.setSenha(jsonObject.getString("senha"));
+                usuario.setTipoUsuario(jsonObject.getString("tipo"));
+                usuario.setStatus(jsonObject.getInt("status"));
+                profissionalModel.setFkUsuario(usuario);
 
                 campoAtuacaoModel.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
                 campoAtuacaoModel.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));

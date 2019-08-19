@@ -7,16 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.controller.ResponsavelController;
-import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.model.ResponsavelModel;
-import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
-import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 import com.fatecourinhos.napp.view.cadastros.CadastroResponsavel;
 import com.fatecourinhos.napp.view.adapter.ResponsavelAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;

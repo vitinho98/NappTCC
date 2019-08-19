@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.model;
 
-public class UsuarioModel {
+public class Usuario {
 
     private int idUsuario;
     private String login;
@@ -8,10 +8,10 @@ public class UsuarioModel {
     private String tipoUsuario;
     private int status;
 
-    public UsuarioModel() {
+    public Usuario() {
     }
 
-    public UsuarioModel(int idUsuario, String login, String senha, String tipoUsuario, int status) {
+    public Usuario(int idUsuario, String login, String senha, String tipoUsuario, int status) {
         this.idUsuario = idUsuario;
         this.login = login;
         this.senha = senha;

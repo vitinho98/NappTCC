@@ -3,17 +3,16 @@ package com.fatecourinhos.napp.controller;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.fatecourinhos.napp.model.UsuarioModel;
+import com.fatecourinhos.napp.model.Usuario;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
-import com.fatecourinhos.napp.view.LoginActivity;
 
 public class UsuarioController {
 
     public static String conteudo;
     public static boolean ativo;
 
-    public static boolean isAtivo(UsuarioModel usuario){
+    public static boolean isAtivo(Usuario usuario){
 
         String uri = "http://vitorsilva.xyz/napp/usuario/verificarStatus.php";
 
@@ -39,8 +38,9 @@ public class UsuarioController {
         @Override
         protected String doInBackground(RequestHttp... params) {
             conteudo = (String) HttpManager.getDados(params[0]);
-
+            Log.e("conteudo", conteudo);
             if(conteudo.equals("Sucesso")){
+
                 ativo = true;
             }else{
                 ativo = false;

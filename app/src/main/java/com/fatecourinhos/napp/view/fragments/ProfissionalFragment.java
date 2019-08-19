@@ -1,8 +1,6 @@
 package com.fatecourinhos.napp.view.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,7 @@ import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
 
-import com.fatecourinhos.napp.model.ProfissionalModel;
+import com.fatecourinhos.napp.model.Profissional;
 
 import java.util.List;
 
@@ -25,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfissionalFragment extends Fragment{
 
-    List<ProfissionalModel> profissionais;
+    List<Profissional> profissionais;
     ProfissionalAdapter adapter;
     RecyclerView profissionalRecycler;
 
@@ -64,11 +62,10 @@ public class ProfissionalFragment extends Fragment{
 
         adapter.setListener(new ProfissionalAdapter.Listener() {
             @Override
-            public void onClick(ProfissionalModel profissional) {
+            public void onClick(Profissional profissional) {
                 Intent intent = new Intent(getActivity(), CadastroProfissional.class);
 
                 intent.putExtra("idProfissional", profissional.getIdProfissional());
-                intent.putExtra("foto", profissional.getFoto());
                 intent.putExtra("nomeProfissional", profissional.getNomeProfissional());
                 intent.putExtra("emailProfissional", profissional.getEmailProfissional());
                 intent.putExtra("celularProfissional", profissional.getCelularProfissional());

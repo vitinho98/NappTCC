@@ -19,9 +19,9 @@ import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.UsuarioController;
 import com.fatecourinhos.napp.json.AlunoJSONParser;
 import com.fatecourinhos.napp.json.ProfissionalJSONParser;
-import com.fatecourinhos.napp.model.AlunoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
-import com.fatecourinhos.napp.model.UsuarioModel;
+import com.fatecourinhos.napp.model.Aluno;
+import com.fatecourinhos.napp.model.Profissional;
+import com.fatecourinhos.napp.model.Usuario;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.cadastros.CadastroAluno;
@@ -38,9 +38,10 @@ public class LoginActivity extends AppCompatActivity {
     ImageView imgSobre;
     TextView txtCadastrar;
     Button btnLogin;
+    ProgressBar pgBar;
+
     boolean sucess;
     String conteudo;
-    ProgressBar pgBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +56,17 @@ public class LoginActivity extends AppCompatActivity {
 
                 String tipoUsuario = preferences.getString("tipoUsuario", null);
 
-                if(tipoUsuario.equals("aluno")) {
+                if(tipoUsuario.contains("aluno")) {
 
                     startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
                     finish();
 
-                } else if(tipoUsuario.equals("profissional") || tipoUsuario.equals("administrador")) {
+                } else if(tipoUsuario.contains("profissional") || tipoUsuario.contains("Administrador")) {
 
-                    UsuarioModel usuarioModel = new UsuarioModel();
-                    usuarioModel.setIdUsuario(preferences.getInt("idUsuario", 0));
+                    Usuario usuario = new Usuario();
+                    usuario.setIdUsuario(preferences.getInt("idUsuario", 0));
 
-                    if (UsuarioController.isAtivo(usuarioModel)) {
+                    if (UsuarioController.isAtivo(usuario)) {
 
                         startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
                         finish();
@@ -99,34 +100,77 @@ public class LoginActivity extends AppCompatActivity {
         pgBar.setVisibility(View.INVISIBLE);
     }
 
+    //seta o evento on click dos componentes
+    private void setOnClicks(){
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (validarForm()) {
+
+                    Usuario usuario = new Usuario();
+                    usuario.setLogin(editTextLogin.getText().toString());
+                    usuario.setSenha(editTextSenha.getText().toString());
+
+                    autenticarUsuario(usuario);
+
+                }
+            }
+        });
+
+        imgSobre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SobreActivity.class));
+            }
+        });
+
+        txtCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, CadastroAluno.class));
+            }
+        });
+
+    }
+
     //valida se login e senha foram digitados
     private boolean validarForm(){
 
         boolean retornoLogin, retornoSenha;
 
         if(editTextSenha.getText().toString().isEmpty()){
+
             textInputLayoutSenha.setErrorEnabled(true);
             textInputLayoutSenha.setError("Insira a senha");
             retornoSenha = false;
+
         }else{
+
             textInputLayoutSenha.setErrorEnabled(false);
             retornoSenha = true;
+
         }
 
         if(editTextLogin.getText().toString().isEmpty()){
+
             textInputLayoutLogin.setErrorEnabled(true);
             textInputLayoutLogin.setError("Insira o login");
             retornoLogin = false;
+
         }else{
+
             textInputLayoutLogin.setErrorEnabled(false);
             retornoLogin = true;
+
         }
 
-        if(retornoLogin == true && retornoSenha == true){
+        if(retornoLogin == true && retornoSenha == true)
             return true;
-        }else{
+        else
             return false;
-        }
+
     }
 
     //valida se já possui uma conta logada no dispositivo
@@ -136,15 +180,36 @@ public class LoginActivity extends AppCompatActivity {
 
             boolean resultado = preferences.getBoolean("conected", false);
 
-            if(resultado){
-                return true;
-            }else{
-                return false;
-            }
+            return resultado;
 
-        }else{
+        }else
             return false;
-        }
+
+    }
+
+    //adiciona no sharedpreferences
+    private void adicionarPreferences(Aluno aluno){
+
+        editor.putInt("idUsuario", aluno.getFkUsuario().getIdUsuario());
+        editor.putString("tipoUsuario", aluno.getFkUsuario().getTipoUsuario());
+        editor.putInt("status", aluno.getFkUsuario().getStatus());
+        editor.putInt("idAluno", aluno.getIdAluno());
+        editor.putBoolean("conected", true);
+
+        editor.commit();
+
+    }
+
+    //adiciona no sharedpreferences
+    private void adicionarPreferences(Profissional profissional){
+
+        editor.putInt("idUsuario", profissional.getFkUsuario().getIdUsuario());
+        editor.putString("tipoUsuario", profissional.getFkUsuario().getTipoUsuario());
+        editor.putInt("status", profissional.getFkUsuario().getStatus());
+        editor.putInt("idProfissional", profissional.getIdProfissional());
+        editor.putBoolean("conected", true);
+
+        editor.commit();
 
     }
 
@@ -170,93 +235,30 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //seta o evento on click dos componentes
-    private void setOnClicks(){
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (validarForm()) {
-
-                    UsuarioModel usuarioModel = new UsuarioModel();
-                    usuarioModel.setLogin(editTextLogin.getText().toString());
-                    usuarioModel.setSenha(editTextSenha.getText().toString());
-
-                    autenticarUsuario(usuarioModel);
-
-                }
-            }
-        });
-
-        imgSobre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SobreActivity.class));
-            }
-        });
-
-        txtCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, CadastroAluno.class));
-            }
-        });
-
-    }
-
-    //adiciona no sharedpreferences
-    private void adicionarPreferences(AlunoModel aluno){
-
-        editor.putInt("idUsuario", aluno.getFkUsuario().getIdUsuario());
-        editor.putString("tipoUsuario", aluno.getFkUsuario().getTipoUsuario());
-        editor.putInt("status", aluno.getFkUsuario().getStatus());
-        editor.putInt("idAluno", aluno.getIdAluno());
-        editor.putBoolean("conected", true);
-
-        editor.commit();
-
-    }
-
-    //adiciona no sharedpreferences
-    private void adicionarPreferences(ProfissionalModel profissional){
-
-        editor.putInt("idUsuario", profissional.getFkUsuario().getIdUsuario());
-        editor.putString("tipoUsuario", profissional.getFkUsuario().getTipoUsuario());
-        editor.putInt("status", profissional.getFkUsuario().getStatus());
-        editor.putInt("idProfissional", profissional.getIdProfissional());
-        editor.putBoolean("conected", true);
-
-        editor.commit();
-
-    }
-
     //verifica o retorno do webservice e chama o menu adequado ou informa que não foi possível encontrar o usuário
     private void login(String conteudo){
-
-        Log.e("CHEGOU ATE AQUI?", conteudo);
 
         String tipoUsuario = verificarTipoUsuario(conteudo);
         conteudo = criarJson(conteudo);
 
         if (tipoUsuario.equals("aluno")) {
 
-            List<AlunoModel> alunosModel = AlunoJSONParser.parseDados(conteudo);
-            AlunoModel alunoModel = alunosModel.get(0);
+            List<Aluno> alunos = AlunoJSONParser.parseDados(conteudo);
+            Aluno aluno = alunos.get(0);
 
-            adicionarPreferences(alunoModel);
+            adicionarPreferences(aluno);
 
             startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
             finish();
 
         } else {
 
-            List<ProfissionalModel> profissionaisModel = ProfissionalJSONParser.parseDados(conteudo);
-            ProfissionalModel profissionalModel = profissionaisModel.get(0);
+            List<Profissional> profissionais = ProfissionalJSONParser.parseDados(conteudo);
+            Profissional profissional = profissionais.get(0);
 
-            if (profissionalModel.getFkUsuario().getStatus() == 0) {
+            if (profissional.getFkUsuario().getStatus() == 0) {
 
-                adicionarPreferences(profissionalModel);
+                adicionarPreferences(profissional);
 
                 startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
                 finish();
@@ -268,7 +270,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //realiza as configurações para enviar dados ao banco de dados
-    public void autenticarUsuario(UsuarioModel usuario) {
+    public void autenticarUsuario(Usuario usuario) {
 
         String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
 
@@ -296,11 +298,10 @@ public class LoginActivity extends AppCompatActivity {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.equals("Vazio"))
+            if(conteudo.contains("Vazio"))
                 sucess = false;
-            else {
+            else
                 sucess = true;
-            }
 
             return conteudo;
         }

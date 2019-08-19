@@ -1,9 +1,9 @@
 package com.fatecourinhos.napp.json;
 
 import com.fatecourinhos.napp.model.AgendamentoModel;
-import com.fatecourinhos.napp.model.AlunoModel;
+import com.fatecourinhos.napp.model.Aluno;
 import com.fatecourinhos.napp.model.LocalAtendimentoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
+import com.fatecourinhos.napp.model.Profissional;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,8 +21,8 @@ public class AgendamentoJSONParser {
 
             LocalAtendimentoModel localAtendimento = new LocalAtendimentoModel();
             AgendamentoModel objAgendamento = new AgendamentoModel();
-            AlunoModel aluno = new AlunoModel();
-            ProfissionalModel profissional = new ProfissionalModel();
+            Aluno aluno = new Aluno();
+            Profissional profissional = new Profissional();
 
             for(int i=0; i<jsonArray.length(); i++){
 
@@ -51,7 +51,6 @@ public class AgendamentoJSONParser {
                 aluno.setDataNascimento(jsonObject.getString("dataNascimento"));
                 aluno.setEmailAluno(jsonObject.getString("emailAluno"));
                 aluno.setCurso(jsonObject.getString("curso"));
-                aluno.setEmpregado(jsonObject.getBoolean("empregado"));
                 aluno.setSemestre(jsonObject.getInt("semestre"));
                 aluno.setRa(jsonObject.getString("ra"));
                 aluno.setEstadoCivil(jsonObject.getString("estadoCivil"));

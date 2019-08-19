@@ -1,25 +1,24 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.AlunoModel;
-import com.fatecourinhos.napp.model.UsuarioModel;
+import com.fatecourinhos.napp.model.Aluno;
+import com.fatecourinhos.napp.model.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AlunoJSONParser {
 
-    public static List<AlunoModel> parseDados(String content){
+    public static List<Aluno> parseDados(String content){
         try{
 
             JSONArray jsonArray = new JSONArray(content);
-            List<AlunoModel> alunoList = new ArrayList<>();
+            List<Aluno> alunoList = new ArrayList<>();
 
-            UsuarioModel usuario = new UsuarioModel();
-            AlunoModel aluno = new AlunoModel();
+            Usuario usuario = new Usuario();
+            Aluno aluno = new Aluno();
 
             for(int i=0; i<jsonArray.length(); i++){
 
@@ -35,7 +34,6 @@ public class AlunoJSONParser {
                 aluno.setDataNascimento(jsonObject.getString("dataNascimento"));
                 aluno.setEmailAluno(jsonObject.getString("emailAluno"));
                 aluno.setCurso(jsonObject.getString("curso"));
-                aluno.setEmpregado(jsonObject.getBoolean("empregado"));
                 aluno.setSemestre(jsonObject.getInt("semestre"));
                 aluno.setRa(jsonObject.getString("ra"));
                 aluno.setEstadoCivil(jsonObject.getString("estadoCivil"));
@@ -43,7 +41,7 @@ public class AlunoJSONParser {
                 usuario.setIdUsuario(jsonObject.getInt("idUsuario"));
                 usuario.setLogin(jsonObject.getString("login"));
                 usuario.setSenha(jsonObject.getString("senha"));
-                usuario.setTipoUsuario(jsonObject.getString("tipo"));
+                usuario.setTipoUsuario(jsonObject.getString("tipoUsuario"));
                 usuario.setStatus(jsonObject.getInt("status"));
                 aluno.setFkUsuario(usuario);
 

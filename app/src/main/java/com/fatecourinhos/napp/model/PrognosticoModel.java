@@ -3,7 +3,7 @@ package com.fatecourinhos.napp.model;
 public class PrognosticoModel {
 
     private int idPrognostico;
-    private AlunoModel fkAluno;
+    private Aluno fkAluno;
     private int opcao1;
     private int opcao2;
     private int opcao3;
@@ -14,7 +14,7 @@ public class PrognosticoModel {
     public PrognosticoModel() {
     }
 
-    public PrognosticoModel(AlunoModel fkAluno, int opcao1, int opcao2, int opcao3, int opcao4, int opcao5, int opcao6) {
+    public PrognosticoModel(Aluno fkAluno, int opcao1, int opcao2, int opcao3, int opcao4, int opcao5, int opcao6) {
         this.fkAluno = fkAluno;
         this.opcao1 = opcao1;
         this.opcao2 = opcao2;
@@ -32,11 +32,11 @@ public class PrognosticoModel {
         this.idPrognostico = idPrognostico;
     }
 
-    public AlunoModel getFkAluno() {
+    public Aluno getFkAluno() {
         return fkAluno;
     }
 
-    public void setFkAluno(AlunoModel fkAluno) {
+    public void setFkAluno(Aluno fkAluno) {
         this.fkAluno = fkAluno;
     }
 

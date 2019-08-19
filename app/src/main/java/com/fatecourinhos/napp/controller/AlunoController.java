@@ -4,8 +4,7 @@ import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.AgendamentoJSONParser;
 import com.fatecourinhos.napp.model.AgendamentoModel;
-import com.fatecourinhos.napp.model.MensagemModel;
-import com.fatecourinhos.napp.model.UsuarioModel;
+import com.fatecourinhos.napp.model.Usuario;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
@@ -16,7 +15,7 @@ public class AlunoController {
     public static boolean sucesso;
     public static List<AgendamentoModel> agendamento;
 
-    public static boolean inserirAluno(UsuarioModel usuario){
+    public static boolean inserirAluno(Usuario usuario){
 
         String uri = "http://vitorsilva.xyz/napp/aluno/incluirAluno.php";
 

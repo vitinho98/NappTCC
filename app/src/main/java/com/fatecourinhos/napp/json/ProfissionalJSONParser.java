@@ -1,8 +1,8 @@
 package com.fatecourinhos.napp.json;
 
 import com.fatecourinhos.napp.model.CampoAtuacaoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
-import com.fatecourinhos.napp.model.UsuarioModel;
+import com.fatecourinhos.napp.model.Profissional;
+import com.fatecourinhos.napp.model.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,15 +12,15 @@ import java.util.List;
 
 public class ProfissionalJSONParser {
 
-    public static List<ProfissionalModel> parseDados(String content){
+    public static List<Profissional> parseDados(String content){
         try{
 
             JSONArray jsonArray = new JSONArray(content);
-            List<ProfissionalModel> profissionalList = new ArrayList<>();
+            List<Profissional> profissionalList = new ArrayList<>();
 
-            UsuarioModel usuario = new UsuarioModel();
+            Usuario usuario = new Usuario();
             CampoAtuacaoModel campoAtuacao = new CampoAtuacaoModel();
-            ProfissionalModel profissional = new ProfissionalModel();
+            Profissional profissional = new Profissional();
 
             for(int i=0; i<jsonArray.length(); i++){
 

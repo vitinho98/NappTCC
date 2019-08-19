@@ -3,8 +3,8 @@ package com.fatecourinhos.napp.model;
 public class AgendamentoModel {
 
     private int idAgendamento;
-    private AlunoModel fkAluno;
-    private ProfissionalModel fkProfissional;
+    private Aluno fkAluno;
+    private Profissional fkProfissional;
     private LocalAtendimentoModel fkLocalAtendimento;
     private String dataRegistro;
     private String horaRegistro;
@@ -24,19 +24,19 @@ public class AgendamentoModel {
         this.idAgendamento = idAgendamento;
     }
 
-    public AlunoModel getFkAluno() {
+    public Aluno getFkAluno() {
         return fkAluno;
     }
 
-    public void setFkAluno(AlunoModel fkAluno) {
+    public void setFkAluno(Aluno fkAluno) {
         this.fkAluno = fkAluno;
     }
 
-    public ProfissionalModel getFkProfissional() {
+    public Profissional getFkProfissional() {
         return fkProfissional;
     }
 
-    public void setFkProfissional(ProfissionalModel fkProfissional) {
+    public void setFkProfissional(Profissional fkProfissional) {
         this.fkProfissional = fkProfissional;
     }
 

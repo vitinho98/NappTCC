@@ -1,6 +1,5 @@
 package com.fatecourinhos.napp.view.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,15 +7,10 @@ import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.LocalAtendimentoController;
-import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.model.LocalAtendimentoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
 import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
-import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroLocalAtendimento;
-import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;

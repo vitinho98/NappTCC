@@ -3,7 +3,7 @@ package com.fatecourinhos.napp.model;
 public class AnamneseModel {
 
     private int idAnamnese;
-    private AlunoModel fkAluno;
+    private Aluno fkAluno;
     private int questao1;
     private int questao2;
     private int questao3;
@@ -30,11 +30,11 @@ public class AnamneseModel {
         this.idAnamnese = idAnamnese;
     }
 
-    public AlunoModel getFkAluno() {
+    public Aluno getFkAluno() {
         return fkAluno;
     }
 
-    public void setFkAluno(AlunoModel fkAluno) {
+    public void setFkAluno(Aluno fkAluno) {
         this.fkAluno = fkAluno;
     }
 

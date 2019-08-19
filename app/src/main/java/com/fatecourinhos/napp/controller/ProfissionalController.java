@@ -4,16 +4,16 @@ import android.os.AsyncTask;
 import java.util.List;
 
 import com.fatecourinhos.napp.json.ProfissionalJSONParser;
-import com.fatecourinhos.napp.model.ProfissionalModel;
+import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
 public class ProfissionalController {
 
     public static boolean sucesso;
-    public static List<ProfissionalModel> profissionais;
+    public static List<Profissional> profissionais;
 
-    public static boolean inserirProfissional(ProfissionalModel profissional){
+    public static boolean inserirProfissional(Profissional profissional){
 
         String uri = "http://vitorsilva.xyz/napp/profissional/inserirProfissional.php";
 
@@ -37,7 +37,7 @@ public class ProfissionalController {
 
     }
 
-    public static boolean alterarProfissional(ProfissionalModel profissional){
+    public static boolean alterarProfissional(Profissional profissional){
 
         String uri = "http://vitorsilva.xyz/napp/profissional/alterarProfissional.php";
 
@@ -62,7 +62,7 @@ public class ProfissionalController {
 
     }
 
-    public static List<ProfissionalModel> selecionarProfisisonais(){
+    public static List<Profissional> selecionarProfisisonais(){
 
         String uri = "http://vitorsilva.xyz/napp/profissional/selecionarProfissionais.php";
 
@@ -72,7 +72,7 @@ public class ProfissionalController {
         return profissionais;
     }
 
-    private static class SelecionarProfissionais extends AsyncTask<String, String, List<ProfissionalModel>>{
+    private static class SelecionarProfissionais extends AsyncTask<String, String, List<Profissional>>{
 
         @Override
         protected void onPreExecute() {
@@ -80,7 +80,7 @@ public class ProfissionalController {
         }
 
         @Override
-        protected List<ProfissionalModel> doInBackground(String... params) {
+        protected List<Profissional> doInBackground(String... params) {
             final String conteudo = HttpManager.getDados(params[0]);
             profissionais = ProfissionalJSONParser.parseDados(conteudo);
 
@@ -88,7 +88,7 @@ public class ProfissionalController {
         }
 
         @Override
-        protected void onPostExecute(List<ProfissionalModel> profissionais) {
+        protected void onPostExecute(List<Profissional> profissionais) {
             super.onPostExecute(profissionais);
 
         }

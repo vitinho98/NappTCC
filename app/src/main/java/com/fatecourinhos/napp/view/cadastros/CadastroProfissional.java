@@ -16,13 +16,13 @@ import android.widget.Toast;
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.model.CampoAtuacaoModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
-import com.fatecourinhos.napp.model.UsuarioModel;
+import com.fatecourinhos.napp.model.Profissional;
+import com.fatecourinhos.napp.model.Usuario;
 
 public class CadastroProfissional extends AppCompatActivity {
 
-    final ProfissionalModel profissional = new ProfissionalModel();
-    final UsuarioModel usuario = new UsuarioModel();
+    final Profissional profissional = new Profissional();
+    final Usuario usuario = new Usuario();
     final CampoAtuacaoModel campoAtuacao = new CampoAtuacaoModel();
 
     private AppCompatEditText editTextNome, editTextCel, editTextEmail, editTextLogin, editTextSenha;
@@ -58,7 +58,6 @@ public class CadastroProfissional extends AppCompatActivity {
             profissional.setCelularProfissional((String) getIntent().getExtras().get("celularProfissional"));
             profissional.setEmailProfissional((String) getIntent().getExtras().get("emailProfissional"));
             profissional.setIdProfissional(getIntent().getExtras().getInt("idProfissional"));
-            profissional.setFoto((byte[]) getIntent().getExtras().get("foto"));
 
             campoAtuacao.setNomeCampoAtuacao((String) getIntent().getExtras().get("nomeCampoAtuacao"));
             campoAtuacao.setIdCampoAtuacao((Integer) getIntent().getExtras().get("idCampoAtuacao"));
@@ -175,7 +174,7 @@ public class CadastroProfissional extends AppCompatActivity {
 
     }
 
-    public boolean conferirDados(ProfissionalModel profissional){
+    public boolean conferirDados(Profissional profissional){
 
         boolean retorno = true;
 

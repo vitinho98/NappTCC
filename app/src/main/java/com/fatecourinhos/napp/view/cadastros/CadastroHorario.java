@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.AgendaProfissionalController;
 import com.fatecourinhos.napp.model.AgendaProfissionalModel;
-import com.fatecourinhos.napp.model.ProfissionalModel;
+import com.fatecourinhos.napp.model.Profissional;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -63,9 +63,9 @@ public class CadastroHorario extends AppCompatDialogFragment {
             agendaProfissional.setMinutos(data.getString("minutos"));
             agendaProfissional.setIdAgendaProfissional(data.getInt("idAgendaProfissional"));
 
-            ProfissionalModel profissionalModel = new ProfissionalModel();
-            profissionalModel.setIdProfissional(data.getInt("idProfissional"));
-            agendaProfissional.setFkProfissional(profissionalModel);
+            Profissional profissional = new Profissional();
+            profissional.setIdProfissional(data.getInt("idProfissional"));
+            agendaProfissional.setFkProfissional(profissional);
 
             int posicao = 0;
 
