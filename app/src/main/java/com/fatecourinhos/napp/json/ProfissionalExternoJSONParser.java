@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
+import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.ProfissionalExternoModel;
 import com.fatecourinhos.napp.model.ResponsavelModel;
 
@@ -19,7 +19,7 @@ public class ProfissionalExternoJSONParser {
             List<ProfissionalExternoModel> profissionaExternolList = new ArrayList<>();
 
             ResponsavelModel responsavel = new ResponsavelModel();
-            CampoAtuacaoModel campoAtuacao = new CampoAtuacaoModel();
+            CampoAtuacao campoAtuacao = new CampoAtuacao();
             ProfissionalExternoModel profissionalExterno = new ProfissionalExternoModel();
 
             for (int i = 0; i < jsonArray.length(); i++) {

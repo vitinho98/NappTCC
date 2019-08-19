@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.UsuarioController;
 import com.fatecourinhos.napp.json.AlunoJSONParser;
 import com.fatecourinhos.napp.json.ProfissionalJSONParser;
 import com.fatecourinhos.napp.model.Aluno;
@@ -31,6 +29,7 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //componente da tela de login
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     AppCompatEditText editTextLogin, editTextSenha;
@@ -40,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     ProgressBar pgBar;
 
+    //variaveis globais
+    boolean ativo;
     boolean sucess;
     String conteudo;
 
@@ -50,28 +51,24 @@ public class LoginActivity extends AppCompatActivity {
 
         getComponentes();
 
-        if(validarShared()){
+        if (validarShared()) {
 
-            if(preferences.contains("tipoUsuario")){
+            if (preferences.contains("tipoUsuario")) {
 
                 String tipoUsuario = preferences.getString("tipoUsuario", null);
 
-                if(tipoUsuario.contains("aluno")) {
+                if (tipoUsuario.contains("aluno")) {
 
                     startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
                     finish();
 
-                } else if(tipoUsuario.contains("profissional") || tipoUsuario.contains("Administrador")) {
+                } else if (tipoUsuario.contains("profissional") || tipoUsuario.contains("Administrador")) {
 
                     Usuario usuario = new Usuario();
                     usuario.setIdUsuario(preferences.getInt("idUsuario", 0));
 
-                    if (UsuarioController.isAtivo(usuario)) {
+                    isAtivo(usuario);
 
-                        startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
-                        finish();
-
-                    }
                 }
             }
         }
@@ -135,38 +132,38 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //valida se login e senha foram digitados
+    //valida se os campos login e senha foram digitados
     private boolean validarForm(){
 
         boolean retornoLogin, retornoSenha;
 
-        if(editTextSenha.getText().toString().isEmpty()){
+        if (editTextSenha.getText().toString().isEmpty()) {
 
             textInputLayoutSenha.setErrorEnabled(true);
             textInputLayoutSenha.setError("Insira a senha");
             retornoSenha = false;
 
-        }else{
+        } else {
 
             textInputLayoutSenha.setErrorEnabled(false);
             retornoSenha = true;
 
         }
 
-        if(editTextLogin.getText().toString().isEmpty()){
+        if (editTextLogin.getText().toString().isEmpty()) {
 
             textInputLayoutLogin.setErrorEnabled(true);
             textInputLayoutLogin.setError("Insira o login");
             retornoLogin = false;
 
-        }else{
+        } else {
 
             textInputLayoutLogin.setErrorEnabled(false);
             retornoLogin = true;
 
         }
 
-        if(retornoLogin == true && retornoSenha == true)
+        if (retornoLogin == true && retornoSenha == true)
             return true;
         else
             return false;
@@ -176,18 +173,17 @@ public class LoginActivity extends AppCompatActivity {
     //valida se já possui uma conta logada no dispositivo
     private boolean validarShared(){
 
-        if(preferences.contains("conected")) {
+        if (preferences.contains("conected")) {
 
             boolean resultado = preferences.getBoolean("conected", false);
-
             return resultado;
 
-        }else
+        } else
             return false;
 
     }
 
-    //adiciona no sharedpreferences
+    //adiciona um aluno no sharedpreferences
     private void adicionarPreferences(Aluno aluno){
 
         editor.putInt("idUsuario", aluno.getFkUsuario().getIdUsuario());
@@ -200,7 +196,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //adiciona no sharedpreferences
+    //adiciona um profissional no sharedpreferences
     private void adicionarPreferences(Profissional profissional){
 
         editor.putInt("idUsuario", profissional.getFkUsuario().getIdUsuario());
@@ -217,9 +213,7 @@ public class LoginActivity extends AppCompatActivity {
     private String verificarTipoUsuario(String conteudo){
 
         int fim = conteudo.indexOf("@");
-
         String tipo = conteudo.substring(0, fim);
-
         return tipo;
 
     }
@@ -228,9 +222,7 @@ public class LoginActivity extends AppCompatActivity {
     private String criarJson(String conteudo){
 
         int inicio = conteudo.indexOf("@");
-
         String json = conteudo.substring(inicio+1);
-
         return json;
 
     }
@@ -263,9 +255,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
                 finish();
 
-            } else {
+            } else
                 Toast.makeText(LoginActivity.this, "Usuário desativado!", Toast.LENGTH_LONG).show();
-            }
         }
     }
 
@@ -286,19 +277,35 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    //verifica se o usuario salvo no dispotivo ainda está ativo
+    public void isAtivo(Usuario usuario){
+
+        String uri = "http://vitorsilva.xyz/napp/usuario/verificarStatus.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("idUsuario", String.valueOf(usuario.getIdUsuario()));
+
+        isAtivo task = new isAtivo();
+        task.execute(requestHttp);
+
+    }
+
     //tarefa assincrona que recebe os dados do banco de dados
     private class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
         @Override
         protected void onPreExecute() {
-            pgBar.setVisibility(View.VISIBLE);
             super.onPreExecute();
+            pgBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Vazio"))
+            if (conteudo.contains("Vazio"))
                 sucess = false;
             else
                 sucess = true;
@@ -307,13 +314,44 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String s) {
-            pgBar.setVisibility(View.INVISIBLE);
             super.onPostExecute(s);
+            pgBar.setVisibility(View.INVISIBLE);
 
             if(sucess == true)
                 login(conteudo);
             else
                 Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    //tarefa assincrona que recebe os dados do banco de dados
+    private class isAtivo extends AsyncTask<RequestHttp, String, String>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            if(conteudo.contains("Sucesso"))
+                ativo = true;
+            else
+                ativo = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (ativo) {
+                startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
+                finish();
+            }
         }
     }
 

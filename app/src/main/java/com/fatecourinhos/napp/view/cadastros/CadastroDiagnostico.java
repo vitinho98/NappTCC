@@ -31,7 +31,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         View view = inflater.inflate(R.layout.cadastro_activity_diagnostico, null);
-        final AppCompatEditText editTextNomeDiagnostico = (AppCompatEditText) getActivity().findViewById(R.id.edit_text_nome_diagnostico);
+        final AppCompatEditText editTextNomeDiagnostico = getActivity().findViewById(R.id.edit_text_nome_diagnostico);
 
         builder.setView(view).setTitle("Diagnóstico");
 

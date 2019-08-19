@@ -10,7 +10,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
 import com.fatecourinhos.napp.model.DiagnosticoModel;
 
 import java.util.List;

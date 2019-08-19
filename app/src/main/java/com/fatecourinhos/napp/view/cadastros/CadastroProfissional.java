@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.ProfissionalController;
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
+import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.model.Usuario;
 
@@ -23,7 +23,7 @@ public class CadastroProfissional extends AppCompatActivity {
 
     final Profissional profissional = new Profissional();
     final Usuario usuario = new Usuario();
-    final CampoAtuacaoModel campoAtuacao = new CampoAtuacaoModel();
+    final CampoAtuacao campoAtuacao = new CampoAtuacao();
 
     private AppCompatEditText editTextNome, editTextCel, editTextEmail, editTextLogin, editTextSenha;
     private ImageView foto;

@@ -11,13 +11,13 @@ public class ProfissionalExternoModel {
     private String emailProfissionalExterno;
     private String telefoneProfissionalExterno;
     private String celularProfissionalExterno;
-    private CampoAtuacaoModel fkCampoAtuacao;
+    private CampoAtuacao fkCampoAtuacao;
     private ResponsavelModel fkResponsavel;
 
     public ProfissionalExternoModel() {
     }
 
-    public ProfissionalExternoModel(int idProfissionalExterno, String nomeProfissionalExterno, String cidadeProfissionalExterno, String bairro, String endereco, String numero, String emailProfissionalExterno, String telefoneProfissionalExterno, String celularProfissionalExterno, CampoAtuacaoModel campoAtuacao, ResponsavelModel fkResponsavel) {
+    public ProfissionalExternoModel(int idProfissionalExterno, String nomeProfissionalExterno, String cidadeProfissionalExterno, String bairro, String endereco, String numero, String emailProfissionalExterno, String telefoneProfissionalExterno, String celularProfissionalExterno, CampoAtuacao campoAtuacao, ResponsavelModel fkResponsavel) {
         this.idProfissionalExterno = idProfissionalExterno;
         this.nomeProfissionalExterno = nomeProfissionalExterno;
         this.cidadeProfissionalExterno = cidadeProfissionalExterno;
@@ -103,11 +103,11 @@ public class ProfissionalExternoModel {
         this.celularProfissionalExterno = celularProfissionalExterno;
     }
 
-    public CampoAtuacaoModel getCampoAtuacao() {
+    public CampoAtuacao getCampoAtuacao() {
         return fkCampoAtuacao;
     }
 
-    public void setCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
+    public void setCampoAtuacao(CampoAtuacao campoAtuacao) {
         this.fkCampoAtuacao = campoAtuacao;
     }
 

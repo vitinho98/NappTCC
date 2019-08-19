@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
+import com.fatecourinhos.napp.model.CampoAtuacao;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,13 +10,13 @@ import java.util.List;
 
 public class CampoAtuacaoJSONParser {
 
-    public static List<CampoAtuacaoModel> parseDados(String content){
+    public static List<CampoAtuacao> parseDados(String content){
         try{
 
             JSONArray jsonArray = new JSONArray(content);
-            List<CampoAtuacaoModel> campoAtuacaoList = new ArrayList<>();
+            List<CampoAtuacao> campoAtuacaoList = new ArrayList<>();
 
-            CampoAtuacaoModel campoAtuacao = new CampoAtuacaoModel();
+            CampoAtuacao campoAtuacao = new CampoAtuacao();
 
             for(int i=0; i<jsonArray.length(); i++){
 

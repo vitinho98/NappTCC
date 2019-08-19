@@ -1,7 +1,7 @@
 package com.fatecourinhos.napp.json;
 
 import com.fatecourinhos.napp.model.AgendaProfissionalModel;
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
+import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.model.Usuario;
 
@@ -22,7 +22,7 @@ public class AgendaProfissionalJSONParser {
 
             Profissional profissionalModel = new Profissional();
             Usuario usuario = new Usuario();
-            CampoAtuacaoModel campoAtuacaoModel = new CampoAtuacaoModel();
+            CampoAtuacao campoAtuacao = new CampoAtuacao();
             Profissional profissional = new Profissional();
 
             for(int i=0; i<jsonArray.length(); i++){
@@ -41,9 +41,9 @@ public class AgendaProfissionalJSONParser {
                 usuario.setStatus(jsonObject.getInt("status"));
                 profissionalModel.setFkUsuario(usuario);
 
-                campoAtuacaoModel.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
-                campoAtuacaoModel.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
-                profissionalModel.setCampoAtuacao(campoAtuacaoModel);
+                campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
+                campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
+                profissionalModel.setCampoAtuacao(campoAtuacao);
 
                 agendaProfissionalModel.setIdAgendaProfissional(jsonObject.getInt("idAgendaProfissional"));
                 agendaProfissionalModel.setDiaDaSemana(jsonObject.getString("diaDaSemana"));

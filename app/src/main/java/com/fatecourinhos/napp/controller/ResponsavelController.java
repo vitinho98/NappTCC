@@ -3,7 +3,6 @@ package com.fatecourinhos.napp.controller;
 import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.ResponsavelJSONParser;
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
 import com.fatecourinhos.napp.model.ResponsavelModel;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;

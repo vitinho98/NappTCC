@@ -38,11 +38,8 @@ public class DiagnosticoFragment extends Fragment{
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstance){
-
         super.onViewCreated(view, savedInstance);
-
         getActivity().setTitle("Diagnosticos");
-
     }
 
     @Override

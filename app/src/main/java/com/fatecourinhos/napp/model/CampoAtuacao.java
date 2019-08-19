@@ -1,15 +1,15 @@
 package com.fatecourinhos.napp.model;
 
-public class CampoAtuacaoModel {
+public class CampoAtuacao {
 
     private Integer idCampoAtuacao;
     private String nomeCampoAtuacao;
 
-    public CampoAtuacaoModel(){
+    public CampoAtuacao(){
 
     }
 
-    public CampoAtuacaoModel(int idCampoAtuacao, String nomeCampoAtuacao){
+    public CampoAtuacao(int idCampoAtuacao, String nomeCampoAtuacao){
         this.idCampoAtuacao = idCampoAtuacao;
         this.nomeCampoAtuacao = nomeCampoAtuacao;
     }

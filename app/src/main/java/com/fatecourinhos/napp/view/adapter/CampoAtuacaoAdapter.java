@@ -10,18 +10,17 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.AgendaProfissionalModel;
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
+import com.fatecourinhos.napp.model.CampoAtuacao;
 
 import java.util.List;
 
 public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoAdapter.ViewHolder>{
 
-    private List<CampoAtuacaoModel> camposAtuacao;
+    private List<CampoAtuacao> camposAtuacao;
     private Listener listener;
 
     public static interface Listener{
-        public void onClick(CampoAtuacaoModel camposAtuacao);
+        public void onClick(CampoAtuacao camposAtuacao);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -35,7 +34,7 @@ public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoAdapte
         }
     }
 
-    public CampoAtuacaoAdapter(List<CampoAtuacaoModel> camposAtuacao){
+    public CampoAtuacaoAdapter(List<CampoAtuacao> camposAtuacao){
         this.camposAtuacao=camposAtuacao;
     }
 
@@ -57,7 +56,7 @@ public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoAdapte
         CardView cardView = holder.cardView;
         TextView txtCampoAtuacao = (TextView) cardView.findViewById(R.id.txt_area_lista);
 
-        final CampoAtuacaoModel campoAtuacao = camposAtuacao.get(position);
+        final CampoAtuacao campoAtuacao = camposAtuacao.get(position);
 
         txtCampoAtuacao.setText(campoAtuacao.getNomeCampoAtuacao());
 

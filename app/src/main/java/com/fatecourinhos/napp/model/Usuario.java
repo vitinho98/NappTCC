@@ -9,6 +9,7 @@ public class Usuario {
     private int status;
 
     public Usuario() {
+
     }
 
     public Usuario(int idUsuario, String login, String senha, String tipoUsuario, int status) {

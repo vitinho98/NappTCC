@@ -55,6 +55,8 @@
     <string name="txt_dia_da_semana">Dia da semana</string>
 
     <!-- Hints -->
+    <string name="hint_campo_atuacao">Campo de atuação</string>
+    <string name="hint_diagnostico">Diagnóstico</string>
     <string name="hint_nome">Nome</string>
     <string name="hint_login">Login</string>
     <string name="hint_senha">Senha</string>

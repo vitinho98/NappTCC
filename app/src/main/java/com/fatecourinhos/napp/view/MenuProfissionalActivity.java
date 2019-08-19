@@ -2,12 +2,13 @@ package com.fatecourinhos.napp.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.view.cadastros.CadastroAreaAtuacao;
+import com.fatecourinhos.napp.view.cadastros.CadastroCampoAtuacao;
 import com.fatecourinhos.napp.view.cadastros.CadastroDiagnostico;
 import com.fatecourinhos.napp.view.cadastros.CadastroHorario;
 import com.fatecourinhos.napp.view.cadastros.CadastroLocalAtendimento;
@@ -42,14 +43,15 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_menu_profissional);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -65,42 +67,43 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                 FragmentManager fragmentManager = MenuProfissionalActivity.this.getSupportFragmentManager();
                 List<Fragment> fragments = fragmentManager.getFragments();
 
-                if(fragments!=null){
-                    for(Fragment fragment : fragments){
-                        if(fragment != null && fragment.isVisible()){
+                if(fragments != null)
+                    for(Fragment fragment : fragments)
+                        if(fragment != null && fragment.isVisible())
                             ativo = fragment;
-                        }
-                    }
-                }
 
-                switch(ativo.getTag()){
+                switch (ativo.getTag()) {
+
                     case("PROFISSIONAL"):
-                        Intent intent = new Intent(MenuProfissionalActivity.this, CadastroProfissional.class);
-                        startActivity(intent);
+                        startActivity(new Intent(MenuProfissionalActivity.this, CadastroProfissional.class));
                         break;
+
                     case("HORARIO"):
                         CadastroHorario cadastroHorario = new CadastroHorario();
                         cadastroHorario.show(getSupportFragmentManager(), "HORARIO");
                         break;
+
                     case("LOCAL"):
                         CadastroLocalAtendimento cadastroLocalAtendimento = new CadastroLocalAtendimento();
                         cadastroLocalAtendimento.show(getSupportFragmentManager(), "LOCAL");
                         break;
+
                     case("EXTERNO"):
-                        Intent intent1 = new Intent(MenuProfissionalActivity.this, CadastroProfissionalExterno.class);
-                        startActivity(intent1);
+                        startActivity(new Intent(MenuProfissionalActivity.this, CadastroProfissionalExterno.class));
                         break;
+
                     case("DIAGNOSTICO"):
                         CadastroDiagnostico cadastroDiagnostico = new CadastroDiagnostico();
                         cadastroDiagnostico.show(getSupportFragmentManager(), "DIAGNOSTICO");
                         break;
+
                     case("CAMPOATUACAO"):
-                        CadastroAreaAtuacao cadastroAreaAtuacao = new CadastroAreaAtuacao();
-                        cadastroAreaAtuacao.show(getSupportFragmentManager(), "CAMPOATUACAO");
+                        CadastroCampoAtuacao cadastroCampoAtuacao = new CadastroCampoAtuacao();
+                        cadastroCampoAtuacao.show(getSupportFragmentManager(), "CAMPOATUACAO");
                         break;
+
                     case("RESPONSAVEL"):
-                        Intent intent2 = new Intent(MenuProfissionalActivity.this, CadastroProfissional.class);
-                        startActivity(intent2);
+                        startActivity(new Intent(MenuProfissionalActivity.this, CadastroProfissional.class));
                         break;
                 }
             }
@@ -110,12 +113,11 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
     //quando o botao da drawer na toolbar é apertado
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START))
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        else
             super.onBackPressed();
-        }
     }
 
     //cria o menu de 3 pontinhos
@@ -131,10 +133,16 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
 
         int id = item.getItemId();
 
-        //TO DO --> Voltar para a tela de login
         if (id == R.id.sair) {
 
-            return true;
+            SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);;
+            SharedPreferences.Editor editor = preferences.edit();
+
+            editor.clear();
+            editor.commit();
+
+            startActivity(new Intent(MenuProfissionalActivity.this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -220,17 +228,20 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
 
     private boolean isOnline(){
+
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        if(networkInfo != null && networkInfo.isConnected()){
+
+        if(networkInfo != null && networkInfo.isConnected())
             return true;
-        }else{
+        else
             return false;
-        }
+
     }
+
 }

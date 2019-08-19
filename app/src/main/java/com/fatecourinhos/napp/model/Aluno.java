@@ -21,6 +21,7 @@ public class Aluno {
     private List<DiagnosticoModel> diagnostico;
 
     public Aluno() {
+
     }
 
     public Aluno(int idAluno, String nomeAluno, String ra, String cpf, String celularAluno, String curso, int semestre, String anoEntrada, String dataNascimento, String sexo, String cidadeAluno, String estadoCivil, String emailAluno, Usuario fkUsuario) {

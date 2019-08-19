@@ -3,8 +3,7 @@ package com.fatecourinhos.napp.controller;
 import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.CampoAtuacaoJSONParser;
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
-import com.fatecourinhos.napp.model.DiagnosticoModel;
+import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
@@ -14,9 +13,9 @@ public class CampoAtuacaoController {
 
 
     public static boolean sucesso;
-    public static List<CampoAtuacaoModel> camposAtuacao;
+    public static List<CampoAtuacao> camposAtuacao;
 
-    public static boolean inserirCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
+    public static boolean inserirCampoAtuacao(CampoAtuacao campoAtuacao) {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/inserirCampoAtuacao.php";
 
@@ -33,7 +32,7 @@ public class CampoAtuacaoController {
 
     }
 
-    public static boolean alterarCampoAtuacao(CampoAtuacaoModel campoAtuacao) {
+    public static boolean alterarCampoAtuacao(CampoAtuacao campoAtuacao) {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/alterarCampoAtuacao.php";
 
@@ -51,7 +50,7 @@ public class CampoAtuacaoController {
 
     }
 
-    public static List<CampoAtuacaoModel> selecionarCamposAtuacao() {
+    public static List<CampoAtuacao> selecionarCamposAtuacao() {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/selecionarCamposAtuacao.php";
 
@@ -61,7 +60,7 @@ public class CampoAtuacaoController {
         return camposAtuacao;
     }
 
-    private static class SelecionarCamposAtuacao extends AsyncTask<String, String, List<CampoAtuacaoModel>> {
+    private static class SelecionarCamposAtuacao extends AsyncTask<String, String, List<CampoAtuacao>> {
 
         @Override
         protected void onPreExecute() {
@@ -69,7 +68,7 @@ public class CampoAtuacaoController {
         }
 
         @Override
-        protected List<CampoAtuacaoModel> doInBackground(String... params) {
+        protected List<CampoAtuacao> doInBackground(String... params) {
             final String conteudo = HttpManager.getDados(params[0]);
             camposAtuacao = CampoAtuacaoJSONParser.parseDados(conteudo);
 
@@ -77,7 +76,7 @@ public class CampoAtuacaoController {
         }
 
         @Override
-        protected void onPostExecute(final List<CampoAtuacaoModel> camposAtuacao) {
+        protected void onPostExecute(final List<CampoAtuacao> camposAtuacao) {
             super.onPostExecute(camposAtuacao);
 
         }

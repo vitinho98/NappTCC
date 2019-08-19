@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.CampoAtuacaoModel;
+import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.model.Usuario;
 
@@ -19,7 +19,7 @@ public class ProfissionalJSONParser {
             List<Profissional> profissionalList = new ArrayList<>();
 
             Usuario usuario = new Usuario();
-            CampoAtuacaoModel campoAtuacao = new CampoAtuacaoModel();
+            CampoAtuacao campoAtuacao = new CampoAtuacao();
             Profissional profissional = new Profissional();
 
             for(int i=0; i<jsonArray.length(); i++){
