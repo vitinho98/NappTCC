@@ -18,7 +18,7 @@ public class Aluno {
     private String estadoCivil;
     private String emailAluno;
     private Usuario fkUsuario;
-    private List<DiagnosticoModel> diagnostico;
+    private List<Diagnostico> diagnostico;
 
     public Aluno() {
 
@@ -41,11 +41,11 @@ public class Aluno {
         this.fkUsuario = fkUsuario;
     }
 
-    public List<DiagnosticoModel> getDiagnostico() {
+    public List<Diagnostico> getDiagnostico() {
         return diagnostico;
     }
 
-    public void setDiagnostico(List<DiagnosticoModel> diagnostico) {
+    public void setDiagnostico(List<Diagnostico> diagnostico) {
         this.diagnostico = diagnostico;
     }
 

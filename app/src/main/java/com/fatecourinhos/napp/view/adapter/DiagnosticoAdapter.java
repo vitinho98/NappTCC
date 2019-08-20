@@ -10,17 +10,17 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.DiagnosticoModel;
+import com.fatecourinhos.napp.model.Diagnostico;
 
 import java.util.List;
 
 public class DiagnosticoAdapter extends RecyclerView.Adapter<DiagnosticoAdapter.ViewHolder>{
 
-    private List<DiagnosticoModel> diagnosticos;
+    private List<Diagnostico> diagnosticos;
     private Listener listener;
 
     public static interface Listener{
-        public void onClick(DiagnosticoModel diagnostico);
+        public void onClick(Diagnostico diagnostico);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -34,7 +34,7 @@ public class DiagnosticoAdapter extends RecyclerView.Adapter<DiagnosticoAdapter.
         }
     }
 
-    public DiagnosticoAdapter(List<DiagnosticoModel> diagnosticos){
+    public DiagnosticoAdapter(List<Diagnostico> diagnosticos){
         this.diagnosticos=diagnosticos;
     }
 
@@ -56,7 +56,7 @@ public class DiagnosticoAdapter extends RecyclerView.Adapter<DiagnosticoAdapter.
         CardView cardView = holder.cardView;
         TextView txtDiagnostico = (TextView) cardView.findViewById(R.id.txt_diagnostico_lista);
 
-        final DiagnosticoModel diagnostico = diagnosticos.get(position);
+        final Diagnostico diagnostico = diagnosticos.get(position);
 
         txtDiagnostico.setText(diagnostico.getNomeDiagnotico());
 
