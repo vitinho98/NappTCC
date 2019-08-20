@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -37,7 +38,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.cadastro_activity_area_atuacao, null);
-        editTextNomeArea = getActivity().findViewById(R.id.edit_text_nome_area);
+        editTextNomeArea = view.findViewById(R.id.edit_text_nome_area);
 
         builder.setView(view).setTitle("Campo de atuação");
 
@@ -59,7 +60,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
                     else {
                         campoAtuacao.setNomeCampoAtuacao(editTextNomeArea.getText().toString());
-                        alterarCampoAtuacao(campoAtuacao, dialog);
+                        alterarCampoAtuacao(campoAtuacao);
                     }
                 }
             });
@@ -78,13 +79,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
                         campoAtuacao = new CampoAtuacao();
                         campoAtuacao.setNomeCampoAtuacao(editTextNomeArea.getText().toString());
 
-                        if(CampoAtuacaoController.inserirCampoAtuacao(campoAtuacao)) {
-
-                            Toast.makeText(getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-
-                        }else
-                            Toast.makeText(getContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
+                        inserirCampoAtuacao(campoAtuacao);
                     }
                 }
             });
@@ -106,7 +101,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    public void inserirCampoAtuacao(CampoAtuacao campoAtuacao) {
+    private void inserirCampoAtuacao(CampoAtuacao campoAtuacao) {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/inserirCampoAtuacao.php";
 
@@ -121,7 +116,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
     }
 
-    public void alterarCampoAtuacao(CampoAtuacao campoAtuacao, DialogInterface dialog) {
+    private void alterarCampoAtuacao(CampoAtuacao campoAtuacao) {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/alterarCampoAtuacao.php";
 
@@ -145,8 +140,8 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            final String conteudo = HttpManager.getDados(params[0]);
-
+            String conteudo = HttpManager.getDados(params[0]);
+    Log.e("cont", conteudo);
             if(conteudo.contains("Sucesso"))
                 sucesso = true;
             else
@@ -158,6 +153,11 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+            if (sucesso)
+                Toast.makeText(getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -169,7 +169,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            final String conteudo = HttpManager.getDados(params[0]);
+            String conteudo = HttpManager.getDados(params[0]);
 
             if(conteudo.contains("Sucesso"))
                 sucesso = true;
@@ -182,10 +182,10 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (sucesso) {
+
+            if (sucesso)
                 Toast.makeText(getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            } else
+            else
                 Toast.makeText(getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
     }

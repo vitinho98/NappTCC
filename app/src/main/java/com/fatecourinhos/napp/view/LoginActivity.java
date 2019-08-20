@@ -261,7 +261,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //realiza as configurações para enviar dados ao banco de dados
-    public void autenticarUsuario(Usuario usuario) {
+    private void autenticarUsuario(Usuario usuario) {
 
         String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
 
@@ -278,7 +278,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //verifica se o usuario salvo no dispotivo ainda está ativo
-    public void isAtivo(Usuario usuario){
+    private void isAtivo(Usuario usuario){
 
         String uri = "http://vitorsilva.xyz/napp/usuario/verificarStatus.php";
 
