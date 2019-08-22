@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //variaveis globais
     boolean ativo;
-    boolean sucess;
+    boolean sucesso;
     String conteudo;
 
     @Override
@@ -306,9 +306,9 @@ public class LoginActivity extends AppCompatActivity {
             conteudo = HttpManager.getDados(params[0]);
 
             if (conteudo.contains("Vazio"))
-                sucess = false;
+                sucesso = false;
             else
-                sucess = true;
+                sucesso = true;
 
             return conteudo;
         }
@@ -317,7 +317,7 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(s);
             pgBar.setVisibility(View.INVISIBLE);
 
-            if(sucess == true)
+            if(sucesso)
                 login(conteudo);
             else
                 Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();

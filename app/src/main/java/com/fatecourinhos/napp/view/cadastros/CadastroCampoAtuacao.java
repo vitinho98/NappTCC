@@ -25,6 +25,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
     AppCompatEditText editTextNomeArea;
     CampoAtuacao campoAtuacao;
+    String conteudo;
     boolean sucesso;
 
     public CadastroCampoAtuacao(){
@@ -140,9 +141,9 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            String conteudo = HttpManager.getDados(params[0]);
-    Log.e("cont", conteudo);
-            if(conteudo.contains("Sucesso"))
+            conteudo = HttpManager.getDados(params[0]);
+
+            if (conteudo.contains("Sucesso"))
                 sucesso = true;
             else
                 sucesso = false;
@@ -169,9 +170,9 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            String conteudo = HttpManager.getDados(params[0]);
+            conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Sucesso"))
+            if (conteudo.contains("Sucesso"))
                 sucesso = true;
             else
                 sucesso = false;
