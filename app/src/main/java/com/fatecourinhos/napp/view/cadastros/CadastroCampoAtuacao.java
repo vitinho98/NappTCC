@@ -4,13 +4,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.CampoAtuacaoController;
 import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
@@ -24,6 +22,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
     AppCompatEditText editTextNomeArea;
+    View view;
     CampoAtuacao campoAtuacao;
     String conteudo;
     boolean sucesso;
@@ -38,7 +37,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.cadastro_activity_area_atuacao, null);
+        view = inflater.inflate(R.layout.cadastro_activity_area_atuacao, null);
         editTextNomeArea = view.findViewById(R.id.edit_text_nome_area);
 
         builder.setView(view).setTitle("Campo de atuação");
@@ -79,7 +78,6 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
                         campoAtuacao = new CampoAtuacao();
                         campoAtuacao.setNomeCampoAtuacao(editTextNomeArea.getText().toString());
-
                         inserirCampoAtuacao(campoAtuacao);
                     }
                 }
@@ -141,9 +139,15 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
+<<<<<<< HEAD
             conteudo = HttpManager.getDados(params[0]);
 
             if (conteudo.contains("Sucesso"))
+=======
+            String conteudo = HttpManager.getDados(params[0]);
+
+            if(conteudo.contains("Sucesso"))
+>>>>>>> 0d8b4c3e4c39d3b841a57ab003577036034ad65d
                 sucesso = true;
             else
                 sucesso = false;
@@ -156,9 +160,9 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
             super.onPostExecute(s);
 
             if (sucesso)
-                Toast.makeText(getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
             else
-                Toast.makeText(getContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -185,9 +189,9 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
             super.onPostExecute(s);
 
             if (sucesso)
-                Toast.makeText(getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
             else
-                Toast.makeText(getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
     }
 

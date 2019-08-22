@@ -11,17 +11,18 @@ import java.util.List;
 public class UsuarioJSONParser {
 
     public static List<Usuario> parseDados(String content){
+
         try{
 
             JSONArray jsonArray = new JSONArray(content);
             List<Usuario> usuarioList = new ArrayList<>();
-
-            Usuario usuario = new Usuario();
+            Usuario usuario;
 
             for(int i=0; i<jsonArray.length(); i++){
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                usuario = new Usuario();
                 usuario.setIdUsuario(jsonObject.getInt("idUsuario"));
                 usuario.setLogin(jsonObject.getString("login"));
                 usuario.setSenha(jsonObject.getString("senha"));

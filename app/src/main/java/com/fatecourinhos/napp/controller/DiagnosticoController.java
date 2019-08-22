@@ -3,7 +3,7 @@ package com.fatecourinhos.napp.controller;
 import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.DiagnosticoJSONParser;
-import com.fatecourinhos.napp.model.DiagnosticoModel;
+import com.fatecourinhos.napp.model.Diagnostico;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
@@ -12,9 +12,9 @@ import java.util.List;
 public class DiagnosticoController {
 
     public static boolean sucesso;
-    public static List<DiagnosticoModel> diagnosticos;
+    public static List<Diagnostico> diagnosticos;
 
-    public static boolean inserirDiagnostico(DiagnosticoModel diagnostico){
+    public static boolean inserirDiagnostico(Diagnostico diagnostico){
 
         String uri = "http://vitorsilva.xyz/napp/diagnostico/inserirDiagnostico.php";
 
@@ -31,7 +31,7 @@ public class DiagnosticoController {
 
     }
 
-    public static boolean alterarDiagnostico(DiagnosticoModel diagnostico){
+    public static boolean alterarDiagnostico(Diagnostico diagnostico){
 
         String uri = "http://vitorsilva.xyz/napp/diagnostico/alterarDiagnostico.php";
 
@@ -49,7 +49,7 @@ public class DiagnosticoController {
 
     }
 
-    public static List<DiagnosticoModel> selecionarDiagnosticos(){
+    public static List<Diagnostico> selecionarDiagnosticos(){
 
         String uri = "http://vitorsilva.xyz/napp/diagnostico/selecionarDiagnosticos.php";
 
@@ -59,7 +59,7 @@ public class DiagnosticoController {
         return diagnosticos;
     }
 
-    private static class SelecionarDiagnosticos extends AsyncTask<String, String, List<DiagnosticoModel>> {
+    private static class SelecionarDiagnosticos extends AsyncTask<String, String, List<Diagnostico>> {
 
         @Override
         protected void onPreExecute() {
@@ -67,7 +67,7 @@ public class DiagnosticoController {
         }
 
         @Override
-        protected List<DiagnosticoModel> doInBackground(String... params) {
+        protected List<Diagnostico> doInBackground(String... params) {
             final String conteudo = HttpManager.getDados(params[0]);
             diagnosticos = DiagnosticoJSONParser.parseDados(conteudo);
 
@@ -75,7 +75,7 @@ public class DiagnosticoController {
         }
 
         @Override
-        protected void onPostExecute(final List<DiagnosticoModel> diagnosticos) {
+        protected void onPostExecute(final List<Diagnostico> diagnosticos) {
             super.onPostExecute(diagnosticos);
 
         }

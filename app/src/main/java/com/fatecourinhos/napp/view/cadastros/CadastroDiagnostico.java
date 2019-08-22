@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.DiagnosticoController;
-import com.fatecourinhos.napp.model.DiagnosticoModel;
+import com.fatecourinhos.napp.model.Diagnostico;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +18,11 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.appcompat.widget.AppCompatEditText;
 
 public class CadastroDiagnostico extends AppCompatDialogFragment {
+
+    AppCompatEditText editTextNomeDiagnostico;
+    View view;
+    Diagnostico diagnostico;
+    boolean sucesso;
 
     public CadastroDiagnostico(){
 
@@ -30,8 +35,8 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.cadastro_activity_diagnostico, null);
-        final AppCompatEditText editTextNomeDiagnostico = getActivity().findViewById(R.id.edit_text_nome_diagnostico);
+        view = inflater.inflate(R.layout.cadastro_activity_diagnostico, null);
+        editTextNomeDiagnostico = view.findViewById(R.id.edit_text_nome_diagnostico);
 
         builder.setView(view).setTitle("Diagnóstico");
 
@@ -49,7 +54,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
             Bundle data = getArguments();
             editTextNomeDiagnostico.setText(data.getString("nomeDiagnostico"));
 
-            final DiagnosticoModel diagnostico = new DiagnosticoModel();
+            diagnostico = new Diagnostico();
             diagnostico.setIdDiagostico(data.getInt("idDiagnostico"));
 
             builder.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
@@ -88,10 +93,10 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
                     }else{
 
-                        DiagnosticoModel diagnosticoModel = new DiagnosticoModel();
-                        diagnosticoModel.setNomeDiagnotico(editTextNomeDiagnostico.getText().toString());
+                        Diagnostico diagnostico = new Diagnostico();
+                        diagnostico.setNomeDiagnotico(editTextNomeDiagnostico.getText().toString());
 
-                        if(DiagnosticoController.inserirDiagnostico(diagnosticoModel)) {
+                        if(DiagnosticoController.inserirDiagnostico(diagnostico)) {
 
                             Toast.makeText(getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();

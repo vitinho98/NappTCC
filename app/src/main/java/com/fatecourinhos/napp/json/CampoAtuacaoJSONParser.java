@@ -15,13 +15,13 @@ public class CampoAtuacaoJSONParser {
 
             JSONArray jsonArray = new JSONArray(content);
             List<CampoAtuacao> campoAtuacaoList = new ArrayList<>();
-
-            CampoAtuacao campoAtuacao = new CampoAtuacao();
+            CampoAtuacao campoAtuacao;
 
             for(int i=0; i<jsonArray.length(); i++){
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                campoAtuacao = new CampoAtuacao();
                 campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
                 campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
 

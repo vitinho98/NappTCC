@@ -1,16 +1,17 @@
 package com.fatecourinhos.napp.model;
 
-public class DiagnosticoModel {
+public class Diagnostico {
 
     private int idDiagostico;
     private String nomeDiagnotico;
 
-    public DiagnosticoModel(int idDiagostico, String nomeDiagostico) {
+    public Diagnostico(int idDiagostico, String nomeDiagostico) {
         this.idDiagostico = idDiagostico;
         this.nomeDiagnotico=nomeDiagostico;
     }
 
-    public  DiagnosticoModel(){
+    public Diagnostico(){
+
     }
 
     public int getIdDiagostico() {

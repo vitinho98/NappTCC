@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.DiagnosticoModel;
+import com.fatecourinhos.napp.model.Diagnostico;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,13 +10,13 @@ import java.util.List;
 
 public class DiagnosticoJSONParser {
 
-    public static List<DiagnosticoModel> parseDados(String content){
+    public static List<Diagnostico> parseDados(String content){
         try{
 
             JSONArray jsonArray = new JSONArray(content);
-            List<DiagnosticoModel> diagnosticoList = new ArrayList<>();
+            List<Diagnostico> diagnosticoList = new ArrayList<>();
 
-            DiagnosticoModel diagnostico= new DiagnosticoModel();
+            Diagnostico diagnostico= new Diagnostico();
 
             for(int i=0; i<jsonArray.length(); i++){
 

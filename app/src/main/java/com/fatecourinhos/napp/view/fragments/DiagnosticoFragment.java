@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.DiagnosticoController;
-import com.fatecourinhos.napp.model.DiagnosticoModel;
+import com.fatecourinhos.napp.model.Diagnostico;
 import com.fatecourinhos.napp.view.adapter.DiagnosticoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroDiagnostico;
 
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class DiagnosticoFragment extends Fragment{
 
-    List<DiagnosticoModel> diagnosticos;
+    List<Diagnostico> diagnosticos;
     DiagnosticoAdapter adapter;
     RecyclerView diagnosticoRecycler;
 
@@ -56,7 +56,7 @@ public class DiagnosticoFragment extends Fragment{
 
         adapter.setListener(new DiagnosticoAdapter.Listener() {
             @Override
-            public void onClick(DiagnosticoModel diagnostico) {
+            public void onClick(Diagnostico diagnostico) {
 
                 Bundle data = new Bundle();
                 data.putInt("idDiagnostico", diagnostico.getIdDiagostico());
