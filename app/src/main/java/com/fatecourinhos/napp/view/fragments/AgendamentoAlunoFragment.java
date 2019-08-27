@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.AlunoController;
 import com.fatecourinhos.napp.model.AgendamentoModel;
-import com.fatecourinhos.napp.model.LocalAtendimentoModel;
+import com.fatecourinhos.napp.model.LocalAtendimento;
 import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.view.adapter.AgendamentoAlunoAdapter;
 
@@ -66,9 +66,9 @@ public class AgendamentoAlunoFragment extends Fragment{
         profissional.setNomeProfissional("prof");
         agendamentoModel.setFkProfissional(profissional);
 
-        LocalAtendimentoModel localAtendimentoModel = new LocalAtendimentoModel();
-        localAtendimentoModel.setNomeLocal("nome");
-        agendamentoModel.setFkLocalAtendimento(localAtendimentoModel);
+        LocalAtendimento localAtendimento = new LocalAtendimento();
+        localAtendimento.setNomeLocal("nome");
+        agendamentoModel.setFkLocalAtendimento(localAtendimento);
 
         agendamento.add(agendamentoModel);
 

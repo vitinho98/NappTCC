@@ -10,6 +10,7 @@ public class Profissional {
     private Usuario fkUsuario;
 
     public Profissional() {
+
     }
 
     public Profissional(int idProfissional, String nomeProfissional, CampoAtuacao campoAtuacao, String celularProfissional, String emailProfissional, Usuario fkUsuario) {

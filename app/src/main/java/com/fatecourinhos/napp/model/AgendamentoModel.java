@@ -5,7 +5,7 @@ public class AgendamentoModel {
     private int idAgendamento;
     private Aluno fkAluno;
     private Profissional fkProfissional;
-    private LocalAtendimentoModel fkLocalAtendimento;
+    private LocalAtendimento fkLocalAtendimento;
     private String dataRegistro;
     private String horaRegistro;
     private String dataAgendamento;
@@ -40,11 +40,11 @@ public class AgendamentoModel {
         this.fkProfissional = fkProfissional;
     }
 
-    public LocalAtendimentoModel getFkLocalAtendimento() {
+    public LocalAtendimento getFkLocalAtendimento() {
         return fkLocalAtendimento;
     }
 
-    public void setFkLocalAtendimento(LocalAtendimentoModel fkLocalAtendimento) {
+    public void setFkLocalAtendimento(LocalAtendimento fkLocalAtendimento) {
         this.fkLocalAtendimento = fkLocalAtendimento;
     }
 

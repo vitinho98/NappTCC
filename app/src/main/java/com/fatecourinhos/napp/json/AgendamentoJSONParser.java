@@ -2,7 +2,7 @@ package com.fatecourinhos.napp.json;
 
 import com.fatecourinhos.napp.model.AgendamentoModel;
 import com.fatecourinhos.napp.model.Aluno;
-import com.fatecourinhos.napp.model.LocalAtendimentoModel;
+import com.fatecourinhos.napp.model.LocalAtendimento;
 import com.fatecourinhos.napp.model.Profissional;
 
 import org.json.JSONArray;
@@ -19,7 +19,7 @@ public class AgendamentoJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<AgendamentoModel> agendamento = new ArrayList<>();
 
-            LocalAtendimentoModel localAtendimento = new LocalAtendimentoModel();
+            LocalAtendimento localAtendimento = new LocalAtendimento();
             AgendamentoModel objAgendamento = new AgendamentoModel();
             Aluno aluno = new Aluno();
             Profissional profissional = new Profissional();

@@ -3,7 +3,7 @@ package com.fatecourinhos.napp.controller;
 import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.LocalAtendimentoJSONParser;
-import com.fatecourinhos.napp.model.LocalAtendimentoModel;
+import com.fatecourinhos.napp.model.LocalAtendimento;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
@@ -13,46 +13,10 @@ public class LocalAtendimentoController {
 
 
     public static boolean sucesso;
-    public static List<LocalAtendimentoModel> locaisAtendimento;
+    public static List<LocalAtendimento> locaisAtendimento;
 
-    public static boolean inserirLocalAtendimento(LocalAtendimentoModel localAtendimento) {
 
-        String uri = "http://vitorsilva.xyz/napp/localAtendimento/inserirLocalAtendimento.php";
-
-        RequestHttp requestHttp = new RequestHttp();
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-
-        requestHttp.setParametro("nomeBloco", localAtendimento.getNomeBloco());
-        requestHttp.setParametro("nomeLocal", localAtendimento.getNomeLocal());
-
-        InserirLocalAtendimento task = new InserirLocalAtendimento();
-        task.execute(requestHttp);
-
-        return sucesso;
-
-    }
-
-    public static boolean alterarLocalAtendimento(LocalAtendimentoModel localAtendimento) {
-
-        String uri = "http://vitorsilva.xyz/napp/localAtendimento/alterarLocalAtendimento.php";
-
-        RequestHttp requestHttp = new RequestHttp();
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-
-        requestHttp.setParametro("idLocalAtendimento", String.valueOf(localAtendimento.getIdLocalAtendimento()));
-        requestHttp.setParametro("nomeBloco", localAtendimento.getNomeBloco());
-        requestHttp.setParametro("nomeLocal", localAtendimento.getNomeLocal());
-
-        AlterarLocalAtendimento task = new AlterarLocalAtendimento();
-        task.execute(requestHttp);
-
-        return sucesso;
-
-    }
-
-    public static List<LocalAtendimentoModel> selecionarLocalAtendimento() {
+    public static List<LocalAtendimento> selecionarLocalAtendimento() {
 
         String uri = "http://vitorsilva.xyz/napp/localAtendimento/selecionarLocaisAtendimento.php";
 
@@ -62,7 +26,7 @@ public class LocalAtendimentoController {
         return locaisAtendimento;
     }
 
-    private static class SelecionarLocaisAtendimento extends AsyncTask<String, String, List<LocalAtendimentoModel>> {
+    private static class SelecionarLocaisAtendimento extends AsyncTask<String, String, List<LocalAtendimento>> {
 
         @Override
         protected void onPreExecute() {
@@ -70,7 +34,7 @@ public class LocalAtendimentoController {
         }
 
         @Override
-        protected List<LocalAtendimentoModel> doInBackground(String... params) {
+        protected List<LocalAtendimento> doInBackground(String... params) {
             final String conteudo = HttpManager.getDados(params[0]);
             locaisAtendimento = LocalAtendimentoJSONParser.parseDados(conteudo);
 
@@ -78,57 +42,10 @@ public class LocalAtendimentoController {
         }
 
         @Override
-        protected void onPostExecute(final List<LocalAtendimentoModel> locaisAtendimento) {
+        protected void onPostExecute(final List<LocalAtendimento> locaisAtendimento) {
             super.onPostExecute(locaisAtendimento);
 
         }
     }
 
-    private static class InserirLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
-        @Override
-        protected void onPreExecute() {
-
-        }
-
-        @Override
-        protected String doInBackground(RequestHttp... params) {
-            final String conteudo = (String) HttpManager.getDados(params[0]);
-
-            if(conteudo.equals("Sucesso"))
-                sucesso = true;
-            else
-                sucesso = false;
-
-            return conteudo;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }
-
-    private static class AlterarLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
-        @Override
-        protected void onPreExecute() {
-
-        }
-
-        @Override
-        protected String doInBackground(RequestHttp... params) {
-            final String conteudo = (String) HttpManager.getDados(params[0]);
-
-            if(conteudo.equals("Sucesso"))
-                sucesso = true;
-            else
-                sucesso = false;
-
-            return conteudo;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }
 }

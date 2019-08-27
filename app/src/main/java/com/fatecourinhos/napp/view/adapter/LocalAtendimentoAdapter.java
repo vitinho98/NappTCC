@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.LocalAtendimentoModel;
+import com.fatecourinhos.napp.model.LocalAtendimento;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimentoAdapter.ViewHolder>{
 
-    private List<LocalAtendimentoModel> locaisAtendimento;
+    private List<LocalAtendimento> locaisAtendimento;
     private Listener listener;
 
     public static interface Listener{
-        public void onClick(LocalAtendimentoModel localAtendimento);
+        public void onClick(LocalAtendimento localAtendimento);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -34,7 +34,7 @@ public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimen
         }
     }
 
-    public LocalAtendimentoAdapter(List<LocalAtendimentoModel> locaisAtendimento){
+    public LocalAtendimentoAdapter(List<LocalAtendimento> locaisAtendimento){
         this.locaisAtendimento=locaisAtendimento;
     }
 
@@ -58,7 +58,7 @@ public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimen
         TextView txtLocal = (TextView)cardView.findViewById(R.id.txt_local_atendimento_lista);
 
 
-        final LocalAtendimentoModel localAtendimento = locaisAtendimento.get(position);
+        final LocalAtendimento localAtendimento = locaisAtendimento.get(position);
 
         txtLocal.setText(localAtendimento.getNomeLocal());
         txtBloco.setText(localAtendimento.getNomeBloco());

@@ -1,15 +1,15 @@
 package com.fatecourinhos.napp.model;
 
-public class LocalAtendimentoModel {
+public class LocalAtendimento {
 
     private int idLocalAtendimento;
     private String nomeLocal;
     private String nomeBloco;
 
-    public LocalAtendimentoModel() {
+    public LocalAtendimento() {
     }
 
-    public LocalAtendimentoModel(int idLocalAtendimento, String nomeLocal) {
+    public LocalAtendimento(int idLocalAtendimento, String nomeLocal) {
         this.idLocalAtendimento = idLocalAtendimento;
         this.nomeLocal = nomeLocal;
     }

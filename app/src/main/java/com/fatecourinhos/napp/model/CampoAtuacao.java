@@ -5,7 +5,7 @@ public class CampoAtuacao {
     private Integer idCampoAtuacao;
     private String nomeCampoAtuacao;
 
-    public CampoAtuacao(){
+    public CampoAtuacao() {
 
     }
 

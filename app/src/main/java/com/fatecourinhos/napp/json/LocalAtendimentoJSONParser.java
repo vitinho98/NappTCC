@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.LocalAtendimentoModel;
+import com.fatecourinhos.napp.model.LocalAtendimento;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,13 +10,13 @@ import java.util.List;
 
 public class LocalAtendimentoJSONParser {
 
-    public static List<LocalAtendimentoModel> parseDados(String content){
+    public static List<LocalAtendimento> parseDados(String content){
         try{
 
             JSONArray jsonArray = new JSONArray(content);
-            List<LocalAtendimentoModel> localAtendimentoList = new ArrayList<>();
+            List<LocalAtendimento> localAtendimentoList = new ArrayList<>();
 
-            LocalAtendimentoModel localAtendimento = new LocalAtendimentoModel();
+            LocalAtendimento localAtendimento = new LocalAtendimento();
 
             for(int i=0; i<jsonArray.length(); i++){
 

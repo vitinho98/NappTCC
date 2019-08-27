@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.LocalAtendimentoController;
-import com.fatecourinhos.napp.model.LocalAtendimentoModel;
+import com.fatecourinhos.napp.model.LocalAtendimento;
 import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroLocalAtendimento;
 
@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class LocalAtendimentoFragment extends Fragment{
 
-    List<LocalAtendimentoModel> locaisAtendimento;
+    List<LocalAtendimento> locaisAtendimento;
     LocalAtendimentoAdapter adapter;
     RecyclerView localAtendimentoRecycler;
 
@@ -60,7 +60,7 @@ public class LocalAtendimentoFragment extends Fragment{
 
         adapter.setListener(new LocalAtendimentoAdapter.Listener() {
             @Override
-            public void onClick(LocalAtendimentoModel localAtendimento) {
+            public void onClick(LocalAtendimento localAtendimento) {
 
                 Bundle data = new Bundle();
                 data.putInt("idLocalAtendimento", localAtendimento.getIdLocalAtendimento());

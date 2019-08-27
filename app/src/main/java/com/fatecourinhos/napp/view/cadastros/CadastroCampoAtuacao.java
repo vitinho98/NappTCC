@@ -27,7 +27,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
     String conteudo;
     boolean sucesso;
 
-    public CadastroCampoAtuacao(){
+    public CadastroCampoAtuacao() {
 
     }
 
@@ -59,8 +59,10 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
                         Toast.makeText(getContext(),"Insira o nome do campo de atuação", Toast.LENGTH_SHORT).show();
 
                     else {
+
                         campoAtuacao.setNomeCampoAtuacao(editTextNomeArea.getText().toString());
                         alterarCampoAtuacao(campoAtuacao);
+
                     }
                 }
             });
@@ -139,15 +141,9 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-<<<<<<< HEAD
             conteudo = HttpManager.getDados(params[0]);
 
-            if (conteudo.contains("Sucesso"))
-=======
-            String conteudo = HttpManager.getDados(params[0]);
-
             if(conteudo.contains("Sucesso"))
->>>>>>> 0d8b4c3e4c39d3b841a57ab003577036034ad65d
                 sucesso = true;
             else
                 sucesso = false;

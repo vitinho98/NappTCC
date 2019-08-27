@@ -2,14 +2,16 @@ package com.fatecourinhos.napp.view.cadastros;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.DiagnosticoController;
 import com.fatecourinhos.napp.model.Diagnostico;
+import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,9 +24,10 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
     AppCompatEditText editTextNomeDiagnostico;
     View view;
     Diagnostico diagnostico;
+    String conteudo;
     boolean sucesso;
 
-    public CadastroDiagnostico(){
+    public CadastroDiagnostico() {
 
     }
 
@@ -40,20 +43,11 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
         builder.setView(view).setTitle("Diagnóstico");
 
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
-
-            }
-        });
-
         if(getArguments() != null){
 
             Bundle data = getArguments();
-            editTextNomeDiagnostico.setText(data.getString("nomeDiagnostico"));
 
+            editTextNomeDiagnostico.setText(data.getString("nomeDiagnostico"));
             diagnostico = new Diagnostico();
             diagnostico.setIdDiagostico(data.getInt("idDiagnostico"));
 
@@ -61,53 +55,44 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    if(editTextNomeDiagnostico.getText().toString().isEmpty()){
-
+                    if(editTextNomeDiagnostico.getText().toString().isEmpty())
                         Toast.makeText(getContext(),"Insira o nome do diagnóstico", Toast.LENGTH_SHORT).show();
 
-                    }else{
+                    else {
 
                         diagnostico.setNomeDiagnotico(editTextNomeDiagnostico.getText().toString());
+                        alterarDiagnostico(diagnostico);
 
-                        if(DiagnosticoController.alterarDiagnostico(diagnostico)) {
-
-                            Toast.makeText(getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-
-                        }else
-
-                            Toast.makeText(getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
 
-        }else {
+        } else {
 
             builder.setPositiveButton("Cadastrar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    if(editTextNomeDiagnostico.getText().toString().isEmpty()){
-
+                    if(editTextNomeDiagnostico.getText().toString().isEmpty())
                         Toast.makeText(getContext(),"Insira o nome do diagnóstico", Toast.LENGTH_SHORT).show();
 
-                    }else{
+                    else{
 
-                        Diagnostico diagnostico = new Diagnostico();
+                        diagnostico = new Diagnostico();
                         diagnostico.setNomeDiagnotico(editTextNomeDiagnostico.getText().toString());
+                        inserirDiagnostico(diagnostico);
 
-                        if(DiagnosticoController.inserirDiagnostico(diagnostico)) {
-
-                            Toast.makeText(getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-
-                        }else
-
-                            Toast.makeText(getContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
 
         return builder.create();
 
@@ -118,4 +103,97 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    public void inserirDiagnostico(Diagnostico diagnostico){
+
+        String uri = "http://vitorsilva.xyz/napp/diagnostico/inserirDiagnostico.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("nomeDiagnostico", diagnostico.getNomeDiagnotico());
+
+        InserirDiagnostico task = new InserirDiagnostico();
+        task.execute(requestHttp);
+
+    }
+
+    public void alterarDiagnostico(Diagnostico diagnostico){
+
+        String uri = "http://vitorsilva.xyz/napp/diagnostico/alterarDiagnostico.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("idDiagnostico", String.valueOf(diagnostico.getIdDiagostico()));
+        requestHttp.setParametro("nomeDiagnostico", diagnostico.getNomeDiagnotico());
+
+        AlterarDiagnostico task = new AlterarDiagnostico();
+        task.execute(requestHttp);
+
+    }
+
+    private class InserirDiagnostico extends AsyncTask<RequestHttp, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            if(conteudo.equals("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if(sucesso)
+                Toast.makeText(view.getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(view.getContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private class AlterarDiagnostico extends AsyncTask<RequestHttp, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            if(conteudo.contains("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if(sucesso)
+                Toast.makeText(view.getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(view.getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
+

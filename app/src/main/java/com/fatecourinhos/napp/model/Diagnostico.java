@@ -10,7 +10,7 @@ public class Diagnostico {
         this.nomeDiagnotico=nomeDiagostico;
     }
 
-    public Diagnostico(){
+    public Diagnostico() {
 
     }
 
