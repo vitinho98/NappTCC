@@ -9,7 +9,7 @@ import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.AgendaProfissionalController;
 import com.fatecourinhos.napp.model.AgendaProfissionalModel;
 import com.fatecourinhos.napp.view.adapter.HorarioAtendimentoAdapter;
-import com.fatecourinhos.napp.view.cadastros.CadastroHorario;
+import com.fatecourinhos.napp.view.cadastros.CadastroHorarioooo;
 
 import java.util.List;
 
@@ -68,9 +68,9 @@ public class HorarioAtendimentoFragment extends Fragment{
                 data.putString("diaDaSemana", agendaProfissional.getDiaDaSemana());
                 data.putInt("idProfissional", agendaProfissional.getFkProfissional().getIdProfissional());
 
-                CadastroHorario cadastroHorario = new CadastroHorario();
-                cadastroHorario.setArguments(data);
-                cadastroHorario.show(getFragmentManager(), "HORARIO");
+                CadastroHorarioooo cadastroHorarioooo = new CadastroHorarioooo();
+                cadastroHorarioooo.setArguments(data);
+                cadastroHorarioooo.show(getFragmentManager(), "HORARIO");
 
             }
         });
