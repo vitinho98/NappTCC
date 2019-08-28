@@ -17,11 +17,16 @@ public class AlunoController {
 
     public static boolean inserirAluno(Usuario usuario){
 
-        String uri = "http://vitorsilva.xyz/napp/aluno/incluirAluno.php";
+        String uri = "http://vitorsilva.xyz/napp/aluno/cadastrarAluno.php";
 
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("raAluno", usuario.getLogin());
+        requestHttp.setParametro("cpfAluno",usuario.getSenha());
+        requestHttp.setParametro("statusAluno",String.valueOf(usuario.getStatus()));
+        requestHttp.setParametro("tipoAluno", usuario.getTipoUsuario());
 
         InserirAluno task = new InserirAluno();
         task.execute(requestHttp);
