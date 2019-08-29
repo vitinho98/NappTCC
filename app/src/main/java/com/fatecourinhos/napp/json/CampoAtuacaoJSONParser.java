@@ -11,6 +11,7 @@ import java.util.List;
 public class CampoAtuacaoJSONParser {
 
     public static List<CampoAtuacao> parseDados(String content){
+
         try{
 
             JSONArray jsonArray = new JSONArray(content);

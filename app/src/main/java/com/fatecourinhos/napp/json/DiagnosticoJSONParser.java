@@ -11,17 +11,19 @@ import java.util.List;
 public class DiagnosticoJSONParser {
 
     public static List<Diagnostico> parseDados(String content){
+
         try{
 
             JSONArray jsonArray = new JSONArray(content);
             List<Diagnostico> diagnosticoList = new ArrayList<>();
 
-            Diagnostico diagnostico= new Diagnostico();
+            Diagnostico diagnostico;
 
             for(int i=0; i<jsonArray.length(); i++){
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                diagnostico = new Diagnostico();
                 diagnostico.setIdDiagostico(jsonObject.getInt("idDiagnostico"));
                 diagnostico.setNomeDiagnotico(jsonObject.getString("nomeDiagnostico"));
 

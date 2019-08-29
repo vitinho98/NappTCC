@@ -42,7 +42,6 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
         builder.setView(view).setTitle("Campo de atuação");
 
-        //caso seja clicado na lista
         if (getArguments() != null) {
 
             Bundle data = getArguments();

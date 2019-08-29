@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.AgendaProfissionalModel;
+import com.fatecourinhos.napp.model.AgendaProfissional;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class HorarioAtendimentoAdapter extends RecyclerView.Adapter<HorarioAtendimentoAdapter.ViewHolder>{
 
-    private List<AgendaProfissionalModel> agendaProfisisonais;
+    private List<AgendaProfissional> agendaProfisisonais;
     private Listener listener;
 
     public static interface Listener{
-        public void onClick(AgendaProfissionalModel agendaProfissionais);
+        public void onClick(AgendaProfissional agendaProfissionais);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -34,7 +34,7 @@ public class HorarioAtendimentoAdapter extends RecyclerView.Adapter<HorarioAtend
         }
     }
 
-    public HorarioAtendimentoAdapter(List<AgendaProfissionalModel> agendaProfisisonais){
+    public HorarioAtendimentoAdapter(List<AgendaProfissional> agendaProfisisonais){
         this.agendaProfisisonais=agendaProfisisonais;
     }
 
@@ -58,7 +58,7 @@ public class HorarioAtendimentoAdapter extends RecyclerView.Adapter<HorarioAtend
         TextView txtHora = (TextView)cardView.findViewById(R.id.txt_horario_atendimento_lista);
 
 
-        final AgendaProfissionalModel agendaProfissional = agendaProfisisonais.get(position);
+        final AgendaProfissional agendaProfissional = agendaProfisisonais.get(position);
 
         txtDia.setText(agendaProfissional.getDiaDaSemana());
         txtHora.setText(agendaProfissional.getHora() + ":" + agendaProfissional.getMinutos());

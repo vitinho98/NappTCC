@@ -10,7 +10,6 @@ import android.os.Bundle;
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.view.cadastros.CadastroCampoAtuacao;
 import com.fatecourinhos.napp.view.cadastros.CadastroDiagnostico;
-import com.fatecourinhos.napp.view.cadastros.CadastroHorarioooo;
 import com.fatecourinhos.napp.view.cadastros.CadastroLocalAtendimento;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissionalExterno;

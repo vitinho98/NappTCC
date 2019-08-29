@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.AgendaProfissionalModel;
+import com.fatecourinhos.napp.model.AgendaProfissional;
 import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.model.Usuario;
@@ -9,16 +9,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AgendaProfissionalJSONParser {
 
-    public static List<AgendaProfissionalModel> parseDados(String content){
+    public static List<AgendaProfissional> parseDados(String content){
         try{
 
             JSONArray jsonArray = new JSONArray(content);
-            List<AgendaProfissionalModel> agendaProfissionalList = new ArrayList<>();
-            AgendaProfissionalModel agendaProfissionalModel = new AgendaProfissionalModel();
+            List<AgendaProfissional> agendaProfissionalList = new ArrayList<>();
+            AgendaProfissional agendaProfissional = new AgendaProfissional();
 
             Profissional profissionalModel = new Profissional();
             Usuario usuario = new Usuario();
@@ -45,13 +46,11 @@ public class AgendaProfissionalJSONParser {
                 campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
                 profissionalModel.setCampoAtuacao(campoAtuacao);
 
-                agendaProfissionalModel.setIdAgendaProfissional(jsonObject.getInt("idAgendaProfissional"));
-                agendaProfissionalModel.setDiaDaSemana(jsonObject.getString("diaDaSemana"));
-                agendaProfissionalModel.setHora(jsonObject.getString("hora"));
-                agendaProfissionalModel.setMinutos(jsonObject.getString("minutos"));
-                agendaProfissionalModel.setFkProfissional(profissionalModel);
+                agendaProfissional.setIdAgendaProfissional(jsonObject.getInt("idAgendaProfissional"));
+                agendaProfissional.setData(new Date(jsonObject.getString("dataHora")));
+                agendaProfissional.setFkProfissional(profissionalModel);
 
-                agendaProfissionalList.add(agendaProfissionalModel);
+                agendaProfissionalList.add(agendaProfissional);
 
             }
 

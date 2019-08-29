@@ -3,7 +3,7 @@ package com.fatecourinhos.napp.controller;
 import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.AgendaProfissionalJSONParser;
-import com.fatecourinhos.napp.model.AgendaProfissionalModel;
+import com.fatecourinhos.napp.model.AgendaProfissional;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
@@ -12,28 +12,11 @@ import java.util.List;
 public class AgendaProfissionalController {
 
     public static boolean sucesso;
-    public static List<AgendaProfissionalModel> agendasProfissional;
+    public static List<AgendaProfissional> agendasProfissional;
 
-    public static boolean inserirAgendaProfissional(AgendaProfissionalModel agendaProfissional) {
 
-        String uri = "http://vitorsilva.xyz/napp/agendaProfissional/inserirAgendaProfissional.php";
 
-        RequestHttp requestHttp = new RequestHttp();
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-
-        requestHttp.setParametro("diaDaSemana", agendaProfissional.getDiaDaSemana());
-        requestHttp.setParametro("horario", agendaProfissional.getHora());
-        requestHttp.setParametro("idProfissional", String.valueOf(agendaProfissional.getFkProfissional().getIdProfissional()));
-
-        InserirAgendaProfissional task = new InserirAgendaProfissional();
-        task.execute(requestHttp);
-
-        return sucesso;
-
-    }
-
-    public static boolean alterarAgendaProfissional(AgendaProfissionalModel agendaProfissional) {
+    public static boolean alterarAgendaProfissional(AgendaProfissional agendaProfissional) {
 
         String uri = "http://vitorsilva.xyz/napp/agendaProfissional/alterarAgendaProfissional.php";
 
@@ -42,7 +25,6 @@ public class AgendaProfissionalController {
         requestHttp.setUrl(uri);
 
         requestHttp.setParametro("idAgendaUsuario", String.valueOf(agendaProfissional.getIdAgendaProfissional()));
-        requestHttp.setParametro("diaDaSemana", agendaProfissional.getDiaDaSemana());
         requestHttp.setParametro("horario", agendaProfissional.getHora());
         requestHttp.setParametro("idProfissional", String.valueOf(agendaProfissional.getFkProfissional().getIdProfissional()));
 
@@ -53,7 +35,7 @@ public class AgendaProfissionalController {
 
     }
 
-    public static List<AgendaProfissionalModel> selecionarAgendaProfissional() {
+    public static List<AgendaProfissional> selecionarAgendaProfissional() {
 
         String uri = "http://vitorsilva.xyz/napp/agendaProfissional/selecionarAgendaProfissional.php";
 
@@ -67,7 +49,7 @@ public class AgendaProfissionalController {
         return agendasProfissional;
     }
 
-    private static class SelecionarAgendaProfissional extends AsyncTask<String, String, List<AgendaProfissionalModel>> {
+    private static class SelecionarAgendaProfissional extends AsyncTask<String, String, List<AgendaProfissional>> {
 
         @Override
         protected void onPreExecute() {
@@ -75,7 +57,7 @@ public class AgendaProfissionalController {
         }
 
         @Override
-        protected List<AgendaProfissionalModel> doInBackground(String... params) {
+        protected List<AgendaProfissional> doInBackground(String... params) {
             final String conteudo = HttpManager.getDados(params[0]);
             agendasProfissional = AgendaProfissionalJSONParser.parseDados(conteudo);
 
@@ -83,35 +65,13 @@ public class AgendaProfissionalController {
         }
 
         @Override
-        protected void onPostExecute(final List<AgendaProfissionalModel> agendasProfissional) {
+        protected void onPostExecute(final List<AgendaProfissional> agendasProfissional) {
             super.onPostExecute(agendasProfissional);
 
         }
     }
 
-    private static class InserirAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
 
-        @Override
-        protected String doInBackground(RequestHttp... params) {
-            final String conteudo = (String) HttpManager.getDados(params[0]);
-
-            if(conteudo.equals("Sucesso"))
-                sucesso = true;
-            else
-                sucesso = false;
-
-            return conteudo;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }
 
     private static class AlterarAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
         @Override

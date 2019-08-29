@@ -7,9 +7,8 @@ import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.AgendaProfissionalController;
-import com.fatecourinhos.napp.model.AgendaProfissionalModel;
+import com.fatecourinhos.napp.model.AgendaProfissional;
 import com.fatecourinhos.napp.view.adapter.HorarioAtendimentoAdapter;
-import com.fatecourinhos.napp.view.cadastros.CadastroHorarioooo;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class HorarioAtendimentoFragment extends Fragment{
 
-    List<AgendaProfissionalModel> agendaProfissional;
+    List<AgendaProfissional> agendaProfissional;
     HorarioAtendimentoAdapter adapter;
     RecyclerView horarioAtendimentoRecycler;
 
@@ -59,7 +58,7 @@ public class HorarioAtendimentoFragment extends Fragment{
 
         adapter.setListener(new HorarioAtendimentoAdapter.Listener() {
             @Override
-            public void onClick(AgendaProfissionalModel agendaProfissional) {
+            public void onClick(AgendaProfissional agendaProfissional) {
 
                 Bundle data = new Bundle();
                 data.putInt("idAgendaProfissional", agendaProfissional.getIdAgendaProfissional());
