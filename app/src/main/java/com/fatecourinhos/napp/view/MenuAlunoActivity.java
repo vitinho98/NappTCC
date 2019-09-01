@@ -1,5 +1,7 @@
 package com.fatecourinhos.napp.view;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
@@ -14,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.view.Menu;
 import android.view.MenuItem;
 
 public class MenuAlunoActivity extends AppCompatActivity {
@@ -69,6 +72,31 @@ public class MenuAlunoActivity extends AppCompatActivity {
         Fragment fragment  = new AgendamentoAlunoFragment();
         ft.replace(R.id.frame_layout_aluno, fragment);
         ft.commit();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_sistema, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.sair) {
+
+            SharedPreferences preferences = getSharedPreferences("user_settings", MODE_PRIVATE);;
+            SharedPreferences.Editor editor = preferences.edit();
+
+            editor.clear();
+            editor.commit();
+
+            startActivity(new Intent(MenuAlunoActivity.this, LoginActivity.class));
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

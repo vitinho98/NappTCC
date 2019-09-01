@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.AgendaProfissional;
 
+import java.sql.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -60,8 +61,9 @@ public class HorarioAtendimentoAdapter extends RecyclerView.Adapter<HorarioAtend
 
         final AgendaProfissional agendaProfissional = agendaProfisisonais.get(position);
 
-        txtDia.setText(agendaProfissional.getDiaDaSemana());
-        txtHora.setText(agendaProfissional.getHora() + ":" + agendaProfissional.getMinutos());
+        //TODO
+        //txtDia.setText(Date.valueOf(agendaProfissional.getData()));
+        //txtHora.setText(agendaProfissional.getData() + ":" + agendaProfissional.getMinutos());
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

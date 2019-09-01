@@ -77,10 +77,10 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                         startActivity(new Intent(MenuProfissionalActivity.this, CadastroProfissional.class));
                         break;
 
-                    case("HORARIO"):
+                    /*case("HORARIO"): TODO
                         CadastroHorarioooo cadastroHorarioooo = new CadastroHorarioooo();
                         cadastroHorarioooo.show(getSupportFragmentManager(), "HORARIO");
-                        break;
+                        break;*/
 
                     case("LOCAL"):
                         CadastroLocalAtendimento cadastroLocalAtendimento = new CadastroLocalAtendimento();
@@ -122,7 +122,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
     //cria o menu de 3 pontinhos
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_profissional, menu);
+        getMenuInflater().inflate(R.menu.menu_sistema, menu);
         return true;
     }
 

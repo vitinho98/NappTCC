@@ -61,6 +61,7 @@ public class HorarioAtendimentoFragment extends Fragment{
             public void onClick(AgendaProfissional agendaProfissional) {
 
                 Bundle data = new Bundle();
+                /* TODO
                 data.putInt("idAgendaProfissional", agendaProfissional.getIdAgendaProfissional());
                 data.putString("hora", agendaProfissional.getHora());
                 data.putString("minutos", agendaProfissional.getMinutos());
@@ -70,7 +71,7 @@ public class HorarioAtendimentoFragment extends Fragment{
                 CadastroHorarioooo cadastroHorarioooo = new CadastroHorarioooo();
                 cadastroHorarioooo.setArguments(data);
                 cadastroHorarioooo.show(getFragmentManager(), "HORARIO");
-
+                */
             }
         });
     }

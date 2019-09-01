@@ -45,7 +45,7 @@ public class ProfissionalJSONParser {
 
                 }catch (Exception e){
                     campoAtuacao.setNomeCampoAtuacao(null);
-                    campoAtuacao.setIdCampoAtuacao(null);
+                    campoAtuacao.setIdCampoAtuacao(0);
                     profissional.setCampoAtuacao(campoAtuacao);
 
                     e.printStackTrace();
