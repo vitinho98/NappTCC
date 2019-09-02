@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -51,27 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
         getComponentes();
 
-        if (validarShared()) {
 
-            if (preferences.contains("tipoUsuario")) {
-
-                String tipoUsuario = preferences.getString("tipoUsuario", null);
-
-                if (tipoUsuario.contains("aluno")) {
-
-                    startActivity(new Intent(LoginActivity.this, MenuAlunoActivity.class));
-                    finish();
-
-                } else if (tipoUsuario.contains("profissional") || tipoUsuario.contains("Administrador")) {
-
-                    Usuario usuario = new Usuario();
-                    usuario.setIdUsuario(preferences.getInt("idUsuario", 0));
-
-                    isAtivo(usuario);
-
-                }
-            }
-        }
 
         setOnClicks();
 
@@ -80,8 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     //chama os componentes da tela
     private void getComponentes(){
 
-        preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
-        editor = preferences.edit();
+
 
         btnLogin = findViewById(R.id.btn_entrar);
         txtCadastrar = findViewById(R.id.txt_cadastrar);
@@ -166,19 +146,6 @@ public class LoginActivity extends AppCompatActivity {
         if (retornoLogin == true && retornoSenha == true)
             return true;
         else
-            return false;
-
-    }
-
-    //valida se já possui uma conta logada no dispositivo
-    private boolean validarShared(){
-
-        if (preferences.contains("conected")) {
-
-            boolean resultado = preferences.getBoolean("conected", false);
-            return resultado;
-
-        } else
             return false;
 
     }
@@ -271,24 +238,8 @@ public class LoginActivity extends AppCompatActivity {
 
         requestHttp.setParametro("login", usuario.getLogin());
         requestHttp.setParametro("senha", usuario.getSenha());
-
+        Log.e("TESTE ENVIADO", usuario.getLogin() + " - " + usuario.getSenha());
         autenticarUsuario task = new autenticarUsuario();
-        task.execute(requestHttp);
-
-    }
-
-    //verifica se o usuario salvo no dispotivo ainda está ativo
-    private void isAtivo(Usuario usuario){
-
-        String uri = "http://vitorsilva.xyz/napp/usuario/verificarStatus.php";
-
-        RequestHttp requestHttp = new RequestHttp();
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-
-        requestHttp.setParametro("idUsuario", String.valueOf(usuario.getIdUsuario()));
-
-        isAtivo task = new isAtivo();
         task.execute(requestHttp);
 
     }
@@ -304,7 +255,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
-
+            Log.e("TESTE RECEBIDO", conteudo);
             if (conteudo.contains("Vazio"))
                 sucesso = false;
             else
@@ -324,35 +275,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    //tarefa assincrona que recebe os dados do banco de dados
-    private class isAtivo extends AsyncTask<RequestHttp, String, String>{
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
-
-            if(conteudo.contains("Sucesso"))
-                ativo = true;
-            else
-                ativo = false;
-
-            return conteudo;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            if (ativo) {
-                startActivity(new Intent(LoginActivity.this, MenuProfissionalActivity.class));
-                finish();
-            }
-        }
-    }
 
 }
