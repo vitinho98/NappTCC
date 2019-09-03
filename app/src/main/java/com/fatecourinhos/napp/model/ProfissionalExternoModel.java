@@ -12,12 +12,12 @@ public class ProfissionalExternoModel {
     private String telefoneProfissionalExterno;
     private String celularProfissionalExterno;
     private CampoAtuacao fkCampoAtuacao;
-    private ResponsavelModel fkResponsavel;
+    private Responsavel fkResponsavel;
 
     public ProfissionalExternoModel() {
     }
 
-    public ProfissionalExternoModel(int idProfissionalExterno, String nomeProfissionalExterno, String cidadeProfissionalExterno, String bairro, String endereco, String numero, String emailProfissionalExterno, String telefoneProfissionalExterno, String celularProfissionalExterno, CampoAtuacao campoAtuacao, ResponsavelModel fkResponsavel) {
+    public ProfissionalExternoModel(int idProfissionalExterno, String nomeProfissionalExterno, String cidadeProfissionalExterno, String bairro, String endereco, String numero, String emailProfissionalExterno, String telefoneProfissionalExterno, String celularProfissionalExterno, CampoAtuacao campoAtuacao, Responsavel fkResponsavel) {
         this.idProfissionalExterno = idProfissionalExterno;
         this.nomeProfissionalExterno = nomeProfissionalExterno;
         this.cidadeProfissionalExterno = cidadeProfissionalExterno;
@@ -111,11 +111,11 @@ public class ProfissionalExternoModel {
         this.fkCampoAtuacao = campoAtuacao;
     }
 
-    public ResponsavelModel getFkResponsavel() {
+    public Responsavel getFkResponsavel() {
         return fkResponsavel;
     }
 
-    public void setFkResponsavel(ResponsavelModel fkResponsavel) {
+    public void setFkResponsavel(Responsavel fkResponsavel) {
         this.fkResponsavel = fkResponsavel;
     }
 }

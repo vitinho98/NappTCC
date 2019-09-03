@@ -53,9 +53,8 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         CardView cardView = holder.cardView;
-        ImageView imgFoto = (ImageView)cardView.findViewById(R.id.foto_profissional_lista);
-        ImageView imgStatus = (ImageView)cardView.findViewById(R.id.img_status_profissional_lista);
-        TextView txtNome = (TextView)cardView.findViewById(R.id.txt_nome_profissional_cab);
+        ImageView imgStatus = cardView.findViewById(R.id.img_status_profissional_lista);
+        TextView txtNome = cardView.findViewById(R.id.txt_nome_profissional_cab);
 
         final Profissional profissional = profissionais.get(position);
 
@@ -67,7 +66,6 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalAdapte
             imgStatus.setImageResource(R.drawable.ic_clear_black_24dp);
         }
 
-        imgFoto.setImageResource(R.drawable.ic_profissional);
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

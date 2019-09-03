@@ -6,8 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.ProfissionalExternoModel;
-import com.fatecourinhos.napp.model.ResponsavelModel;
+import com.fatecourinhos.napp.model.Responsavel;
 
 import java.util.List;
 
@@ -17,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ResponsavelAdapter extends RecyclerView.Adapter<ResponsavelAdapter.ViewHolder>{
 
-    private List<ResponsavelModel> responsaveis;
+    private List<Responsavel> responsaveis;
     private Listener listener;
 
     public static interface Listener{
-        public void onClick(ResponsavelModel profissional);
+        public void onClick(Responsavel profissional);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -35,7 +34,7 @@ public class ResponsavelAdapter extends RecyclerView.Adapter<ResponsavelAdapter.
         }
     }
 
-    public ResponsavelAdapter(List<ResponsavelModel> responsaveis){
+    public ResponsavelAdapter(List<Responsavel> responsaveis){
         this.responsaveis=responsaveis;
     }
 
@@ -55,21 +54,21 @@ public class ResponsavelAdapter extends RecyclerView.Adapter<ResponsavelAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         CardView cardView = holder.cardView;
-        TextView txtNome = (TextView)cardView.findViewById(R.id.txt_nome_responsavel_lista);
-        TextView txtCidade = (TextView)cardView.findViewById(R.id.txt_email_responsavel_lista);
-        TextView txtTelefone = (TextView)cardView.findViewById(R.id.txt_telefone_responsavel_lista);
+        TextView txtNome = cardView.findViewById(R.id.txt_nome_responsavel_lista);
+        TextView txtCidade = cardView.findViewById(R.id.txt_email_responsavel_lista);
+        TextView txtTelefone = cardView.findViewById(R.id.txt_telefone_responsavel_lista);
 
-        final ResponsavelModel responsavelModel = responsaveis.get(position);
+        final Responsavel responsavel = responsaveis.get(position);
 
-        txtNome.setText(responsavelModel.getNomeResponsavel());
-        txtCidade.setText(responsavelModel.getEmailResponsavel());
-        txtTelefone.setText(responsavelModel.getCelularResponsavel());
+        txtNome.setText(responsavel.getNomeResponsavel());
+        txtCidade.setText(responsavel.getEmailResponsavel());
+        txtTelefone.setText(responsavel.getCelularResponsavel());
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(listener!=null){
-                    listener.onClick(responsavelModel);
+                    listener.onClick(responsavel);
                 }
             }
         });

@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.ResponsavelModel;
+import com.fatecourinhos.napp.model.Responsavel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,33 +10,36 @@ import java.util.List;
 
 public class ResponsavelJSONParser {
 
-    public static List<ResponsavelModel> parseDados(String content) {
+    public static List<Responsavel> parseDados(String content) {
+
         try {
 
             JSONArray jsonArray = new JSONArray(content);
-            List<ResponsavelModel> responsavelList = new ArrayList<>();
+            List<Responsavel> responsaveis = new ArrayList<>();
 
-            ResponsavelModel responsavel = new ResponsavelModel();
+            Responsavel responsavel;
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                responsavel = new Responsavel();
                 responsavel.setCelularResponsavel(jsonObject.getString("celularResponsavel"));
                 responsavel.setEmailResponsavel(jsonObject.getString("emailResponsavel"));
                 responsavel.setIdResponsavel(jsonObject.getInt("idResponsavel"));
                 responsavel.setNomeResponsavel(jsonObject.getString("nomeResponsavel"));
                 responsavel.setTelefoneResponsavel(jsonObject.getString("telefoneResponsavel"));
 
-                responsavelList.add(responsavel);
+                responsaveis.add(responsavel);
 
             }
 
-            return responsavelList;
+            return responsaveis;
 
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
 }

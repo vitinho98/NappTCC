@@ -42,9 +42,6 @@ public class AgendaProfissionalJSONParser {
                 usuario.setStatus(jsonObject.getInt("status"));
                 profissionalModel.setFkUsuario(usuario);
 
-                campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
-                campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
-                profissionalModel.setCampoAtuacao(campoAtuacao);
 
                 agendaProfissional.setIdAgendaProfissional(jsonObject.getInt("idAgendaProfissional"));
                 agendaProfissional.setData(new Date(jsonObject.getString("dataHora")));

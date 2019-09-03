@@ -23,6 +23,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
     AppCompatEditText editTextNomeArea;
     View view;
+
     CampoAtuacao campoAtuacao;
     String conteudo;
     boolean sucesso;

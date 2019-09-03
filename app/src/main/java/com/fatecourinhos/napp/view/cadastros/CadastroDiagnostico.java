@@ -23,6 +23,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
     AppCompatEditText editTextNomeDiagnostico;
     View view;
+
     Diagnostico diagnostico;
     String conteudo;
     boolean sucesso;
@@ -103,7 +104,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    public void inserirDiagnostico(Diagnostico diagnostico){
+    private void inserirDiagnostico(Diagnostico diagnostico){
 
         String uri = "http://vitorsilva.xyz/napp/diagnostico/inserirDiagnostico.php";
 
@@ -118,7 +119,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
     }
 
-    public void alterarDiagnostico(Diagnostico diagnostico){
+    private void alterarDiagnostico(Diagnostico diagnostico){
 
         String uri = "http://vitorsilva.xyz/napp/diagnostico/alterarDiagnostico.php";
 
@@ -145,7 +146,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.equals("Sucesso"))
+            if(conteudo.contains("Sucesso"))
                 sucesso = true;
             else
                 sucesso = false;

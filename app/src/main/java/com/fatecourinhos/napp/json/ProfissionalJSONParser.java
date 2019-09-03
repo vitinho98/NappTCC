@@ -1,6 +1,5 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.model.Usuario;
 
@@ -12,19 +11,22 @@ import java.util.List;
 
 public class ProfissionalJSONParser {
 
-    public static List<Profissional> parseDados(String content){
-        try{
+    public static List<Profissional> parseDados(String content) {
+
+        try {
 
             JSONArray jsonArray = new JSONArray(content);
-            List<Profissional> profissionalList = new ArrayList<>();
+            List<Profissional> profissionais = new ArrayList<>();
 
-            Usuario usuario = new Usuario();
-            CampoAtuacao campoAtuacao = new CampoAtuacao();
-            Profissional profissional = new Profissional();
+            Usuario usuario;
+            Profissional profissional ;
 
-            for(int i=0; i<jsonArray.length(); i++){
+            for (int i=0; i<jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                usuario = new Usuario();
+                profissional = new Profissional();
 
                 profissional.setIdProfissional(jsonObject.getInt("idProfissional"));
                 profissional.setNomeProfissional(jsonObject.getString("nomeProfissional"));
@@ -38,26 +40,13 @@ public class ProfissionalJSONParser {
                 usuario.setStatus(jsonObject.getInt("status"));
                 profissional.setFkUsuario(usuario);
 
-                try{
-                    campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
-                    campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
-                    profissional.setCampoAtuacao(campoAtuacao);
-
-                }catch (Exception e){
-                    campoAtuacao.setNomeCampoAtuacao(null);
-                    campoAtuacao.setIdCampoAtuacao(null);
-                    profissional.setCampoAtuacao(campoAtuacao);
-
-                    e.printStackTrace();
-                }
-
-                profissionalList.add(profissional);
+                profissionais.add(profissional);
 
             }
 
-            return profissionalList;
+            return profissionais;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

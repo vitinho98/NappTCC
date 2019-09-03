@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.model;
 
-public class ResponsavelModel {
+public class Responsavel {
 
     private int idResponsavel;
     private String nomeResponsavel;
@@ -8,15 +8,8 @@ public class ResponsavelModel {
     private String telefoneResponsavel;
     private String emailResponsavel;
 
-    public ResponsavelModel() {
-    }
+    public Responsavel() {
 
-    public ResponsavelModel(int idResponsavel, String nomeResponsavel, String celularResponsavel, String telefoneResponsavel, String emailResponsavel) {
-        this.idResponsavel = idResponsavel;
-        this.nomeResponsavel = nomeResponsavel;
-        this.celularResponsavel = celularResponsavel;
-        this.telefoneResponsavel = telefoneResponsavel;
-        this.emailResponsavel = emailResponsavel;
     }
 
     public int getIdResponsavel() {

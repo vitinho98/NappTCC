@@ -1,13 +1,15 @@
 package com.fatecourinhos.napp.view.cadastros;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.ResponsavelController;
-import com.fatecourinhos.napp.model.ResponsavelModel;
+import com.fatecourinhos.napp.model.Responsavel;
+import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -17,107 +19,186 @@ public class CadastroResponsavel extends AppCompatActivity {
     private AppCompatEditText editTextNomeResponsavel, editTextEmailResponsavel, editTextCelularResponsavel, editTextTelefoneResponsavel;
     private Button btn_cadastrar_responsavel;
 
+    Responsavel responsavel;
+    String conteudo;
+    boolean sucesso;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro_activity_responsavel);
 
-        editTextCelularResponsavel = (AppCompatEditText)findViewById(R.id.edit_text_celular_responsavel);
-        editTextEmailResponsavel = (AppCompatEditText) findViewById(R.id.edit_text_email_responsavel);
-        editTextNomeResponsavel = (AppCompatEditText) findViewById(R.id.edit_text_nome_responsavel);
-        editTextTelefoneResponsavel = (AppCompatEditText) findViewById(R.id.edit_text_telefone_responsavel);
+        getComponentes();
 
-        btn_cadastrar_responsavel = (Button) findViewById(R.id.btn_salvar_responsavel);
+        if (getIntent().getExtras() != null) {
 
-        if(getIntent().getExtras() != null){
-
-            final ResponsavelModel responsavel = new ResponsavelModel();
-
+            responsavel = new Responsavel();
             responsavel.setIdResponsavel(getIntent().getExtras().getInt("idResponsavel"));
-            responsavel.setCelularResponsavel(getIntent().getExtras().getString("celularResponsavel"));
-            responsavel.setEmailResponsavel(getIntent().getExtras().getString("emailResponsavel"));
-            responsavel.setNomeResponsavel(getIntent().getExtras().getString("nomeResponsavel"));
-            responsavel.setTelefoneResponsavel(getIntent().getExtras().getString("telefoneResponsavel"));
 
-            editTextTelefoneResponsavel.setText(responsavel.getTelefoneResponsavel());
-            editTextNomeResponsavel.setText(responsavel.getNomeResponsavel());
-            editTextCelularResponsavel.setText(responsavel.getCelularResponsavel());
-            editTextEmailResponsavel.setText(responsavel.getEmailResponsavel());
+            editTextTelefoneResponsavel.setText(getIntent().getExtras().getString("telefoneResponsavel"));
+            editTextNomeResponsavel.setText(getIntent().getExtras().getString("nomeResponsavel"));
+            editTextCelularResponsavel.setText(getIntent().getExtras().getString("celularResponsavel"));
+            editTextEmailResponsavel.setText(getIntent().getExtras().getString("emailResponsavel"));
             btn_cadastrar_responsavel.setText(R.string.btn_salvar);
 
             btn_cadastrar_responsavel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    if(conferirDados()){
+                    if (conferirDados()) {
 
                         responsavel.setTelefoneResponsavel(editTextTelefoneResponsavel.getText().toString());
                         responsavel.setNomeResponsavel(editTextNomeResponsavel.getText().toString());
                         responsavel.setEmailResponsavel(editTextEmailResponsavel.getText().toString());
                         responsavel.setCelularResponsavel(editTextCelularResponsavel.getText().toString());
 
-                        if(ResponsavelController.alterarResponsavel(responsavel)){
+                        alterarResponsavel(responsavel);
 
-                            Toast.makeText(CadastroResponsavel.this,"Alterado com sucesso", Toast.LENGTH_SHORT).show();
-
-                        }else{
-
-                            Toast.makeText(CadastroResponsavel.this,"Erro ao alterar", Toast.LENGTH_SHORT).show();
-
-                        }
-
-                    }else{
-
+                    } else
                         Toast.makeText(CadastroResponsavel.this,"Insira todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
-
-                    }
 
                 }
             });
 
-        }else{
+        } else {
 
             btn_cadastrar_responsavel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    ResponsavelModel responsavelModel = new ResponsavelModel();
+                    if (conferirDados()) {
 
-                    if(conferirDados()){
+                        responsavel = new Responsavel();
 
-                        responsavelModel.setTelefoneResponsavel(editTextTelefoneResponsavel.getText().toString());
-                        responsavelModel.setNomeResponsavel(editTextNomeResponsavel.getText().toString());
-                        responsavelModel.setEmailResponsavel(editTextEmailResponsavel.getText().toString());
-                        responsavelModel.setCelularResponsavel(editTextCelularResponsavel.getText().toString());
+                        responsavel.setTelefoneResponsavel(editTextTelefoneResponsavel.getText().toString());
+                        responsavel.setNomeResponsavel(editTextNomeResponsavel.getText().toString());
+                        responsavel.setEmailResponsavel(editTextEmailResponsavel.getText().toString());
+                        responsavel.setCelularResponsavel(editTextCelularResponsavel.getText().toString());
 
-                        if(ResponsavelController.inserirResponsavel(responsavelModel)){
+                        inserirResponsavel(responsavel);
 
-                            Toast.makeText(CadastroResponsavel.this,"Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-
-                        }else{
-
-                            Toast.makeText(CadastroResponsavel.this,"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
-
-                        }
-
-                    }else{
-
+                    } else
                         Toast.makeText(CadastroResponsavel.this,"Insira todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
 
-                    }
                 }
             });
         }
+
+}
+
+    private void getComponentes(){
+
+        editTextCelularResponsavel = findViewById(R.id.edit_text_celular_responsavel);
+        editTextEmailResponsavel = findViewById(R.id.edit_text_email_responsavel);
+        editTextNomeResponsavel = findViewById(R.id.edit_text_nome_responsavel);
+        editTextTelefoneResponsavel = findViewById(R.id.edit_text_telefone_responsavel);
+
+        btn_cadastrar_responsavel = findViewById(R.id.btn_salvar_responsavel);
+
     }
 
     public boolean conferirDados(){
 
-        if(editTextNomeResponsavel.getText().toString().isEmpty()){
+        if (editTextNomeResponsavel.getText().toString().isEmpty())
             return false;
-        }else{
+        else
             return true;
+
+    }
+
+    private void inserirResponsavel(Responsavel responsavel) {
+
+        String uri = "http://vitorsilva.xyz/napp/responsavel/inserirResponsavel.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("nomeResponsavel", responsavel.getNomeResponsavel());
+        requestHttp.setParametro("telefoneResponsavel", responsavel.getTelefoneResponsavel());
+        requestHttp.setParametro("celularResponsavel", responsavel.getCelularResponsavel());
+        requestHttp.setParametro("emailResponsavel", responsavel.getEmailResponsavel());
+
+        CadastrarResponsavel task = new CadastrarResponsavel();
+        task.execute(requestHttp);
+
+    }
+
+    private void alterarResponsavel(Responsavel responsavel) {
+
+        String uri = "http://vitorsilva.xyz/napp/responsavel/alterarResponsavel.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("idResponsavel", String.valueOf(responsavel.getIdResponsavel()));
+        requestHttp.setParametro("nomeResponsavel", responsavel.getNomeResponsavel());
+        requestHttp.setParametro("telefoneResponsavel", responsavel.getTelefoneResponsavel());
+        requestHttp.setParametro("celularResponsavel", responsavel.getCelularResponsavel());
+        requestHttp.setParametro("emailResponsavel", responsavel.getEmailResponsavel());
+
+        AlterarResponsavel task = new AlterarResponsavel();
+        task.execute(requestHttp);
+
+    }
+
+    private class CadastrarResponsavel extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
         }
 
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            if(conteudo.contains("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (sucesso)
+                Toast.makeText(getApplicationContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getApplicationContext(), "Erro ao cadastrar", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private class AlterarResponsavel extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            if(conteudo.contains("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (sucesso)
+                Toast.makeText(getApplicationContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getApplicationContext(), "Erro ao alterar", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

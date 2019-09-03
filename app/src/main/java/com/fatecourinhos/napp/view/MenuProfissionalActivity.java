@@ -10,15 +10,18 @@ import android.os.Bundle;
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.view.cadastros.CadastroCampoAtuacao;
 import com.fatecourinhos.napp.view.cadastros.CadastroDiagnostico;
+import com.fatecourinhos.napp.view.cadastros.CadastroHorario;
 import com.fatecourinhos.napp.view.cadastros.CadastroLocalAtendimento;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissionalExterno;
+import com.fatecourinhos.napp.view.cadastros.CadastroResponsavel;
 import com.fatecourinhos.napp.view.fragments.AreaAtuacaoFragment;
 import com.fatecourinhos.napp.view.fragments.DiagnosticoFragment;
 import com.fatecourinhos.napp.view.fragments.HorarioAtendimentoFragment;
 import com.fatecourinhos.napp.view.fragments.LocalAtendimentoFragment;
 import com.fatecourinhos.napp.view.fragments.ProfissionalExternoFragment;
 import com.fatecourinhos.napp.view.fragments.ProfissionalFragment;
+import com.fatecourinhos.napp.view.fragments.ResponsavelFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -54,7 +57,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        final NavigationView navigationView = findViewById(R.id.nav_view_profissional);
+        NavigationView navigationView = findViewById(R.id.nav_view_profissional);
         navigationView.setNavigationItemSelectedListener(this);
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -78,8 +81,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                         break;
 
                     case("HORARIO"):
-                        CadastroHorarioooo cadastroHorarioooo = new CadastroHorarioooo();
-                        cadastroHorarioooo.show(getSupportFragmentManager(), "HORARIO");
+                        startActivity(new Intent(MenuProfissionalActivity.this, CadastroHorario.class));
                         break;
 
                     case("LOCAL"):
@@ -102,7 +104,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                         break;
 
                     case("RESPONSAVEL"):
-                        startActivity(new Intent(MenuProfissionalActivity.this, CadastroProfissional.class));
+                        startActivity(new Intent(MenuProfissionalActivity.this, CadastroResponsavel.class));
                         break;
                 }
             }
@@ -162,6 +164,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         Fragment fragment = null;
 
         switch (itemid) {
+
             case R.id.nav_profissional:
                 fragment = new ProfissionalFragment();
                 if (fragment != null) {
@@ -217,7 +220,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                 break;
 
             case R.id.nav_responsavel:
-                fragment = new HorarioAtendimentoFragment();
+                fragment = new ResponsavelFragment();
                 if(fragment != null) {
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frame_layout_nav, fragment, "RESPONSAVEL");

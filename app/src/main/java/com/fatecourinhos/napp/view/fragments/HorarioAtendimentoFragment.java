@@ -1,5 +1,6 @@
 package com.fatecourinhos.napp.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.AgendaProfissionalController;
 import com.fatecourinhos.napp.model.AgendaProfissional;
 import com.fatecourinhos.napp.view.adapter.HorarioAtendimentoAdapter;
+import com.fatecourinhos.napp.view.cadastros.CadastroHorario;
 
 import java.util.List;
 
@@ -60,16 +62,14 @@ public class HorarioAtendimentoFragment extends Fragment{
             @Override
             public void onClick(AgendaProfissional agendaProfissional) {
 
-                Bundle data = new Bundle();
-                data.putInt("idAgendaProfissional", agendaProfissional.getIdAgendaProfissional());
-                data.putString("hora", agendaProfissional.getHora());
-                data.putString("minutos", agendaProfissional.getMinutos());
-                data.putString("diaDaSemana", agendaProfissional.getDiaDaSemana());
-                data.putInt("idProfissional", agendaProfissional.getFkProfissional().getIdProfissional());
+                Intent intent = new Intent(getActivity(), CadastroHorario.class);
 
-                CadastroHorarioooo cadastroHorarioooo = new CadastroHorarioooo();
-                cadastroHorarioooo.setArguments(data);
-                cadastroHorarioooo.show(getFragmentManager(), "HORARIO");
+                intent.putExtra("idAgendaProfissional", agendaProfissional.getIdAgendaProfissional());
+                intent.putExtra("hora", String.valueOf(agendaProfissional.getData()));
+
+                intent.putExtra("idProfissional", agendaProfissional.getFkProfissional().getIdProfissional());
+
+                startActivity(intent);
 
             }
         });

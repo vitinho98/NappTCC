@@ -12,14 +12,14 @@ public class DiagnosticoJSONParser {
 
     public static List<Diagnostico> parseDados(String content){
 
-        try{
+        try {
 
             JSONArray jsonArray = new JSONArray(content);
-            List<Diagnostico> diagnosticoList = new ArrayList<>();
+            List<Diagnostico> diagnosticos = new ArrayList<>();
 
             Diagnostico diagnostico;
 
-            for(int i=0; i<jsonArray.length(); i++){
+            for (int i=0; i<jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -27,12 +27,12 @@ public class DiagnosticoJSONParser {
                 diagnostico.setIdDiagostico(jsonObject.getInt("idDiagnostico"));
                 diagnostico.setNomeDiagnotico(jsonObject.getString("nomeDiagnostico"));
 
-                diagnosticoList.add(diagnostico);
+                diagnosticos.add(diagnostico);
             }
 
-            return diagnosticoList;
+            return diagnosticos;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

@@ -13,7 +13,7 @@ import com.fatecourinhos.napp.controller.ProfissionalExternoController;
 import com.fatecourinhos.napp.controller.ResponsavelController;
 import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.ProfissionalExternoModel;
-import com.fatecourinhos.napp.model.ResponsavelModel;
+import com.fatecourinhos.napp.model.Responsavel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -25,7 +25,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
     final ProfissionalExternoModel profissionalExterno = new ProfissionalExternoModel();
     final CampoAtuacao campoAtuacao = new CampoAtuacao();
-    final ResponsavelModel responsavelModel = new ResponsavelModel();
+    final Responsavel responsavel = new Responsavel();
 
     private AppCompatEditText editTextNomeProfissionalExterno, editTextTelefoneProfissionalExterno, editTextCelularProfissionalExterno,
     editTextBairro, editTextNumero, editTextCidadeProfissionalExterno, editTextEndereco, editTextEmailProfissionalExterno;
@@ -49,7 +49,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         editTextNumero = (AppCompatEditText) findViewById(R.id.edit_text_numero_profissional_externo);
 
         final List<CampoAtuacao> camposAtuacao = CampoAtuacaoController.selecionarCamposAtuacao();
-        final List<ResponsavelModel> responsaveis = ResponsavelController.selecionarResponsaveis();
+        final List<Responsavel> responsaveis = ResponsavelController.selecionarResponsaveis();
 
         List<String> nomesCampos = new ArrayList<String>();
         List<String> nomesResponsaveis = new ArrayList<String>();
@@ -57,7 +57,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         for ( CampoAtuacao campoAtuacao : camposAtuacao)
             nomesCampos.add(campoAtuacao.getNomeCampoAtuacao());
 
-        for ( ResponsavelModel responsavel: responsaveis)
+        for ( Responsavel responsavel: responsaveis)
             nomesResponsaveis.add(responsavel.getNomeResponsavel());
 
         spinnerTipo = (Spinner) findViewById(R.id.spinnerTipo);
@@ -85,14 +85,14 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             campoAtuacao.setIdCampoAtuacao(getIntent().getExtras().getInt("idCampoAtuacao"));
             campoAtuacao.setNomeCampoAtuacao(getIntent().getExtras().getString("nomeCampoAtuacao"));
 
-            responsavelModel.setIdResponsavel(getIntent().getExtras().getInt("idResponsavel"));
-            responsavelModel.setCelularResponsavel(getIntent().getExtras().getString("celularResponsavel"));
-            responsavelModel.setTelefoneResponsavel(getIntent().getExtras().getString("telefoneResponsavel"));
-            responsavelModel.setEmailResponsavel(getIntent().getExtras().getString("emailResponsavel"));
-            responsavelModel.setNomeResponsavel(getIntent().getExtras().getString("nomeResponsavel"));
+            responsavel.setIdResponsavel(getIntent().getExtras().getInt("idResponsavel"));
+            responsavel.setCelularResponsavel(getIntent().getExtras().getString("celularResponsavel"));
+            responsavel.setTelefoneResponsavel(getIntent().getExtras().getString("telefoneResponsavel"));
+            responsavel.setEmailResponsavel(getIntent().getExtras().getString("emailResponsavel"));
+            responsavel.setNomeResponsavel(getIntent().getExtras().getString("nomeResponsavel"));
 
             profissionalExterno.setCampoAtuacao(campoAtuacao);
-            profissionalExterno.setFkResponsavel(responsavelModel);
+            profissionalExterno.setFkResponsavel(responsavel);
 
             editTextNumero.setText(profissionalExterno.getNumero());
             editTextNomeProfissionalExterno.setText(profissionalExterno.getNomeProfissionalExterno());
@@ -105,9 +105,9 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
             for (int i = 0; i < responsaveis.size(); i++) {
 
-                for (ResponsavelModel responsavel : responsaveis) {
+                for (Responsavel responsavel : responsaveis) {
 
-                    if (responsavel.getNomeResponsavel().equals(responsavelModel.getNomeResponsavel())) {
+                    if (responsavel.getNomeResponsavel().equals(this.responsavel.getNomeResponsavel())) {
                         spinnerResponsavel.setSelection(i);
                     }
 
@@ -147,7 +147,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
     }
 
-    private void enviarDados(boolean inserir, List<CampoAtuacao> camposAtuacao, List<ResponsavelModel> responsaveis){
+    private void enviarDados(boolean inserir, List<CampoAtuacao> camposAtuacao, List<Responsavel> responsaveis){
 
         profissionalExterno.setEndereco(editTextEndereco.getText().toString());
         profissionalExterno.setBairro(editTextBairro.getText().toString());
@@ -169,7 +169,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
         }
 
-        for( ResponsavelModel responsavel : responsaveis){
+        for( Responsavel responsavel : responsaveis){
 
             if(spinnerResponsavel.getSelectedItem().equals(responsavel.getNomeResponsavel())){
                 profissionalExterno.setFkResponsavel(responsavel);

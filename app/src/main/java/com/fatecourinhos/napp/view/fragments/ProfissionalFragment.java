@@ -76,9 +76,6 @@ public class ProfissionalFragment extends Fragment{
                 intent.putExtra("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
                 intent.putExtra("statusProfissional", profissional.getFkUsuario().getStatus());
 
-                intent.putExtra("campoAtuacao",profissional.getCampoAtuacao().getNomeCampoAtuacao());
-                intent.putExtra("idCampoAtuacao", profissional.getCampoAtuacao().getIdCampoAtuacao());
-
                 intent.putExtra("operacao", "alterar");
 
                 getActivity().startActivity(intent);

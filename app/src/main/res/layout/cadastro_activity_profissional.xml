@@ -14,20 +14,6 @@
         android:paddingBottom="50dp"
         tools:context=".view.LoginActivity">
 
-        <ImageView
-            android:id="@+id/img_profissional"
-            android:layout_width="112dp"
-            android:layout_height="105dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_menu_gallery" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txt_layout_nome_profissional"
             android:layout_width="match_parent"
@@ -39,7 +25,7 @@
             android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_profissional"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -161,7 +147,7 @@
             android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/switchStatus"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerCampoAtuacao" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_senha_profissional" />
 
         <Switch
             android:id="@+id/switchStatus"
@@ -176,7 +162,7 @@
             android:text="@string/txt_status"
             app:layout_constraintEnd_toStartOf="@+id/spinnerTipoUsuario_consulta"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerCampoAtuacao" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_senha_profissional" />
 
         <Button
             android:id="@+id/btn_salvar_profissional"
@@ -187,25 +173,13 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
-            android:text="@string/btn_salvar"
             android:background="@drawable/btn_customizado"
+            android:text="@string/btn_salvar"
             android:textColor="@drawable/btn_customizado"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerTipoUsuario" />
-
-        <Spinner
-            android:id="@+id/spinnerCampoAtuacao"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_layout_senha_profissional" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

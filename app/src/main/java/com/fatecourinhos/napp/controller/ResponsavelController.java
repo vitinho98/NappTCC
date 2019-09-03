@@ -3,7 +3,7 @@ package com.fatecourinhos.napp.controller;
 import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.ResponsavelJSONParser;
-import com.fatecourinhos.napp.model.ResponsavelModel;
+import com.fatecourinhos.napp.model.Responsavel;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
@@ -12,9 +12,9 @@ import java.util.List;
 public class ResponsavelController {
 
     public static boolean sucesso;
-    public static List<ResponsavelModel> responsaveis;
+    public static List<Responsavel> responsaveis;
 
-    public static boolean inserirResponsavel(ResponsavelModel responsavel) {
+    public static boolean inserirResponsavel(Responsavel responsavel) {
 
         String uri = "http://vitorsilva.xyz/napp/responsavel/inserirResponsavel.php";
 
@@ -34,7 +34,7 @@ public class ResponsavelController {
 
     }
 
-    public static boolean alterarResponsavel(ResponsavelModel responsavel) {
+    public static boolean alterarResponsavel(Responsavel responsavel) {
 
         String uri = "http://vitorsilva.xyz/napp/responsavel/alterarResponsavel.php";
 
@@ -55,7 +55,7 @@ public class ResponsavelController {
 
     }
 
-    public static List<ResponsavelModel> selecionarResponsaveis() {
+    public static List<Responsavel> selecionarResponsaveis() {
 
         String uri = "http://vitorsilva.xyz/napp/responsavel/selecionarResponsaveis.php";
 
@@ -65,7 +65,7 @@ public class ResponsavelController {
         return responsaveis;
     }
 
-    private static class SelecionarResponsaveis extends AsyncTask<String, String, List<ResponsavelModel>> {
+    private static class SelecionarResponsaveis extends AsyncTask<String, String, List<Responsavel>> {
 
         @Override
         protected void onPreExecute() {
@@ -73,7 +73,7 @@ public class ResponsavelController {
         }
 
         @Override
-        protected List<ResponsavelModel> doInBackground(String... params) {
+        protected List<Responsavel> doInBackground(String... params) {
             final String conteudo = HttpManager.getDados(params[0]);
             responsaveis = ResponsavelJSONParser.parseDados(conteudo);
 
@@ -81,7 +81,7 @@ public class ResponsavelController {
         }
 
         @Override
-        protected void onPostExecute(final List<ResponsavelModel> responsaveis) {
+        protected void onPostExecute(final List<Responsavel> responsaveis) {
             super.onPostExecute(responsaveis);
 
         }

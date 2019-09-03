@@ -4,7 +4,6 @@ public class Profissional {
 
     private int idProfissional;
     private String nomeProfissional;
-    private CampoAtuacao fkCampoAtuacao;
     private String celularProfissional;
     private String emailProfissional;
     private Usuario fkUsuario;
@@ -13,14 +12,6 @@ public class Profissional {
 
     }
 
-    public Profissional(int idProfissional, String nomeProfissional, CampoAtuacao campoAtuacao, String celularProfissional, String emailProfissional, Usuario fkUsuario) {
-        this.idProfissional = idProfissional;
-        this.nomeProfissional = nomeProfissional;
-        this.fkCampoAtuacao = campoAtuacao;
-        this.celularProfissional = celularProfissional;
-        this.emailProfissional = emailProfissional;
-        this.fkUsuario = fkUsuario;
-    }
 
     public int getIdProfissional() {
         return idProfissional;
@@ -37,14 +28,6 @@ public class Profissional {
     public void setNomeProfissional(String nomeProfissional) {
         this.nomeProfissional = nomeProfissional;
 }
-
-    public CampoAtuacao getCampoAtuacao() {
-        return fkCampoAtuacao;
-    }
-
-    public void setCampoAtuacao(CampoAtuacao campoAtuacao) {
-        this.fkCampoAtuacao = campoAtuacao;
-    }
 
     public String getCelularProfissional() {
         return celularProfissional;

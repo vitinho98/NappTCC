@@ -12,14 +12,14 @@ public class LocalAtendimentoJSONParser {
 
     public static List<LocalAtendimento> parseDados(String content){
 
-        try{
+        try {
 
             JSONArray jsonArray = new JSONArray(content);
-            List<LocalAtendimento> localAtendimentoList = new ArrayList<>();
+            List<LocalAtendimento> locaisAtendimento = new ArrayList<>();
 
             LocalAtendimento localAtendimento;
 
-            for(int i=0; i<jsonArray.length(); i++){
+            for (int i=0; i<jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -28,14 +28,15 @@ public class LocalAtendimentoJSONParser {
                 localAtendimento.setNomeBloco(jsonObject.getString("nomeBloco"));
                 localAtendimento.setNomeLocal(jsonObject.getString("nomeLocal"));
 
-                localAtendimentoList.add(localAtendimento);
+                locaisAtendimento.add(localAtendimento);
             }
 
-            return localAtendimentoList;
+            return locaisAtendimento;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
 }

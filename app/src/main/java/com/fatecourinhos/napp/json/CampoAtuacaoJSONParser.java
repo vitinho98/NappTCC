@@ -12,13 +12,13 @@ public class CampoAtuacaoJSONParser {
 
     public static List<CampoAtuacao> parseDados(String content){
 
-        try{
+        try {
 
             JSONArray jsonArray = new JSONArray(content);
-            List<CampoAtuacao> campoAtuacaoList = new ArrayList<>();
+            List<CampoAtuacao> camposAtuacao = new ArrayList<>();
             CampoAtuacao campoAtuacao;
 
-            for(int i=0; i<jsonArray.length(); i++){
+            for (int i=0; i<jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -26,15 +26,16 @@ public class CampoAtuacaoJSONParser {
                 campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
                 campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
 
-                campoAtuacaoList.add(campoAtuacao);
+                camposAtuacao.add(campoAtuacao);
 
             }
 
-            return campoAtuacaoList;
+            return camposAtuacao;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
 }

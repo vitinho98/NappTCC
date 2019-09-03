@@ -27,7 +27,6 @@ public class ProfissionalController {
         requestHttp.setParametro("loginProfissional", profissional.getFkUsuario().getLogin());
         requestHttp.setParametro("senhaProfissional", profissional.getFkUsuario().getSenha());
         requestHttp.setParametro("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
-        requestHttp.setParametro("campoAtuacaoProfissional", String.valueOf(profissional.getCampoAtuacao().getIdCampoAtuacao()));
         requestHttp.setParametro("statusProfissional", String.valueOf(profissional.getFkUsuario().getStatus()));
 
         InserirProfissional task = new InserirProfissional();
@@ -52,7 +51,6 @@ public class ProfissionalController {
         requestHttp.setParametro("loginProfissional", profissional.getFkUsuario().getLogin());
         requestHttp.setParametro("senhaProfissional", profissional.getFkUsuario().getSenha());
         requestHttp.setParametro("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
-        requestHttp.setParametro("campoAtuacaoProfissional", String.valueOf(profissional.getCampoAtuacao().getIdCampoAtuacao()));
         requestHttp.setParametro("statusProfissional", String.valueOf(profissional.getFkUsuario().getStatus()));
 
         AlterarProfissional task = new AlterarProfissional();

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.ResponsavelController;
-import com.fatecourinhos.napp.model.ResponsavelModel;
+import com.fatecourinhos.napp.model.Responsavel;
 import com.fatecourinhos.napp.view.cadastros.CadastroResponsavel;
 import com.fatecourinhos.napp.view.adapter.ResponsavelAdapter;
 
@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ResponsavelFragment extends Fragment{
 
-    List<ResponsavelModel> responsaveis;
+    List<Responsavel> responsaveis;
     ResponsavelAdapter adapter;
     RecyclerView responsavelRecycler;
 
@@ -61,7 +61,7 @@ public class ResponsavelFragment extends Fragment{
 
         adapter.setListener(new ResponsavelAdapter.Listener() {
             @Override
-            public void onClick(ResponsavelModel responsavel) {
+            public void onClick(Responsavel responsavel) {
                 Intent intent = new Intent(getActivity(), CadastroResponsavel.class);
 
                 intent.putExtra("idResponsavel", responsavel.getIdResponsavel());

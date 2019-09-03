@@ -3,30 +3,32 @@ package com.fatecourinhos.napp.view.cadastros;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.controller.ProfissionalController;
-import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.model.Usuario;
+import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 
 public class CadastroProfissional extends AppCompatActivity {
 
-    final Profissional profissional = new Profissional();
-    final Usuario usuario = new Usuario();
-    final CampoAtuacao campoAtuacao = new CampoAtuacao();
+    Profissional profissional = new Profissional();
+    Usuario usuario = new Usuario();
+
+    boolean sucesso;
+    String conteudo;
 
     private AppCompatEditText editTextNome, editTextCel, editTextEmail, editTextLogin, editTextSenha;
-    private ImageView foto;
     private Spinner spinnerProf;
     private Button btn_cadastrar_profissional;
     private Switch switchProf;
@@ -36,7 +38,64 @@ public class CadastroProfissional extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro_activity_profissional);
 
-        foto = findViewById(R.id.img_profissional);
+        getComponentes();
+
+        if ((getIntent().getExtras() != null)) {
+
+            profissional.setNomeProfissional((String) getIntent().getExtras().get("nomeProfissional"));
+            profissional.setCelularProfissional((String) getIntent().getExtras().get("celularProfissional"));
+            profissional.setEmailProfissional((String) getIntent().getExtras().get("emailProfissional"));
+            profissional.setIdProfissional(getIntent().getExtras().getInt("idProfissional"));
+
+            usuario.setLogin((String) getIntent().getExtras().get("loginProfissional"));
+            usuario.setSenha((String) getIntent().getExtras().get("senhaProfissional"));
+            usuario.setTipoUsuario((String) getIntent().getExtras().get("tipoProfissional"));
+            usuario.setStatus((Integer) getIntent().getExtras().get("statusProfissional"));
+
+            profissional.setFkUsuario(usuario);
+
+            editTextCel.setText(profissional.getCelularProfissional());
+            editTextEmail.setText(profissional.getEmailProfissional());
+            editTextLogin.setText(profissional.getFkUsuario().getLogin());
+            editTextSenha.setText(profissional.getFkUsuario().getSenha());
+            editTextNome.setText(profissional.getNomeProfissional());
+
+            if(profissional.getFkUsuario().getTipoUsuario().equals("Administrador"))
+                spinnerProf.setSelection(0);
+            else
+                spinnerProf.setSelection(1);
+
+            try {
+
+                if (profissional.getFkUsuario().getStatus() == 1)
+                    switchProf.setChecked(false);
+                else
+                    switchProf.setChecked(true);
+
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+
+            btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    enviarDados(false);
+                }
+            });
+
+        } else {
+
+            btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    enviarDados(true);
+                }
+            });
+
+        }
+    }
+
+    private void getComponentes(){
 
         editTextNome = findViewById(R.id.edit_text_nome_profissional);
         editTextCel = findViewById(R.id.edit_text_celular_profissional);
@@ -52,65 +111,6 @@ public class CadastroProfissional extends AppCompatActivity {
 
         btn_cadastrar_profissional = findViewById(R.id.btn_salvar_profissional);
 
-        if ((getIntent().getExtras() != null)) {
-
-            profissional.setNomeProfissional((String) getIntent().getExtras().get("nomeProfissional"));
-            profissional.setCelularProfissional((String) getIntent().getExtras().get("celularProfissional"));
-            profissional.setEmailProfissional((String) getIntent().getExtras().get("emailProfissional"));
-            profissional.setIdProfissional(getIntent().getExtras().getInt("idProfissional"));
-
-            campoAtuacao.setNomeCampoAtuacao((String) getIntent().getExtras().get("nomeCampoAtuacao"));
-            campoAtuacao.setIdCampoAtuacao((Integer) getIntent().getExtras().get("idCampoAtuacao"));
-
-            usuario.setLogin((String) getIntent().getExtras().get("loginProfissional"));
-            usuario.setSenha((String) getIntent().getExtras().get("senhaProfissional"));
-            usuario.setTipoUsuario((String) getIntent().getExtras().get("tipoProfissional"));
-            usuario.setStatus((Integer) getIntent().getExtras().get("statusProfissional"));
-
-            profissional.setFkUsuario(usuario);
-            profissional.setCampoAtuacao(campoAtuacao);
-
-            editTextCel.setText(profissional.getCelularProfissional());
-            editTextEmail.setText(profissional.getEmailProfissional());
-            editTextLogin.setText(profissional.getFkUsuario().getLogin());
-            editTextSenha.setText(profissional.getFkUsuario().getSenha());
-            editTextNome.setText(profissional.getNomeProfissional());
-
-            if(profissional.getFkUsuario().getTipoUsuario().equals("Administrador")){
-                spinnerProf.setSelection(0);
-            }else{
-                spinnerProf.setSelection(1);
-            }
-
-            try {
-
-                if (profissional.getFkUsuario().getStatus() == 1) {
-                    switchProf.setChecked(false);
-                } else {
-                    switchProf.setChecked(true);
-                }
-
-            }catch (Exception e){
-                System.out.println(e.toString());
-            }
-
-            btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    enviarDados(false);
-                }
-            });
-
-        }else{
-
-            btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    enviarDados(true);
-                }
-            });
-
-        }
     }
 
     private void enviarDados(boolean inserir) {
@@ -142,34 +142,20 @@ public class CadastroProfissional extends AppCompatActivity {
 
         });
 
-        if (switchProf.isChecked()) {
+        if (switchProf.isChecked())
             usuario.setStatus(0);
-        } else {
+        else
             usuario.setStatus(1);
-        }
 
         profissional.setFkUsuario(usuario);
 
-        if(conferirDados(profissional)){
+        if (conferirDados(profissional))
 
-            if(inserir == true){
-
-                if(ProfissionalController.inserirProfissional(profissional)) {
-                    Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_LONG).show();
-                    limparDados();
-                }else
-                    Toast.makeText(this, "Erro ao inserir", Toast.LENGTH_LONG).show();
-
-            }else{
-
-                if(ProfissionalController.alterarProfissional(profissional)){
-                    Toast.makeText(this, "Alterado com sucesso", Toast.LENGTH_LONG).show();
-                    limparDados();
-                }else
-                    Toast.makeText(this, "Erro ao alterar", Toast.LENGTH_LONG).show();
-            }
-
-        }else
+            if(inserir)
+                inserirProfissional(profissional);
+            else
+                alterarProfissional(profissional);
+        else
             Toast.makeText(this, "Insira todos os campos corretamente!", Toast.LENGTH_LONG).show();
 
     }
@@ -178,6 +164,16 @@ public class CadastroProfissional extends AppCompatActivity {
 
         boolean retorno = true;
 
+        if (profissional.getCelularProfissional().isEmpty())
+            retorno = false;
+        else if (profissional.getEmailProfissional().isEmpty())
+            retorno = false;
+        else if (profissional.getNomeProfissional().isEmpty())
+            retorno = false;
+        else if (profissional.getFkUsuario().getLogin().isEmpty())
+            retorno = false;
+        else if (profissional.getFkUsuario().getSenha().isEmpty())
+            retorno = false;
 
         return retorno;
     }
@@ -190,8 +186,108 @@ public class CadastroProfissional extends AppCompatActivity {
         editTextSenha.setText(null);
         editTextNome.setText(null);
 
-        foto.setImageBitmap(null);
+    }
+
+    public void inserirProfissional(Profissional profissional){
+
+        String uri = "http://vitorsilva.xyz/napp/profissional/inserirProfissional.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("nomeProfissional", profissional.getNomeProfissional());
+        requestHttp.setParametro("celProfissional", profissional.getCelularProfissional());
+        requestHttp.setParametro("emailProfissional", profissional.getEmailProfissional());
+        requestHttp.setParametro("loginProfissional", profissional.getFkUsuario().getLogin());
+        requestHttp.setParametro("senhaProfissional", profissional.getFkUsuario().getSenha());
+        requestHttp.setParametro("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
+        requestHttp.setParametro("statusProfissional", String.valueOf(profissional.getFkUsuario().getStatus()));
+
+        InserirProfissional task = new InserirProfissional();
+        task.execute(requestHttp);
 
     }
+
+    public void alterarProfissional(Profissional profissional){
+
+        String uri = "http://vitorsilva.xyz/napp/profissional/alterarProfissional.php";
+
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("idProfissional", String.valueOf(profissional.getIdProfissional()));
+        requestHttp.setParametro("nomeProfissional", profissional.getNomeProfissional());
+        requestHttp.setParametro("celProfissional", profissional.getCelularProfissional());
+        requestHttp.setParametro("emailProfissional", profissional.getEmailProfissional());
+        requestHttp.setParametro("loginProfissional", profissional.getFkUsuario().getLogin());
+        requestHttp.setParametro("senhaProfissional", profissional.getFkUsuario().getSenha());
+        requestHttp.setParametro("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
+        requestHttp.setParametro("statusProfissional", String.valueOf(profissional.getFkUsuario().getStatus()));
+
+        AlterarProfissional task = new AlterarProfissional();
+        task.execute(requestHttp);
+
+    }
+
+    private class InserirProfissional extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            if(conteudo.contains("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if(sucesso)
+                Toast.makeText(getApplicationContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getApplicationContext(), "Erro ao cadastrar", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private class AlterarProfissional extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            if(conteudo.contains("Sucesso"))
+                sucesso = true;
+            else
+                sucesso = false;
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if(sucesso)
+                Toast.makeText(getApplicationContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getApplicationContext(), "Erro ao alterar", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
 
