@@ -62,6 +62,7 @@ public class HorarioAtendimentoFragment extends Fragment{
             @Override
             public void onClick(AgendaProfissional agendaProfissional) {
 
+<<<<<<< HEAD
                 Intent intent = new Intent(getActivity(), CadastroHorario.class);
 
                 intent.putExtra("idAgendaProfissional", agendaProfissional.getIdAgendaProfissional());
@@ -71,6 +72,20 @@ public class HorarioAtendimentoFragment extends Fragment{
 
                 startActivity(intent);
 
+=======
+                Bundle data = new Bundle();
+                /* TODO
+                data.putInt("idAgendaProfissional", agendaProfissional.getIdAgendaProfissional());
+                data.putString("hora", agendaProfissional.getHora());
+                data.putString("minutos", agendaProfissional.getMinutos());
+                data.putString("diaDaSemana", agendaProfissional.getDiaDaSemana());
+                data.putInt("idProfissional", agendaProfissional.getFkProfissional().getIdProfissional());
+
+                CadastroHorarioooo cadastroHorarioooo = new CadastroHorarioooo();
+                cadastroHorarioooo.setArguments(data);
+                cadastroHorarioooo.show(getFragmentManager(), "HORARIO");
+                */
+>>>>>>> 1d7cc48f860a237dd568e5e98f77bac65a14ec2a
             }
         });
     }

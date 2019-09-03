@@ -16,24 +16,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.cadastros.CadastroHorario"></activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.cadastros.CadastroHorario" />
         <activity
             android:name=".view.MenuAlunoActivity"
-            android:label="@string/title_activity_menu_aluno"></activity>
+            android:label="@string/title_activity_menu_aluno" />
         <activity android:name=".view.cadastros.CadastroAluno" />
         <activity android:name=".view.cadastros.CadastroProfissional" />
         <activity android:name=".view.cadastros.CadastroResponsavel" />
         <activity
             android:name=".view.MenuProfissionalActivity"
             android:label="@string/title_activity_menu_profissional"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.SobreActivity" />
         <activity android:name=".view.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

@@ -1,6 +1,7 @@
 package com.fatecourinhos.napp.controller;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.fatecourinhos.napp.json.AgendamentoJSONParser;
 import com.fatecourinhos.napp.model.AgendamentoModel;
@@ -17,8 +18,7 @@ public class AlunoController {
 
     public static boolean inserirAluno(Usuario usuario){
 
-        String uri = "http://vitorsilva.xyz/napp/aluno/cadastrarAluno.php";
-
+        String uri = "http://vitorsilva.xyz/napp/aluno/inserirAluno.php";
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
@@ -81,7 +81,6 @@ public class AlunoController {
         @Override
         protected String doInBackground(RequestHttp... params) {
             final String conteudo = (String) HttpManager.getDados(params[0]);
-
             if(conteudo.equals("Sucesso"))
                 sucesso = true;
             else
