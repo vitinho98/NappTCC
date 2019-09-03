@@ -35,4 +35,5 @@ public class AgendaProfissional {
     public void setFkProfissional(Profissional fkProfissional) {
         this.fkProfissional = fkProfissional;
     }
+
 }

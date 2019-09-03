@@ -61,13 +61,12 @@ public class HorarioAtendimentoAdapter extends RecyclerView.Adapter<HorarioAtend
 
         final AgendaProfissional agendaProfissional = agendaProfisisonais.get(position);
 
-<<<<<<< HEAD
         txtDia.setText(String.valueOf(agendaProfissional.getData()));
-=======
+
         //TODO
         //txtDia.setText(Date.valueOf(agendaProfissional.getData()));
         //txtHora.setText(agendaProfissional.getData() + ":" + agendaProfissional.getMinutos());
->>>>>>> 1d7cc48f860a237dd568e5e98f77bac65a14ec2a
+
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

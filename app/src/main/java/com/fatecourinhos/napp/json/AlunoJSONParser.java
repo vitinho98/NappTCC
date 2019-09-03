@@ -12,17 +12,21 @@ import java.util.List;
 public class AlunoJSONParser {
 
     public static List<Aluno> parseDados(String content){
-        try{
+
+        try {
 
             JSONArray jsonArray = new JSONArray(content);
-            List<Aluno> alunoList = new ArrayList<>();
+            List<Aluno> alunos = new ArrayList<>();
 
-            Usuario usuario = new Usuario();
-            Aluno aluno = new Aluno();
+            Usuario usuario;
+            Aluno aluno;
 
-            for(int i=0; i<jsonArray.length(); i++){
+            for (int i=0; i<jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                usuario = new Usuario();
+                aluno = new Aluno();
 
                 aluno.setIdAluno(jsonObject.getInt("idAluno"));
                 aluno.setNomeAluno(jsonObject.getString("nomeAluno"));
@@ -45,15 +49,15 @@ public class AlunoJSONParser {
                 usuario.setStatus(jsonObject.getInt("status"));
                 aluno.setFkUsuario(usuario);
 
-                alunoList.add(aluno);
+                alunos.add(aluno);
 
             }
 
-            return alunoList;
+            return alunos;
 
         }catch (Exception e){
-            e.printStackTrace();
             return null;
         }
     }
+
 }

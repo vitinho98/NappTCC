@@ -33,7 +33,6 @@ public class CampoAtuacaoJSONParser {
             return camposAtuacao;
 
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }

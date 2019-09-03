@@ -34,7 +34,6 @@ public class LocalAtendimentoJSONParser {
             return locaisAtendimento;
 
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }

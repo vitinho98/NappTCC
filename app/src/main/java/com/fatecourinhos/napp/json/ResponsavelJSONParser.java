@@ -37,7 +37,6 @@ public class ResponsavelJSONParser {
             return responsaveis;
 
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }

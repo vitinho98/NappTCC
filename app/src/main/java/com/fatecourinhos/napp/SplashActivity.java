@@ -16,8 +16,11 @@ import com.fatecourinhos.napp.view.MenuProfissionalActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
+    //variaveis para manipular bd do celular
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+
+    //variaveis globais
     boolean ativo;
     String conteudo;
 
@@ -52,6 +55,20 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         }
+
+    }
+
+    //valida se já possui uma conta logada no dispositivo
+    private boolean validarShared(){
+
+        if (preferences.contains("conected")) {
+
+            boolean resultado = preferences.getBoolean("conected", false);
+            return resultado;
+
+        } else
+            return false;
+
     }
 
     //verifica se o usuario salvo no dispotivo ainda está ativo
@@ -67,19 +84,6 @@ public class SplashActivity extends AppCompatActivity {
 
         isAtivo task = new isAtivo();
         task.execute(requestHttp);
-
-    }
-
-    //valida se já possui uma conta logada no dispositivo
-    private boolean validarShared(){
-
-        if (preferences.contains("conected")) {
-
-            boolean resultado = preferences.getBoolean("conected", false);
-            return resultado;
-
-        } else
-            return false;
 
     }
 
@@ -114,4 +118,5 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
     }
+
 }

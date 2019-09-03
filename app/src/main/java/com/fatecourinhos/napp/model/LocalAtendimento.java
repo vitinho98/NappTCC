@@ -7,11 +7,7 @@ public class LocalAtendimento {
     private String nomeBloco;
 
     public LocalAtendimento() {
-    }
 
-    public LocalAtendimento(int idLocalAtendimento, String nomeLocal) {
-        this.idLocalAtendimento = idLocalAtendimento;
-        this.nomeLocal = nomeLocal;
     }
 
     public int getIdLocalAtendimento() {

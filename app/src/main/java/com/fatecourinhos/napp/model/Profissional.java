@@ -12,7 +12,6 @@ public class Profissional {
 
     }
 
-
     public int getIdProfissional() {
         return idProfissional;
     }

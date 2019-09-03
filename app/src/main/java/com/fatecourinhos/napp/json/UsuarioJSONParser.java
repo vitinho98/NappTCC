@@ -36,8 +36,8 @@ public class UsuarioJSONParser {
             return usuarioList;
 
         }catch (Exception e){
-            e.printStackTrace();
             return null;
         }
     }
+
 }

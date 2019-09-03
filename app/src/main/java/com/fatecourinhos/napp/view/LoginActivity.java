@@ -51,17 +51,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         getComponentes();
-
-
-
         setOnClicks();
-
     }
 
     //chama os componentes da tela
     private void getComponentes(){
-
-
 
         btnLogin = findViewById(R.id.btn_entrar);
         txtCadastrar = findViewById(R.id.txt_cadastrar);
@@ -75,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
         pgBar = findViewById(R.id.pgBarLogin);
         pgBar.setVisibility(View.INVISIBLE);
+
     }
 
     //seta o evento on click dos componentes
@@ -274,7 +269,5 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
         }
     }
-
-
 
 }

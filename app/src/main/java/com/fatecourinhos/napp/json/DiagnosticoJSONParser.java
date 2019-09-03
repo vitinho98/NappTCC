@@ -33,8 +33,8 @@ public class DiagnosticoJSONParser {
             return diagnosticos;
 
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
+    
 }

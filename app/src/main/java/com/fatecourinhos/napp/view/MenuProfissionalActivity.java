@@ -80,16 +80,8 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                         startActivity(new Intent(MenuProfissionalActivity.this, CadastroProfissional.class));
                         break;
 
-<<<<<<< HEAD
                     case("HORARIO"):
                         startActivity(new Intent(MenuProfissionalActivity.this, CadastroHorario.class));
-                        break;
-=======
-                    /*case("HORARIO"): TODO
-                        CadastroHorarioooo cadastroHorarioooo = new CadastroHorarioooo();
-                        cadastroHorarioooo.show(getSupportFragmentManager(), "HORARIO");
-                        break;*/
->>>>>>> 1d7cc48f860a237dd568e5e98f77bac65a14ec2a
 
                     case("LOCAL"):
                         CadastroLocalAtendimento cadastroLocalAtendimento = new CadastroLocalAtendimento();
@@ -164,7 +156,6 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         return true;
     }
 
-    //TO DO --> Adicionar todas as telas par
     //método chamado quando algum item do drawer é clicado
     private void displaySeletecScreen(int itemid) {
 

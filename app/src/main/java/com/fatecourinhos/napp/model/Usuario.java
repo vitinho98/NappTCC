@@ -12,14 +12,6 @@ public class Usuario {
 
     }
 
-    public Usuario(int idUsuario, String login, String senha, String tipoUsuario, int status) {
-        this.idUsuario = idUsuario;
-        this.login = login;
-        this.senha = senha;
-        this.tipoUsuario = tipoUsuario;
-        this.status = status;
-    }
-
     public int getIdUsuario() {
         return idUsuario;
     }

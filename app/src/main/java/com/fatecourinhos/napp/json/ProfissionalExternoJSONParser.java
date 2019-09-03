@@ -13,18 +13,23 @@ import java.util.List;
 public class ProfissionalExternoJSONParser {
 
     public static List<ProfissionalExternoModel> parseDados(String content) {
+
         try {
 
             JSONArray jsonArray = new JSONArray(content);
-            List<ProfissionalExternoModel> profissionaExternolList = new ArrayList<>();
+            List<ProfissionalExternoModel> profissionaisExternos = new ArrayList<>();
 
-            Responsavel responsavel = new Responsavel();
-            CampoAtuacao campoAtuacao = new CampoAtuacao();
-            ProfissionalExternoModel profissionalExterno = new ProfissionalExternoModel();
+            Responsavel responsavel;
+            CampoAtuacao campoAtuacao;
+            ProfissionalExternoModel profissionalExterno;
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                responsavel = new Responsavel();
+                campoAtuacao = new CampoAtuacao();
+                profissionalExterno = new ProfissionalExternoModel();
 
                 profissionalExterno.setBairro(jsonObject.getString("bairro"));
                 profissionalExterno.setCelularProfissionalExterno(jsonObject.getString("celularProfissionalExterno"));
@@ -47,15 +52,15 @@ public class ProfissionalExternoJSONParser {
                 responsavel.setTelefoneResponsavel(jsonObject.getString("telefoneResponsavel"));
                 profissionalExterno.setFkResponsavel(responsavel);
 
-                profissionaExternolList.add(profissionalExterno);
+                profissionaisExternos.add(profissionalExterno);
 
             }
 
-            return profissionaExternolList;
+            return profissionaisExternos;
 
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
+
 }
