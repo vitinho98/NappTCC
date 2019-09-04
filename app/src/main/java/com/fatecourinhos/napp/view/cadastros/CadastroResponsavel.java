@@ -16,9 +16,11 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 public class CadastroResponsavel extends AppCompatActivity {
 
+    //componentes da tela
     private AppCompatEditText editTextNomeResponsavel, editTextEmailResponsavel, editTextCelularResponsavel, editTextTelefoneResponsavel;
     private Button btn_cadastrar_responsavel;
 
+    //variaveis globais
     Responsavel responsavel;
     String conteudo;
     boolean sucesso;
@@ -86,6 +88,7 @@ public class CadastroResponsavel extends AppCompatActivity {
 
 }
 
+    //pega os componentes da tela
     private void getComponentes(){
 
         editTextCelularResponsavel = findViewById(R.id.edit_text_celular_responsavel);
@@ -97,7 +100,8 @@ public class CadastroResponsavel extends AppCompatActivity {
 
     }
 
-    public boolean conferirDados(){
+    //confere se os campos necessarios foram inseridos
+    private boolean conferirDados(){
 
         if (editTextNomeResponsavel.getText().toString().isEmpty())
             return false;
@@ -106,6 +110,7 @@ public class CadastroResponsavel extends AppCompatActivity {
 
     }
 
+    //realiza o cadastro
     private void inserirResponsavel(Responsavel responsavel) {
 
         String uri = "http://vitorsilva.xyz/napp/responsavel/inserirResponsavel.php";
@@ -124,6 +129,7 @@ public class CadastroResponsavel extends AppCompatActivity {
 
     }
 
+    //realiza a alteração
     private void alterarResponsavel(Responsavel responsavel) {
 
         String uri = "http://vitorsilva.xyz/napp/responsavel/alterarResponsavel.php";

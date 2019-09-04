@@ -233,7 +233,7 @@ public class LoginActivity extends AppCompatActivity {
 
         requestHttp.setParametro("login", usuario.getLogin());
         requestHttp.setParametro("senha", usuario.getSenha());
-        Log.e("TESTE ENVIADO", usuario.getLogin() + " - " + usuario.getSenha());
+
         autenticarUsuario task = new autenticarUsuario();
         task.execute(requestHttp);
 
@@ -250,7 +250,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
-            Log.e("TESTE RECEBIDO", conteudo);
+
             if (conteudo.contains("Vazio"))
                 sucesso = false;
             else

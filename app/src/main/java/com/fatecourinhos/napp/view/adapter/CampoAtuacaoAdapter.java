@@ -42,6 +42,7 @@ public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoAdapte
         this.listener = listener;
     }
 
+
     @NonNull
     @Override
     public CampoAtuacaoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
