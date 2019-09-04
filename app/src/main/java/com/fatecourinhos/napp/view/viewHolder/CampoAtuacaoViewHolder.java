@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.CampoAtuacao;
+import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
 
 public class CampoAtuacaoViewHolder extends RecyclerView.ViewHolder {
 
@@ -21,8 +22,14 @@ public class CampoAtuacaoViewHolder extends RecyclerView.ViewHolder {
         this.textView = itemView.findViewById(R.id.txt_area_lista);
     }
 
-    public void bindData(CampoAtuacao campoAtuacao){
+    public void bindData(final CampoAtuacao campoAtuacao, final OnCampoAtuacaoInteractionListener listener){
         textView.setText(campoAtuacao.getNomeCampoAtuacao());
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onListClick(campoAtuacao);
+            }
+        });
     }
 
 }

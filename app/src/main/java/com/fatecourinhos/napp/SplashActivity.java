@@ -34,25 +34,22 @@ public class SplashActivity extends AppCompatActivity {
 
         if (validarShared()) {
 
-            if (preferences.contains("tipoUsuario")) {
+            String tipoUsuario = preferences.getString("tipoUsuario", null);
 
-                String tipoUsuario = preferences.getString("tipoUsuario", null);
+            if (tipoUsuario.contains("Aluno")) {
 
-                if (tipoUsuario.contains("aluno")) {
+                startActivity(new Intent(SplashActivity.this, MenuAlunoActivity.class));
+                finish();
 
-                    startActivity(new Intent(SplashActivity.this, MenuAlunoActivity.class));
-                    finish();
+            } else if (tipoUsuario.contains("Profissional") || tipoUsuario.contains("Administrador")) {
 
-                } else if (tipoUsuario.contains("profissional") || tipoUsuario.contains("administrador")) {
+                Usuario usuario = new Usuario();
+                usuario.setIdUsuario(preferences.getInt("idUsuario", 0));
 
-                    Usuario usuario = new Usuario();
-                    usuario.setIdUsuario(preferences.getInt("idUsuario", 0));
+                isAtivo(usuario);
 
-                    isAtivo(usuario);
-
-                } else {
+            } else {
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                }
             }
         }
 

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.CampoAtuacao;
+import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
 import com.fatecourinhos.napp.view.viewHolder.CampoAtuacaoViewHolder;
 
 import java.util.List;
@@ -17,9 +18,11 @@ import java.util.List;
 public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHolder>{
 
     private List<CampoAtuacao> camposAtuacao;
+    private OnCampoAtuacaoInteractionListener listener;
 
-    public CampoAtuacaoAdapter(List<CampoAtuacao> camposAtuacao){
+    public CampoAtuacaoAdapter(List<CampoAtuacao> camposAtuacao, OnCampoAtuacaoInteractionListener listener){
         this.camposAtuacao=camposAtuacao;
+        this.listener=listener;
     }
 
     @NonNull
@@ -36,7 +39,7 @@ public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHo
     @Override
     public void onBindViewHolder(@NonNull CampoAtuacaoViewHolder holder, final int position) {
         CampoAtuacao campoAtuacao = this.camposAtuacao.get(position);
-        holder.bindData(campoAtuacao);
+        holder.bindData(campoAtuacao, listener);
     }
 
     @Override

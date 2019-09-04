@@ -57,6 +57,9 @@ public class LoginActivity extends AppCompatActivity {
     //chama os componentes da tela
     private void getComponentes(){
 
+        preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
+        editor = preferences.edit();
+
         btnLogin = findViewById(R.id.btn_entrar);
         txtCadastrar = findViewById(R.id.txt_cadastrar);
         imgSobre = findViewById(R.id.img_sobre);
