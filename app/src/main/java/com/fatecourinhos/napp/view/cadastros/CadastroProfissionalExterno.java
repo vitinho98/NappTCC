@@ -48,7 +48,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         editTextNomeProfissionalExterno = (AppCompatEditText) findViewById(R.id.edit_text_nome_profissional_externo);
         editTextNumero = (AppCompatEditText) findViewById(R.id.edit_text_numero_profissional_externo);
 
-        final List<CampoAtuacao> camposAtuacao = CampoAtuacaoController.selecionarCamposAtuacao();
+        //final List<CampoAtuacao> camposAtuacao = CampoAtuacaoController.selecionarCamposAtuacao();
         final List<Responsavel> responsaveis = ResponsavelController.selecionarResponsaveis();
 
         List<String> nomesCampos = new ArrayList<String>();
