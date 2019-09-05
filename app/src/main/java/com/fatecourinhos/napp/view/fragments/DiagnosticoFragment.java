@@ -80,7 +80,6 @@ public class DiagnosticoFragment extends Fragment{
             public void onResponse(Call<List<Diagnostico>> call, Response<List<Diagnostico>> response) {
                 diagnosticos = response.body();
                 diagnosticoAdapter = new DiagnosticoAdapter(diagnosticos, listener);
-                System.out.println(diagnosticos.get(1).getNomeDiagnostico());
                 viewHolder.recyclerViewDiagnosticos.setAdapter(diagnosticoAdapter);
             }
 

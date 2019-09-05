@@ -38,7 +38,6 @@ public class LocalAtendimentoFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
 
         getActivity().setTitle("Locais de Atendimento");
-
         view = inflater.inflate(R.layout.fragment_local_atendimento,container,false);
         context = view.getContext();
 

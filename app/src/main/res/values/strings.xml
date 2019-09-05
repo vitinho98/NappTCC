@@ -45,8 +45,8 @@
     <string name="title_notifications">Notifications</string>
 
     <!-- Cadastros/Listas -->
-    <string name="txt_bloco">Bloco:</string>
-    <string name="txt_local">Local:</string>
+    <string name="txt_bloco">Bloco: </string>
+    <string name="txt_local">Local: </string>
     <string name="txt_dia">Dia:</string>
     <string name="txt_horario">Horário:</string>
     <string name="btn_salvar">SALVAR</string>

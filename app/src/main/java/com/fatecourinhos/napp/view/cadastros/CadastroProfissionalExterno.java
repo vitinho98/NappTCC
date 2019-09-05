@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
     private String conteudo;
 
     //componentes da tela
+    private ProgressBar progressBar;
     private AppCompatEditText editTextNomeProfissionalExterno, editTextTelefoneProfissionalExterno, editTextCelularProfissionalExterno,
     editTextBairro, editTextNumero, editTextCidadeProfissionalExterno, editTextEndereco, editTextEmailProfissionalExterno;
     private Spinner spinnerTipo, spinnerResponsavel;
@@ -114,7 +116,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
         if (conferirDados(profissionalExterno)) {
 
-            if(inserir)
+            if (inserir)
                 inserirProfissionalExterno(profissionalExterno);
             else
                 alterarProfissionalExterno(profissionalExterno);
@@ -124,12 +126,10 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
     }
 
-    private void limparDados(){
-
-    }
-
     //carrega os sppiners com os dados do banco
     private void carregarSpinners(){
+
+        progressBar.setVisibility(ProgressBar.VISIBLE);
 
         nomesCampos.add("Selecione o campo de atuação");
         nomesCampos.add("Nenhum");
@@ -170,12 +170,15 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
                 ArrayAdapter<String> adapterResponsavel =  new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, nomesResponsaveis);
                 spinnerResponsavel.setAdapter(adapterResponsavel);
+
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<List<Responsavel>> call, Throwable t) {
                 ArrayAdapter<String> adapterResponsavel =  new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, nomesResponsaveis);
                 spinnerResponsavel.setAdapter(adapterResponsavel);
+                progressBar.setVisibility(ProgressBar.INVISIBLE);
             }
         });
 
@@ -219,11 +222,17 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
         spinnerResponsavel = findViewById(R.id.spinnerResponsavel);
         spinnerTipo = findViewById(R.id.spinnerCampoAtuacao);
+
+        progressBar = findViewById(R.id.progressBarCadResponsavel);
     }
 
     private boolean conferirDados(ProfissionalExterno profissionalExterno){
-        boolean retorno = true;
-        return retorno;
+
+        if (profissionalExterno.getNomeProfissionalExterno().isEmpty())
+            return false;
+        else
+            return true;
+
     }
 
     public void inserirProfissionalExterno(ProfissionalExterno profissionalExterno) {
@@ -239,11 +248,20 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         requestHttp.setParametro("celularProfissionalExterno", profissionalExterno.getCelularProfissionalExterno());
         requestHttp.setParametro("telefoneProfissionalExterno", profissionalExterno.getCelularProfissionalExterno());
         requestHttp.setParametro("cidadeProfissionalExterno", profissionalExterno.getCidadeProfissionalExterno());
-        requestHttp.setParametro("idResponsavel", String.valueOf(profissionalExterno.getFkResponsavel().getIdResponsavel()));
         requestHttp.setParametro("enderecoProfissionalExterno", profissionalExterno.getEndereco());
         requestHttp.setParametro("emailProfissionalExterno", profissionalExterno.getEmailProfissionalExterno());
         requestHttp.setParametro("numeroProfissionalExterno", profissionalExterno.getNumero());
-        requestHttp.setParametro("idCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
+
+
+        if (profissionalExterno.getFkCampoAtuacao() != null)
+            requestHttp.setParametro("fkCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
+        else
+            requestHttp.setParametro("fkCampoAtuacao", null);
+
+        if (profissionalExterno.getFkResponsavel() != null)
+            requestHttp.setParametro("fkResponsavel", String.valueOf(profissionalExterno.getFkResponsavel().getIdResponsavel()));
+        else
+            requestHttp.setParametro("fkCampoAtuacao", null);
 
         CadastrarProfissionalExterno task = new CadastrarProfissionalExterno();
         task.execute(requestHttp);
@@ -283,9 +301,10 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
+            System.out.println("aq");
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Sucesso"))
+            if (conteudo.contains("Sucesso"))
                 sucesso = true;
             else
                 sucesso = false;

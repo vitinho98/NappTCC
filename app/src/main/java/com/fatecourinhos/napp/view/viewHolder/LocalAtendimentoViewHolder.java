@@ -19,8 +19,8 @@ public class LocalAtendimentoViewHolder extends RecyclerView.ViewHolder {
     public LocalAtendimentoViewHolder(@NonNull View itemView) {
         super(itemView);
         this.cardView = itemView.findViewById(R.id.card_view_local_atendimento);
-        this.textViewLocal = itemView.findViewById(R.id.txt_local_lista);
-        this.textViewBloco = itemView.findViewById(R.id.txt_bloco_lista);
+        this.textViewLocal = itemView.findViewById(R.id.txt_local_atendimento_lista);
+        this.textViewBloco = itemView.findViewById(R.id.txt_bloco_local_atendimento_lista);
     }
 
     public void bindData(final LocalAtendimento localAtendimento, final OnLocalAtendimentoInteractionListener listener){
