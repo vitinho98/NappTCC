@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,7 +27,6 @@ public class CadastroProfissional extends AppCompatActivity {
     Usuario usuario = new Usuario();
 
     boolean sucesso;
-    String conteudo;
 
     private AppCompatEditText editTextNome, editTextCel, editTextEmail, editTextLogin, editTextSenha;
     private Spinner spinnerProf;
@@ -107,6 +107,28 @@ public class CadastroProfissional extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipo_prof_array, android.R.layout.simple_spinner_item);
         spinnerProf.setAdapter(adapter);
 
+        spinnerProf.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                switch (position) {
+                    case 0:
+                        usuario.setTipoUsuario("Administrador");
+                        break;
+                    case 1:
+                        usuario.setTipoUsuario("Profissional");
+                        break;
+                    default:
+                        usuario.setTipoUsuario("Administrador");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                usuario.setTipoUsuario("Administrador");
+            }
+
+        });
+
         switchProf = findViewById(R.id.switchStatus);
 
         btn_cadastrar_profissional = findViewById(R.id.btn_salvar_profissional);
@@ -122,39 +144,19 @@ public class CadastroProfissional extends AppCompatActivity {
         usuario.setLogin(editTextLogin.getText().toString());
         usuario.setSenha(editTextSenha.getText().toString());
 
-        spinnerProf.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                switch (position) {
-                    case 0:
-                        usuario.setTipoUsuario("Administrador");
-                        break;
-                    case 1:
-                        usuario.setTipoUsuario("Profissional");
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                usuario.setTipoUsuario("Administrador");
-            }
-
-        });
-
         if (switchProf.isChecked())
             usuario.setStatus(0);
         else
             usuario.setStatus(1);
-
         profissional.setFkUsuario(usuario);
 
-        if (conferirDados(profissional))
+        if (conferirDados(profissional)) {
 
-            if(inserir)
+            if (inserir) {
                 inserirProfissional(profissional);
-            else
+            } else
                 alterarProfissional(profissional);
+        }
         else
             Toast.makeText(this, "Insira todos os campos corretamente!", Toast.LENGTH_LONG).show();
 
@@ -195,7 +197,6 @@ public class CadastroProfissional extends AppCompatActivity {
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-
         requestHttp.setParametro("nomeProfissional", profissional.getNomeProfissional());
         requestHttp.setParametro("celProfissional", profissional.getCelularProfissional());
         requestHttp.setParametro("emailProfissional", profissional.getEmailProfissional());
@@ -206,7 +207,6 @@ public class CadastroProfissional extends AppCompatActivity {
 
         InserirProfissional task = new InserirProfissional();
         task.execute(requestHttp);
-
     }
 
     public void alterarProfissional(Profissional profissional){
@@ -239,9 +239,8 @@ public class CadastroProfissional extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
-
-            if(conteudo.contains("Sucesso"))
+            String conteudo = (String) HttpManager.getDados(params[0]);
+            if(conteudo.equals("Sucesso"))
                 sucesso = true;
             else
                 sucesso = false;
@@ -268,7 +267,7 @@ public class CadastroProfissional extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
+            String conteudo = HttpManager.getDados(params[0]);
 
             if(conteudo.contains("Sucesso"))
                 sucesso = true;
