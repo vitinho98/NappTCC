@@ -15,20 +15,21 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.LocalAtendimentoController;
 import com.fatecourinhos.napp.model.LocalAtendimento;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
 public class CadastroLocalAtendimento extends AppCompatDialogFragment {
 
-    View view;
-    AppCompatEditText editTextNomeBloco;
-    AppCompatEditText editTextNomeLocal;
+    //componentes da tela
+    private AppCompatEditText editTextNomeBloco;
+    private AppCompatEditText editTextNomeLocal;
 
-    LocalAtendimento localAtendimento;
-    String conteudo;
-    boolean sucesso;
+    //variaveis gloabais
+    private View view;
+    private LocalAtendimento localAtendimento;
+    private String conteudo;
+    private boolean sucesso;
 
     public CadastroLocalAtendimento() {
 
@@ -40,14 +41,12 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
         view = inflater.inflate(R.layout.cadastro_activity_local, null);
         editTextNomeBloco = view.findViewById(R.id.edit_text_nome_bloco);
         editTextNomeLocal = view.findViewById(R.id.edit_text_nome_sala);
-
         builder.setView(view).setTitle("Local de Atendimento");
 
-        if(getArguments() != null){
+        if (getArguments() != null) {
 
             Bundle data = getArguments();
 
@@ -60,7 +59,7 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    if(editTextNomeBloco.getText().toString().isEmpty() || editTextNomeLocal.getText().toString().isEmpty())
+                    if (editTextNomeBloco.getText().toString().isEmpty() || editTextNomeLocal.getText().toString().isEmpty())
                         Toast.makeText(getContext(), "Insira todos os campos", Toast.LENGTH_SHORT).show();
 
                     else {
@@ -79,7 +78,7 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    if(editTextNomeBloco.getText().toString().isEmpty() || editTextNomeLocal.getText().toString().isEmpty())
+                    if (editTextNomeBloco.getText().toString().isEmpty() || editTextNomeLocal.getText().toString().isEmpty())
                         Toast.makeText(getContext(), "Insira todos os campos", Toast.LENGTH_SHORT).show();
 
                     else {
@@ -104,11 +103,6 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
 
         return builder.create();
 
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     private void inserirLocalAtendimento(LocalAtendimento localAtendimento) {

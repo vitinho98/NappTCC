@@ -4,7 +4,7 @@ public class EncaminhamentoModel {
 
     private int idEncaminhamento;
     private AgendamentoModel fkAgendamento;
-    private ProfissionalExternoModel fkProfissionalExterno;
+    private ProfissionalExterno fkProfissionalExterno;
     private String data;
     private String hora;
 
@@ -27,11 +27,11 @@ public class EncaminhamentoModel {
         this.fkAgendamento = fkAgendamento;
     }
 
-    public ProfissionalExternoModel getFkProfissionalExterno() {
+    public ProfissionalExterno getFkProfissionalExterno() {
         return fkProfissionalExterno;
     }
 
-    public void setFkProfissionalExterno(ProfissionalExternoModel fkProfissionalExterno) {
+    public void setFkProfissionalExterno(ProfissionalExterno fkProfissionalExterno) {
         this.fkProfissionalExterno = fkProfissionalExterno;
     }
 

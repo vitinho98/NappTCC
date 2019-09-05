@@ -13,34 +13,19 @@
         android:layout_height="wrap_content"
         tools:context=".view.LoginActivity">
 
-        <ImageView
-            android:id="@+id/img_profissional"
-            android:layout_width="112dp"
-            android:layout_height="105dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_menu_gallery" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txt_layout_nome_profissional"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_profissional"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="169dp">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edit_text_nome_profissional"

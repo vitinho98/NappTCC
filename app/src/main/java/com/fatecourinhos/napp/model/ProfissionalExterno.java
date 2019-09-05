@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.model;
 
-public class ProfissionalExternoModel {
+public class ProfissionalExterno {
 
     private int idProfissionalExterno;
     private String nomeProfissionalExterno;
@@ -14,21 +14,8 @@ public class ProfissionalExternoModel {
     private CampoAtuacao fkCampoAtuacao;
     private Responsavel fkResponsavel;
 
-    public ProfissionalExternoModel() {
-    }
+    public ProfissionalExterno() {
 
-    public ProfissionalExternoModel(int idProfissionalExterno, String nomeProfissionalExterno, String cidadeProfissionalExterno, String bairro, String endereco, String numero, String emailProfissionalExterno, String telefoneProfissionalExterno, String celularProfissionalExterno, CampoAtuacao campoAtuacao, Responsavel fkResponsavel) {
-        this.idProfissionalExterno = idProfissionalExterno;
-        this.nomeProfissionalExterno = nomeProfissionalExterno;
-        this.cidadeProfissionalExterno = cidadeProfissionalExterno;
-        this.bairro = bairro;
-        this.endereco = endereco;
-        this.numero = numero;
-        this.emailProfissionalExterno = emailProfissionalExterno;
-        this.telefoneProfissionalExterno = telefoneProfissionalExterno;
-        this.celularProfissionalExterno = celularProfissionalExterno;
-        this.fkCampoAtuacao = campoAtuacao;
-        this.fkResponsavel = fkResponsavel;
     }
 
     public int getIdProfissionalExterno() {
@@ -103,11 +90,11 @@ public class ProfissionalExternoModel {
         this.celularProfissionalExterno = celularProfissionalExterno;
     }
 
-    public CampoAtuacao getCampoAtuacao() {
+    public CampoAtuacao getFkCampoAtuacao() {
         return fkCampoAtuacao;
     }
 
-    public void setCampoAtuacao(CampoAtuacao campoAtuacao) {
+    public void setFkCampoAtuacao(CampoAtuacao campoAtuacao) {
         this.fkCampoAtuacao = campoAtuacao;
     }
 
@@ -118,4 +105,5 @@ public class ProfissionalExternoModel {
     public void setFkResponsavel(Responsavel fkResponsavel) {
         this.fkResponsavel = fkResponsavel;
     }
+
 }

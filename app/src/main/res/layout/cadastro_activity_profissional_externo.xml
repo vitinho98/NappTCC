@@ -223,7 +223,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerTipo" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCampoAtuacao" />
 
         <Spinner
             android:id="@+id/spinnerResponsavel"
@@ -239,7 +239,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_layout_telefone_profissional_externo" />
 
         <Spinner
-            android:id="@+id/spinnerTipo"
+            android:id="@+id/spinnerCampoAtuacao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"

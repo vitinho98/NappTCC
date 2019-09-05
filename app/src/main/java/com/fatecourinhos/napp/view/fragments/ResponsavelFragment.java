@@ -8,15 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.ResponsavelController;
-import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.Responsavel;
-import com.fatecourinhos.napp.view.adapter.CampoAtuacaoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroResponsavel;
 import com.fatecourinhos.napp.view.adapter.ResponsavelAdapter;
-import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
 import com.fatecourinhos.napp.view.listener.OnResponsavelInteractionListener;
-import com.fatecourinhos.napp.view.listener.RetrofitClass;
+import com.fatecourinhos.napp.util.RetrofitClass;
 
 import java.util.List;
 

@@ -79,14 +79,4 @@
         <item>Profissional</item>
     </string-array>
 
-    <!-- Spinner -->
-    <string-array name="dia_semana_array">
-        <item>Segunda-Feira</item>
-        <item>Terça-Feira</item>
-        <item>Quarta-Feira</item>
-        <item>Quinta-Feira</item>
-        <item>Sexta-Feira</item>
-        <item>Sábado</item>
-    </string-array>
-
 </resources>

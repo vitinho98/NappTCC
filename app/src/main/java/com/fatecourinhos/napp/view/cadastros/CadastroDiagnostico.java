@@ -21,12 +21,14 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 public class CadastroDiagnostico extends AppCompatDialogFragment {
 
-    AppCompatEditText editTextNomeDiagnostico;
-    View view;
+    //componente da tela
+    private AppCompatEditText editTextNomeDiagnostico;
 
-    Diagnostico diagnostico;
-    String conteudo;
-    boolean sucesso;
+    //variaveis globais
+    private View view;
+    private Diagnostico diagnostico;
+    private String conteudo;
+    private boolean sucesso;
 
     public CadastroDiagnostico() {
 
@@ -38,13 +40,11 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
         view = inflater.inflate(R.layout.cadastro_activity_diagnostico, null);
         editTextNomeDiagnostico = view.findViewById(R.id.edit_text_nome_diagnostico);
-
         builder.setView(view).setTitle("Diagnóstico");
 
-        if(getArguments() != null){
+        if (getArguments() != null){
 
             Bundle data = getArguments();
 
@@ -56,7 +56,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    if(editTextNomeDiagnostico.getText().toString().isEmpty())
+                    if (editTextNomeDiagnostico.getText().toString().isEmpty())
                         Toast.makeText(getContext(),"Insira o nome do diagnóstico", Toast.LENGTH_SHORT).show();
 
                     else {
@@ -74,10 +74,10 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    if(editTextNomeDiagnostico.getText().toString().isEmpty())
+                    if (editTextNomeDiagnostico.getText().toString().isEmpty())
                         Toast.makeText(getContext(),"Insira o nome do diagnóstico", Toast.LENGTH_SHORT).show();
 
-                    else{
+                    else {
 
                         diagnostico = new Diagnostico();
                         diagnostico.setNomeDiagnostico(editTextNomeDiagnostico.getText().toString());
@@ -97,11 +97,6 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
         return builder.create();
 
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     private void inserirDiagnostico(Diagnostico diagnostico){

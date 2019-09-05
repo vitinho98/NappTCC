@@ -17,12 +17,12 @@ import com.fatecourinhos.napp.view.MenuProfissionalActivity;
 public class SplashActivity extends AppCompatActivity {
 
     //variaveis para manipular bd do celular
-    SharedPreferences preferences;
-    SharedPreferences.Editor editor;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     //variaveis globais
-    boolean ativo;
-    String conteudo;
+    private boolean ativo;
+    private String conteudo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

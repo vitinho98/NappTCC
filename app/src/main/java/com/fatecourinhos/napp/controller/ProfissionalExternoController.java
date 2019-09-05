@@ -3,7 +3,7 @@ package com.fatecourinhos.napp.controller;
 import android.os.AsyncTask;
 
 import com.fatecourinhos.napp.json.ProfissionalExternoJSONParser;
-import com.fatecourinhos.napp.model.ProfissionalExternoModel;
+import com.fatecourinhos.napp.model.ProfissionalExterno;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
@@ -12,9 +12,9 @@ import java.util.List;
 public class ProfissionalExternoController {
 
     public static boolean sucesso;
-    public static List<ProfissionalExternoModel> profissionaisExternos;
+    public static List<ProfissionalExterno> profissionaisExternos;
 
-    public static boolean inserirProfissionalExterno(ProfissionalExternoModel profissionalExterno) {
+    public static boolean inserirProfissionalExterno(ProfissionalExterno profissionalExterno) {
 
         String uri = "http://vitorsilva.xyz/napp/profissionalExterno/inserirProfissionalExterno.php";
 
@@ -31,7 +31,7 @@ public class ProfissionalExternoController {
         requestHttp.setParametro("enderecoProfissionalExterno", profissionalExterno.getEndereco());
         requestHttp.setParametro("emailProfissionalExterno", profissionalExterno.getEmailProfissionalExterno());
         requestHttp.setParametro("numeroProfissionalExterno", profissionalExterno.getNumero());
-        requestHttp.setParametro("idCampoAtuacao", String.valueOf(profissionalExterno.getCampoAtuacao().getIdCampoAtuacao()));
+        requestHttp.setParametro("idCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
 
         CadastrarProfissionalExterno task = new CadastrarProfissionalExterno();
         task.execute(requestHttp);
@@ -40,7 +40,7 @@ public class ProfissionalExternoController {
 
     }
 
-    public static boolean alterarProfissionalExterno(ProfissionalExternoModel profissionalExterno) {
+    public static boolean alterarProfissionalExterno(ProfissionalExterno profissionalExterno) {
 
         String uri = "http://vitorsilva.xyz/napp/profissionalExterno/alterarProfissionalExterno.php";
 
@@ -58,7 +58,7 @@ public class ProfissionalExternoController {
         requestHttp.setParametro("enderecoProfissionalExterno", profissionalExterno.getEndereco());
         requestHttp.setParametro("emailProfissionalExterno", profissionalExterno.getEmailProfissionalExterno());
         requestHttp.setParametro("numeroProfissionalExterno", profissionalExterno.getNumero());
-        requestHttp.setParametro("idCampoAtuacao", String.valueOf(profissionalExterno.getCampoAtuacao().getIdCampoAtuacao()));
+        requestHttp.setParametro("idCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
 
         AlterarProfissionalExterno task = new AlterarProfissionalExterno();
         task.execute(requestHttp);
@@ -67,7 +67,7 @@ public class ProfissionalExternoController {
 
     }
 
-    public static List<ProfissionalExternoModel> selecionarProfissionaisExternos() {
+    public static List<ProfissionalExterno> selecionarProfissionaisExternos() {
 
         String uri = "http://vitorsilva.xyz/napp/profissionalExterno/selecionarProfissionaisExternos.php";
 
@@ -77,7 +77,7 @@ public class ProfissionalExternoController {
         return profissionaisExternos;
     }
 
-    private static class SelecionarProfissionaisExternos extends AsyncTask<String, String, List<ProfissionalExternoModel>> {
+    private static class SelecionarProfissionaisExternos extends AsyncTask<String, String, List<ProfissionalExterno>> {
 
         @Override
         protected void onPreExecute() {
@@ -85,7 +85,7 @@ public class ProfissionalExternoController {
         }
 
         @Override
-        protected List<ProfissionalExternoModel> doInBackground(String... params) {
+        protected List<ProfissionalExterno> doInBackground(String... params) {
             final String conteudo = HttpManager.getDados(params[0]);
             profissionaisExternos = ProfissionalExternoJSONParser.parseDados(conteudo);
 
@@ -93,7 +93,7 @@ public class ProfissionalExternoController {
         }
 
         @Override
-        protected void onPostExecute(final List<ProfissionalExternoModel> profissionaisExternos) {
+        protected void onPostExecute(final List<ProfissionalExterno> profissionaisExternos) {
             super.onPostExecute(profissionaisExternos);
 
         }

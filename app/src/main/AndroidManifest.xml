@@ -29,6 +29,7 @@
             android:label="@string/title_activity_menu_aluno" />
         <activity android:name=".view.cadastros.CadastroAluno" />
         <activity android:name=".view.cadastros.CadastroProfissional" />
+        <activity android:name=".view.cadastros.CadastroProfissionalExterno" />
         <activity android:name=".view.cadastros.CadastroResponsavel" />
         <activity
             android:name=".view.MenuProfissionalActivity"

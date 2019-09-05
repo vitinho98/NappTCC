@@ -21,9 +21,10 @@ public class CadastroResponsavel extends AppCompatActivity {
     private Button btn_cadastrar_responsavel;
 
     //variaveis globais
-    Responsavel responsavel;
-    String conteudo;
-    boolean sucesso;
+    private View view;
+    private Responsavel responsavel;
+    private String conteudo;
+    private boolean sucesso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

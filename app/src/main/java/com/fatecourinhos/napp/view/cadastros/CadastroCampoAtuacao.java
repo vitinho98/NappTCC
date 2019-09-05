@@ -21,12 +21,14 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
-    AppCompatEditText editTextNomeArea;
-    View view;
+    //componente da tela
+    private AppCompatEditText editTextNomeCampo;
 
-    CampoAtuacao campoAtuacao;
-    String conteudo;
-    boolean sucesso;
+    //variaveis gloabais
+    private View view;
+    private CampoAtuacao campoAtuacao;
+    private String conteudo;
+    private boolean sucesso;
 
     public CadastroCampoAtuacao() {
 
@@ -39,15 +41,14 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         view = inflater.inflate(R.layout.cadastro_activity_area_atuacao, null);
-        editTextNomeArea = view.findViewById(R.id.edit_text_nome_area);
-
+        editTextNomeCampo = view.findViewById(R.id.edit_text_nome_area);
         builder.setView(view).setTitle("Campo de atuação");
 
         if (getArguments() != null) {
 
             Bundle data = getArguments();
 
-            editTextNomeArea.setText(data.getString("nomeCampoAtuacao"));
+            editTextNomeCampo.setText(data.getString("nomeCampoAtuacao"));
             campoAtuacao = new CampoAtuacao();
             campoAtuacao.setIdCampoAtuacao(data.getInt("idCampoAtuacao"));
 
@@ -55,12 +56,12 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    if(editTextNomeArea.getText().toString().isEmpty())
+                    if (editTextNomeCampo.getText().toString().isEmpty())
                         Toast.makeText(getContext(),"Insira o nome do campo de atuação", Toast.LENGTH_SHORT).show();
 
                     else {
 
-                        campoAtuacao.setNomeCampoAtuacao(editTextNomeArea.getText().toString());
+                        campoAtuacao.setNomeCampoAtuacao(editTextNomeCampo.getText().toString());
                         alterarCampoAtuacao(campoAtuacao);
 
                     }
@@ -73,13 +74,13 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    if(editTextNomeArea.getText().toString().isEmpty())
+                    if (editTextNomeCampo.getText().toString().isEmpty())
                         Toast.makeText(getContext(), "Insira o nome do campo de atuação", Toast.LENGTH_SHORT).show();
 
                     else {
 
                         campoAtuacao = new CampoAtuacao();
-                        campoAtuacao.setNomeCampoAtuacao(editTextNomeArea.getText().toString());
+                        campoAtuacao.setNomeCampoAtuacao(editTextNomeCampo.getText().toString());
                         inserirCampoAtuacao(campoAtuacao);
                     }
                 }
@@ -95,11 +96,6 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
         return builder.create();
 
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     private void inserirCampoAtuacao(CampoAtuacao campoAtuacao) {

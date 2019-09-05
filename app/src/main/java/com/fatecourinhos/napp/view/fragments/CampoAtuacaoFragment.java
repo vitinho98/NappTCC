@@ -10,7 +10,7 @@ import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.view.adapter.CampoAtuacaoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroCampoAtuacao;
 import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
-import com.fatecourinhos.napp.view.listener.RetrofitClass;
+import com.fatecourinhos.napp.util.RetrofitClass;
 
 import java.util.List;
 import androidx.annotation.Nullable;

@@ -1,7 +1,7 @@
 package com.fatecourinhos.napp.json;
 
 import com.fatecourinhos.napp.model.CampoAtuacao;
-import com.fatecourinhos.napp.model.ProfissionalExternoModel;
+import com.fatecourinhos.napp.model.ProfissionalExterno;
 import com.fatecourinhos.napp.model.Responsavel;
 
 import org.json.JSONArray;
@@ -12,16 +12,16 @@ import java.util.List;
 
 public class ProfissionalExternoJSONParser {
 
-    public static List<ProfissionalExternoModel> parseDados(String content) {
+    public static List<ProfissionalExterno> parseDados(String content) {
 
         try {
 
             JSONArray jsonArray = new JSONArray(content);
-            List<ProfissionalExternoModel> profissionaisExternos = new ArrayList<>();
+            List<ProfissionalExterno> profissionaisExternos = new ArrayList<>();
 
             Responsavel responsavel;
             CampoAtuacao campoAtuacao;
-            ProfissionalExternoModel profissionalExterno;
+            ProfissionalExterno profissionalExterno;
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -29,7 +29,7 @@ public class ProfissionalExternoJSONParser {
 
                 responsavel = new Responsavel();
                 campoAtuacao = new CampoAtuacao();
-                profissionalExterno = new ProfissionalExternoModel();
+                profissionalExterno = new ProfissionalExterno();
 
                 profissionalExterno.setBairro(jsonObject.getString("bairro"));
                 profissionalExterno.setCelularProfissionalExterno(jsonObject.getString("celularProfissionalExterno"));
@@ -43,7 +43,7 @@ public class ProfissionalExternoJSONParser {
 
                 campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
                 campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
-                profissionalExterno.setCampoAtuacao(campoAtuacao);
+                profissionalExterno.setFkCampoAtuacao(campoAtuacao);
 
                 responsavel.setCelularResponsavel(jsonObject.getString("celularResponsavel"));
                 responsavel.setEmailResponsavel(jsonObject.getString("emailResponsavel"));

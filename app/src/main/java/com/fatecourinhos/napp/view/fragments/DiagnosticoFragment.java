@@ -16,7 +16,7 @@ import com.fatecourinhos.napp.model.Diagnostico;
 import com.fatecourinhos.napp.view.adapter.DiagnosticoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroDiagnostico;
 import com.fatecourinhos.napp.view.listener.OnDiagnosticoInteractionListener;
-import com.fatecourinhos.napp.view.listener.RetrofitClass;
+import com.fatecourinhos.napp.util.RetrofitClass;
 
 import java.util.List;
 

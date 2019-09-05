@@ -7,16 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.LocalAtendimentoController;
-import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.LocalAtendimento;
-import com.fatecourinhos.napp.view.adapter.CampoAtuacaoAdapter;
 import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
-import com.fatecourinhos.napp.view.cadastros.CadastroCampoAtuacao;
 import com.fatecourinhos.napp.view.cadastros.CadastroLocalAtendimento;
-import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
 import com.fatecourinhos.napp.view.listener.OnLocalAtendimentoInteractionListener;
-import com.fatecourinhos.napp.view.listener.RetrofitClass;
+import com.fatecourinhos.napp.util.RetrofitClass;
 
 import java.util.List;
 

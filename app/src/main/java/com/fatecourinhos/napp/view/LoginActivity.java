@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,19 +30,18 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     //componente da tela de login
-    SharedPreferences preferences;
-    SharedPreferences.Editor editor;
-    AppCompatEditText editTextLogin, editTextSenha;
-    TextInputLayout textInputLayoutLogin, textInputLayoutSenha;
-    ImageView imgSobre;
-    TextView txtCadastrar;
-    Button btnLogin;
-    ProgressBar pgBar;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private AppCompatEditText editTextLogin, editTextSenha;
+    private TextInputLayout textInputLayoutLogin, textInputLayoutSenha;
+    private ImageView imgSobre;
+    private TextView txtCadastrar;
+    private Button btnLogin;
+    private ProgressBar pgBar;
 
     //variaveis globais
-    boolean ativo;
-    boolean sucesso;
-    String conteudo;
+    private boolean sucesso;
+    private String conteudo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -266,7 +264,7 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(s);
             pgBar.setVisibility(View.INVISIBLE);
 
-            if(sucesso)
+            if (sucesso)
                 login(conteudo);
             else
                 Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
