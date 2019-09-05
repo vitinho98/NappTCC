@@ -23,9 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".view.cadastros.CadastroHorario" />
-
         <activity
             android:name=".view.MenuAlunoActivity"
             android:label="@string/title_activity_menu_aluno" />
@@ -38,8 +36,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.SobreActivity" />
         <activity android:name=".view.LoginActivity">
-
         </activity>
+
     </application>
 
 </manifest>

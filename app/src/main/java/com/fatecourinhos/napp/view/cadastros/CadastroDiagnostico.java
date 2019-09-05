@@ -50,7 +50,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
             editTextNomeDiagnostico.setText(data.getString("nomeDiagnostico"));
             diagnostico = new Diagnostico();
-            diagnostico.setIdDiagostico(data.getInt("idDiagnostico"));
+            diagnostico.setIdDiagnostico(data.getInt("idDiagnostico"));
 
             builder.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
                 @Override
@@ -61,7 +61,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
                     else {
 
-                        diagnostico.setNomeDiagnotico(editTextNomeDiagnostico.getText().toString());
+                        diagnostico.setNomeDiagnostico(editTextNomeDiagnostico.getText().toString());
                         alterarDiagnostico(diagnostico);
 
                     }
@@ -80,7 +80,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
                     else{
 
                         diagnostico = new Diagnostico();
-                        diagnostico.setNomeDiagnotico(editTextNomeDiagnostico.getText().toString());
+                        diagnostico.setNomeDiagnostico(editTextNomeDiagnostico.getText().toString());
                         inserirDiagnostico(diagnostico);
 
                     }
@@ -112,7 +112,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
-        requestHttp.setParametro("nomeDiagnostico", diagnostico.getNomeDiagnotico());
+        requestHttp.setParametro("nomeDiagnostico", diagnostico.getNomeDiagnostico());
 
         InserirDiagnostico task = new InserirDiagnostico();
         task.execute(requestHttp);
@@ -127,8 +127,8 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
-        requestHttp.setParametro("idDiagnostico", String.valueOf(diagnostico.getIdDiagostico()));
-        requestHttp.setParametro("nomeDiagnostico", diagnostico.getNomeDiagnotico());
+        requestHttp.setParametro("idDiagnostico", String.valueOf(diagnostico.getIdDiagnostico()));
+        requestHttp.setParametro("nomeDiagnostico", diagnostico.getNomeDiagnostico());
 
         AlterarDiagnostico task = new AlterarDiagnostico();
         task.execute(requestHttp);

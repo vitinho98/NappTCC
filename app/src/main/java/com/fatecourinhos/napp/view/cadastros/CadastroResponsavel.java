@@ -29,7 +29,6 @@ public class CadastroResponsavel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro_activity_responsavel);
-
         getComponentes();
 
         if (getIntent().getExtras() != null) {
@@ -171,9 +170,10 @@ public class CadastroResponsavel extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
+            if (sucesso) {
                 Toast.makeText(getApplicationContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-            else
+                finish();
+            } else
                 Toast.makeText(getApplicationContext(), "Erro ao cadastrar", Toast.LENGTH_SHORT).show();
         }
     }
@@ -200,9 +200,10 @@ public class CadastroResponsavel extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
+            if (sucesso) {
                 Toast.makeText(getApplicationContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
-            else
+                finish();
+            } else
                 Toast.makeText(getApplicationContext(), "Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
     }

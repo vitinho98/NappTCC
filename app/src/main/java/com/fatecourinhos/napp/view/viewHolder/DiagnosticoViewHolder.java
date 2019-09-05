@@ -8,34 +8,34 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.CampoAtuacao;
-import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
+import com.fatecourinhos.napp.model.Diagnostico;
+import com.fatecourinhos.napp.view.listener.OnDiagnosticoInteractionListener;
 
-public class CampoAtuacaoViewHolder extends RecyclerView.ViewHolder {
+public class DiagnosticoViewHolder extends RecyclerView.ViewHolder {
 
     private CardView cardView;
     private TextView textView;
 
-    public CampoAtuacaoViewHolder(@NonNull View itemView) {
+    public DiagnosticoViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.cardView = itemView.findViewById(R.id.card_view_area_atuacao);
-        this.textView = itemView.findViewById(R.id.txt_area_lista);
+        this.cardView = itemView.findViewById(R.id.card_view_diagnostico);
+        this.textView = itemView.findViewById(R.id.txt_diagnostico_lista);
     }
 
-    public void bindData(final CampoAtuacao campoAtuacao, final OnCampoAtuacaoInteractionListener listener){
-        textView.setText(campoAtuacao.getNomeCampoAtuacao());
+    public void bindData(final Diagnostico diagnostico, final OnDiagnosticoInteractionListener listener){
+        textView.setText(diagnostico.getNomeDiagnostico());
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onListClick(campoAtuacao);
+                listener.onListClick(diagnostico);
             }
         });
 
         cardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                listener.onDeleteClick(campoAtuacao);
+                listener.onDeleteClick(diagnostico);
                 return true;
             }
         });

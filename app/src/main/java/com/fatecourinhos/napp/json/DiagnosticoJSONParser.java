@@ -24,8 +24,8 @@ public class DiagnosticoJSONParser {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                 diagnostico = new Diagnostico();
-                diagnostico.setIdDiagostico(jsonObject.getInt("idDiagnostico"));
-                diagnostico.setNomeDiagnotico(jsonObject.getString("nomeDiagnostico"));
+                diagnostico.setIdDiagnostico(jsonObject.getInt("idDiagnostico"));
+                diagnostico.setNomeDiagnostico(jsonObject.getString("nomeDiagnostico"));
 
                 diagnosticos.add(diagnostico);
             }

@@ -25,10 +25,9 @@ import retrofit2.Response;
 public class CampoAtuacaoFragment extends Fragment{
 
     private List<CampoAtuacao> camposAtuacao;
-    private String conteudo;
-    OnCampoAtuacaoInteractionListener listener;
+    private OnCampoAtuacaoInteractionListener listener;
     private ViewHolder viewHolder = new ViewHolder();
-    CampoAtuacaoAdapter campoAtuacaoAdapter;
+    private CampoAtuacaoAdapter campoAtuacaoAdapter;
     private View view;
     private Context context;
 
@@ -39,6 +38,11 @@ public class CampoAtuacaoFragment extends Fragment{
         getActivity().setTitle("Campos de Atuação");
         view = inflater.inflate(R.layout.fragment_area_atuacao,container,false);
         context = view.getContext();
+
+        viewHolder.recyclerViewCampoAtuacao = view.findViewById(R.id.recycler_view_area_atuacao);
+        viewHolder.recyclerViewCampoAtuacao.setLayoutManager(new LinearLayoutManager(context));
+
+        //seta os eventos da lista
         listener = new OnCampoAtuacaoInteractionListener() {
             @Override
             public void onListClick(CampoAtuacao campoAtuacao) {
@@ -59,12 +63,22 @@ public class CampoAtuacaoFragment extends Fragment{
             }
         };
 
-        viewHolder.recyclerViewCampoAtuacao = view.findViewById(R.id.recycler_view_area_atuacao);
-        viewHolder.recyclerViewCampoAtuacao.setLayoutManager(new LinearLayoutManager(context));
+        carregarCamposAtuacao();
+
+        return view;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        carregarCamposAtuacao();
+    }
+
+    //busca os dados no banco e adapta para a lista
+    private void carregarCamposAtuacao() {
 
         RetrofitClass retrofit = RetrofitClass.retrofit.create(RetrofitClass.class);
         Call<List<CampoAtuacao>> call = retrofit.getCamposAtuacao();
-
         call.enqueue(new Callback<List<CampoAtuacao>>() {
             @Override
             public void onResponse(Call<List<CampoAtuacao>> call, Response<List<CampoAtuacao>> response) {
@@ -79,7 +93,6 @@ public class CampoAtuacaoFragment extends Fragment{
             }
         });
 
-        return view;
     }
 
     private static class ViewHolder {

@@ -2,26 +2,26 @@ package com.fatecourinhos.napp.model;
 
 public class Diagnostico {
 
-    private int idDiagostico;
-    private String nomeDiagnotico;
+    private int idDiagnostico;
+    private String nomeDiagnostico;
 
     public Diagnostico() {
 
     }
 
-    public int getIdDiagostico() {
-        return idDiagostico;
+    public int getIdDiagnostico() {
+        return idDiagnostico;
     }
 
-    public void setIdDiagostico(int idDiagostico) {
-        this.idDiagostico = idDiagostico;
+    public void setIdDiagnostico(int idDiagnostico) {
+        this.idDiagnostico = idDiagnostico;
     }
 
-    public String getNomeDiagnotico() {
-        return nomeDiagnotico;
+    public String getNomeDiagnostico() {
+        return nomeDiagnostico;
     }
 
-    public void setNomeDiagnotico(String nomeDiagnotico) {
-        this.nomeDiagnotico = nomeDiagnotico;
+    public void setNomeDiagnostico(String nomeDiagnostico) {
+        this.nomeDiagnostico = nomeDiagnostico;
     }
 }

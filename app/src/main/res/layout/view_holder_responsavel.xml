@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:layout_marginBottom="5dp"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
         <TextView
             android:id="@+id/txt_telefone_responsavel_lista"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:layout_marginBottom="5dp"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
     </LinearLayout>
 

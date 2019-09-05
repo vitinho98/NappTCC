@@ -1,82 +1,51 @@
 package com.fatecourinhos.napp.view.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.LocalAtendimento;
+import com.fatecourinhos.napp.view.listener.OnLocalAtendimentoInteractionListener;
+import com.fatecourinhos.napp.view.viewHolder.LocalAtendimentoViewHolder;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimentoAdapter.ViewHolder>{
+public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimentoViewHolder>{
 
     private List<LocalAtendimento> locaisAtendimento;
-    private Listener listener;
+    private OnLocalAtendimentoInteractionListener listener;
 
-    public static interface Listener{
-        public void onClick(LocalAtendimento localAtendimento);
-    }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        private CardView cardView;
-
-        public ViewHolder(@NonNull CardView itemView) {
-
-            super(itemView);
-            cardView = itemView;
-        }
-    }
-
-    public LocalAtendimentoAdapter(List<LocalAtendimento> locaisAtendimento){
-        this.locaisAtendimento=locaisAtendimento;
-    }
-
-    public void setListener(Listener listener){
+    public LocalAtendimentoAdapter(List<LocalAtendimento> locaisAtendimento, OnLocalAtendimentoInteractionListener listener) {
+        this.locaisAtendimento = locaisAtendimento;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public LocalAtendimentoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LocalAtendimentoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        CardView cv = (CardView)LayoutInflater.from(parent.getContext()).inflate(R.layout.view_holder_local_atendimento,parent,false);
-        return new ViewHolder(cv);
+        Context context = parent.getContext();
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View view = layoutInflater.inflate(R.layout.view_holder_local_atendimento, parent, false);
+        return new LocalAtendimentoViewHolder(view);
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-
-        CardView cardView = holder.cardView;
-        TextView txtBloco = (TextView)cardView.findViewById(R.id.txt_bloco_local_atendimento_lista);
-        TextView txtLocal = (TextView)cardView.findViewById(R.id.txt_local_atendimento_lista);
-
-
-        final LocalAtendimento localAtendimento = locaisAtendimento.get(position);
-
-        txtLocal.setText(localAtendimento.getNomeLocal());
-        txtBloco.setText(localAtendimento.getNomeBloco());
-
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(listener!=null){
-                    listener.onClick(localAtendimento);
-                }
-            }
-        });
-
+    public void onBindViewHolder(@NonNull LocalAtendimentoViewHolder holder, final int position) {
+        LocalAtendimento localAtendimento = new LocalAtendimento();
+        holder.bindData(localAtendimento, listener);
     }
 
     @Override
     public int getItemCount() {
-        if(locaisAtendimento != null)
+        if (locaisAtendimento != null)
             return locaisAtendimento.size();
         else
             return 0;

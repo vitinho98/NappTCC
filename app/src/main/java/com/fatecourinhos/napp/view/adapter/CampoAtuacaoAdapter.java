@@ -21,18 +21,16 @@ public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHo
     private OnCampoAtuacaoInteractionListener listener;
 
     public CampoAtuacaoAdapter(List<CampoAtuacao> camposAtuacao, OnCampoAtuacaoInteractionListener listener){
-        this.camposAtuacao=camposAtuacao;
-        this.listener=listener;
+        this.camposAtuacao = camposAtuacao;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public CampoAtuacaoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.view_holder_area_atuacao, parent, false);
-
         return new CampoAtuacaoViewHolder(view);
     }
 
@@ -44,7 +42,10 @@ public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHo
 
     @Override
     public int getItemCount() {
-        return this.camposAtuacao.size();
+        if (this.camposAtuacao == null)
+            return 0;
+        else
+            return this.camposAtuacao.size();
     }
 
 }
