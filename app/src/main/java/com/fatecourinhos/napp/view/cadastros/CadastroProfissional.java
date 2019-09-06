@@ -23,12 +23,13 @@ import com.fatecourinhos.napp.util.RequestHttp;
 
 public class CadastroProfissional extends AppCompatActivity {
 
-    Profissional profissional = new Profissional();
-    Usuario usuario = new Usuario();
-
+    //variaveis gloabaais
+    private Profissional profissional = new Profissional();
+    private Usuario usuario = new Usuario();
     private String conteudo;
     boolean sucesso;
 
+    //componentes da tela
     private AppCompatEditText editTextNome, editTextCel, editTextEmail, editTextLogin, editTextSenha;
     private Spinner spinnerProf;
     private Button btn_cadastrar_profissional;
@@ -38,7 +39,6 @@ public class CadastroProfissional extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro_activity_profissional);
-
         getComponentes();
 
         if ((getIntent().getExtras() != null)) {
@@ -61,7 +61,7 @@ public class CadastroProfissional extends AppCompatActivity {
             editTextSenha.setText(profissional.getFkUsuario().getSenha());
             editTextNome.setText(profissional.getNomeProfissional());
 
-            if(profissional.getFkUsuario().getTipoUsuario().equals("Administrador"))
+            if (profissional.getFkUsuario().getTipoUsuario().equals("Administrador"))
                 spinnerProf.setSelection(0);
             else
                 spinnerProf.setSelection(1);
