@@ -14,8 +14,6 @@ public class AgendaProfissionalController {
     public static boolean sucesso;
     public static List<AgendaProfissional> agendasProfissional;
 
-
-
     public static boolean alterarAgendaProfissional(AgendaProfissional agendaProfissional) {
 
         String uri = "http://vitorsilva.xyz/napp/agendaProfissional/alterarAgendaProfissional.php";
@@ -36,44 +34,6 @@ public class AgendaProfissionalController {
         return sucesso;
 
     }
-
-    public static List<AgendaProfissional> selecionarAgendaProfissional() {
-
-        String uri = "http://vitorsilva.xyz/napp/agendaProfissional/selecionarAgendaProfissional.php";
-
-        RequestHttp requestHttp = new RequestHttp();
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-
-        SelecionarAgendaProfissional mytask = new SelecionarAgendaProfissional();
-        mytask.execute(uri);
-
-        return agendasProfissional;
-    }
-
-    private static class SelecionarAgendaProfissional extends AsyncTask<String, String, List<AgendaProfissional>> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected List<AgendaProfissional> doInBackground(String... params) {
-            final String conteudo = HttpManager.getDados(params[0]);
-            agendasProfissional = AgendaProfissionalJSONParser.parseDados(conteudo);
-
-            return agendasProfissional;
-        }
-
-        @Override
-        protected void onPostExecute(final List<AgendaProfissional> agendasProfissional) {
-            super.onPostExecute(agendasProfissional);
-
-        }
-    }
-
-
 
     private static class AlterarAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
         @Override

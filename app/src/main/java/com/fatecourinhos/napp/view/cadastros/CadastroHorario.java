@@ -91,7 +91,7 @@ public class CadastroHorario extends AppCompatActivity {
 
     }
 
-    private void getComponentes(){
+    private void getComponentes() {
 
         preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 

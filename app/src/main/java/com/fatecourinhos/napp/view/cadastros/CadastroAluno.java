@@ -4,21 +4,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.AlunoController;
 import com.fatecourinhos.napp.model.Usuario;
+import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.LoginActivity;
 
 public class CadastroAluno extends AppCompatActivity {
 
-    Usuario usuario = new Usuario();
-    AppCompatEditText editTextCpf, editTextRa;
-    Button btnCadastrar;
+    //variaveis gloabais
+    private String conteudo;
+    private boolean sucesso;
+    private Usuario usuario = new Usuario();
+
+    //componentes da tela
+    private AppCompatEditText editTextCpf, editTextRa;
+    private Button btnCadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +36,6 @@ public class CadastroAluno extends AppCompatActivity {
         editTextRa = findViewById(R.id.edit_text_ra_aluno);
 
         btnCadastrar = findViewById(R.id.btn_cadastrar_aluno);
-
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,17 +45,81 @@ public class CadastroAluno extends AppCompatActivity {
                 usuario.setTipoUsuario("Aluno");
                 usuario.setStatus(0);
 
-                if(AlunoController.inserirAluno(usuario)){
-                    Toast.makeText(CadastroAluno.this, "Salvo com sucesso", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(CadastroAluno.this, LoginActivity.class);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(CadastroAluno.this, "Erro ao inserir", Toast.LENGTH_LONG).show();
-                }
+                if (conferirDados())
+                    inserirAluno(usuario);
+                else
+                    Toast.makeText(CadastroAluno.this, "Insira todos os dados!", Toast.LENGTH_LONG).show();
 
             }
         });
 
+    }
+
+    private void inserirAluno(Usuario usuario) {
+
+        String uri = "http://vitorsilva.xyz/napp/aluno/inserirAluno.php";
+        RequestHttp requestHttp = new RequestHttp();
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("raAluno", usuario.getLogin());
+        requestHttp.setParametro("cpfAluno",usuario.getSenha());
+        requestHttp.setParametro("statusAluno",String.valueOf(usuario.getStatus()));
+        requestHttp.setParametro("tipoAluno", usuario.getTipoUsuario());
+
+        InserirAluno task = new InserirAluno();
+        task.execute(requestHttp);
+
+    }
+
+    private boolean conferirDados() {
+
+        if (editTextCpf.getText().toString().isEmpty())
+            return false;
+        else if (editTextRa.getText().toString().isEmpty())
+            return false;
+        else
+            return true;
+
+    }
+
+    private class InserirAluno extends AsyncTask<RequestHttp, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
+                sucesso = false;
+            }
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (sucesso) {
+                Toast.makeText(CadastroAluno.this, R.string.msg_sucesso_cadastro, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(CadastroAluno.this, LoginActivity.class));
+                finish();
+            } else
+                Toast.makeText(CadastroAluno.this, R.string.msg_erro_cadastro, Toast.LENGTH_LONG).show();
+
+        }
     }
 
 }

@@ -20,6 +20,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/menu_profissional_cabecalho"
-        app:menu="@menu/activity_menu_profissional_drawer" />
+        app:menu="@menu/menu_profissional_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

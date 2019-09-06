@@ -14,7 +14,7 @@ import com.fatecourinhos.napp.view.listener.OnProfissionalExternoInteractionList
 public class ProfissionalExternoViewHolder extends RecyclerView.ViewHolder {
 
     private CardView cardView;
-    private TextView textViewNome, textViewCidade, textViewTelefone;
+    private TextView textViewNome, textViewCidade, textViewTelefone, textViewCampoAtuacao;
 
     public ProfissionalExternoViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -22,12 +22,14 @@ public class ProfissionalExternoViewHolder extends RecyclerView.ViewHolder {
         this.textViewNome = itemView.findViewById(R.id.txt_nome_profissional_externo_lista);
         this.textViewCidade = itemView.findViewById(R.id.txt_cidade_profissional_externo_lista);
         this.textViewTelefone = itemView.findViewById(R.id.txt_telefone_profissional_externo_lista);
+        this.textViewCampoAtuacao = itemView.findViewById(R.id.txt_campo_atuacao_profissional_externo_lista);
     }
 
     public void bindData(final ProfissionalExterno profissionalExterno, final OnProfissionalExternoInteractionListener listener){
         textViewNome.setText(profissionalExterno.getNomeProfissionalExterno());
         textViewCidade.setText(profissionalExterno.getCidadeProfissionalExterno());
         textViewTelefone.setText(profissionalExterno.getTelefoneProfissionalExterno());
+        textViewCampoAtuacao.setText(profissionalExterno.getFkCampoAtuacao().getNomeCampoAtuacao());
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

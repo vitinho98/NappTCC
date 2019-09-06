@@ -30,7 +30,7 @@ public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHo
     public CampoAtuacaoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.view_holder_area_atuacao, parent, false);
+        View view = layoutInflater.inflate(R.layout.view_holder_campo_atuacao, parent, false);
         return new CampoAtuacaoViewHolder(view);
     }
 

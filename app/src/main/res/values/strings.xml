@@ -1,7 +1,9 @@
 <resources>
+
+    <!-- Nome App -->
     <string name="app_name">Napp</string>
 
-    <!-- Tela de login strings -->
+    <!-- Tela Login -->
     <string name="sobre_nap">Sobre o NAP</string>
     <string name="btn_entrar">ENTRAR</string>
     <string name="txt_cadastrar">Não tem uma conta? <b>Cadastre-se!</b></string>
@@ -9,7 +11,7 @@
     <string name="nap_txt">Núcleo de Apoio Psicopedagógico</string>
     <string name="fatec_ourinhos">Fatec Ourinhos</string>
 
-    <!-- Tela sobre strings -->
+    <!-- Tela Sobre -->
     <string name="nap_txt_abreviado">SOBRE O NAP</string>
     <string name="txt_explicando_nap">O Núcleo de Apoio Psicopedagógico aos alunos da Fatec Ourinhos, foi implantado a partir do segundo semestre de 2017, tendo como colaboradoras as professoras Rose Prado(Pedagoga), Eunice Sanches Belotti(Psicóloga), Marcela Penteado Rossini e Elaine Pasqualini, tendo como finalidade oferecer recursos que auxilie o aluno no desempenho da sua atividade educativa como também a compreensão das relações intersubjetivas entre aluno-professor-disciplina-mundo do trabalho, em situação escolar resultante de um complexo conjunto de influências psicológicas, sociais, formais e informais</string>
     <string name="txt_objetivos">OBJETIVOS</string>
@@ -18,7 +20,9 @@
     <string name="txt_objetivo_3"><b>&#8226;</b> Detectar problemas diversos no âmbito educacional, proporcionando acompanhamentos que possibilitem resultados diretos na melhoria e desenvolvimento do curso;</string>
     <string name="txt_objetivo_4"><b>&#8226;</b> Estabelecer convênios, parcerias e encaminhamentos que possam trazer informações e benefícios aos alunos do ADS.</string>
 
-    <!-- Itens Menu -->
+    <!-- Itens Menus -->
+    <string name="item_feedback">Feedback</string>
+    <string name="item_mensagem">Mensagem</string>
     <string name="item_agendamento">Agendamento</string>
     <string name="item_alunos">Alunos</string>
     <string name="item_indicacoes_adicionais">Indicações adicionais</string>
@@ -30,6 +34,8 @@
     <string name="item_horario_atendimento">Horário de Atendimento</string>
     <string name="item_responsavel">Responsavel</string>
     <string name="item_sair">Sair</string>
+    <string name="item_diagnostico">Diagnóstico</string>
+    <string name="item_campo_atuacao">Campo de atuação</string>
 
     <!-- Sei la de onde saiu isso, mas não vou mexer pra não bugar tudo -->
     <string name="title_activity_menu_profissional">NAPP</string>
@@ -44,13 +50,11 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <!-- Cadastros/Listas -->
+    <!-- Listas -->
     <string name="txt_bloco">Bloco: </string>
     <string name="txt_local">Local: </string>
-    <string name="txt_dia">Dia:</string>
+    <string name="txt_data">Data:</string>
     <string name="txt_horario">Horário:</string>
-    <string name="btn_salvar">SALVAR</string>
-    <string name="btn_cadastrar">CADASTRAR</string>
     <string name="txt_status">Status:</string>
     <string name="txt_dia_da_semana">Dia da semana</string>
 
@@ -70,13 +74,17 @@
     <string name="hint_bairro">bairro</string>
     <string name="hint_numero_casa">Número</string>
     <string name="hint_email">E-mail</string>
-    <string name="item_diagnostico">Diagnóstico</string>
-    <string name="item_campo_atuacao">Campo de atuação</string>
 
     <!-- Spinner -->
     <string-array name="tipo_prof_array">
         <item>Administrador</item>
         <item>Profissional</item>
     </string-array>
+
+    <!-- Buttons -->
+    <string name="btn_salvar">SALVAR</string>
+    <string name="btn_cadastrar">CADASTRAR</string>
+    <string name="msg_erro_cadastro">Erro ao cadastrar</string>
+    <string name="msg_sucesso_cadastro">Cadastrado com sucesso</string>
 
 </resources>

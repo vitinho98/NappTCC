@@ -18,7 +18,7 @@ import com.fatecourinhos.napp.view.cadastros.CadastroResponsavel;
 import com.fatecourinhos.napp.view.fragments.CampoAtuacaoFragment;
 
 import com.fatecourinhos.napp.view.fragments.DiagnosticoFragment;
-import com.fatecourinhos.napp.view.fragments.HorarioAtendimentoFragment;
+import com.fatecourinhos.napp.view.fragments.AgendaProfissionalFragment;
 import com.fatecourinhos.napp.view.fragments.LocalAtendimentoFragment;
 import com.fatecourinhos.napp.view.fragments.ProfissionalExternoFragment;
 import com.fatecourinhos.napp.view.fragments.ProfissionalFragment;
@@ -174,7 +174,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                 break;
 
             case R.id.nav_horario_atendimento:
-                fragment = new HorarioAtendimentoFragment();
+                fragment = new AgendaProfissionalFragment();
                 if (fragment != null) {
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frame_layout_nav, fragment,"HORARIO");

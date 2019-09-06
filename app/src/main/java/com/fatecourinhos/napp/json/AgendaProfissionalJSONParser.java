@@ -8,6 +8,7 @@ import com.fatecourinhos.napp.model.Usuario;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,36 +17,20 @@ public class AgendaProfissionalJSONParser {
 
     public static List<AgendaProfissional> parseDados(String content){
         try{
+            SimpleDateFormat formatDataHora = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            SimpleDateFormat formatData = new SimpleDateFormat("dd/MM/yyyy");
 
             JSONArray jsonArray = new JSONArray(content);
             List<AgendaProfissional> agendaProfissionalList = new ArrayList<>();
-            AgendaProfissional agendaProfissional = new AgendaProfissional();
-
-            Profissional profissionalModel = new Profissional();
-            Usuario usuario = new Usuario();
-            CampoAtuacao campoAtuacao = new CampoAtuacao();
-            Profissional profissional = new Profissional();
+            AgendaProfissional agendaProfissional;
 
             for(int i=0; i<jsonArray.length(); i++){
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                profissional.setIdProfissional(jsonObject.getInt("idProfissional"));
-                profissional.setNomeProfissional(jsonObject.getString("nomeProfissional"));
-                profissional.setCelularProfissional(jsonObject.getString("celProfissional"));
-                profissional.setEmailProfissional(jsonObject.getString("emailProfissional"));
-
-                usuario.setIdUsuario(jsonObject.getInt("idUsuario"));
-                usuario.setLogin(jsonObject.getString("login"));
-                usuario.setSenha(jsonObject.getString("senha"));
-                usuario.setTipoUsuario(jsonObject.getString("tipo"));
-                usuario.setStatus(jsonObject.getInt("status"));
-                profissionalModel.setFkUsuario(usuario);
-
+                agendaProfissional = new AgendaProfissional();
 
                 agendaProfissional.setIdAgendaProfissional(jsonObject.getInt("idAgendaProfissional"));
-                agendaProfissional.setData(new Date(jsonObject.getString("dataHora")));
-                agendaProfissional.setFkProfissional(profissionalModel);
+                agendaProfissional.setData(formatDataHora.parse(jsonObject.getString("dataHora")));
 
                 agendaProfissionalList.add(agendaProfissional);
 

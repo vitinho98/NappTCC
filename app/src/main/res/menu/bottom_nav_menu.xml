@@ -4,16 +4,16 @@
     <item
         android:id="@+id/nav_agendamento_aluno"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="Agendamento" />
+        android:title="@string/item_agendamento" />
 
     <item
         android:id="@+id/nav_mensagem"
         android:icon="@drawable/ic_mensagem"
-        android:title="Mensagem" />
+        android:title="@string/item_mensagem" />
 
     <item
         android:id="@+id/nav_feedback"
         android:icon="@drawable/ic_feedback"
-        android:title="Feedback" />
+        android:title="@string/item_feedback" />
 
 </menu>
