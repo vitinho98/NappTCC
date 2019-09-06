@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.ProfissionalExterno;
-import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
 import com.fatecourinhos.napp.view.listener.OnProfissionalExternoInteractionListener;
 
 public class ProfissionalExternoViewHolder extends RecyclerView.ViewHolder {
