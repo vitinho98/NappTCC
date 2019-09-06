@@ -19,6 +19,8 @@ import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CadastroHorario extends AppCompatActivity {
@@ -33,31 +35,48 @@ public class CadastroHorario extends AppCompatActivity {
     CalendarView calendario;
     AppCompatEditText editTextHorario;
     TimePickerDialog timePickerDialog;
+    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_cadastro_horario);
-        preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
+        preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
         editTextHorario = findViewById(R.id.edit_text_hora);
         btnCadastrar = findViewById(R.id.btn_salvar_horario);
         calendario = findViewById(R.id.calendarView);
         calendario.setMinDate(System.currentTimeMillis());
+        agendaProfissional = new AgendaProfissional();
 
         btnCadastrar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
                 if(preferences.contains("idProfissional"))
-                    idProfissional = preferences.getInt("idProfissional", 0);
+                   idProfissional = preferences.getInt("idProfissional", 0);
 
                 profissional.setIdProfissional(idProfissional);
-                agendaProfissional.setData(new Date(calendario.getDate() + editTextHorario.getText().toString()));
 
                 agendaProfissional.setFkProfissional(profissional);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+                String data = simpleDateFormat.format(new Date(calendario.getDate()));
+                String hora = editTextHorario.getText().toString();
+
+                try {
+
+                    agendaProfissional.setData(simpleDateFormat1.parse(data + " " + hora));
+                    System.out.println(simpleDateFormat1.format(agendaProfissional.getData()));
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 inserirAgendaProfissional(agendaProfissional);
+
+
+
 
             }
         });
@@ -69,7 +88,7 @@ public class CadastroHorario extends AppCompatActivity {
                 timePickerDialog = new TimePickerDialog(CadastroHorario.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        editTextHorario.setText(hourOfDay + " : " + minute);
+                        editTextHorario.setText(String.format("%02d",hourOfDay) + ":" + String.format("%02d", minute));
                     }
                 }, 0, 0, true);
 
@@ -88,7 +107,7 @@ public class CadastroHorario extends AppCompatActivity {
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
-        requestHttp.setParametro("data", String.valueOf(agendaProfissional.getData()));
+        requestHttp.setParametro("data", simpleDateFormat1.format(agendaProfissional.getData()));
         requestHttp.setParametro("idProfissional", String.valueOf(agendaProfissional.getFkProfissional().getIdProfissional()));
 
         InserirAgendaProfissional task = new InserirAgendaProfissional();
@@ -107,7 +126,7 @@ public class CadastroHorario extends AppCompatActivity {
 
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Sucesso"))
+            if (conteudo.contains("Sucesso"))
                 sucesso = true;
             else
                 sucesso = false;

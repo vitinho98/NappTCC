@@ -3,6 +3,7 @@ package com.fatecourinhos.napp.util;
 import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.Diagnostico;
 import com.fatecourinhos.napp.model.LocalAtendimento;
+import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.model.ProfissionalExterno;
 import com.fatecourinhos.napp.model.Responsavel;
 
@@ -29,7 +30,9 @@ public interface RetrofitClass {
     @GET("profissionalExterno/selecionarProfExterno.php")
     Call<List<ProfissionalExterno>> getProfissionaisExternos();
 
-    retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder().baseUrl("http://vitorsilva.xyz/napp/").addConverterFactory(GsonConverterFactory.create()).build();
+    @GET("profissional/selecionarProfissionais.php")
+    Call<List<Profissional>> getProfissionais();
 
+    retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder().baseUrl("http://vitorsilva.xyz/napp/").addConverterFactory(GsonConverterFactory.create()).build();
 
 }

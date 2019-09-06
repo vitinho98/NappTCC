@@ -49,12 +49,12 @@ public class SplashActivity extends AppCompatActivity {
                 isAtivo(usuario);
 
             } else {
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
             }
-        }else{
+
+        } else {
             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
         }
-
 
     }
 
