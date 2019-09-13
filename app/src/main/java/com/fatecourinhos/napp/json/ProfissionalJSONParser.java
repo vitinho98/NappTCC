@@ -17,7 +17,6 @@ public class ProfissionalJSONParser {
 
             JSONArray jsonArray = new JSONArray(content);
             List<Profissional> profissionais = new ArrayList<>();
-
             Usuario usuario;
             Profissional profissional ;
 

@@ -18,6 +18,7 @@ public class ProfissionalExternoViewHolder extends RecyclerView.ViewHolder {
 
     public ProfissionalExternoViewHolder(@NonNull View itemView) {
         super(itemView);
+
         this.cardView = itemView.findViewById(R.id.card_view_profissional_externo);
         this.textViewNome = itemView.findViewById(R.id.txt_nome_profissional_externo_lista);
         this.textViewCidade = itemView.findViewById(R.id.txt_cidade_profissional_externo_lista);
@@ -25,7 +26,8 @@ public class ProfissionalExternoViewHolder extends RecyclerView.ViewHolder {
         this.textViewCampoAtuacao = itemView.findViewById(R.id.txt_campo_atuacao_profissional_externo_lista);
     }
 
-    public void bindData(final ProfissionalExterno profissionalExterno, final OnProfissionalExternoInteractionListener listener){
+    public void bindData(final ProfissionalExterno profissionalExterno, final OnProfissionalExternoInteractionListener listener) {
+
         textViewNome.setText(profissionalExterno.getNomeProfissionalExterno());
         textViewCidade.setText(profissionalExterno.getCidadeProfissionalExterno());
         textViewTelefone.setText(profissionalExterno.getTelefoneProfissionalExterno());
@@ -46,4 +48,5 @@ public class ProfissionalExternoViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
+
 }

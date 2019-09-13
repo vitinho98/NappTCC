@@ -51,4 +51,5 @@ public class Profissional {
     public void setFkUsuario(Usuario fkUsuario) {
         this.fkUsuario = fkUsuario;
     }
+
 }

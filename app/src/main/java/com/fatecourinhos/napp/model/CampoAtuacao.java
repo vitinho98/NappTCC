@@ -24,4 +24,5 @@ public class CampoAtuacao {
     public void setNomeCampoAtuacao(String nomeCampoAtuacao) {
         this.nomeCampoAtuacao = nomeCampoAtuacao;
     }
+
 }

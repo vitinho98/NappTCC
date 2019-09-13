@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +26,13 @@ import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
 import java.util.List;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AgendaProfissionalFragment extends Fragment{
 
-    private String conteudo;
     private SharedPreferences preferences;
 
     private List<AgendaProfissional> agendaProfissional;
@@ -56,7 +58,6 @@ public class AgendaProfissionalFragment extends Fragment{
 
         selecionarAgendaProfissional(id);
 
-
         return view;
     }
 
@@ -71,21 +72,22 @@ public class AgendaProfissionalFragment extends Fragment{
         requestHttp.setParametro("idProfissional", String.valueOf(id));
 
         SelecionarAgendaProfissional mytask = new SelecionarAgendaProfissional();
-        mytask.execute(uri);
+        mytask.execute(requestHttp);
 
     }
 
-    private class SelecionarAgendaProfissional extends AsyncTask<String, String, List<AgendaProfissional>> {
+    private class SelecionarAgendaProfissional extends AsyncTask<RequestHttp, String, List<AgendaProfissional>> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
-        protected List<AgendaProfissional> doInBackground(String... params) {
-            conteudo = HttpManager.getDados(params[0]);
-            System.out.println(conteudo);
+        protected List<AgendaProfissional> doInBackground(RequestHttp... params) {
+            final String conteudo = HttpManager.getDados(params[0]);
+            Log.e("cont", conteudo);
             agendaProfissional = AgendaProfissionalJSONParser.parseDados(conteudo);
 
             return agendaProfissional;

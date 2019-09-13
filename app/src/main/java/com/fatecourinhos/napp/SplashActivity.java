@@ -59,7 +59,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     //valida se já possui uma conta logada no dispositivo
-    private boolean validarShared(){
+    private boolean validarShared() {
 
         if (preferences.contains("conected")) {
 
@@ -72,7 +72,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     //verifica se o usuario salvo no dispotivo ainda está ativo
-    private void isAtivo(Usuario usuario){
+    private void isAtivo(Usuario usuario) {
 
         String uri = "http://vitorsilva.xyz/napp/usuario/verificarStatus.php";
 
@@ -98,7 +98,7 @@ public class SplashActivity extends AppCompatActivity {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Sucesso"))
+            if (conteudo.contains("Sucesso"))
                 ativo = true;
             else
                 ativo = false;

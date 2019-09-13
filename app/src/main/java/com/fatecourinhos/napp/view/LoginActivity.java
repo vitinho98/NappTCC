@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //chama os componentes da tela
-    private void getComponentes(){
+    private void getComponentes() {
 
         preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
         editor = preferences.edit();
@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //seta o evento on click dos componentes
-    private void setOnClicks(){
+    private void setOnClicks() {
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //valida se os campos login e senha foram digitados
-    private boolean validarForm(){
+    private boolean validarForm() {
 
         boolean retornoLogin, retornoSenha;
 
@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //adiciona um aluno no sharedpreferences
-    private void adicionarPreferences(Aluno aluno){
+    private void adicionarPreferences(Aluno aluno) {
 
         editor.putInt("idUsuario", aluno.getFkUsuario().getIdUsuario());
         editor.putString("tipoUsuario", aluno.getFkUsuario().getTipoUsuario());
@@ -160,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //adiciona um profissional no sharedpreferences
-    private void adicionarPreferences(Profissional profissional){
+    private void adicionarPreferences(Profissional profissional) {
 
         editor.putInt("idUsuario", profissional.getFkUsuario().getIdUsuario());
         editor.putString("tipoUsuario", profissional.getFkUsuario().getTipoUsuario());
@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //pega o retorno do web service e retorna o tipo de usuário
-    private String verificarTipoUsuario(String conteudo){
+    private String verificarTipoUsuario(String conteudo) {
 
         int fim = conteudo.indexOf("@");
         String tipo = conteudo.substring(0, fim);
@@ -182,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //pega o retorno do web service e retorna o json
-    private String criarJson(String conteudo){
+    private String criarJson(String conteudo) {
 
         int inicio = conteudo.indexOf("@");
         String json = conteudo.substring(inicio+1);
@@ -191,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //verifica o retorno do webservice e chama o menu adequado ou informa que não foi possível encontrar o usuário
-    private void login(String conteudo){
+    private void login(String conteudo) {
 
         String tipoUsuario = verificarTipoUsuario(conteudo);
         conteudo = criarJson(conteudo);

@@ -33,4 +33,5 @@ public class LocalAtendimento {
     public void setNomeBloco(String nomeBloco) {
         this.nomeBloco = nomeBloco;
     }
+
 }

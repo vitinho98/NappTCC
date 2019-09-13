@@ -10,12 +10,13 @@ import java.util.List;
 
 public class CampoAtuacaoJSONParser {
 
-    public static List<CampoAtuacao> parseDados(String content){
+    public static List<CampoAtuacao> parseDados(String content) {
 
         try {
 
             JSONArray jsonArray = new JSONArray(content);
             List<CampoAtuacao> camposAtuacao = new ArrayList<>();
+
             CampoAtuacao campoAtuacao;
 
             for (int i=0; i<jsonArray.length(); i++) {

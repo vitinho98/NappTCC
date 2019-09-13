@@ -24,4 +24,5 @@ public class Diagnostico {
     public void setNomeDiagnostico(String nomeDiagnostico) {
         this.nomeDiagnostico = nomeDiagnostico;
     }
+
 }

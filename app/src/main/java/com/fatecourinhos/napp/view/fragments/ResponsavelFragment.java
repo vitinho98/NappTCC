@@ -36,7 +36,7 @@ public class ResponsavelFragment extends Fragment{
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
 
         getActivity().setTitle("Responsaveis");
         view = inflater.inflate(R.layout.fragment_responsavel,container,false);
@@ -68,7 +68,6 @@ public class ResponsavelFragment extends Fragment{
         };
 
         carregarResponsaveis();
-
         return view;
 
     }
@@ -95,4 +94,5 @@ public class ResponsavelFragment extends Fragment{
     private static class ViewHolder {
         RecyclerView recyclerViewResponsaveis;
     }
+
 }

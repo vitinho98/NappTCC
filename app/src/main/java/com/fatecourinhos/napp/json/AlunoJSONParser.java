@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AlunoJSONParser {
 
-    public static List<Aluno> parseDados(String content){
+    public static List<Aluno> parseDados(String content) {
 
         try {
 
@@ -55,7 +55,7 @@ public class AlunoJSONParser {
 
             return alunos;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

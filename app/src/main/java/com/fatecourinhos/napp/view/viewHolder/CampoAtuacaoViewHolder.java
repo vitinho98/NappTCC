@@ -18,11 +18,13 @@ public class CampoAtuacaoViewHolder extends RecyclerView.ViewHolder {
 
     public CampoAtuacaoViewHolder(@NonNull View itemView) {
         super(itemView);
+
         this.cardView = itemView.findViewById(R.id.card_view_campo_atuacao);
         this.textView = itemView.findViewById(R.id.txt_campo_lista);
     }
 
-    public void bindData(final CampoAtuacao campoAtuacao, final OnCampoAtuacaoInteractionListener listener){
+    public void bindData(final CampoAtuacao campoAtuacao, final OnCampoAtuacaoInteractionListener listener) {
+
         textView.setText(campoAtuacao.getNomeCampoAtuacao());
 
         cardView.setOnClickListener(new View.OnClickListener() {

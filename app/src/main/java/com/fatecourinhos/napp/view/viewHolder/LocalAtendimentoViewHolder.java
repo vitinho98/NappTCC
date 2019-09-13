@@ -18,12 +18,14 @@ public class LocalAtendimentoViewHolder extends RecyclerView.ViewHolder {
 
     public LocalAtendimentoViewHolder(@NonNull View itemView) {
         super(itemView);
+
         this.cardView = itemView.findViewById(R.id.card_view_local_atendimento);
         this.textViewLocal = itemView.findViewById(R.id.txt_local_atendimento_lista);
         this.textViewBloco = itemView.findViewById(R.id.txt_bloco_lista);
     }
 
-    public void bindData(final LocalAtendimento localAtendimento, final OnLocalAtendimentoInteractionListener listener){
+    public void bindData(final LocalAtendimento localAtendimento, final OnLocalAtendimentoInteractionListener listener) {
+
         textViewBloco.setText(localAtendimento.getNomeBloco());
         textViewLocal.setText(localAtendimento.getNomeLocal());
 
@@ -42,4 +44,5 @@ public class LocalAtendimentoViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
+
 }

@@ -51,4 +51,5 @@ public class Responsavel {
     public void setEmailResponsavel(String emailResponsavel) {
         this.emailResponsavel = emailResponsavel;
     }
+
 }

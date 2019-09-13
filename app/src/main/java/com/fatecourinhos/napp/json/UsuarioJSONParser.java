@@ -10,15 +10,16 @@ import java.util.List;
 
 public class UsuarioJSONParser {
 
-    public static List<Usuario> parseDados(String content){
+    public static List<Usuario> parseDados(String content) {
 
-        try{
+        try {
 
             JSONArray jsonArray = new JSONArray(content);
             List<Usuario> usuarioList = new ArrayList<>();
+
             Usuario usuario;
 
-            for(int i=0; i<jsonArray.length(); i++){
+            for (int i=0; i<jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -35,7 +36,7 @@ public class UsuarioJSONParser {
 
             return usuarioList;
 
-        }catch (Exception e){
+        }catch (Exception e) {
             return null;
         }
     }

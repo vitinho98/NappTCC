@@ -10,7 +10,7 @@ import java.util.List;
 
 public class LocalAtendimentoJSONParser {
 
-    public static List<LocalAtendimento> parseDados(String content){
+    public static List<LocalAtendimento> parseDados(String content) {
 
         try {
 

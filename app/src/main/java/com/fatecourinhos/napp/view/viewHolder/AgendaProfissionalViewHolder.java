@@ -18,12 +18,14 @@ public class AgendaProfissionalViewHolder extends RecyclerView.ViewHolder {
 
     public AgendaProfissionalViewHolder(@NonNull View itemView) {
         super(itemView);
+
         this.cardView = itemView.findViewById(R.id.card_view_horario_atendimento);
         this.textViewData = itemView.findViewById(R.id.txt_data_lista);
         this.textViewHora = itemView.findViewById(R.id.txt_horario_lista);
     }
 
-    public void bindData(final AgendaProfissional agendaProfissional, final OnAgendaProfissionalnteractionListener listener){
+    public void bindData(final AgendaProfissional agendaProfissional, final OnAgendaProfissionalnteractionListener listener) {
+
         int index = String.valueOf(agendaProfissional.getData()).indexOf(" ");
         textViewData.setText(String.valueOf(agendaProfissional.getData()).substring(0, index));
         textViewHora.setText(String.valueOf(agendaProfissional.getData()).substring(index));
@@ -43,4 +45,5 @@ public class AgendaProfissionalViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
+
 }

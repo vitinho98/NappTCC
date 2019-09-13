@@ -18,12 +18,14 @@ public class ProfissionalViewHolder extends RecyclerView.ViewHolder {
 
     public ProfissionalViewHolder(@NonNull View itemView) {
         super(itemView);
+
         this.cardView = itemView.findViewById(R.id.card_view_profissional);
         this.textViewNome = itemView.findViewById(R.id.txt_header);
         this.textViewEmail = itemView.findViewById(R.id.txt_email_profissional_lista);
     }
 
-    public void bindData(final Profissional profissional, final OnProfissionalInteractionListener listener){
+    public void bindData(final Profissional profissional, final OnProfissionalInteractionListener listener) {
+
         textViewNome.setText(profissional.getNomeProfissional());
         textViewEmail.setText(profissional.getEmailProfissional());
 
@@ -42,4 +44,5 @@ public class ProfissionalViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
+
 }
