@@ -50,37 +50,7 @@ public class CampoAtuacaoController {
 
     }
 
-    public static List<CampoAtuacao> selecionarCamposAtuacao() {
 
-        String uri = "http://vitorsilva.xyz/napp/campoAtuacao/selecionarCamposAtuacao.php";
-
-        SelecionarCamposAtuacao mytask = new SelecionarCamposAtuacao();
-        mytask.execute(uri);
-
-        return camposAtuacao;
-    }
-
-    private static class SelecionarCamposAtuacao extends AsyncTask<String, String, List<CampoAtuacao>> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected List<CampoAtuacao> doInBackground(String... params) {
-            final String conteudo = HttpManager.getDados(params[0]);
-            camposAtuacao = CampoAtuacaoJSONParser.parseDados(conteudo);
-
-            return camposAtuacao;
-        }
-
-        @Override
-        protected void onPostExecute(final List<CampoAtuacao> camposAtuacao) {
-            super.onPostExecute(camposAtuacao);
-
-        }
-    }
 
     private static class InserirCampoAtuacao extends AsyncTask<RequestHttp, String, String> {
         @Override

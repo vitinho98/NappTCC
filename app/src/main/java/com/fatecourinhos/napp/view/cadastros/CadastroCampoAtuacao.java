@@ -101,14 +101,14 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
     private void inserirCampoAtuacao(CampoAtuacao campoAtuacao) {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/inserirCampoAtuacao.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        InserirCampoAtuacao task = new InserirCampoAtuacao();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
         requestHttp.setParametro("nomeCampoAtuacao", campoAtuacao.getNomeCampoAtuacao());
 
-        InserirCampoAtuacao task = new InserirCampoAtuacao();
         task.execute(requestHttp);
 
     }
@@ -116,15 +116,15 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
     private void alterarCampoAtuacao(CampoAtuacao campoAtuacao) {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/alterarCampoAtuacao.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        AlterarCampoAtuacao task = new AlterarCampoAtuacao();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
         requestHttp.setParametro("idCampoAtuacao", String.valueOf(campoAtuacao.getIdCampoAtuacao()));
         requestHttp.setParametro("nomeCampoAtuacao", campoAtuacao.getNomeCampoAtuacao());
 
-        AlterarCampoAtuacao task = new AlterarCampoAtuacao();
         task.execute(requestHttp);
 
     }
@@ -139,10 +139,16 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Sucesso"))
-                sucesso = true;
-            else
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
                 sucesso = false;
+            }
 
             return conteudo;
         }
@@ -168,10 +174,16 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if (conteudo.contains("Sucesso"))
-                sucesso = true;
-            else
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
                 sucesso = false;
+            }
 
             return conteudo;
         }

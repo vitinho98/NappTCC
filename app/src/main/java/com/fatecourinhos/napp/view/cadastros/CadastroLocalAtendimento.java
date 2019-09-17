@@ -108,15 +108,15 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
     private void inserirLocalAtendimento(LocalAtendimento localAtendimento) {
 
         String uri = "http://vitorsilva.xyz/napp/localAtendimento/inserirLocalAtendimento.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        InserirLocalAtendimento task = new InserirLocalAtendimento();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
         requestHttp.setParametro("nomeBloco", localAtendimento.getNomeBloco());
         requestHttp.setParametro("nomeLocal", localAtendimento.getNomeLocal());
 
-        InserirLocalAtendimento task = new InserirLocalAtendimento();
         task.execute(requestHttp);
 
     }
@@ -124,8 +124,9 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
     private void alterarLocalAtendimento(LocalAtendimento localAtendimento) {
 
         String uri = "http://vitorsilva.xyz/napp/localAtendimento/alterarLocalAtendimento.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        AlterarLocalAtendimento task = new AlterarLocalAtendimento();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
@@ -133,7 +134,6 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
         requestHttp.setParametro("nomeBloco", localAtendimento.getNomeBloco());
         requestHttp.setParametro("nomeLocal", localAtendimento.getNomeLocal());
 
-        AlterarLocalAtendimento task = new AlterarLocalAtendimento();
         task.execute(requestHttp);
 
     }
@@ -149,10 +149,16 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Sucesso"))
-                sucesso = true;
-            else
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
                 sucesso = false;
+            }
 
             return conteudo;
         }
@@ -179,10 +185,16 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Sucesso"))
-                sucesso = true;
-            else
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
                 sucesso = false;
+            }
 
             return conteudo;
         }

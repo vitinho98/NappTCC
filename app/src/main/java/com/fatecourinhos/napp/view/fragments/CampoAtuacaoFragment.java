@@ -1,16 +1,18 @@
 package com.fatecourinhos.napp.view.fragments;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.json.CampoAtuacaoJSONParser;
 import com.fatecourinhos.napp.model.CampoAtuacao;
+import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.view.adapter.CampoAtuacaoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroCampoAtuacao;
 import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
-import com.fatecourinhos.napp.util.RetrofitClass;
 
 import java.util.List;
 import androidx.annotation.Nullable;
@@ -18,12 +20,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class CampoAtuacaoFragment extends Fragment{
 
+    private String conteudo;
     private List<CampoAtuacao> camposAtuacao;
     private OnCampoAtuacaoInteractionListener listener;
     private ViewHolder viewHolder = new ViewHolder();
@@ -63,36 +62,49 @@ public class CampoAtuacaoFragment extends Fragment{
             }
         };
 
-        carregarCamposAtuacao();
-
+        selecionarCamposAtuacao();
         return view;
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        carregarCamposAtuacao();
+        selecionarCamposAtuacao();
     }
 
-    //busca os dados no banco e adapta para a lista
-    private void carregarCamposAtuacao() {
+    public void selecionarCamposAtuacao() {
+        String uri = "http://vitorsilva.xyz/napp/campoAtuacao/selecionarCamposAtuacao.php";
+        SelecionarCamposAtuacao mytask = new SelecionarCamposAtuacao();
+        mytask.execute(uri);
+    }
 
-        RetrofitClass retrofit = RetrofitClass.retrofit.create(RetrofitClass.class);
-        Call<List<CampoAtuacao>> call = retrofit.getCamposAtuacao();
-        call.enqueue(new Callback<List<CampoAtuacao>>() {
-            @Override
-            public void onResponse(Call<List<CampoAtuacao>> call, Response<List<CampoAtuacao>> response) {
-                camposAtuacao = response.body();
-                campoAtuacaoAdapter = new CampoAtuacaoAdapter(camposAtuacao, listener);
-                viewHolder.recyclerViewCampoAtuacao.setAdapter(campoAtuacaoAdapter);
+    private class SelecionarCamposAtuacao extends AsyncTask<String, String, List<CampoAtuacao>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected List<CampoAtuacao> doInBackground(String... params) {
+
+            try {
+                conteudo = HttpManager.getDados(params[0]);
+            } catch (Exception e) {
+                conteudo = null;
             }
 
-            @Override
-            public void onFailure(Call<List<CampoAtuacao>> call, Throwable t) {
+            camposAtuacao = CampoAtuacaoJSONParser.parseDados(conteudo);
+            return camposAtuacao;
+        }
 
-            }
-        });
+        @Override
+        protected void onPostExecute(final List<CampoAtuacao> camposAtuacao) {
+            super.onPostExecute(camposAtuacao);
 
+            campoAtuacaoAdapter = new CampoAtuacaoAdapter(camposAtuacao, listener);
+            viewHolder.recyclerViewCampoAtuacao.setAdapter(campoAtuacaoAdapter);
+        }
     }
 
     private static class ViewHolder {

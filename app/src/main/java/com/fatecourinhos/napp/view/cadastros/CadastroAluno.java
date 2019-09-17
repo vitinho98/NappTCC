@@ -21,7 +21,7 @@ public class CadastroAluno extends AppCompatActivity {
     //variaveis gloabais
     private String conteudo;
     private boolean sucesso;
-    private Usuario usuario = new Usuario();
+    private Usuario usuario;
 
     //componentes da tela
     private AppCompatEditText editTextCpf, editTextRa;
@@ -32,6 +32,7 @@ public class CadastroAluno extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro_activity_aluno);
 
+        usuario = new Usuario();
         editTextCpf = findViewById(R.id.edit_text_cpf_aluno);
         editTextRa = findViewById(R.id.edit_text_ra_aluno);
 
@@ -55,23 +56,6 @@ public class CadastroAluno extends AppCompatActivity {
 
     }
 
-    private void inserirAluno(Usuario usuario) {
-
-        String uri = "http://vitorsilva.xyz/napp/aluno/inserirAluno.php";
-        RequestHttp requestHttp = new RequestHttp();
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-
-        requestHttp.setParametro("raAluno", usuario.getLogin());
-        requestHttp.setParametro("cpfAluno",usuario.getSenha());
-        requestHttp.setParametro("statusAluno",String.valueOf(usuario.getStatus()));
-        requestHttp.setParametro("tipoAluno", usuario.getTipoUsuario());
-
-        InserirAluno task = new InserirAluno();
-        task.execute(requestHttp);
-
-    }
-
     private boolean conferirDados() {
 
         if (editTextCpf.getText().toString().isEmpty())
@@ -80,6 +64,24 @@ public class CadastroAluno extends AppCompatActivity {
             return false;
         else
             return true;
+
+    }
+
+    private void inserirAluno(Usuario usuario) {
+
+        String uri = "http://vitorsilva.xyz/napp/aluno/inserirAluno.php";
+        RequestHttp requestHttp = new RequestHttp();
+        InserirAluno task = new InserirAluno();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+
+        requestHttp.setParametro("raAluno", usuario.getLogin());
+        requestHttp.setParametro("cpfAluno",usuario.getSenha());
+        requestHttp.setParametro("statusAluno",String.valueOf(usuario.getStatus()));
+        requestHttp.setParametro("tipoAluno", usuario.getTipoUsuario());
+
+        task.execute(requestHttp);
 
     }
 

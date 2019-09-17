@@ -44,7 +44,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         editTextNomeDiagnostico = view.findViewById(R.id.edit_text_nome_diagnostico);
         builder.setView(view).setTitle("Diagnóstico");
 
-        if (getArguments() != null){
+        if (getArguments() != null) {
 
             Bundle data = getArguments();
 
@@ -102,14 +102,14 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
     private void inserirDiagnostico(Diagnostico diagnostico){
 
         String uri = "http://vitorsilva.xyz/napp/diagnostico/inserirDiagnostico.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        InserirDiagnostico task = new InserirDiagnostico();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
         requestHttp.setParametro("nomeDiagnostico", diagnostico.getNomeDiagnostico());
 
-        InserirDiagnostico task = new InserirDiagnostico();
         task.execute(requestHttp);
 
     }
@@ -117,15 +117,15 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
     private void alterarDiagnostico(Diagnostico diagnostico){
 
         String uri = "http://vitorsilva.xyz/napp/diagnostico/alterarDiagnostico.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        AlterarDiagnostico task = new AlterarDiagnostico();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
         requestHttp.setParametro("idDiagnostico", String.valueOf(diagnostico.getIdDiagnostico()));
         requestHttp.setParametro("nomeDiagnostico", diagnostico.getNomeDiagnostico());
 
-        AlterarDiagnostico task = new AlterarDiagnostico();
         task.execute(requestHttp);
 
     }
@@ -141,10 +141,16 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Sucesso"))
-                sucesso = true;
-            else
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
                 sucesso = false;
+            }
 
             return conteudo;
         }
@@ -153,7 +159,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if(sucesso)
+            if (sucesso)
                 Toast.makeText(view.getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(view.getContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
@@ -172,10 +178,16 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Sucesso"))
-                sucesso = true;
-            else
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
                 sucesso = false;
+            }
 
             return conteudo;
         }
@@ -184,7 +196,7 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if(sucesso)
+            if (sucesso)
                 Toast.makeText(view.getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(view.getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();

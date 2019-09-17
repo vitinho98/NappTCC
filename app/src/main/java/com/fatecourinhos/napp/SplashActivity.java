@@ -75,14 +75,14 @@ public class SplashActivity extends AppCompatActivity {
     private void isAtivo(Usuario usuario) {
 
         String uri = "http://vitorsilva.xyz/napp/usuario/verificarStatus.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        isAtivo task = new isAtivo();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
         requestHttp.setParametro("idUsuario", String.valueOf(usuario.getIdUsuario()));
 
-        isAtivo task = new isAtivo();
         task.execute(requestHttp);
 
     }
@@ -98,10 +98,16 @@ public class SplashActivity extends AppCompatActivity {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if (conteudo.contains("Sucesso"))
-                ativo = true;
-            else
+            try{
+
+                if (conteudo.contains("Sucesso"))
+                    ativo = true;
+                else
+                    ativo = false;
+
+            } catch (Exception e) {
                 ativo = false;
+            }
 
             return conteudo;
         }

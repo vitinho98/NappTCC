@@ -2,17 +2,19 @@ package com.fatecourinhos.napp.view.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.json.ResponsavelJSONParser;
 import com.fatecourinhos.napp.model.Responsavel;
+import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.view.cadastros.CadastroResponsavel;
 import com.fatecourinhos.napp.view.adapter.ResponsavelAdapter;
 import com.fatecourinhos.napp.view.listener.OnResponsavelInteractionListener;
-import com.fatecourinhos.napp.util.RetrofitClass;
 
 import java.util.List;
 
@@ -21,12 +23,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class ResponsavelFragment extends Fragment{
 
+    private String conteudo;
     private List<Responsavel> responsaveis;
     private ResponsavelAdapter responsavelAdapter;
     private OnResponsavelInteractionListener listener;
@@ -67,28 +66,50 @@ public class ResponsavelFragment extends Fragment{
             }
         };
 
-        carregarResponsaveis();
+        selecionarResponsaveis();
         return view;
 
     }
 
-    private void carregarResponsaveis(){
+    @Override
+    public void onResume() {
+        super.onResume();
+        selecionarResponsaveis();
+    }
 
-        RetrofitClass retrofit = RetrofitClass.retrofit.create(RetrofitClass.class);
-        Call<List<Responsavel>> call = retrofit.getResponsaveis();
-        call.enqueue(new Callback<List<Responsavel>>() {
-            @Override
-            public void onResponse(Call<List<Responsavel>> call, Response<List<Responsavel>> response) {
-                responsaveis = response.body();
-                responsavelAdapter = new ResponsavelAdapter(responsaveis, listener);
-                viewHolder.recyclerViewResponsaveis.setAdapter(responsavelAdapter);
+    public void selecionarResponsaveis() {
+        String uri = "http://vitorsilva.xyz/napp/responsavel/selecionarResponsaveis.php";
+        SelecionarResponsaveis mytask = new SelecionarResponsaveis();
+        mytask.execute(uri);
+    }
+
+    private class SelecionarResponsaveis extends AsyncTask<String, String, List<Responsavel>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected List<Responsavel> doInBackground(String... params) {
+
+            try {
+                conteudo = HttpManager.getDados(params[0]);
+            } catch (Exception e) {
+                conteudo = null;
             }
 
-            @Override
-            public void onFailure(Call<List<Responsavel>> call, Throwable t) {
+            responsaveis = ResponsavelJSONParser.parseDados(conteudo);
+            return responsaveis;
+        }
 
-            }
-        });
+        @Override
+        protected void onPostExecute(final List<Responsavel> responsaveis) {
+            super.onPostExecute(responsaveis);
+
+            responsavelAdapter = new ResponsavelAdapter(responsaveis, listener);
+            viewHolder.recyclerViewResponsaveis.setAdapter(responsavelAdapter);
+        }
     }
 
     private static class ViewHolder {

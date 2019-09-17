@@ -6,8 +6,6 @@ import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.view.fragments.AgendamentoAlunoFragment;
-import com.fatecourinhos.napp.view.fragments.Feedback;
-import com.fatecourinhos.napp.view.fragments.MensagemAlunoFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;

@@ -10,12 +10,8 @@ import android.view.ViewGroup;
 
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.json.ProfissionalJSONParser;
-import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.util.HttpManager;
-import com.fatecourinhos.napp.util.RetrofitClass;
-import com.fatecourinhos.napp.view.adapter.CampoAtuacaoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
 
@@ -29,12 +25,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class ProfissionalFragment extends Fragment{
 
+    private String conteudo;
     private List<Profissional> profissionais;
     private OnProfissionalInteractionListener listener;
     private ProfissionalAdapter profissionalAdapter;
@@ -69,8 +62,6 @@ public class ProfissionalFragment extends Fragment{
                 intent.putExtra("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
                 intent.putExtra("statusProfissional", profissional.getFkUsuario().getStatus());
 
-                intent.putExtra("operacao", "alterar");
-
                 getActivity().startActivity(intent);
             }
 
@@ -81,18 +72,20 @@ public class ProfissionalFragment extends Fragment{
         };
 
         selecionarProfissionais();
-
         return view;
 
     }
 
-    private void selecionarProfissionais(){
+    @Override
+    public void onResume() {
+        super.onResume();
+        selecionarProfissionais();
+    }
 
+    private void selecionarProfissionais() {
         String uri = "http://vitorsilva.xyz/napp/profissional/selecionarProfissionais.php";
-
         SelecionarProfissionais mytask = new SelecionarProfissionais();
         mytask.execute(uri);
-
     }
 
     private class SelecionarProfissionais extends AsyncTask<String, String, List<Profissional>> {
@@ -104,18 +97,23 @@ public class ProfissionalFragment extends Fragment{
 
         @Override
         protected List<Profissional> doInBackground(String... params) {
-            final String conteudo = HttpManager.getDados(params[0]);
-            profissionais = ProfissionalJSONParser.parseDados(conteudo);
 
+            try {
+                conteudo = HttpManager.getDados(params[0]);
+            } catch (Exception e) {
+                conteudo = null;
+            }
+
+            profissionais = ProfissionalJSONParser.parseDados(conteudo);
             return profissionais;
         }
 
         @Override
         protected void onPostExecute(List<Profissional> profissionais) {
             super.onPostExecute(profissionais);
+
             profissionalAdapter = new ProfissionalAdapter(profissionais, listener);
             viewHolder.recyclerViewProfissionais.setAdapter(profissionalAdapter);
-
         }
     }
 

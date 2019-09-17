@@ -114,8 +114,9 @@ public class CadastroResponsavel extends AppCompatActivity {
     private void inserirResponsavel(Responsavel responsavel) {
 
         String uri = "http://vitorsilva.xyz/napp/responsavel/inserirResponsavel.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        CadastrarResponsavel task = new CadastrarResponsavel();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
@@ -124,7 +125,6 @@ public class CadastroResponsavel extends AppCompatActivity {
         requestHttp.setParametro("celularResponsavel", responsavel.getCelularResponsavel());
         requestHttp.setParametro("emailResponsavel", responsavel.getEmailResponsavel());
 
-        CadastrarResponsavel task = new CadastrarResponsavel();
         task.execute(requestHttp);
 
     }
@@ -133,8 +133,9 @@ public class CadastroResponsavel extends AppCompatActivity {
     private void alterarResponsavel(Responsavel responsavel) {
 
         String uri = "http://vitorsilva.xyz/napp/responsavel/alterarResponsavel.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        AlterarResponsavel task = new AlterarResponsavel();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
@@ -144,7 +145,6 @@ public class CadastroResponsavel extends AppCompatActivity {
         requestHttp.setParametro("celularResponsavel", responsavel.getCelularResponsavel());
         requestHttp.setParametro("emailResponsavel", responsavel.getEmailResponsavel());
 
-        AlterarResponsavel task = new AlterarResponsavel();
         task.execute(requestHttp);
 
     }
@@ -159,10 +159,16 @@ public class CadastroResponsavel extends AppCompatActivity {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Sucesso"))
-                sucesso = true;
-            else
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
                 sucesso = false;
+            }
 
             return conteudo;
         }
@@ -189,10 +195,16 @@ public class CadastroResponsavel extends AppCompatActivity {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if(conteudo.contains("Sucesso"))
-                sucesso = true;
-            else
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
                 sucesso = false;
+            }
 
             return conteudo;
         }

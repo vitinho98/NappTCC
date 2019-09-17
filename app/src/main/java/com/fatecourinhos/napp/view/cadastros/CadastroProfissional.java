@@ -5,7 +5,6 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,7 +14,6 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.ProfissionalController;
 import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.model.Usuario;
 import com.fatecourinhos.napp.util.HttpManager;
@@ -41,7 +39,7 @@ public class CadastroProfissional extends AppCompatActivity {
         setContentView(R.layout.cadastro_activity_profissional);
         getComponentes();
 
-        if ((getIntent().getExtras() != null)) {
+        if (getIntent().getExtras() != null) {
 
             profissional.setNomeProfissional((String) getIntent().getExtras().get("nomeProfissional"));
             profissional.setCelularProfissional((String) getIntent().getExtras().get("celularProfissional"));
@@ -74,7 +72,7 @@ public class CadastroProfissional extends AppCompatActivity {
                     switchProf.setChecked(true);
 
             } catch (Exception e) {
-                System.out.println(e.toString());
+                switchProf.setChecked(false);
             }
 
             btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +94,7 @@ public class CadastroProfissional extends AppCompatActivity {
         }
     }
 
-    private void getComponentes(){
+    private void getComponentes() {
 
         editTextNome = findViewById(R.id.edit_text_nome_profissional);
         editTextCel = findViewById(R.id.edit_text_celular_profissional);
@@ -163,7 +161,7 @@ public class CadastroProfissional extends AppCompatActivity {
 
     }
 
-    public boolean conferirDados(Profissional profissional){
+    public boolean conferirDados(Profissional profissional) {
 
         boolean retorno = true;
 
@@ -179,13 +177,15 @@ public class CadastroProfissional extends AppCompatActivity {
             retorno = false;
 
         return retorno;
+
     }
 
-    public void inserirProfissional(Profissional profissional){
+    public void inserirProfissional(Profissional profissional) {
 
         String uri = "http://vitorsilva.xyz/napp/profissional/inserirProfissional.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        InserirProfissional task = new InserirProfissional();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
@@ -197,15 +197,16 @@ public class CadastroProfissional extends AppCompatActivity {
         requestHttp.setParametro("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
         requestHttp.setParametro("statusProfissional", String.valueOf(profissional.getFkUsuario().getStatus()));
 
-        InserirProfissional task = new InserirProfissional();
         task.execute(requestHttp);
+
     }
 
-    public void alterarProfissional(Profissional profissional){
+    public void alterarProfissional(Profissional profissional) {
 
         String uri = "http://vitorsilva.xyz/napp/profissional/alterarProfissional.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        AlterarProfissional task = new AlterarProfissional();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
@@ -219,7 +220,6 @@ public class CadastroProfissional extends AppCompatActivity {
         requestHttp.setParametro("statusProfissional", String.valueOf(profissional.getFkUsuario().getStatus()));
         requestHttp.setParametro("fkUsuario", String.valueOf(profissional.getFkUsuario().getIdUsuario()));
 
-        AlterarProfissional task = new AlterarProfissional();
         task.execute(requestHttp);
 
     }
@@ -234,10 +234,16 @@ public class CadastroProfissional extends AppCompatActivity {
         protected String doInBackground(RequestHttp... params) {
             conteudo =  HttpManager.getDados(params[0]);
 
-            if (conteudo.contains("Sucesso"))
-                sucesso = true;
-            else
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
                 sucesso = false;
+            }
 
             return conteudo;
         }
@@ -264,10 +270,16 @@ public class CadastroProfissional extends AppCompatActivity {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if (conteudo.contains("Sucesso"))
-                sucesso = true;
-            else
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
                 sucesso = false;
+            }
 
             return conteudo;
         }

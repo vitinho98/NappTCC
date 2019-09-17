@@ -2,14 +2,16 @@ package com.fatecourinhos.napp.view.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.json.ProfissionalExternoJSONParser;
 import com.fatecourinhos.napp.model.ProfissionalExterno;
-import com.fatecourinhos.napp.util.RetrofitClass;
+import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.view.adapter.ProfissionalExternoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissionalExterno;
 import com.fatecourinhos.napp.view.listener.OnProfissionalExternoInteractionListener;
@@ -21,12 +23,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class ProfissionalExternoFragment extends Fragment{
 
+    private String conteudo;
     private List<ProfissionalExterno> profissionaisExterno;
     private ProfissionalExternoAdapter profissionalExternoAdapter;
     private OnProfissionalExternoInteractionListener listener;
@@ -72,29 +71,49 @@ public class ProfissionalExternoFragment extends Fragment{
             }
         };
 
-        carregarProfissionaisExternos();
-
+        selecionarProfissionaisExternos();
         return view;
     }
 
-    private void carregarProfissionaisExternos(){
+    @Override
+    public void onResume() {
+        super.onResume();
+        selecionarProfissionaisExternos();
+    }
 
-        RetrofitClass retrofit = RetrofitClass.retrofit.create(RetrofitClass.class);
-        Call<List<ProfissionalExterno>> call = retrofit.getProfissionaisExternos();
-        call.enqueue(new Callback<List<ProfissionalExterno>>() {
-            @Override
-            public void onResponse(Call<List<ProfissionalExterno>> call, Response<List<ProfissionalExterno>> response) {
-                profissionaisExterno = response.body();
-                profissionalExternoAdapter = new ProfissionalExternoAdapter(profissionaisExterno, listener);
-                viewHolder.recyclerViewProfissionaisExternos.setAdapter(profissionalExternoAdapter);
+    public void selecionarProfissionaisExternos() {
+        String uri = "http://vitorsilva.xyz/napp/profissionalExterno/selecionarProfissionaisExternos.php";
+        SelecionarProfissionaisExternos mytask = new SelecionarProfissionaisExternos();
+        mytask.execute(uri);
+    }
+
+    private class SelecionarProfissionaisExternos extends AsyncTask<String, String, List<ProfissionalExterno>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected List<ProfissionalExterno> doInBackground(String... params) {
+
+            try {
+                conteudo = HttpManager.getDados(params[0]);
+            } catch (Exception e) {
+                conteudo = null;
             }
 
-            @Override
-            public void onFailure(Call<List<ProfissionalExterno>> call, Throwable t) {
+            profissionaisExterno = ProfissionalExternoJSONParser.parseDados(conteudo);
+            return profissionaisExterno;
+        }
 
-            }
-        });
+        @Override
+        protected void onPostExecute(final List<ProfissionalExterno> profissionaisExternos) {
+            super.onPostExecute(profissionaisExternos);
 
+            profissionalExternoAdapter = new ProfissionalExternoAdapter(profissionaisExterno, listener);
+            viewHolder.recyclerViewProfissionaisExternos.setAdapter(profissionalExternoAdapter);
+        }
     }
 
     private static class ViewHolder {

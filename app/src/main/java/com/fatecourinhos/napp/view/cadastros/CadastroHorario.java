@@ -109,15 +109,15 @@ public class CadastroHorario extends AppCompatActivity {
     public void inserirAgendaProfissional(AgendaProfissional agendaProfissional) {
 
         String uri = "http://vitorsilva.xyz/napp/agendaProfissional/inserirAgendaProfissional.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        InserirAgendaProfissional task = new InserirAgendaProfissional();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
         requestHttp.setParametro("data", formatDataHora.format(agendaProfissional.getData()));
         requestHttp.setParametro("idProfissional", String.valueOf(agendaProfissional.getFkProfissional().getIdProfissional()));
 
-        InserirAgendaProfissional task = new InserirAgendaProfissional();
         task.execute(requestHttp);
 
     }
@@ -150,9 +150,10 @@ public class CadastroHorario extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
+            if (sucesso) {
                 Toast.makeText(getApplicationContext(), "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-            else
+                finish();
+            } else
                 Toast.makeText(getApplicationContext(), "Erro ao cadastrar!", Toast.LENGTH_SHORT).show();
         }
     }

@@ -227,21 +227,22 @@ public class LoginActivity extends AppCompatActivity {
     private void autenticarUsuario(Usuario usuario) {
 
         String uri = "http://vitorsilva.xyz/napp/usuario/autenticarUsuario.php";
-
         RequestHttp requestHttp = new RequestHttp();
+        autenticarUsuario task = new autenticarUsuario();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
         requestHttp.setParametro("login", usuario.getLogin());
         requestHttp.setParametro("senha", usuario.getSenha());
 
-        autenticarUsuario task = new autenticarUsuario();
         task.execute(requestHttp);
 
     }
 
     //tarefa assincrona que recebe os dados do banco de dados
     private class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -252,10 +253,16 @@ public class LoginActivity extends AppCompatActivity {
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
 
-            if (conteudo.contains("Vazio"))
+            try {
+
+                if (conteudo.contains("Vazio"))
+                    sucesso = false;
+                else
+                    sucesso = true;
+
+            } catch (Exception e) {
                 sucesso = false;
-            else
-                sucesso = true;
+            }
 
             return conteudo;
         }

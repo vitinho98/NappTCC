@@ -1,17 +1,19 @@
 package com.fatecourinhos.napp.view.fragments;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.json.LocalAtendimentoJSONParser;
 import com.fatecourinhos.napp.model.LocalAtendimento;
+import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroLocalAtendimento;
 import com.fatecourinhos.napp.view.listener.OnLocalAtendimentoInteractionListener;
-import com.fatecourinhos.napp.util.RetrofitClass;
 
 import java.util.List;
 
@@ -20,12 +22,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class LocalAtendimentoFragment extends Fragment{
 
+    private String conteudo;
     private List<LocalAtendimento> locaisAtendimento;
     private OnLocalAtendimentoInteractionListener listener;
     private ViewHolder viewHolder = new ViewHolder();
@@ -66,30 +65,44 @@ public class LocalAtendimentoFragment extends Fragment{
             }
         };
 
-        carregarLocaisAtendimento();
-
+        selecionarLocalAtendimento();
         return view;
 
     }
 
-    private void carregarLocaisAtendimento(){
+    public void selecionarLocalAtendimento() {
+        String uri = "http://vitorsilva.xyz/napp/localAtendimento/selecionarLocaisAtendimento.php";
+        SelecionarLocaisAtendimento mytask = new SelecionarLocaisAtendimento();
+        mytask.execute(uri);
+    }
 
-        RetrofitClass retrofit = RetrofitClass.retrofit.create(RetrofitClass.class);
-        Call<List<LocalAtendimento>> call = retrofit.getLocaisAtendimento();
-        call.enqueue(new Callback<List<LocalAtendimento>>() {
-            @Override
-            public void onResponse(Call<List<LocalAtendimento>> call, Response<List<LocalAtendimento>> response) {
-                locaisAtendimento = response.body();
-                localAtendimentoAdapter = new LocalAtendimentoAdapter(locaisAtendimento, listener);
-                viewHolder.recyclerViewLocaisAtendimento.setAdapter(localAtendimentoAdapter);
+    private class SelecionarLocaisAtendimento extends AsyncTask<String, String, List<LocalAtendimento>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected List<LocalAtendimento> doInBackground(String... params) {
+
+            try {
+                conteudo = HttpManager.getDados(params[0]);
+            } catch (Exception e) {
+                conteudo = null;
             }
 
-            @Override
-            public void onFailure(Call<List<LocalAtendimento>> call, Throwable t) {
+            locaisAtendimento = LocalAtendimentoJSONParser.parseDados(conteudo);
+            return locaisAtendimento;
+        }
 
-            }
-        });
+        @Override
+        protected void onPostExecute(final List<LocalAtendimento> locaisAtendimento) {
+            super.onPostExecute(locaisAtendimento);
 
+            localAtendimentoAdapter = new LocalAtendimentoAdapter(locaisAtendimento, listener);
+            viewHolder.recyclerViewLocaisAtendimento.setAdapter(localAtendimentoAdapter);
+        }
     }
 
     private static class ViewHolder {

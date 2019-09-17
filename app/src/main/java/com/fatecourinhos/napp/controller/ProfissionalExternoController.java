@@ -67,37 +67,7 @@ public class ProfissionalExternoController {
 
     }
 
-    public static List<ProfissionalExterno> selecionarProfissionaisExternos() {
 
-        String uri = "http://vitorsilva.xyz/napp/profissionalExterno/selecionarProfissionaisExternos.php";
-
-        SelecionarProfissionaisExternos mytask = new SelecionarProfissionaisExternos();
-        mytask.execute(uri);
-
-        return profissionaisExternos;
-    }
-
-    private static class SelecionarProfissionaisExternos extends AsyncTask<String, String, List<ProfissionalExterno>> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected List<ProfissionalExterno> doInBackground(String... params) {
-            final String conteudo = HttpManager.getDados(params[0]);
-            profissionaisExternos = ProfissionalExternoJSONParser.parseDados(conteudo);
-
-            return profissionaisExternos;
-        }
-
-        @Override
-        protected void onPostExecute(final List<ProfissionalExterno> profissionaisExternos) {
-            super.onPostExecute(profissionaisExternos);
-
-        }
-    }
 
     private static class CadastrarProfissionalExterno extends AsyncTask<RequestHttp, String, String> {
         @Override

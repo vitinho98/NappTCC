@@ -1,6 +1,7 @@
 package com.fatecourinhos.napp.view.fragments;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,20 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.json.DiagnosticoJSONParser;
 import com.fatecourinhos.napp.model.Diagnostico;
+import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.view.adapter.DiagnosticoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroDiagnostico;
 import com.fatecourinhos.napp.view.listener.OnDiagnosticoInteractionListener;
-import com.fatecourinhos.napp.util.RetrofitClass;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class DiagnosticoFragment extends Fragment{
 
+    private String conteudo;
     private List<Diagnostico> diagnosticos;
     private ViewHolder viewHolder = new ViewHolder();
     private OnDiagnosticoInteractionListener listener;
@@ -65,30 +64,43 @@ public class DiagnosticoFragment extends Fragment{
             }
         };
 
-        carregarDiagnosticos();
-
+        selecionarDiagnosticos();
         return view;
     }
 
-    private void carregarDiagnosticos() {
+    public void selecionarDiagnosticos(){
+        String uri = "http://vitorsilva.xyz/napp/diagnostico/selecionarDiagnosticos.php";
+        SelecionarDiagnosticos mytask = new SelecionarDiagnosticos();
+        mytask.execute(uri);
+    }
 
-        RetrofitClass retrofit = RetrofitClass.retrofit.create(RetrofitClass.class);
-        Call<List<Diagnostico>> call = retrofit.getDiagnosticos();
+    private class SelecionarDiagnosticos extends AsyncTask<String, String, List<Diagnostico>> {
 
-        call.enqueue(new Callback<List<Diagnostico>>() {
-            @Override
-            public void onResponse(Call<List<Diagnostico>> call, Response<List<Diagnostico>> response) {
-                diagnosticos = response.body();
-                diagnosticoAdapter = new DiagnosticoAdapter(diagnosticos, listener);
-                viewHolder.recyclerViewDiagnosticos.setAdapter(diagnosticoAdapter);
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected List<Diagnostico> doInBackground(String... params) {
+
+            try {
+                conteudo = HttpManager.getDados(params[0]);
+            } catch (Exception e) {
+                conteudo = null;
             }
 
-            @Override
-            public void onFailure(Call<List<Diagnostico>> call, Throwable t) {
+            diagnosticos = DiagnosticoJSONParser.parseDados(conteudo);
+            return diagnosticos;
+        }
 
-            }
-        });
+        @Override
+        protected void onPostExecute(final List<Diagnostico> diagnosticos) {
+            super.onPostExecute(diagnosticos);
 
+            diagnosticoAdapter = new DiagnosticoAdapter(diagnosticos, listener);
+            viewHolder.recyclerViewDiagnosticos.setAdapter(diagnosticoAdapter);
+        }
     }
 
     private static class ViewHolder {
