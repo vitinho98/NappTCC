@@ -232,7 +232,6 @@ public class LoginActivity extends AppCompatActivity {
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-
         requestHttp.setParametro("login", usuario.getLogin());
         requestHttp.setParametro("senha", usuario.getSenha());
 

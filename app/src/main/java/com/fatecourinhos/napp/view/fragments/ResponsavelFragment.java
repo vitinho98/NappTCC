@@ -1,17 +1,21 @@
 package com.fatecourinhos.napp.view.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.json.ResponsavelJSONParser;
 import com.fatecourinhos.napp.model.Responsavel;
 import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.cadastros.CadastroResponsavel;
 import com.fatecourinhos.napp.view.adapter.ResponsavelAdapter;
 import com.fatecourinhos.napp.view.listener.OnResponsavelInteractionListener;
@@ -25,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ResponsavelFragment extends Fragment{
 
+    private boolean sucesso;
     private String conteudo;
     private List<Responsavel> responsaveis;
     private ResponsavelAdapter responsavelAdapter;
@@ -61,8 +66,19 @@ public class ResponsavelFragment extends Fragment{
             }
 
             @Override
-            public void onDeleteClick(Responsavel responsavel) {
+            public void onDeleteClick(final Responsavel responsavel) {
 
+                new AlertDialog.Builder(context)
+                        .setTitle("Remover responsável?")
+                        .setMessage("Deseja remover o responsável?")
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                excluirResponsavel(responsavel.getIdResponsavel());
+                            }
+                        })
+                        .setNeutralButton("Não", null)
+                        .show();
             }
         };
 
@@ -77,10 +93,23 @@ public class ResponsavelFragment extends Fragment{
         selecionarResponsaveis();
     }
 
-    public void selecionarResponsaveis() {
+    private void excluirResponsavel(int id) {
+        String uri = "http://vitorsilva.xyz/napp/responsavel/excluirResponsavel.php";
+        ExcluirLocalAtendimento task = new ExcluirLocalAtendimento();
+        RequestHttp requestHttp = new RequestHttp();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+        requestHttp.setParametro("idResponsavel", String.valueOf(id));
+
+        task.execute(requestHttp);
+    }
+
+    private void selecionarResponsaveis() {
         String uri = "http://vitorsilva.xyz/napp/responsavel/selecionarResponsaveis.php";
-        SelecionarResponsaveis mytask = new SelecionarResponsaveis();
-        mytask.execute(uri);
+        SelecionarResponsaveis task = new SelecionarResponsaveis();
+
+        task.execute(uri);
     }
 
     private class SelecionarResponsaveis extends AsyncTask<String, String, List<Responsavel>> {
@@ -109,6 +138,41 @@ public class ResponsavelFragment extends Fragment{
 
             responsavelAdapter = new ResponsavelAdapter(responsaveis, listener);
             viewHolder.recyclerViewResponsaveis.setAdapter(responsavelAdapter);
+        }
+    }
+
+    private class ExcluirLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
+                sucesso = false;
+            }
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (sucesso)
+                Toast.makeText(view.getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(view.getContext(),"Erro ao excluir", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -1,15 +1,20 @@
 package com.fatecourinhos.napp.view.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.json.CampoAtuacaoJSONParser;
 import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.adapter.CampoAtuacaoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroCampoAtuacao;
 import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
@@ -22,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CampoAtuacaoFragment extends Fragment{
 
+    private boolean sucesso;
     private String conteudo;
     private List<CampoAtuacao> camposAtuacao;
     private OnCampoAtuacaoInteractionListener listener;
@@ -57,8 +63,19 @@ public class CampoAtuacaoFragment extends Fragment{
             }
 
             @Override
-            public void onDeleteClick(CampoAtuacao campoAtuacao) {
+            public void onDeleteClick(final CampoAtuacao campoAtuacao) {
 
+                new AlertDialog.Builder(context)
+                        .setTitle("Remover campo de atuação")
+                        .setMessage("Deseja remover o campo de atuação?")
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                excluirCampoAtuacao(campoAtuacao.getIdCampoAtuacao());
+                            }
+                        })
+                        .setNeutralButton("Não", null)
+                        .show();
             }
         };
 
@@ -67,15 +84,28 @@ public class CampoAtuacaoFragment extends Fragment{
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         selecionarCamposAtuacao();
     }
 
-    public void selecionarCamposAtuacao() {
+    private void excluirCampoAtuacao(int id) {
+        String uri = "http://vitorsilva.xyz/napp/campoAtuacao/excluirCampoAtuacao.php";
+        RequestHttp requestHttp = new RequestHttp();
+        ExcluirCampoAtuacao task = new ExcluirCampoAtuacao();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+        requestHttp.setParametro("idCampoAtuacao", String.valueOf(id));
+
+        task.execute(requestHttp);
+    }
+
+    private void selecionarCamposAtuacao() {
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/selecionarCamposAtuacao.php";
-        SelecionarCamposAtuacao mytask = new SelecionarCamposAtuacao();
-        mytask.execute(uri);
+        SelecionarCamposAtuacao task = new SelecionarCamposAtuacao();
+
+        task.execute(uri);
     }
 
     private class SelecionarCamposAtuacao extends AsyncTask<String, String, List<CampoAtuacao>> {
@@ -104,6 +134,41 @@ public class CampoAtuacaoFragment extends Fragment{
 
             campoAtuacaoAdapter = new CampoAtuacaoAdapter(camposAtuacao, listener);
             viewHolder.recyclerViewCampoAtuacao.setAdapter(campoAtuacaoAdapter);
+        }
+    }
+
+    private class ExcluirCampoAtuacao extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
+                sucesso = false;
+            }
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (sucesso)
+                Toast.makeText(view.getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(view.getContext(),"Erro ao excluir", Toast.LENGTH_SHORT).show();
         }
     }
 

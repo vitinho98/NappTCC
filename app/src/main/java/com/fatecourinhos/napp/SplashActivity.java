@@ -80,7 +80,6 @@ public class SplashActivity extends AppCompatActivity {
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-
         requestHttp.setParametro("idUsuario", String.valueOf(usuario.getIdUsuario()));
 
         task.execute(requestHttp);

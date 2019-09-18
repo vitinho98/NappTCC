@@ -1,16 +1,20 @@
 package com.fatecourinhos.napp.view.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.json.LocalAtendimentoJSONParser;
 import com.fatecourinhos.napp.model.LocalAtendimento;
 import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroLocalAtendimento;
 import com.fatecourinhos.napp.view.listener.OnLocalAtendimentoInteractionListener;
@@ -24,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class LocalAtendimentoFragment extends Fragment{
 
+    private boolean sucesso;
     private String conteudo;
     private List<LocalAtendimento> locaisAtendimento;
     private OnLocalAtendimentoInteractionListener listener;
@@ -60,8 +65,19 @@ public class LocalAtendimentoFragment extends Fragment{
             }
 
             @Override
-            public void onDeleteClick(LocalAtendimento localAtendimento) {
+            public void onDeleteClick(final LocalAtendimento localAtendimento) {
 
+                new AlertDialog.Builder(context)
+                        .setTitle("Remover diagnóstico?")
+                        .setMessage("Deseja remover o diagnóstico?")
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                excluirLocalAtendimento(localAtendimento.getIdLocalAtendimento());
+                            }
+                        })
+                        .setNeutralButton("Não", null)
+                        .show();
             }
         };
 
@@ -70,10 +86,29 @@ public class LocalAtendimentoFragment extends Fragment{
 
     }
 
-    public void selecionarLocalAtendimento() {
+    @Override
+    public void onResume() {
+        super.onResume();
+        selecionarLocalAtendimento();
+    }
+
+    private void excluirLocalAtendimento(int id) {
+        String uri = "http://vitorsilva.xyz/napp/localAtendimento/excluirLocalAtendimento.php";
+        ExcluirLocalAtendimento task = new ExcluirLocalAtendimento();
+        RequestHttp requestHttp = new RequestHttp();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+        requestHttp.setParametro("idLocalAtendimento", String.valueOf(id));
+
+        task.execute(requestHttp);
+    }
+
+    private void selecionarLocalAtendimento() {
         String uri = "http://vitorsilva.xyz/napp/localAtendimento/selecionarLocaisAtendimento.php";
-        SelecionarLocaisAtendimento mytask = new SelecionarLocaisAtendimento();
-        mytask.execute(uri);
+        SelecionarLocaisAtendimento task = new SelecionarLocaisAtendimento();
+
+        task.execute(uri);
     }
 
     private class SelecionarLocaisAtendimento extends AsyncTask<String, String, List<LocalAtendimento>> {
@@ -102,6 +137,41 @@ public class LocalAtendimentoFragment extends Fragment{
 
             localAtendimentoAdapter = new LocalAtendimentoAdapter(locaisAtendimento, listener);
             viewHolder.recyclerViewLocaisAtendimento.setAdapter(localAtendimentoAdapter);
+        }
+    }
+
+    private class ExcluirLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+            conteudo = HttpManager.getDados(params[0]);
+
+            try {
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
+                sucesso = false;
+            }
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (sucesso)
+                Toast.makeText(view.getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(view.getContext(),"Erro ao excluir", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -4,6 +4,7 @@ public class Diagnostico {
 
     private int idDiagnostico;
     private String nomeDiagnostico;
+    private int status;
 
     public Diagnostico() {
 
@@ -23,6 +24,14 @@ public class Diagnostico {
 
     public void setNomeDiagnostico(String nomeDiagnostico) {
         this.nomeDiagnostico = nomeDiagnostico;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 }
