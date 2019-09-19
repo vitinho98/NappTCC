@@ -25,9 +25,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CampoAtuacaoFragment extends Fragment{
+public class CampoAtuacaoFragment extends Fragment implements CadastroCampoAtuacao.DialogListener{
 
-    private boolean sucesso;
     private String conteudo;
     private List<CampoAtuacao> camposAtuacao;
     private OnCampoAtuacaoInteractionListener listener;
@@ -83,12 +82,6 @@ public class CampoAtuacaoFragment extends Fragment{
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        selecionarCamposAtuacao();
-    }
-
     private void excluirCampoAtuacao(int id) {
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/excluirCampoAtuacao.php";
         RequestHttp requestHttp = new RequestHttp();
@@ -106,6 +99,11 @@ public class CampoAtuacaoFragment extends Fragment{
         SelecionarCamposAtuacao task = new SelecionarCamposAtuacao();
 
         task.execute(uri);
+    }
+
+    @Override
+    public void selecionar() {
+        selecionarCamposAtuacao();
     }
 
     private class SelecionarCamposAtuacao extends AsyncTask<String, String, List<CampoAtuacao>> {
@@ -141,21 +139,16 @@ public class CampoAtuacaoFragment extends Fragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            conteudo = null;
         }
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
-
-                if (conteudo.contains("Sucesso"))
-                    sucesso = true;
-                else
-                    sucesso = false;
-
+                conteudo = HttpManager.getDados(params[0]);
             } catch (Exception e) {
-                sucesso = false;
+                conteudo = null;
             }
 
             return conteudo;
@@ -165,8 +158,12 @@ public class CampoAtuacaoFragment extends Fragment{
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
+            if (conteudo.contains("Sucesso")) {
                 Toast.makeText(view.getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
+                selecionarCamposAtuacao();
+            } else if (conteudo.contains("Derrota - Relacionado com outra tabela"))
+                Toast.makeText(view.getContext(),"Não é possível excluir um campo relacionado com um profissional externo",
+                        Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(view.getContext(),"Erro ao excluir", Toast.LENGTH_SHORT).show();
         }

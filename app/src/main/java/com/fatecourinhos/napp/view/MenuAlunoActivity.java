@@ -36,7 +36,7 @@ public class MenuAlunoActivity extends AppCompatActivity {
                     ft.commit();
                     return true;
 
-                case R.id.nav_mensagem:
+               /* case R.id.nav_mensagem:
 
                     fragment = new MensagemAlunoFragment();
                     ft.replace(R.id.frame_layout_aluno, fragment);
@@ -48,7 +48,7 @@ public class MenuAlunoActivity extends AppCompatActivity {
                     fragment = new Feedback();
                     ft.replace(R.id.frame_layout_aluno, fragment);
                     ft.commit();
-                    return true;
+                    return true; */
             }
 
             return false;

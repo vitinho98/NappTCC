@@ -1,9 +1,11 @@
 package com.fatecourinhos.napp.view.cadastros;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -23,7 +25,7 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
     //componente da tela
     private AppCompatEditText editTextNomeCampo;
-
+    public DialogListener listener;
     //variaveis gloabais
     private View view;
     private CampoAtuacao campoAtuacao;
@@ -98,6 +100,21 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
 
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            listener = (DialogListener) context;
+        } catch (ClassCastException e) {
+            Log.e("to s", e.toString());
+        }
+    }
+
+    public interface DialogListener {
+        void selecionar();
+    }
+
     private void inserirCampoAtuacao(CampoAtuacao campoAtuacao) {
 
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/inserirCampoAtuacao.php";
@@ -157,9 +174,10 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
+            if (sucesso) {
                 Toast.makeText(view.getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-            else
+                listener.selecionar();
+            } else
                 Toast.makeText(view.getContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
         }
     }
@@ -192,9 +210,10 @@ public class CadastroCampoAtuacao extends AppCompatDialogFragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
+            if (sucesso) {
                 Toast.makeText(view.getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
-            else
+                listener.selecionar();
+            } else
                 Toast.makeText(view.getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
     }
