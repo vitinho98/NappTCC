@@ -22,7 +22,6 @@ public class AgendaProfissionalController {
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
-        //TODO
         requestHttp.setParametro("idAgendaUsuario", String.valueOf(agendaProfissional.getIdAgendaProfissional()));
         requestHttp.setParametro("data", String.valueOf(agendaProfissional.getData()));
         requestHttp.setParametro("horario", String.valueOf(agendaProfissional.getData()));
