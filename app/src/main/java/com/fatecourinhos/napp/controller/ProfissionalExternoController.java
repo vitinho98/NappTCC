@@ -1,6 +1,7 @@
 package com.fatecourinhos.napp.controller;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.fatecourinhos.napp.json.ProfissionalExternoJSONParser;
 import com.fatecourinhos.napp.model.ProfissionalExterno;
@@ -42,7 +43,7 @@ public class ProfissionalExternoController {
 
     public static boolean alterarProfissionalExterno(ProfissionalExterno profissionalExterno) {
 
-        String uri = "http://vitorsilva.xyz/napp/profissionalExterno/alterarProfissionalExterno.php";
+        String uri = "http://vitorsilva.xyz/napp/profissionalExterno/alterarProfExterno.php";
 
         RequestHttp requestHttp = new RequestHttp();
         requestHttp.setMetodo("GET");
@@ -54,11 +55,11 @@ public class ProfissionalExternoController {
         requestHttp.setParametro("celularProfissionalExterno", profissionalExterno.getCelularProfissionalExterno());
         requestHttp.setParametro("telefoneProfissionalExterno", profissionalExterno.getCelularProfissionalExterno());
         requestHttp.setParametro("cidadeProfissionalExterno", profissionalExterno.getCidadeProfissionalExterno());
-        requestHttp.setParametro("idResponsavel", String.valueOf(profissionalExterno.getFkResponsavel().getIdResponsavel()));
         requestHttp.setParametro("enderecoProfissionalExterno", profissionalExterno.getEndereco());
         requestHttp.setParametro("emailProfissionalExterno", profissionalExterno.getEmailProfissionalExterno());
         requestHttp.setParametro("numeroProfissionalExterno", profissionalExterno.getNumero());
-        requestHttp.setParametro("idCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
+        requestHttp.setParametro("fkCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
+        requestHttp.setParametro("fkResponsavel", String.valueOf(profissionalExterno.getFkResponsavel().getIdResponsavel()));
 
         AlterarProfissionalExterno task = new AlterarProfissionalExterno();
         task.execute(requestHttp);
@@ -102,12 +103,13 @@ public class ProfissionalExternoController {
         @Override
         protected String doInBackground(RequestHttp... params) {
             final String conteudo = (String) HttpManager.getDados(params[0]);
-
+            Log.e("TESTE", "ANTES DA CONSULTA");
             if(conteudo.equals("Sucesso")){
                 sucesso = true;
             }else{
                 sucesso = false;
             }
+            Log.e("TESTE", "DEPOIS DA CONSULTA - " + conteudo);
 
             return conteudo;
         }

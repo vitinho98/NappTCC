@@ -2,6 +2,7 @@ package com.fatecourinhos.napp.view.cadastros;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -252,6 +253,9 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         requestHttp.setParametro("emailProfissionalExterno", profissionalExterno.getEmailProfissionalExterno());
         requestHttp.setParametro("numeroProfissionalExterno", profissionalExterno.getNumero());
 
+        Log.e("TESTE", "CAMPOATUACAO - " + String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
+        Log.e("TESTE", "RESPONSAVEL - " + String.valueOf(profissionalExterno.getFkResponsavel().getIdResponsavel()));
+
 
         if (profissionalExterno.getFkCampoAtuacao() != null)
             requestHttp.setParametro("fkCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
@@ -301,9 +305,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            System.out.println("aq");
             conteudo = HttpManager.getDados(params[0]);
-
             if (conteudo.contains("Sucesso"))
                 sucesso = true;
             else
@@ -333,11 +335,13 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         @Override
         protected String doInBackground(RequestHttp... params) {
             conteudo = HttpManager.getDados(params[0]);
-
-            if(conteudo.contains("Sucesso"))
+            Log.e("TESTE", "ANTES DA CONSULTA");
+            if(conteudo.equals("Sucesso")){
                 sucesso = true;
-            else
+            }else{
                 sucesso = false;
+            }
+            Log.e("TESTE", "DEPOIS DA CONSULTA - " + conteudo);
 
             return conteudo;
         }
@@ -345,7 +349,6 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
             if (sucesso) {
                 Toast.makeText(getApplicationContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
                 finish();

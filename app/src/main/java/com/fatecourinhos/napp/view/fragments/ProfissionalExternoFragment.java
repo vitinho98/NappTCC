@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +83,7 @@ public class ProfissionalExternoFragment extends Fragment{
     }
 
     public void selecionarProfissionaisExternos() {
-        String uri = "http://vitorsilva.xyz/napp/profissionalExterno/selecionarProfissionaisExternos.php";
+        String uri = "http://vitorsilva.xyz/napp/profissionalExterno/selecionarProfExterno.php";
         SelecionarProfissionaisExternos mytask = new SelecionarProfissionaisExternos();
         mytask.execute(uri);
     }
@@ -96,7 +97,6 @@ public class ProfissionalExternoFragment extends Fragment{
 
         @Override
         protected List<ProfissionalExterno> doInBackground(String... params) {
-
             try {
                 conteudo = HttpManager.getDados(params[0]);
             } catch (Exception e) {
