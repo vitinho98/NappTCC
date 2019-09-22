@@ -85,8 +85,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                         startActivity(new Intent(MenuProfissionalActivity.this, CadastroHorario.class));
 
                     case("LOCAL"):
-                        CadastroLocalAtendimento cadastroLocalAtendimento = new CadastroLocalAtendimento();
-                        cadastroLocalAtendimento.show(getSupportFragmentManager(), "LOCAL");
+                        startActivity(new Intent(MenuProfissionalActivity.this, CadastroLocalAtendimento.class));
                         break;
 
                     case("EXTERNO"):
@@ -94,18 +93,17 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                         break;
 
                     case("DIAGNOSTICO"):
-                        CadastroDiagnostico cadastroDiagnostico = new CadastroDiagnostico();
-                        cadastroDiagnostico.show(getSupportFragmentManager(), "DIAGNOSTICO");
+                        startActivity(new Intent(MenuProfissionalActivity.this, CadastroDiagnostico.class));
                         break;
 
                     case("CAMPOATUACAO"):
-                        CadastroCampoAtuacao cadastroCampoAtuacao = new CadastroCampoAtuacao();
-                        cadastroCampoAtuacao.show(getSupportFragmentManager(), "CAMPOATUACAO");
+                        startActivity(new Intent(MenuProfissionalActivity.this, CadastroCampoAtuacao.class));
                         break;
 
                     case("RESPONSAVEL"):
                         startActivity(new Intent(MenuProfissionalActivity.this, CadastroResponsavel.class));
                         break;
+
                 }
             }
         });

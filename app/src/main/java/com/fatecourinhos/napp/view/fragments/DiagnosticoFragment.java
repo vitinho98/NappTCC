@@ -3,6 +3,7 @@ package com.fatecourinhos.napp.view.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -52,14 +53,11 @@ public class DiagnosticoFragment extends Fragment{
             @Override
             public void onListClick(Diagnostico diagnostico) {
 
-                Bundle data = new Bundle();
-                data.putInt("idDiagnostico", diagnostico.getIdDiagnostico());
-                data.putString("nomeDiagnostico", diagnostico.getNomeDiagnostico());
-                data.putString("operação", "alteração");
+                Intent intent = new Intent(getActivity(), CadastroDiagnostico.class);
+                intent.putExtra("idDiagnostico", diagnostico.getIdDiagnostico());
+                intent.putExtra("nomeDiagnostico", diagnostico.getNomeDiagnostico());
 
-                CadastroDiagnostico cadastroDiagnostico = new CadastroDiagnostico();
-                cadastroDiagnostico.setArguments(data);
-                cadastroDiagnostico.show(getFragmentManager(), "DIAGNOSTICO");
+                getActivity().startActivity(intent);
 
             }
 
@@ -91,22 +89,26 @@ public class DiagnosticoFragment extends Fragment{
     }
 
     private void excluirDiagnostico(int id) {
+
         String uri = "http://vitorsilva.xyz/napp/diagnostico/excluirDiagnostico.php";
         ExcluirDiagnostico task = new ExcluirDiagnostico();
         RequestHttp requestHttp = new RequestHttp();
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-        requestHttp.setParametro("idCampoAtuacao", String.valueOf(id));
+        requestHttp.setParametro("idDiagnostico", String.valueOf(id));
 
         task.execute(requestHttp);
+
     }
 
     private void selecionarDiagnosticos() {
+
         String uri = "http://vitorsilva.xyz/napp/diagnostico/selecionarDiagnosticos.php";
         SelecionarDiagnosticos task = new SelecionarDiagnosticos();
 
         task.execute(uri);
+
     }
 
     private class SelecionarDiagnosticos extends AsyncTask<String, String, List<Diagnostico>> {
@@ -136,9 +138,11 @@ public class DiagnosticoFragment extends Fragment{
             diagnosticoAdapter = new DiagnosticoAdapter(diagnosticos, listener);
             viewHolder.recyclerViewDiagnosticos.setAdapter(diagnosticoAdapter);
         }
+
     }
 
     private class ExcluirDiagnostico extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -146,9 +150,10 @@ public class DiagnosticoFragment extends Fragment{
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -166,11 +171,13 @@ public class DiagnosticoFragment extends Fragment{
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
+            if (sucesso) {
                 Toast.makeText(view.getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
-            else
+                selecionarDiagnosticos();
+            } else
                 Toast.makeText(view.getContext(),"Erro ao excluir", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private static class ViewHolder {

@@ -1,107 +1,81 @@
 package com.fatecourinhos.napp.view.cadastros;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.appcompat.widget.AppCompatEditText;
-
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.LocalAtendimento;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
-public class CadastroLocalAtendimento extends AppCompatDialogFragment {
+public class CadastroLocalAtendimento extends AppCompatActivity {
 
     //componentes da tela
-    private AppCompatEditText editTextNomeBloco;
-    private AppCompatEditText editTextNomeLocal;
+    private AppCompatEditText editTextNomeBloco, editTextNomeLocal;
+    private Button botao;
 
     //variaveis gloabais
-    private View view;
     private LocalAtendimento localAtendimento;
     private String conteudo;
     private boolean sucesso;
 
-    public CadastroLocalAtendimento() {
-
-    }
-
-    @NonNull
     @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.cadastro_activity_local);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        view = inflater.inflate(R.layout.cadastro_activity_local, null);
-        editTextNomeBloco = view.findViewById(R.id.edit_text_nome_bloco);
-        editTextNomeLocal = view.findViewById(R.id.edit_text_nome_sala);
-        builder.setView(view).setTitle("Local de Atendimento");
+        editTextNomeBloco = findViewById(R.id.edit_text_nome_bloco);
+        editTextNomeLocal = findViewById(R.id.edit_text_nome_sala);
+        botao = findViewById(R.id.btn_cadastrar_local);
+        localAtendimento = new LocalAtendimento();
 
-        if (getArguments() != null) {
+        if (getIntent().getExtras() != null) {
 
-            Bundle data = getArguments();
+            localAtendimento.setIdLocalAtendimento(getIntent().getExtras().getInt("idLocalAtendimento"));
+            editTextNomeBloco.setText(getIntent().getExtras().getString("nomeBloco"));
+            editTextNomeLocal.setText(getIntent().getExtras().getString("nomeLocal"));
 
-            localAtendimento = new LocalAtendimento();
-            localAtendimento.setIdLocalAtendimento(data.getInt("idLocalAtendimento"));
-            editTextNomeBloco.setText(data.getString("nomeBloco"));
-            editTextNomeLocal.setText(data.getString("nomeLocal"));
-
-            builder.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
+            botao.setText(R.string.btn_salvar);
+            botao.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(View view) {
 
                     if (editTextNomeBloco.getText().toString().isEmpty() || editTextNomeLocal.getText().toString().isEmpty())
-                        Toast.makeText(getContext(), "Insira todos os campos", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), "Insira todos os campos", Toast.LENGTH_SHORT).show();
                     else {
-
                         localAtendimento.setNomeBloco(editTextNomeBloco.getText().toString());
                         localAtendimento.setNomeLocal(editTextNomeLocal.getText().toString());
                         alterarLocalAtendimento(localAtendimento);
-
                     }
+
                 }
             });
 
         } else {
 
-            builder.setPositiveButton("Cadastrar", new DialogInterface.OnClickListener() {
+            botao.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(View view) {
 
                     if (editTextNomeBloco.getText().toString().isEmpty() || editTextNomeLocal.getText().toString().isEmpty())
-                        Toast.makeText(getContext(), "Insira todos os campos", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), "Insira todos os campos", Toast.LENGTH_SHORT).show();
                     else {
-
-                        localAtendimento = new LocalAtendimento();
                         localAtendimento.setNomeLocal(editTextNomeLocal.getText().toString());
                         localAtendimento.setNomeBloco(editTextNomeBloco.getText().toString());
                         inserirLocalAtendimento(localAtendimento);
-
                     }
+
                 }
             });
 
         }
-
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        return builder.create();
 
     }
 
@@ -113,7 +87,6 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-
         requestHttp.setParametro("nomeBloco", localAtendimento.getNomeBloco());
         requestHttp.setParametro("nomeLocal", localAtendimento.getNomeLocal());
 
@@ -129,7 +102,6 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-
         requestHttp.setParametro("idLocalAtendimento", String.valueOf(localAtendimento.getIdLocalAtendimento()));
         requestHttp.setParametro("nomeBloco", localAtendimento.getNomeBloco());
         requestHttp.setParametro("nomeLocal", localAtendimento.getNomeLocal());
@@ -147,9 +119,10 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -167,15 +140,18 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
-                Toast.makeText(view.getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(view.getContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
+            if (sucesso) {
+                Toast.makeText(getApplicationContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                finish();
+            } else
+                Toast.makeText(getApplicationContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
 
         }
+
     }
 
     private class AlterarLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -183,9 +159,10 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -203,12 +180,13 @@ public class CadastroLocalAtendimento extends AppCompatDialogFragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
-                Toast.makeText(view.getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(view.getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
-
+            if (sucesso) {
+                Toast.makeText(getApplicationContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
+                finish();
+            } else
+                Toast.makeText(getApplicationContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 }

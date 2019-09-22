@@ -54,7 +54,6 @@ public class ResponsavelFragment extends Fragment{
             public void onListClick(Responsavel responsavel) {
 
                 Intent intent = new Intent(getActivity(), CadastroResponsavel.class);
-
                 intent.putExtra("idResponsavel", responsavel.getIdResponsavel());
                 intent.putExtra("nomeResponsavel", responsavel.getNomeResponsavel());
                 intent.putExtra("emailResponsavel", responsavel.getEmailResponsavel());
@@ -69,7 +68,7 @@ public class ResponsavelFragment extends Fragment{
             public void onDeleteClick(final Responsavel responsavel) {
 
                 new AlertDialog.Builder(context)
-                        .setTitle("Remover responsável?")
+                        .setTitle("Remover responsável")
                         .setMessage("Deseja remover o responsável?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
@@ -84,7 +83,6 @@ public class ResponsavelFragment extends Fragment{
 
         selecionarResponsaveis();
         return view;
-
     }
 
     @Override
@@ -94,6 +92,7 @@ public class ResponsavelFragment extends Fragment{
     }
 
     private void excluirResponsavel(int id) {
+
         String uri = "http://vitorsilva.xyz/napp/responsavel/excluirResponsavel.php";
         ExcluirLocalAtendimento task = new ExcluirLocalAtendimento();
         RequestHttp requestHttp = new RequestHttp();
@@ -103,13 +102,16 @@ public class ResponsavelFragment extends Fragment{
         requestHttp.setParametro("idResponsavel", String.valueOf(id));
 
         task.execute(requestHttp);
+
     }
 
     private void selecionarResponsaveis() {
+
         String uri = "http://vitorsilva.xyz/napp/responsavel/selecionarResponsaveis.php";
         SelecionarResponsaveis task = new SelecionarResponsaveis();
 
         task.execute(uri);
+
     }
 
     private class SelecionarResponsaveis extends AsyncTask<String, String, List<Responsavel>> {
@@ -139,9 +141,11 @@ public class ResponsavelFragment extends Fragment{
             responsavelAdapter = new ResponsavelAdapter(responsaveis, listener);
             viewHolder.recyclerViewResponsaveis.setAdapter(responsavelAdapter);
         }
+
     }
 
     private class ExcluirLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -149,9 +153,10 @@ public class ResponsavelFragment extends Fragment{
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -169,11 +174,13 @@ public class ResponsavelFragment extends Fragment{
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
+            if (sucesso) {
                 Toast.makeText(view.getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
-            else
+                selecionarResponsaveis();
+            } else
                 Toast.makeText(view.getContext(),"Erro ao excluir", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private static class ViewHolder {

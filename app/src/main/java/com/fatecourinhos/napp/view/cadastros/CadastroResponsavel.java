@@ -10,6 +10,8 @@ import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.Responsavel;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -34,7 +36,6 @@ public class CadastroResponsavel extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
 
-            responsavel = new Responsavel();
             responsavel.setIdResponsavel(getIntent().getExtras().getInt("idResponsavel"));
 
             editTextTelefoneResponsavel.setText(getIntent().getExtras().getString("telefoneResponsavel"));
@@ -70,8 +71,6 @@ public class CadastroResponsavel extends AppCompatActivity {
 
                     if (conferirDados()) {
 
-                        responsavel = new Responsavel();
-
                         responsavel.setTelefoneResponsavel(editTextTelefoneResponsavel.getText().toString());
                         responsavel.setNomeResponsavel(editTextNomeResponsavel.getText().toString());
                         responsavel.setEmailResponsavel(editTextEmailResponsavel.getText().toString());
@@ -86,7 +85,7 @@ public class CadastroResponsavel extends AppCompatActivity {
             });
         }
 
-}
+    }
 
     //pega os componentes da tela
     private void getComponentes(){
@@ -97,6 +96,16 @@ public class CadastroResponsavel extends AppCompatActivity {
         editTextTelefoneResponsavel = findViewById(R.id.edit_text_telefone_responsavel);
 
         btn_cadastrar_responsavel = findViewById(R.id.btn_salvar_responsavel);
+        responsavel = new Responsavel();
+
+        SimpleMaskFormatter maskCelular = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
+        SimpleMaskFormatter maskTelefone = new SimpleMaskFormatter("(NN) NNNN-NNNN");
+
+        MaskTextWatcher mtwCelular = new MaskTextWatcher(editTextCelularResponsavel, maskCelular);
+        MaskTextWatcher mtwTelefone = new MaskTextWatcher(editTextTelefoneResponsavel, maskTelefone);
+
+        editTextCelularResponsavel.addTextChangedListener(mtwCelular);
+        editTextTelefoneResponsavel.addTextChangedListener(mtwTelefone);
 
     }
 
@@ -119,7 +128,6 @@ public class CadastroResponsavel extends AppCompatActivity {
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-
         requestHttp.setParametro("nomeResponsavel", responsavel.getNomeResponsavel());
         requestHttp.setParametro("telefoneResponsavel", responsavel.getTelefoneResponsavel());
         requestHttp.setParametro("celularResponsavel", responsavel.getCelularResponsavel());
@@ -138,7 +146,6 @@ public class CadastroResponsavel extends AppCompatActivity {
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-
         requestHttp.setParametro("idResponsavel", String.valueOf(responsavel.getIdResponsavel()));
         requestHttp.setParametro("nomeResponsavel", responsavel.getNomeResponsavel());
         requestHttp.setParametro("telefoneResponsavel", responsavel.getTelefoneResponsavel());
@@ -150,6 +157,7 @@ public class CadastroResponsavel extends AppCompatActivity {
     }
 
     private class CadastrarResponsavel extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -157,9 +165,10 @@ public class CadastroResponsavel extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -183,9 +192,11 @@ public class CadastroResponsavel extends AppCompatActivity {
             } else
                 Toast.makeText(getApplicationContext(), "Erro ao cadastrar", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private class AlterarResponsavel extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -193,9 +204,10 @@ public class CadastroResponsavel extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -219,6 +231,7 @@ public class CadastroResponsavel extends AppCompatActivity {
             } else
                 Toast.makeText(getApplicationContext(), "Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 }

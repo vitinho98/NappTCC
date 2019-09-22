@@ -3,6 +3,7 @@ package com.fatecourinhos.napp.view.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,7 +26,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CampoAtuacaoFragment extends Fragment implements CadastroCampoAtuacao.DialogListener{
+public class CampoAtuacaoFragment extends Fragment {
 
     private String conteudo;
     private List<CampoAtuacao> camposAtuacao;
@@ -37,7 +38,7 @@ public class CampoAtuacaoFragment extends Fragment implements CadastroCampoAtuac
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
 
         getActivity().setTitle("Campos de Atuação");
         view = inflater.inflate(R.layout.fragment_area_atuacao,container,false);
@@ -51,14 +52,11 @@ public class CampoAtuacaoFragment extends Fragment implements CadastroCampoAtuac
             @Override
             public void onListClick(CampoAtuacao campoAtuacao) {
 
-                Bundle data = new Bundle();
-                data.putInt("idCampoAtuacao", campoAtuacao.getIdCampoAtuacao());
-                data.putString("nomeCampoAtuacao", campoAtuacao.getNomeCampoAtuacao());
-                data.putString("operação", "alteração");
+                Intent intent = new Intent(getActivity(), CadastroCampoAtuacao.class);
+                intent.putExtra("idCampoAtuacao", campoAtuacao.getIdCampoAtuacao());
+                intent.putExtra("nomeCampoAtuacao", campoAtuacao.getNomeCampoAtuacao());
 
-                CadastroCampoAtuacao cadastroCampoAtuacao = new CadastroCampoAtuacao();
-                cadastroCampoAtuacao.setArguments(data);
-                cadastroCampoAtuacao.show(getFragmentManager(), "CAMPOATUACAO");
+                getActivity().startActivity(intent);
             }
 
             @Override
@@ -82,7 +80,14 @@ public class CampoAtuacaoFragment extends Fragment implements CadastroCampoAtuac
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        selecionarCamposAtuacao();
+    }
+
     private void excluirCampoAtuacao(int id) {
+
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/excluirCampoAtuacao.php";
         RequestHttp requestHttp = new RequestHttp();
         ExcluirCampoAtuacao task = new ExcluirCampoAtuacao();
@@ -92,18 +97,16 @@ public class CampoAtuacaoFragment extends Fragment implements CadastroCampoAtuac
         requestHttp.setParametro("idCampoAtuacao", String.valueOf(id));
 
         task.execute(requestHttp);
+
     }
 
     private void selecionarCamposAtuacao() {
+
         String uri = "http://vitorsilva.xyz/napp/campoAtuacao/selecionarCamposAtuacao.php";
         SelecionarCamposAtuacao task = new SelecionarCamposAtuacao();
 
         task.execute(uri);
-    }
 
-    @Override
-    public void selecionar() {
-        selecionarCamposAtuacao();
     }
 
     private class SelecionarCamposAtuacao extends AsyncTask<String, String, List<CampoAtuacao>> {
@@ -136,10 +139,10 @@ public class CampoAtuacaoFragment extends Fragment implements CadastroCampoAtuac
     }
 
     private class ExcluirCampoAtuacao extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            conteudo = null;
         }
 
         @Override
@@ -161,12 +164,10 @@ public class CampoAtuacaoFragment extends Fragment implements CadastroCampoAtuac
             if (conteudo.contains("Sucesso")) {
                 Toast.makeText(view.getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
                 selecionarCamposAtuacao();
-            } else if (conteudo.contains("Derrota - Relacionado com outra tabela"))
-                Toast.makeText(view.getContext(),"Não é possível excluir um campo relacionado com um profissional externo",
-                        Toast.LENGTH_SHORT).show();
-            else
+            } else
                 Toast.makeText(view.getContext(),"Erro ao excluir", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private static class ViewHolder {

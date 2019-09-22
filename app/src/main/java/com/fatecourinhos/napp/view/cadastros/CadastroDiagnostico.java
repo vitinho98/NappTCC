@@ -1,101 +1,77 @@
 package com.fatecourinhos.napp.view.cadastros;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.Diagnostico;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.appcompat.widget.AppCompatEditText;
-
-public class CadastroDiagnostico extends AppCompatDialogFragment {
+public class CadastroDiagnostico extends AppCompatActivity {
 
     //componente da tela
     private AppCompatEditText editTextNomeDiagnostico;
+    private Button botao;
 
     //variaveis globais
-    private View view;
     private Diagnostico diagnostico;
     private String conteudo;
     private boolean sucesso;
 
-    public CadastroDiagnostico() {
-
-    }
-
-    @NonNull
     @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.cadastro_activity_diagnostico);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        view = inflater.inflate(R.layout.cadastro_activity_diagnostico, null);
-        editTextNomeDiagnostico = view.findViewById(R.id.edit_text_nome_diagnostico);
-        builder.setView(view).setTitle("Diagnóstico");
+        editTextNomeDiagnostico = findViewById(R.id.edit_text_nome_diagnostico);
+        botao = findViewById(R.id.btn_cadastrar_diagnostico);
+        diagnostico = new Diagnostico();
 
-        if (getArguments() != null) {
+        if (getIntent().getExtras() != null) {
 
-            Bundle data = getArguments();
+            editTextNomeDiagnostico.setText(getIntent().getExtras().getString("nomeDiagnostico"));
+            diagnostico.setIdDiagnostico(getIntent().getExtras().getInt("idDiagnostico"));
 
-            editTextNomeDiagnostico.setText(data.getString("nomeDiagnostico"));
-            diagnostico = new Diagnostico();
-            diagnostico.setIdDiagnostico(data.getInt("idDiagnostico"));
-
-            builder.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
+            botao.setText(R.string.btn_salvar);
+            botao.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(View view) {
 
                     if (editTextNomeDiagnostico.getText().toString().isEmpty())
-                        Toast.makeText(getContext(),"Insira o nome do diagnóstico", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(),"Insira o nome do diagnóstico", Toast.LENGTH_SHORT).show();
                     else {
-
                         diagnostico.setNomeDiagnostico(editTextNomeDiagnostico.getText().toString());
                         alterarDiagnostico(diagnostico);
-
                     }
+
                 }
             });
 
         } else {
 
-            builder.setPositiveButton("Cadastrar", new DialogInterface.OnClickListener() {
+            botao.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(View view) {
 
                     if (editTextNomeDiagnostico.getText().toString().isEmpty())
-                        Toast.makeText(getContext(),"Insira o nome do diagnóstico", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(),"Insira o nome do diagnóstico", Toast.LENGTH_SHORT).show();
                     else {
-
-                        diagnostico = new Diagnostico();
                         diagnostico.setNomeDiagnostico(editTextNomeDiagnostico.getText().toString());
                         inserirDiagnostico(diagnostico);
-
                     }
+
                 }
             });
+
         }
-
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        return builder.create();
 
     }
 
@@ -107,7 +83,6 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-
         requestHttp.setParametro("nomeDiagnostico", diagnostico.getNomeDiagnostico());
 
         task.execute(requestHttp);
@@ -122,7 +97,6 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-
         requestHttp.setParametro("idDiagnostico", String.valueOf(diagnostico.getIdDiagnostico()));
         requestHttp.setParametro("nomeDiagnostico", diagnostico.getNomeDiagnostico());
 
@@ -139,9 +113,10 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -159,12 +134,13 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
-                Toast.makeText(view.getContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(view.getContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
-
+            if (sucesso) {
+                Toast.makeText(getApplicationContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                finish();
+            } else
+                Toast.makeText(getApplicationContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private class AlterarDiagnostico extends AsyncTask<RequestHttp, String, String> {
@@ -176,9 +152,10 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -196,12 +173,13 @@ public class CadastroDiagnostico extends AppCompatDialogFragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
-                Toast.makeText(view.getContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(view.getContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
+            if (sucesso) {
+                Toast.makeText(getApplicationContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
+                finish();
+            } else
+                Toast.makeText(getApplicationContext(),"Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 }
-

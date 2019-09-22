@@ -3,6 +3,7 @@ package com.fatecourinhos.napp.view.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.fatecourinhos.napp.json.LocalAtendimentoJSONParser;
 import com.fatecourinhos.napp.model.LocalAtendimento;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
+import com.fatecourinhos.napp.view.MenuProfissionalActivity;
 import com.fatecourinhos.napp.view.adapter.LocalAtendimentoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroLocalAtendimento;
 import com.fatecourinhos.napp.view.listener.OnLocalAtendimentoInteractionListener;
@@ -53,23 +55,20 @@ public class LocalAtendimentoFragment extends Fragment{
             @Override
             public void onListClick(LocalAtendimento localAtendimento) {
 
-                Bundle data = new Bundle();
-                data.putInt("idLocalAtendimento", localAtendimento.getIdLocalAtendimento());
-                data.putString("nomeLocal", localAtendimento.getNomeLocal());
-                data.putString("nomeBloco", localAtendimento.getNomeBloco());
+                Intent intent = new Intent(getActivity(), CadastroLocalAtendimento.class);
+                intent.putExtra("idLocalAtendimento", localAtendimento.getIdLocalAtendimento());
+                intent.putExtra("nomeLocal", localAtendimento.getNomeLocal());
+                intent.putExtra("nomeBloco", localAtendimento.getNomeBloco());
 
-                CadastroLocalAtendimento cadastroLocalAtendimento = new CadastroLocalAtendimento();
-                cadastroLocalAtendimento.setArguments(data);
-                cadastroLocalAtendimento.show(getFragmentManager(), "LOCAL");
-
+                getActivity().startActivity(intent);
             }
 
             @Override
             public void onDeleteClick(final LocalAtendimento localAtendimento) {
 
                 new AlertDialog.Builder(context)
-                        .setTitle("Remover diagnóstico?")
-                        .setMessage("Deseja remover o diagnóstico?")
+                        .setTitle("Remover local de atendimento?")
+                        .setMessage("Deseja remover o local de atendimento?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -93,6 +92,7 @@ public class LocalAtendimentoFragment extends Fragment{
     }
 
     private void excluirLocalAtendimento(int id) {
+
         String uri = "http://vitorsilva.xyz/napp/localAtendimento/excluirLocalAtendimento.php";
         ExcluirLocalAtendimento task = new ExcluirLocalAtendimento();
         RequestHttp requestHttp = new RequestHttp();
@@ -102,13 +102,16 @@ public class LocalAtendimentoFragment extends Fragment{
         requestHttp.setParametro("idLocalAtendimento", String.valueOf(id));
 
         task.execute(requestHttp);
+
     }
 
     private void selecionarLocalAtendimento() {
+
         String uri = "http://vitorsilva.xyz/napp/localAtendimento/selecionarLocaisAtendimento.php";
         SelecionarLocaisAtendimento task = new SelecionarLocaisAtendimento();
 
         task.execute(uri);
+
     }
 
     private class SelecionarLocaisAtendimento extends AsyncTask<String, String, List<LocalAtendimento>> {
@@ -138,9 +141,11 @@ public class LocalAtendimentoFragment extends Fragment{
             localAtendimentoAdapter = new LocalAtendimentoAdapter(locaisAtendimento, listener);
             viewHolder.recyclerViewLocaisAtendimento.setAdapter(localAtendimentoAdapter);
         }
+
     }
 
     private class ExcluirLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -148,9 +153,10 @@ public class LocalAtendimentoFragment extends Fragment{
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -168,11 +174,13 @@ public class LocalAtendimentoFragment extends Fragment{
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso)
+            if (sucesso) {
                 Toast.makeText(view.getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
-            else
+                selecionarLocalAtendimento();
+            } else
                 Toast.makeText(view.getContext(),"Erro ao excluir", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private static class ViewHolder {
