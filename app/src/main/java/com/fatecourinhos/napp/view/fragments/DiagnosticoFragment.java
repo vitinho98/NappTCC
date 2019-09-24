@@ -27,7 +27,7 @@ import com.fatecourinhos.napp.view.listener.OnDiagnosticoInteractionListener;
 
 import java.util.List;
 
-public class DiagnosticoFragment extends Fragment{
+public class DiagnosticoFragment extends Fragment {
 
     private boolean sucesso;
     private String conteudo;

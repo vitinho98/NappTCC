@@ -136,6 +136,7 @@ public class CampoAtuacaoFragment extends Fragment {
             campoAtuacaoAdapter = new CampoAtuacaoAdapter(camposAtuacao, listener);
             viewHolder.recyclerViewCampoAtuacao.setAdapter(campoAtuacaoAdapter);
         }
+
     }
 
     private class ExcluirCampoAtuacao extends AsyncTask<RequestHttp, String, String> {

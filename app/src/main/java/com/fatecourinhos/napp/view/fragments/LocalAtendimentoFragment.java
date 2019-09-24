@@ -28,7 +28,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class LocalAtendimentoFragment extends Fragment{
+public class LocalAtendimentoFragment extends Fragment {
 
     private boolean sucesso;
     private String conteudo;

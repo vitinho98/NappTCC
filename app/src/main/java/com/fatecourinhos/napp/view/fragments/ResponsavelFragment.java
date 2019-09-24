@@ -27,7 +27,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ResponsavelFragment extends Fragment{
+public class ResponsavelFragment extends Fragment {
 
     private boolean sucesso;
     private String conteudo;

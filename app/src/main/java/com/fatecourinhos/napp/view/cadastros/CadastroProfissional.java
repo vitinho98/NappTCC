@@ -18,6 +18,8 @@ import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.model.Usuario;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 public class CadastroProfissional extends AppCompatActivity {
 
@@ -101,6 +103,10 @@ public class CadastroProfissional extends AppCompatActivity {
         editTextEmail = findViewById(R.id.edit_text_email_profissional);
         editTextLogin = findViewById(R.id.edit_text_login_profissional);
         editTextSenha = findViewById(R.id.edit_text_senha_profissional);
+
+        SimpleMaskFormatter maskCelular = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
+        MaskTextWatcher mtwCelular = new MaskTextWatcher(editTextCel, maskCelular);
+        editTextCel.addTextChangedListener(mtwCelular);
 
         btn_cadastrar_profissional = findViewById(R.id.btn_salvar_profissional);
         switchProf = findViewById(R.id.switchStatus);
@@ -225,6 +231,7 @@ public class CadastroProfissional extends AppCompatActivity {
     }
 
     private class InserirProfissional extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -232,9 +239,10 @@ public class CadastroProfissional extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo =  HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo =  HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -258,9 +266,11 @@ public class CadastroProfissional extends AppCompatActivity {
             } else
                 Toast.makeText(getApplicationContext(), "Erro ao cadastrar", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private class AlterarProfissional extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -268,9 +278,10 @@ public class CadastroProfissional extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -294,6 +305,7 @@ public class CadastroProfissional extends AppCompatActivity {
             } else
                 Toast.makeText(getApplicationContext(), "Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 }

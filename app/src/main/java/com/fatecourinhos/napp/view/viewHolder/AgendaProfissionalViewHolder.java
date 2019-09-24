@@ -11,6 +11,8 @@ import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.AgendaProfissional;
 import com.fatecourinhos.napp.view.listener.OnAgendaProfissionalnteractionListener;
 
+import java.text.SimpleDateFormat;
+
 public class AgendaProfissionalViewHolder extends RecyclerView.ViewHolder {
 
     private CardView cardView;
@@ -26,9 +28,11 @@ public class AgendaProfissionalViewHolder extends RecyclerView.ViewHolder {
 
     public void bindData(final AgendaProfissional agendaProfissional, final OnAgendaProfissionalnteractionListener listener) {
 
-        int index = String.valueOf(agendaProfissional.getData()).indexOf(" ");
-        textViewData.setText(String.valueOf(agendaProfissional.getData()).substring(0, index));
-        textViewHora.setText(String.valueOf(agendaProfissional.getData()).substring(index));
+        SimpleDateFormat dataFormater = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat horaFormater = new SimpleDateFormat("hh:mm");
+
+        textViewData.setText(dataFormater.format(agendaProfissional.getData()));
+        textViewHora.setText(horaFormater.format(agendaProfissional.getData()));
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

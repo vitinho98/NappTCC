@@ -17,6 +17,8 @@ import com.fatecourinhos.napp.model.Responsavel;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.util.RetrofitClass;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -208,7 +210,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
     }
 
     //pega os componentes da tela
-    private void getComponentes(){
+    private void getComponentes() {
 
         editTextBairro = findViewById(R.id.edit_text_bairro_profissional_externo);
         editTextCelularProfissionalExterno = findViewById(R.id.edit_text_celular_profissional_externo);
@@ -219,12 +221,20 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         editTextNomeProfissionalExterno = findViewById(R.id.edit_text_nome_profissional_externo);
         editTextNumero = findViewById(R.id.edit_text_numero_profissional_externo);
 
-        btnCadastrarResponsavel = findViewById(R.id.btn_salvar_profissional_externo);
-
         spinnerResponsavel = findViewById(R.id.spinnerResponsavel);
         spinnerTipo = findViewById(R.id.spinnerCampoAtuacao);
-
+        btnCadastrarResponsavel = findViewById(R.id.btn_salvar_profissional_externo);
         progressBar = findViewById(R.id.progressBarCadResponsavel);
+
+        SimpleMaskFormatter maskCelular = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
+        SimpleMaskFormatter maskTelefone = new SimpleMaskFormatter("(NN) NNNN-NNNN");
+
+        MaskTextWatcher mtwCelular = new MaskTextWatcher(editTextCelularProfissionalExterno, maskCelular);
+        MaskTextWatcher mtwTelefone = new MaskTextWatcher(editTextTelefoneProfissionalExterno, maskTelefone);
+
+        editTextCelularProfissionalExterno.addTextChangedListener(mtwCelular);
+        editTextTelefoneProfissionalExterno.addTextChangedListener(mtwTelefone);
+
     }
 
     private boolean conferirDados(ProfissionalExterno profissionalExterno){
@@ -239,8 +249,9 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
     public void inserirProfissionalExterno(ProfissionalExterno profissionalExterno) {
 
         String uri = "http://vitorsilva.xyz/napp/profissionalExterno/inserirProfExterno.php";
-
+        CadastrarProfissionalExterno task = new CadastrarProfissionalExterno();
         RequestHttp requestHttp = new RequestHttp();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
@@ -253,10 +264,6 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         requestHttp.setParametro("emailProfissionalExterno", profissionalExterno.getEmailProfissionalExterno());
         requestHttp.setParametro("numeroProfissionalExterno", profissionalExterno.getNumero());
 
-        Log.e("TESTE", "CAMPOATUACAO - " + String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
-        Log.e("TESTE", "RESPONSAVEL - " + String.valueOf(profissionalExterno.getFkResponsavel().getIdResponsavel()));
-
-
         if (profissionalExterno.getFkCampoAtuacao() != null)
             requestHttp.setParametro("fkCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
         else
@@ -267,7 +274,6 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         else
             requestHttp.setParametro("fkCampoAtuacao", null);
 
-        CadastrarProfissionalExterno task = new CadastrarProfissionalExterno();
         task.execute(requestHttp);
 
     }
@@ -275,8 +281,9 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
     public void alterarProfissionalExterno(ProfissionalExterno profissionalExterno) {
 
         String uri = "http://vitorsilva.xyz/napp/profissionalExterno/alterarProfExterno.php";
-
+        AlterarProfissionalExterno task = new AlterarProfissionalExterno();
         RequestHttp requestHttp = new RequestHttp();
+
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
 
@@ -292,12 +299,12 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         requestHttp.setParametro("numeroProfissionalExterno", profissionalExterno.getNumero());
         requestHttp.setParametro("idCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
 
-        AlterarProfissionalExterno task = new AlterarProfissionalExterno();
         task.execute(requestHttp);
 
     }
 
     private class CadastrarProfissionalExterno extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -305,11 +312,19 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
-            if (conteudo.contains("Sucesso"))
-                sucesso = true;
-            else
-                sucesso = false;
+
+            try {
+
+                conteudo = HttpManager.getDados(params[0]);
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
+                conteudo = null;
+            }
 
             return conteudo;
         }
@@ -324,9 +339,11 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             } else
                 Toast.makeText(getApplicationContext(), "Erro ao inserir", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private class AlterarProfissionalExterno extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -334,14 +351,19 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
-            Log.e("TESTE", "ANTES DA CONSULTA");
-            if(conteudo.equals("Sucesso")){
-                sucesso = true;
-            }else{
-                sucesso = false;
+
+            try {
+
+                conteudo = HttpManager.getDados(params[0]);
+
+                if (conteudo.equals("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
+                conteudo = null;
             }
-            Log.e("TESTE", "DEPOIS DA CONSULTA - " + conteudo);
 
             return conteudo;
         }
@@ -349,12 +371,14 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
             if (sucesso) {
                 Toast.makeText(getApplicationContext(), "Alterado com sucesso", Toast.LENGTH_SHORT).show();
                 finish();
             } else
                 Toast.makeText(getApplicationContext(), "Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 }

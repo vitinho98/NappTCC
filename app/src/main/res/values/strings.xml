@@ -71,7 +71,7 @@
     <string name="hint_sala">Sala</string>
     <string name="hint_cidade">Cidade</string>
     <string name="hint_endereco">Endereço</string>
-    <string name="hint_bairro">bairro</string>
+    <string name="hint_bairro">Bairro</string>
     <string name="hint_numero_casa">Número</string>
     <string name="hint_email">E-mail</string>
 

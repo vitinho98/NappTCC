@@ -1,4 +1,4 @@
-package com.fatecourinhos.napp;
+package com.fatecourinhos.napp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,12 +7,10 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.Usuario;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
-import com.fatecourinhos.napp.view.LoginActivity;
-import com.fatecourinhos.napp.view.MenuAlunoActivity;
-import com.fatecourinhos.napp.view.MenuProfissionalActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

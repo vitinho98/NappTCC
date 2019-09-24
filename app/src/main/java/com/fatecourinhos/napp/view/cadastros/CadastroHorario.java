@@ -41,12 +41,24 @@ public class CadastroHorario extends AppCompatActivity {
     //formatadores de data
     private SimpleDateFormat formatDataHora = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private SimpleDateFormat formatData = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat formatHora = new SimpleDateFormat("hh:mm");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_horario);
         getComponentes();
+
+        if (getIntent().getExtras() != null) {
+
+            agendaProfissional.setData((Date) getIntent().getExtras().get("dataHora"));
+            calendario.setDate(agendaProfissional.getData().getTime());
+            editTextHorario.setText(formatHora.format(agendaProfissional.getData()));
+
+        } else {
+
+
+        }
 
         btnCadastrar.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -82,7 +94,7 @@ public class CadastroHorario extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         editTextHorario.setText(String.format("%02d",hourOfDay) + ":" + String.format("%02d", minute));
                     }
-                }, 0, 0, true);
+                }, 23, 06, true);
 
                 timePickerDialog.show();
 
@@ -114,7 +126,6 @@ public class CadastroHorario extends AppCompatActivity {
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-
         requestHttp.setParametro("data", formatDataHora.format(agendaProfissional.getData()));
         requestHttp.setParametro("idProfissional", String.valueOf(agendaProfissional.getFkProfissional().getIdProfissional()));
 
@@ -123,6 +134,7 @@ public class CadastroHorario extends AppCompatActivity {
     }
 
     private class InserirAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -130,9 +142,10 @@ public class CadastroHorario extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
             try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
@@ -156,6 +169,7 @@ public class CadastroHorario extends AppCompatActivity {
             } else
                 Toast.makeText(getApplicationContext(), "Erro ao cadastrar!", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 }

@@ -35,7 +35,7 @@ public class AgendamentoAlunoFragment extends Fragment{
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
-        agendamentoAlunoRecycler = rootView.findViewById(R.id.listaagendamentoid);
+        agendamentoAlunoRecycler = rootView.findViewById(R.id.recycler_view_agendamentos_aluno);
         agendamentoAlunoRecycler.setLayoutManager(layoutManager);
 
         return rootView;

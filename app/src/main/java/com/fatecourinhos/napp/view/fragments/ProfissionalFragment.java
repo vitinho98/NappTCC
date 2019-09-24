@@ -25,7 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ProfissionalFragment extends Fragment{
+public class ProfissionalFragment extends Fragment {
 
     private String conteudo;
     private List<Profissional> profissionais;
@@ -49,6 +49,7 @@ public class ProfissionalFragment extends Fragment{
         listener = new OnProfissionalInteractionListener() {
             @Override
             public void onListClick(Profissional profissional) {
+
                 Intent intent = new Intent(getActivity(), CadastroProfissional.class);
 
                 intent.putExtra("idProfissional", profissional.getIdProfissional());
@@ -83,9 +84,12 @@ public class ProfissionalFragment extends Fragment{
     }
 
     private void selecionarProfissionais() {
+
         String uri = "http://vitorsilva.xyz/napp/profissional/selecionarProfissionais.php";
         SelecionarProfissionais mytask = new SelecionarProfissionais();
+
         mytask.execute(uri);
+
     }
 
     private class SelecionarProfissionais extends AsyncTask<String, String, List<Profissional>> {
@@ -115,6 +119,7 @@ public class ProfissionalFragment extends Fragment{
             profissionalAdapter = new ProfissionalAdapter(profissionais, listener);
             viewHolder.recyclerViewProfissionais.setAdapter(profissionalAdapter);
         }
+
     }
 
     private static class ViewHolder {
