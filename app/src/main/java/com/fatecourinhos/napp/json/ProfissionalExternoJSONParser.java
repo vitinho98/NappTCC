@@ -31,23 +31,23 @@ public class ProfissionalExternoJSONParser {
                 campoAtuacao = new CampoAtuacao();
                 profissionalExterno = new ProfissionalExterno();
 
-                profissionalExterno.setBairro(jsonObject.getString("bairro"));
-                profissionalExterno.setCelularProfissionalExterno(jsonObject.getString("celularProfissionalExterno"));
-                profissionalExterno.setTelefoneProfissionalExterno(jsonObject.getString("telefoneProfissionalExterno"));
-                profissionalExterno.setCidadeProfissionalExterno(jsonObject.getString("cidadeProfissionalExterno"));
-                profissionalExterno.setEndereco(jsonObject.getString("endereco"));
                 profissionalExterno.setIdProfissionalExterno(jsonObject.getInt("idProfissionalExterno"));
+                profissionalExterno.setNomeProfissionalExterno(jsonObject.getString("nomeProfissionalExterno"));
+                profissionalExterno.setCidadeProfissionalExterno(jsonObject.getString("cidadeProfissionalExterno"));
+                profissionalExterno.setBairro(jsonObject.getString("bairro"));
+                profissionalExterno.setEndereco(jsonObject.getString("endereco"));
                 profissionalExterno.setNumero(jsonObject.getString("numero"));
                 profissionalExterno.setEmailProfissionalExterno(jsonObject.getString("emailProfissionalExterno"));
-                profissionalExterno.setNomeProfissionalExterno(jsonObject.getString("nomeProfissionalExterno"));
+                profissionalExterno.setTelefoneProfissionalExterno(jsonObject.getString("telefoneProfissionalExterno"));
+                profissionalExterno.setCelularProfissionalExterno(jsonObject.getString("celularProfissionalExterno"));
 
                 campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
                 campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
                 profissionalExterno.setFkCampoAtuacao(campoAtuacao);
 
+                responsavel.setIdResponsavel(jsonObject.getInt("idResponsavel"));
                 responsavel.setCelularResponsavel(jsonObject.getString("celularResponsavel"));
                 responsavel.setEmailResponsavel(jsonObject.getString("emailResponsavel"));
-                responsavel.setIdResponsavel(jsonObject.getInt("idResponsavel"));
                 responsavel.setNomeResponsavel(jsonObject.getString("nomeResponsavel"));
                 responsavel.setTelefoneResponsavel(jsonObject.getString("telefoneResponsavel"));
                 profissionalExterno.setFkResponsavel(responsavel);
