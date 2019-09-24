@@ -36,7 +36,7 @@ public class UsuarioJSONParser {
 
             return usuarioList;
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }

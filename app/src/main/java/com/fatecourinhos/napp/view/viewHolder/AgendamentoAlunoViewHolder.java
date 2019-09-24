@@ -8,6 +8,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.model.Agendamento;
+import com.fatecourinhos.napp.view.listener.OnAgendamentoAlunoInteractionListener;
+
+import java.text.SimpleDateFormat;
 
 public class AgendamentoAlunoViewHolder extends RecyclerView.ViewHolder {
 
@@ -21,4 +25,15 @@ public class AgendamentoAlunoViewHolder extends RecyclerView.ViewHolder {
         textViewHorario = itemView.findViewById(R.id.txt_data_hora_ag_aluno);
         textViewLocal = itemView.findViewById(R.id.txt_local_ag_aluno);
     }
+
+    public void bindData(Agendamento agendamento, OnAgendamentoAlunoInteractionListener listener) {
+
+        SimpleDateFormat dataHoraFormater = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+
+        textViewProfissional.setText(agendamento.getFkHorario().getFkProfissional().getNomeProfissional());
+        textViewHorario.setText(dataHoraFormater.format(agendamento.getFkHorario().getData()));
+        textViewLocal.setText(agendamento.getFkLocalAtendimento().getNomeLocal() + " " + agendamento.getFkLocalAtendimento().getNomeBloco());
+
+    }
+
 }

@@ -2,13 +2,13 @@ package com.fatecourinhos.napp.model;
 
 import java.util.Date;
 
-public class AgendaProfissional {
+public class Horario {
 
     private int idAgendaProfissional;
     private Date dataHora;
     private Profissional fkProfissional;
 
-    public AgendaProfissional() {
+    public Horario() {
 
     }
 

@@ -5,7 +5,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.fatecourinhos.napp.model.AgendaProfissional;
+import com.fatecourinhos.napp.model.Horario;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,23 +13,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgendaProfissionalJSONParser {
+public class HorarioProfissionalJSONParser {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static List<AgendaProfissional> parseDados(String content) {
+    public static List<Horario> parseDados(String content) {
 
         String dia, mes, ano, hora, minuto;
 
         try {
 
             JSONArray jsonArray = new JSONArray(content);
-            List<AgendaProfissional> agendaProfissionalList = new ArrayList<>();
-            AgendaProfissional agendaProfissional;
+            List<Horario> agendaProfissionalList = new ArrayList<>();
+            Horario agendaProfissional;
 
             for (int i=0; i<jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                agendaProfissional = new AgendaProfissional();
+                agendaProfissional = new Horario();
 
                 String data = jsonObject.getString("dataHora");
                 ano = data.substring(0,4);

@@ -1,87 +1,137 @@
 package com.fatecourinhos.napp.view.fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.controller.AlunoController;
-import com.fatecourinhos.napp.model.AgendamentoModel;
-import com.fatecourinhos.napp.model.LocalAtendimento;
-import com.fatecourinhos.napp.model.Profissional;
+import com.fatecourinhos.napp.json.AgendamentoJSONParser;
+import com.fatecourinhos.napp.model.Agendamento;
+import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.adapter.AgendamentoAlunoAdapter;
+import com.fatecourinhos.napp.view.cadastros.CadastroAgendamento;
+import com.fatecourinhos.napp.view.listener.OnAgendamentoAlunoInteractionListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class AgendamentoAlunoFragment extends Fragment{
+public class AgendamentoAlunoFragment extends Fragment {
 
-    List<AgendamentoModel> agendamento;
-    AgendamentoAlunoAdapter adapter;
-    RecyclerView agendamentoAlunoRecycler;
-    //SharedPreferences preferences = this.getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
+    private SharedPreferences preferences;
+    private String conteudo;
+    private int id = 0;
+    private OnAgendamentoAlunoInteractionListener listener;
+    private ViewHolder viewHolder = new ViewHolder();
+    private View view;
+    private Context context;
+    private List<Agendamento> agendamentos;
+    private AgendamentoAlunoAdapter agendamentoAlunoAdapter;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
-
-        View rootView = inflater.inflate(R.layout.fragment_agendamento_aluno,container,false);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-
-        agendamentoAlunoRecycler = rootView.findViewById(R.id.recycler_view_agendamentos_aluno);
-        agendamentoAlunoRecycler.setLayoutManager(layoutManager);
-
-        return rootView;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstance){
-
-        super.onViewCreated(view, savedInstance);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
 
         getActivity().setTitle("Agendamento");
+        view = inflater.inflate(R.layout.fragment_agendamento_aluno,container,false);
+        context = view.getContext();
 
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        AlunoController alunoController = new AlunoController();
-
-        agendamento = new ArrayList<>();//alunoController.selecionarAgendamento(preferences.getInt("idUsuario", 0));
-
-        AgendamentoModel agendamentoModel = new AgendamentoModel();
-
-        agendamentoModel.setDataAgendamento("12/2");
-        agendamentoModel.setHoraAgendamento("2100");
-        Profissional profissional = new Profissional();
-        profissional.setNomeProfissional("prof");
-        agendamentoModel.setFkProfissional(profissional);
-
-        LocalAtendimento localAtendimento = new LocalAtendimento();
-        localAtendimento.setNomeLocal("nome");
-        agendamentoModel.setFkLocalAtendimento(localAtendimento);
-
-        agendamento.add(agendamentoModel);
-
-        adapter = new AgendamentoAlunoAdapter(agendamento);
-
-        agendamentoAlunoRecycler.setAdapter(adapter);
-
-        adapter.setListener(new AgendamentoAlunoAdapter.Listener() {
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.fab_agendamento_aluno);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(AgendamentoModel agendamentoModel) {
-
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), CadastroAgendamento.class));
             }
         });
 
+        viewHolder.recyclerViewAgendamento = view.findViewById(R.id.recycler_view_agendamentos_aluno);
+        viewHolder.recyclerViewAgendamento.setLayoutManager(new LinearLayoutManager(context));
+
+        listener = new OnAgendamentoAlunoInteractionListener() {
+            @Override
+            public void onListClick(Agendamento agendamento) {
+
+            }
+
+            @Override
+            public void onDeleteClick(Agendamento agendamento) {
+
+            }
+        };
+
+        preferences = this.getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
+        if (preferences.contains("idAluno"))
+            id = preferences.getInt("idAluno", 0);
+
+        selecionarAgendaAluno(id);
+        return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        selecionarAgendaAluno(id);
+    }
+
+    private void selecionarAgendaAluno(int id) {
+
+        String uri = "http://vitorsilva.xyz/napp/agendamento/selecionarAgendamentoAluno.php";
+        RequestHttp requestHttp = new RequestHttp();
+        SelecionarAgendaAluno mytask = new SelecionarAgendaAluno();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+        requestHttp.setParametro("idAluno", String.valueOf(id));
+
+        mytask.execute(requestHttp);
+
+    }
+
+    private class SelecionarAgendaAluno extends AsyncTask<RequestHttp, String, List<Agendamento>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @Override
+        protected List<Agendamento> doInBackground(RequestHttp... params) {
+
+            try {
+                conteudo = HttpManager.getDados(params[0]);
+            } catch (Exception e) {
+                conteudo = null;
+            }
+
+            agendamentos = AgendamentoJSONParser.parseDados(conteudo);
+            return agendamentos;
+        }
+
+        @Override
+        protected void onPostExecute(final List<Agendamento> agendamentos) {
+            super.onPostExecute(agendamentos);
+
+            agendamentoAlunoAdapter = new AgendamentoAlunoAdapter(agendamentos, listener);
+            viewHolder.recyclerViewAgendamento.setAdapter(agendamentoAlunoAdapter);
+        }
+
+    }
+
+    private static class ViewHolder {
+        RecyclerView recyclerViewAgendamento;
+    }
+
 }

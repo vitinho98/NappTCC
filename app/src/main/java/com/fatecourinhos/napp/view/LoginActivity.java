@@ -166,6 +166,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("tipoUsuario", profissional.getFkUsuario().getTipoUsuario());
         editor.putInt("status", profissional.getFkUsuario().getStatus());
         editor.putInt("idProfissional", profissional.getIdProfissional());
+        editor.putString("nome", profissional.getNomeProfissional());
         editor.putBoolean("conected", true);
 
         editor.commit();

@@ -7,7 +7,6 @@ public class Responsavel {
     private String celularResponsavel;
     private String telefoneResponsavel;
     private String emailResponsavel;
-    private int status;
 
     public Responsavel() {
 
@@ -51,14 +50,6 @@ public class Responsavel {
 
     public void setEmailResponsavel(String emailResponsavel) {
         this.emailResponsavel = emailResponsavel;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
 }

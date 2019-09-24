@@ -8,17 +8,17 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.AgendaProfissional;
-import com.fatecourinhos.napp.view.listener.OnAgendaProfissionalnteractionListener;
+import com.fatecourinhos.napp.model.Horario;
+import com.fatecourinhos.napp.view.listener.OnHorarioProfissionalnteractionListener;
 
 import java.text.SimpleDateFormat;
 
-public class AgendaProfissionalViewHolder extends RecyclerView.ViewHolder {
+public class HorarioProfissionalViewHolder extends RecyclerView.ViewHolder {
 
     private CardView cardView;
     private TextView textViewData, textViewHora;
 
-    public AgendaProfissionalViewHolder(@NonNull View itemView) {
+    public HorarioProfissionalViewHolder(@NonNull View itemView) {
         super(itemView);
 
         this.cardView = itemView.findViewById(R.id.card_view_horario_atendimento);
@@ -26,7 +26,7 @@ public class AgendaProfissionalViewHolder extends RecyclerView.ViewHolder {
         this.textViewHora = itemView.findViewById(R.id.txt_horario_lista);
     }
 
-    public void bindData(final AgendaProfissional agendaProfissional, final OnAgendaProfissionalnteractionListener listener) {
+    public void bindData(final Horario agendaProfissional, final OnHorarioProfissionalnteractionListener listener) {
 
         SimpleDateFormat dataFormater = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat horaFormater = new SimpleDateFormat("hh:mm");

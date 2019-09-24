@@ -5,7 +5,6 @@ public class LocalAtendimento {
     private int idLocalAtendimento;
     private String nomeLocal;
     private String nomeBloco;
-    private int status;
 
     public LocalAtendimento() {
 
@@ -33,14 +32,6 @@ public class LocalAtendimento {
 
     public void setNomeBloco(String nomeBloco) {
         this.nomeBloco = nomeBloco;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
 }

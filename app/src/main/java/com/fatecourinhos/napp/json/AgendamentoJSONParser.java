@@ -1,7 +1,13 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.AgendamentoModel;
+import android.icu.util.Calendar;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import com.fatecourinhos.napp.model.Agendamento;
 import com.fatecourinhos.napp.model.Aluno;
+import com.fatecourinhos.napp.model.Horario;
 import com.fatecourinhos.napp.model.LocalAtendimento;
 import com.fatecourinhos.napp.model.Profissional;
 
@@ -13,33 +19,32 @@ import java.util.List;
 
 public class AgendamentoJSONParser {
 
-    public static List<AgendamentoModel> parseDados(String content){
-        try{
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static List<Agendamento> parseDados(String content) {
+
+        try {
+
+            String dia, mes, ano, hora, minuto;
 
             JSONArray jsonArray = new JSONArray(content);
-            List<AgendamentoModel> agendamento = new ArrayList<>();
+            List<Agendamento> agendamentos = new ArrayList<>();
 
             LocalAtendimento localAtendimento = new LocalAtendimento();
-            AgendamentoModel objAgendamento = new AgendamentoModel();
+            Agendamento agendamento = new Agendamento();
             Aluno aluno = new Aluno();
+            Horario horario = new Horario();
             Profissional profissional = new Profissional();
 
-            for(int i=0; i<jsonArray.length(); i++){
+            for (int i=0; i<jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                objAgendamento.setDataAgendamento(jsonObject.getString("dataAgendamento"));
-                objAgendamento.setHoraAgendamento(jsonObject.getString("horaAgendamento"));
-                objAgendamento.setDataRegistro(jsonObject.getString("dataRegistro"));
-                objAgendamento.setHoraRegistro(jsonObject.getString("horaRegistro"));
-                objAgendamento.setIdAgendamento(jsonObject.getInt("idAgendamento"));
-                objAgendamento.setStatus(jsonObject.getInt("status"));
-                objAgendamento.setObservacao(jsonObject.getString("observacao"));
 
                 localAtendimento.setIdLocalAtendimento(jsonObject.getInt("idLocalAtendimento"));
                 localAtendimento.setNomeBloco(jsonObject.getString("nomeBloco"));
                 localAtendimento.setNomeLocal(jsonObject.getString("nomeLocal"));
-                objAgendamento.setFkLocalAtendimento(localAtendimento);
+                agendamento.setFkLocalAtendimento(localAtendimento);
+
+                //-------------------------------------------------------------------------------------------------------------------------//
 
                 aluno.setIdAluno(jsonObject.getInt("idAluno"));
                 aluno.setNomeAluno(jsonObject.getString("nomeAluno"));
@@ -54,22 +59,38 @@ public class AgendamentoJSONParser {
                 aluno.setSemestre(jsonObject.getInt("semestre"));
                 aluno.setRa(jsonObject.getString("ra"));
                 aluno.setEstadoCivil(jsonObject.getString("estadoCivil"));
-                objAgendamento.setFkAluno(aluno);
+                agendamento.setFkAluno(aluno);
+
+                //-------------------------------------------------------------------------------------------------------------------------//
 
                 profissional.setIdProfissional(jsonObject.getInt("idProfissional"));
                 profissional.setNomeProfissional(jsonObject.getString("nomeProfissional"));
-                profissional.setCelularProfissional(jsonObject.getString("celProfissional"));
-                profissional.setEmailProfissional(jsonObject.getString("emailProfissional"));
-                objAgendamento.setFkProfissional(profissional);
 
-                agendamento.add(objAgendamento);
+                String data = jsonObject.getString("dataHora");
+                ano = data.substring(0,4);
+                mes = data.substring(5,7);
+                dia = data.substring(8,10);
+                hora = data.substring(11,13);
+                minuto = data.substring(14,16);
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia), Integer.parseInt(hora), Integer.parseInt(minuto));
+
+                horario.setIdAgendaProfissional(jsonObject.getInt("idAgendaProfissional"));
+                horario.setData(calendar.getTime());
+                horario.setFkProfissional(profissional);
+                agendamento.setFkHorario(horario);
+
+                //-------------------------------------------------------------------------------------------------------------------------//
+
+                agendamentos.add(agendamento);
             }
 
-            return agendamento;
+            return agendamentos;
 
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
             return null;
         }
     }
+
 }

@@ -130,7 +130,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
     }
 
     //carrega os sppiners com os dados do banco
-    private void carregarSpinners(){
+    private void carregarSpinners() {
 
         progressBar.setVisibility(ProgressBar.VISIBLE);
 

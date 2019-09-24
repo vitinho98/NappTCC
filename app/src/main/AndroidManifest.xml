@@ -39,8 +39,8 @@
         <activity android:name=".view.cadastros.CadastroProfissionalExterno" />
         <activity android:name=".view.cadastros.CadastroResponsavel" />
         <activity android:name=".view.SobreActivity" />
-        <activity android:name=".view.LoginActivity">
-        </activity>
+        <activity android:name=".view.LoginActivity"/>
+        <activity android:name=".view.cadastros.CadastroAgendamento"/>
 
     </application>
 

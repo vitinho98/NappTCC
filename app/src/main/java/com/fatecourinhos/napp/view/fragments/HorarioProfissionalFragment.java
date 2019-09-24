@@ -14,13 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.json.AgendaProfissionalJSONParser;
-import com.fatecourinhos.napp.model.AgendaProfissional;
+import com.fatecourinhos.napp.json.HorarioProfissionalJSONParser;
+import com.fatecourinhos.napp.model.Horario;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
-import com.fatecourinhos.napp.view.adapter.AgendaProfissionalAdapter;
+import com.fatecourinhos.napp.view.adapter.HorarioProfissionalAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroHorario;
-import com.fatecourinhos.napp.view.listener.OnAgendaProfissionalnteractionListener;
+import com.fatecourinhos.napp.view.listener.OnHorarioProfissionalnteractionListener;
 
 import java.util.List;
 
@@ -30,14 +30,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class AgendaProfissionalFragment extends Fragment {
+public class HorarioProfissionalFragment extends Fragment {
 
     private SharedPreferences preferences;
     private String conteudo;
     private int id = 0;
-    private List<AgendaProfissional> agendaProfissional;
-    private AgendaProfissionalAdapter agendaProfissionalAdapter;
-    private OnAgendaProfissionalnteractionListener listener;
+    private List<Horario> agendaProfissional;
+    private HorarioProfissionalAdapter agendaProfissionalAdapter;
+    private OnHorarioProfissionalnteractionListener listener;
     private ViewHolder viewHolder = new ViewHolder();
     private View view;
     private Context context;
@@ -53,9 +53,9 @@ public class AgendaProfissionalFragment extends Fragment {
         viewHolder.recyclerViewAgendaProfissional = view.findViewById(R.id.recycler_view_horario_atendimento);
         viewHolder.recyclerViewAgendaProfissional.setLayoutManager(new LinearLayoutManager(context));
 
-        listener = new OnAgendaProfissionalnteractionListener() {
+        listener = new OnHorarioProfissionalnteractionListener() {
             @Override
-            public void onListClick(AgendaProfissional agendaProfissional) {
+            public void onListClick(Horario agendaProfissional) {
 
                 Intent intent = new Intent(getActivity(), CadastroHorario.class);
                 intent.putExtra("idHorario", agendaProfissional.getIdAgendaProfissional());
@@ -65,7 +65,7 @@ public class AgendaProfissionalFragment extends Fragment {
             }
 
             @Override
-            public void onDeleteClick(final AgendaProfissional agendaProfissional) {
+            public void onDeleteClick(final Horario agendaProfissional) {
 
                 new AlertDialog.Builder(context)
                         .setTitle("Remover horário")
@@ -123,7 +123,7 @@ public class AgendaProfissionalFragment extends Fragment {
 
     }
 
-    private class SelecionarAgendaProfissional extends AsyncTask<RequestHttp, String, List<AgendaProfissional>> {
+    private class SelecionarAgendaProfissional extends AsyncTask<RequestHttp, String, List<Horario>> {
 
         @Override
         protected void onPreExecute() {
@@ -132,7 +132,7 @@ public class AgendaProfissionalFragment extends Fragment {
 
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
-        protected List<AgendaProfissional> doInBackground(RequestHttp... params) {
+        protected List<Horario> doInBackground(RequestHttp... params) {
 
             try {
                 conteudo = HttpManager.getDados(params[0]);
@@ -140,15 +140,15 @@ public class AgendaProfissionalFragment extends Fragment {
                 conteudo = null;
             }
 
-            agendaProfissional = AgendaProfissionalJSONParser.parseDados(conteudo);
+            agendaProfissional = HorarioProfissionalJSONParser.parseDados(conteudo);
             return agendaProfissional;
         }
 
         @Override
-        protected void onPostExecute(final List<AgendaProfissional> agendasProfissional) {
+        protected void onPostExecute(final List<Horario> agendasProfissional) {
             super.onPostExecute(agendasProfissional);
 
-            agendaProfissionalAdapter = new AgendaProfissionalAdapter(agendaProfissional, listener);
+            agendaProfissionalAdapter = new HorarioProfissionalAdapter(agendaProfissional, listener);
             viewHolder.recyclerViewAgendaProfissional.setAdapter(agendaProfissionalAdapter);
         }
 

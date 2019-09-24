@@ -14,16 +14,6 @@ public class PrognosticoModel {
     public PrognosticoModel() {
     }
 
-    public PrognosticoModel(Aluno fkAluno, int opcao1, int opcao2, int opcao3, int opcao4, int opcao5, int opcao6) {
-        this.fkAluno = fkAluno;
-        this.opcao1 = opcao1;
-        this.opcao2 = opcao2;
-        this.opcao3 = opcao3;
-        this.opcao4 = opcao4;
-        this.opcao5 = opcao5;
-        this.opcao6 = opcao6;
-    }
-
     public int getIdPrognostico() {
         return idPrognostico;
     }
@@ -87,4 +77,5 @@ public class PrognosticoModel {
     public void setOpcao6(int opcao6) {
         this.opcao6 = opcao6;
     }
+
 }

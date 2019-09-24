@@ -4,7 +4,6 @@ public class CampoAtuacao {
 
     private int idCampoAtuacao;
     private String nomeCampoAtuacao;
-    private int status;
 
     public CampoAtuacao() {
 
@@ -24,14 +23,6 @@ public class CampoAtuacao {
 
     public void setNomeCampoAtuacao(String nomeCampoAtuacao) {
         this.nomeCampoAtuacao = nomeCampoAtuacao;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
 }

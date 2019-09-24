@@ -143,4 +143,5 @@ public class Aluno {
     public void setFkUsuario(Usuario fkUsuario) {
         this.fkUsuario = fkUsuario;
     }
+
 }

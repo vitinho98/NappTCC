@@ -14,7 +14,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.model.AgendaProfissional;
+import com.fatecourinhos.napp.model.Horario;
 import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
@@ -28,7 +28,7 @@ public class CadastroHorario extends AppCompatActivity {
     //variaveis globais
     private SharedPreferences preferences;
     private Profissional profissional;
-    private AgendaProfissional agendaProfissional;
+    private Horario agendaProfissional;
     private String conteudo;
     private boolean sucesso;
 
@@ -113,12 +113,12 @@ public class CadastroHorario extends AppCompatActivity {
         calendario = findViewById(R.id.calendarView);
         calendario.setMinDate(System.currentTimeMillis());
 
-        agendaProfissional = new AgendaProfissional();
+        agendaProfissional = new Horario();
         profissional = new Profissional();
 
     }
 
-    public void inserirAgendaProfissional(AgendaProfissional agendaProfissional) {
+    public void inserirAgendaProfissional(Horario agendaProfissional) {
 
         String uri = "http://vitorsilva.xyz/napp/agendaProfissional/inserirAgendaProfissional.php";
         RequestHttp requestHttp = new RequestHttp();

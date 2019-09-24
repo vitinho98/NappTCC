@@ -13,7 +13,6 @@ public class ProfissionalExterno {
     private String celularProfissionalExterno;
     private CampoAtuacao fkCampoAtuacao;
     private Responsavel fkResponsavel;
-    private int status;
 
     public ProfissionalExterno() {
 
@@ -105,14 +104,6 @@ public class ProfissionalExterno {
 
     public void setFkResponsavel(Responsavel fkResponsavel) {
         this.fkResponsavel = fkResponsavel;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
 }
