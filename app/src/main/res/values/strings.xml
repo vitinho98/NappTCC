@@ -68,7 +68,7 @@
     <string name="hint_telefone">Telefone</string>
     <string name="hint_celular">Celular</string>
     <string name="hint_bloco">Bloco</string>
-    <string name="hint_sala">Sala</string>
+    <string name="hint_local">Local/Sala</string>
     <string name="hint_cidade">Cidade</string>
     <string name="hint_endereco">Endereço</string>
     <string name="hint_bairro">Bairro</string>
