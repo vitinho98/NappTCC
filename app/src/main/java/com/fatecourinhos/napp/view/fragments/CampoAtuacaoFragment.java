@@ -28,10 +28,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CampoAtuacaoFragment extends Fragment {
 
+    //variaveis globais
+    private boolean sucesso;
     private String conteudo;
     private List<CampoAtuacao> camposAtuacao;
+
+    //componentes da tela
     private OnCampoAtuacaoInteractionListener listener;
-    private ViewHolder viewHolder = new ViewHolder();
+    private ViewHolder viewHolder;
     private CampoAtuacaoAdapter campoAtuacaoAdapter;
     private View view;
     private Context context;
@@ -43,6 +47,7 @@ public class CampoAtuacaoFragment extends Fragment {
         getActivity().setTitle("Campos de Atuação");
         view = inflater.inflate(R.layout.fragment_area_atuacao,container,false);
         context = view.getContext();
+        viewHolder = new ViewHolder();
 
         viewHolder.recyclerViewCampoAtuacao = view.findViewById(R.id.recycler_view_area_atuacao);
         viewHolder.recyclerViewCampoAtuacao.setLayoutManager(new LinearLayoutManager(context));
@@ -76,7 +81,6 @@ public class CampoAtuacaoFragment extends Fragment {
             }
         };
 
-        selecionarCamposAtuacao();
         return view;
     }
 
@@ -151,6 +155,12 @@ public class CampoAtuacaoFragment extends Fragment {
 
             try {
                 conteudo = HttpManager.getDados(params[0]);
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
             } catch (Exception e) {
                 conteudo = null;
             }
@@ -162,7 +172,7 @@ public class CampoAtuacaoFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (conteudo.contains("Sucesso")) {
+            if (sucesso) {
                 Toast.makeText(view.getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
                 selecionarCamposAtuacao();
             } else

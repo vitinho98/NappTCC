@@ -6,34 +6,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CalendarView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.json.HorarioProfissionalJSONParser;
 import com.fatecourinhos.napp.json.ProfissionalJSONParser;
-import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.Horario;
 import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.adapter.HorarioProfissionalAdapter;
-import com.fatecourinhos.napp.view.adapter.ProfissionalAdapter;
-import com.fatecourinhos.napp.view.fragments.ProfissionalFragment;
+import com.fatecourinhos.napp.view.listener.OnHorarioProfissionalnteractionListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import sun.bob.mcalendarview.MCalendarView;
-import sun.bob.mcalendarview.views.ExpCalendarView;
-
 public class CadastroAgendamento extends AppCompatActivity {
 
-    ExpCalendarView calendarView;
+    OnHorarioProfissionalnteractionListener listener;
+    HorarioProfissionalAdapter adapter;
+    ViewHolder viewHolder = new ViewHolder();
     List<Horario> agendaProfissional;
     Spinner spinner;
     String conteudo;
@@ -44,15 +41,29 @@ public class CadastroAgendamento extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agendamento_aluno);
-        calendarView = findViewById(R.id.calendario);
+
+        listener = new OnHorarioProfissionalnteractionListener() {
+            @Override
+            public void onListClick(Horario agendaProfissional) {
+
+            }
+
+            @Override
+            public void onDeleteClick(Horario agendaProfissional) {
+
+            }
+        };
+
+        viewHolder.recyclerViewHorarios = findViewById(R.id.recycler_view_lista_datas_ag_aluno);
+        viewHolder.recyclerViewHorarios.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
         spinner = findViewById(R.id.spinner_profissional);
         selecionarProfissionais();
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
                 selecionarDatas(profissionais.get(spinner.getSelectedItemPosition()).getIdProfissional());
-
             }
 
             @Override
@@ -68,10 +79,13 @@ public class CadastroAgendamento extends AppCompatActivity {
         String uri = "http://vitorsilva.xyz/napp/agendamento/selecionarDatas.php";
         SelecionarDatas mytask = new SelecionarDatas();
         RequestHttp requestHttp = new RequestHttp();
+
         requestHttp.setUrl(uri);
         requestHttp.setMetodo("GET");
         requestHttp.setParametro("id", String.valueOf(id));
+
         mytask.execute(requestHttp);
+
     }
 
     private class SelecionarDatas extends AsyncTask<RequestHttp, String, List<Horario>> {
@@ -98,6 +112,9 @@ public class CadastroAgendamento extends AppCompatActivity {
         @Override
         protected void onPostExecute(final List<Horario> agendasProfissional) {
             super.onPostExecute(agendasProfissional);
+
+            adapter = new HorarioProfissionalAdapter(agendaProfissional, listener);
+            viewHolder.recyclerViewHorarios.setAdapter(adapter);
         }
 
     }
@@ -141,10 +158,12 @@ public class CadastroAgendamento extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, nomes);
             spinner.setAdapter(adapter);
 
-            System.out.println("acabo");
-
         }
 
+    }
+
+    private static class ViewHolder {
+        RecyclerView recyclerViewHorarios;
     }
 
 }

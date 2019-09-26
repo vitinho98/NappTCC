@@ -20,7 +20,7 @@ public class HorarioProfissionalAdapter extends RecyclerView.Adapter<HorarioProf
     private List<Horario> agendaProfissional;
     private OnHorarioProfissionalnteractionListener listener;
 
-    public HorarioProfissionalAdapter(List<Horario> agendaProfissional, OnHorarioProfissionalnteractionListener listener){
+    public HorarioProfissionalAdapter(List<Horario> agendaProfissional, OnHorarioProfissionalnteractionListener listener) {
         this.agendaProfissional = agendaProfissional;
         this.listener = listener;
     }

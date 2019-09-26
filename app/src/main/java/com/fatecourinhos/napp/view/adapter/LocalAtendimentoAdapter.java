@@ -15,11 +15,10 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimentoViewHolder>{
+public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimentoViewHolder> {
 
     private List<LocalAtendimento> locaisAtendimento;
     private OnLocalAtendimentoInteractionListener listener;
-
 
     public LocalAtendimentoAdapter(List<LocalAtendimento> locaisAtendimento, OnLocalAtendimentoInteractionListener listener) {
         this.locaisAtendimento = locaisAtendimento;
@@ -29,12 +28,10 @@ public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimen
     @NonNull
     @Override
     public LocalAtendimentoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.view_holder_local_atendimento, parent, false);
         return new LocalAtendimentoViewHolder(view);
-
     }
 
     @Override

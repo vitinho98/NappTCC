@@ -20,7 +20,7 @@ public class DiagnosticoAdapter extends RecyclerView.Adapter<DiagnosticoViewHold
     private List<Diagnostico> diagnosticos;
     private OnDiagnosticoInteractionListener listener;
 
-    public DiagnosticoAdapter(List<Diagnostico> diagnosticos, OnDiagnosticoInteractionListener listener){
+    public DiagnosticoAdapter(List<Diagnostico> diagnosticos, OnDiagnosticoInteractionListener listener) {
         this.diagnosticos = diagnosticos;
         this.listener = listener;
     }
@@ -29,20 +29,16 @@ public class DiagnosticoAdapter extends RecyclerView.Adapter<DiagnosticoViewHold
     @NonNull
     @Override
     public DiagnosticoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.view_holder_diagnostico, parent, false);
         return new DiagnosticoViewHolder(view);
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull DiagnosticoViewHolder holder, final int position) {
-
         Diagnostico diagnostico = this.diagnosticos.get(position);
         holder.bindData(diagnostico, listener);
-
     }
 
     @Override

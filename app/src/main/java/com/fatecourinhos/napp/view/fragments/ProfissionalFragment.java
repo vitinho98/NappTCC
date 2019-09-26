@@ -27,25 +27,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfissionalFragment extends Fragment {
 
+    //variaveis globais
+    private boolean sucesso;
     private String conteudo;
     private List<Profissional> profissionais;
+
+    //componentes da tela
     private OnProfissionalInteractionListener listener;
     private ProfissionalAdapter profissionalAdapter;
-    private ViewHolder viewHolder = new ViewHolder();
+    private ViewHolder viewHolder;
     private View view;
     private Context context;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
 
         getActivity().setTitle("Profissionais do Núcleo");
         view = inflater.inflate(R.layout.fragment_profissional,container,false);
         context = view.getContext();
+        viewHolder = new ViewHolder();
 
         viewHolder.recyclerViewProfissionais = view.findViewById(R.id.recycler_view_profissional);
         viewHolder.recyclerViewProfissionais.setLayoutManager(new LinearLayoutManager(context));
 
+        //adiciona eventos ao itens da lista
         listener = new OnProfissionalInteractionListener() {
             @Override
             public void onListClick(Profissional profissional) {
@@ -72,9 +78,7 @@ public class ProfissionalFragment extends Fragment {
             }
         };
 
-        selecionarProfissionais();
         return view;
-
     }
 
     @Override

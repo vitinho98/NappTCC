@@ -13,12 +13,12 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalViewHolder>{
+public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalViewHolder> {
 
     private List<Profissional> profissionais;
     private OnProfissionalInteractionListener listener;
 
-    public ProfissionalAdapter(List<Profissional> profissionais, OnProfissionalInteractionListener listener){
+    public ProfissionalAdapter(List<Profissional> profissionais, OnProfissionalInteractionListener listener) {
         this.profissionais = profissionais;
         this.listener = listener;
     }

@@ -15,12 +15,12 @@ import com.fatecourinhos.napp.view.viewHolder.CampoAtuacaoViewHolder;
 
 import java.util.List;
 
-public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHolder>{
+public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHolder> {
 
     private List<CampoAtuacao> camposAtuacao;
     private OnCampoAtuacaoInteractionListener listener;
 
-    public CampoAtuacaoAdapter(List<CampoAtuacao> camposAtuacao, OnCampoAtuacaoInteractionListener listener){
+    public CampoAtuacaoAdapter(List<CampoAtuacao> camposAtuacao, OnCampoAtuacaoInteractionListener listener) {
         this.camposAtuacao = camposAtuacao;
         this.listener = listener;
     }

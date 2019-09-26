@@ -29,12 +29,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ResponsavelFragment extends Fragment {
 
+    //variaveis globais
     private boolean sucesso;
     private String conteudo;
     private List<Responsavel> responsaveis;
+
+    //componentes da tela
     private ResponsavelAdapter responsavelAdapter;
     private OnResponsavelInteractionListener listener;
-    private ViewHolder viewHolder = new ViewHolder();
+    private ViewHolder viewHolder;
     private View view;
     private Context context;
 
@@ -42,13 +45,15 @@ public class ResponsavelFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
 
-        getActivity().setTitle("Responsaveis");
+        getActivity().setTitle("Responsáveis");
         view = inflater.inflate(R.layout.fragment_responsavel,container,false);
         context = view.getContext();
+        viewHolder = new ViewHolder();
 
         viewHolder.recyclerViewResponsaveis = view.findViewById(R.id.recycler_view_responsavel);
         viewHolder.recyclerViewResponsaveis.setLayoutManager(new LinearLayoutManager(context));
 
+        //adiciona eventos ao itens da lista
         listener = new OnResponsavelInteractionListener() {
             @Override
             public void onListClick(Responsavel responsavel) {
@@ -81,7 +86,6 @@ public class ResponsavelFragment extends Fragment {
             }
         };
 
-        selecionarResponsaveis();
         return view;
     }
 
@@ -89,20 +93,6 @@ public class ResponsavelFragment extends Fragment {
     public void onResume() {
         super.onResume();
         selecionarResponsaveis();
-    }
-
-    private void excluirResponsavel(int id) {
-
-        String uri = "http://vitorsilva.xyz/napp/responsavel/excluirResponsavel.php";
-        ExcluirLocalAtendimento task = new ExcluirLocalAtendimento();
-        RequestHttp requestHttp = new RequestHttp();
-
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-        requestHttp.setParametro("idResponsavel", String.valueOf(id));
-
-        task.execute(requestHttp);
-
     }
 
     private void selecionarResponsaveis() {
@@ -144,7 +134,21 @@ public class ResponsavelFragment extends Fragment {
 
     }
 
-    private class ExcluirLocalAtendimento extends AsyncTask<RequestHttp, String, String> {
+    private void excluirResponsavel(int id) {
+
+        String uri = "http://vitorsilva.xyz/napp/responsavel/excluirResponsavel.php";
+        ExcluirResponsavel task = new ExcluirResponsavel();
+        RequestHttp requestHttp = new RequestHttp();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+        requestHttp.setParametro("idResponsavel", String.valueOf(id));
+
+        task.execute(requestHttp);
+
+    }
+
+    private class ExcluirResponsavel extends AsyncTask<RequestHttp, String, String> {
 
         @Override
         protected void onPreExecute() {

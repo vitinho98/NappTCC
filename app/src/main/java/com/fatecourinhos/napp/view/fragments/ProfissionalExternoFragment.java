@@ -1,17 +1,21 @@
 package com.fatecourinhos.napp.view.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.json.ProfissionalExternoJSONParser;
 import com.fatecourinhos.napp.model.ProfissionalExterno;
 import com.fatecourinhos.napp.util.HttpManager;
+import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.adapter.ProfissionalExternoAdapter;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissionalExterno;
 import com.fatecourinhos.napp.view.listener.OnProfissionalExternoInteractionListener;
@@ -25,25 +29,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProfissionalExternoFragment extends Fragment {
 
+    //variaveis globais
+    private boolean sucesso;
     private String conteudo;
     private List<ProfissionalExterno> profissionaisExterno;
+
+    //componentes da tela
     private ProfissionalExternoAdapter profissionalExternoAdapter;
     private OnProfissionalExternoInteractionListener listener;
-    private ViewHolder viewHolder = new ViewHolder();
+    private ViewHolder viewHolder;
     private View view;
     private Context context;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
 
         getActivity().setTitle("Profissionais Externos");
         view = inflater.inflate(R.layout.fragment_profissional_externo,container,false);
         context = view.getContext();
+        viewHolder = new ViewHolder();
 
         viewHolder.recyclerViewProfissionaisExternos = view.findViewById(R.id.recycler_view_profissional_externo);
         viewHolder.recyclerViewProfissionaisExternos.setLayoutManager(new LinearLayoutManager(context));
 
+        //adiciona eventos aos itens da lista
         listener = new OnProfissionalExternoInteractionListener() {
             @Override
             public void onListClick(ProfissionalExterno profissionalExterno) {
@@ -66,12 +76,22 @@ public class ProfissionalExternoFragment extends Fragment {
             }
 
             @Override
-            public void onDeleteClick(ProfissionalExterno profissionalExterno) {
+            public void onDeleteClick(final ProfissionalExterno profissionalExterno) {
 
+                new AlertDialog.Builder(context)
+                        .setTitle("Remover responsável")
+                        .setMessage("Deseja remover o responsável?")
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                excluirProfissionalExterno(profissionalExterno.getIdProfissionalExterno());
+                            }
+                        })
+                        .setNeutralButton("Não", null)
+                        .show();
             }
         };
 
-        selecionarProfissionaisExternos();
         return view;
     }
 
@@ -116,6 +136,59 @@ public class ProfissionalExternoFragment extends Fragment {
 
             profissionalExternoAdapter = new ProfissionalExternoAdapter(profissionaisExterno, listener);
             viewHolder.recyclerViewProfissionaisExternos.setAdapter(profissionalExternoAdapter);
+        }
+
+    }
+
+    private void excluirProfissionalExterno(int id) {
+
+        String uri = "http://vitorsilva.xyz/napp/responsavel/excluirProfissionalExterno.php";
+        ExcluirProfissionalExterno task = new ExcluirProfissionalExterno();
+        RequestHttp requestHttp = new RequestHttp();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+        requestHttp.setParametro("idProfissionalExterno", String.valueOf(id));
+
+        task.execute(requestHttp);
+
+    }
+
+    private class ExcluirProfissionalExterno extends AsyncTask<RequestHttp, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+
+            try {
+
+                conteudo = HttpManager.getDados(params[0]);
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
+                sucesso = false;
+            }
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (sucesso) {
+                Toast.makeText(view.getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
+                selecionarProfissionaisExternos();
+            } else
+                Toast.makeText(view.getContext(),"Erro ao excluir", Toast.LENGTH_SHORT).show();
         }
 
     }

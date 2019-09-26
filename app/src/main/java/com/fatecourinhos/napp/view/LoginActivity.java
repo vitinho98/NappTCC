@@ -30,8 +30,6 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     //componente da tela de login
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
     private AppCompatEditText editTextLogin, editTextSenha;
     private TextInputLayout textInputLayoutLogin, textInputLayoutSenha;
     private ImageView imgSobre;
@@ -40,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar pgBar;
 
     //variaveis globais
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
     private boolean sucesso;
     private String conteudo;
 
@@ -276,6 +276,7 @@ public class LoginActivity extends AppCompatActivity {
             else
                 Toast.makeText(LoginActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
         }
+
     }
 
 }

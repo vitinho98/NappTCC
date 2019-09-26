@@ -30,27 +30,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class LocalAtendimentoFragment extends Fragment {
 
+    //variaveis globais
     private boolean sucesso;
     private String conteudo;
     private List<LocalAtendimento> locaisAtendimento;
+
+    //componentes da tela
     private OnLocalAtendimentoInteractionListener listener;
-    private ViewHolder viewHolder = new ViewHolder();
+    private ViewHolder viewHolder;
     private LocalAtendimentoAdapter localAtendimentoAdapter;
     private View view;
     private Context context;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
 
         getActivity().setTitle("Locais de Atendimento");
         view = inflater.inflate(R.layout.fragment_local_atendimento,container,false);
         context = view.getContext();
+        viewHolder = new ViewHolder();
 
         viewHolder.recyclerViewLocaisAtendimento = view.findViewById(R.id.recycler_view_local_atendimento);
         viewHolder.recyclerViewLocaisAtendimento.setLayoutManager(new LinearLayoutManager(context));
 
-        //seta os eventos da lista
+        //adiciona eventos aos itens da lista
         listener = new OnLocalAtendimentoInteractionListener() {
             @Override
             public void onListClick(LocalAtendimento localAtendimento) {
@@ -80,29 +84,13 @@ public class LocalAtendimentoFragment extends Fragment {
             }
         };
 
-        selecionarLocalAtendimento();
         return view;
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
         selecionarLocalAtendimento();
-    }
-
-    private void excluirLocalAtendimento(int id) {
-
-        String uri = "http://vitorsilva.xyz/napp/localAtendimento/excluirLocalAtendimento.php";
-        ExcluirLocalAtendimento task = new ExcluirLocalAtendimento();
-        RequestHttp requestHttp = new RequestHttp();
-
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-        requestHttp.setParametro("idLocalAtendimento", String.valueOf(id));
-
-        task.execute(requestHttp);
-
     }
 
     private void selecionarLocalAtendimento() {
@@ -141,6 +129,20 @@ public class LocalAtendimentoFragment extends Fragment {
             localAtendimentoAdapter = new LocalAtendimentoAdapter(locaisAtendimento, listener);
             viewHolder.recyclerViewLocaisAtendimento.setAdapter(localAtendimentoAdapter);
         }
+
+    }
+
+    private void excluirLocalAtendimento(int id) {
+
+        String uri = "http://vitorsilva.xyz/napp/localAtendimento/excluirLocalAtendimento.php";
+        ExcluirLocalAtendimento task = new ExcluirLocalAtendimento();
+        RequestHttp requestHttp = new RequestHttp();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+        requestHttp.setParametro("idLocalAtendimento", String.valueOf(id));
+
+        task.execute(requestHttp);
 
     }
 

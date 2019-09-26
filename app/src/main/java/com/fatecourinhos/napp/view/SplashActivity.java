@@ -46,13 +46,11 @@ public class SplashActivity extends AppCompatActivity {
 
                 isAtivo(usuario);
 
-            } else {
+            } else
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-            }
 
-        } else {
+        } else
             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-        }
 
     }
 
@@ -93,9 +91,10 @@ public class SplashActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(RequestHttp... params) {
-            conteudo = HttpManager.getDados(params[0]);
 
-            try{
+            try {
+
+                conteudo = HttpManager.getDados(params[0]);
 
                 if (conteudo.contains("Sucesso"))
                     ativo = true;
@@ -116,10 +115,10 @@ public class SplashActivity extends AppCompatActivity {
             if (ativo) {
                 startActivity(new Intent(SplashActivity.this, MenuProfissionalActivity.class));
                 finish();
-            } else {
+            } else
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-            }
         }
+
     }
 
 }

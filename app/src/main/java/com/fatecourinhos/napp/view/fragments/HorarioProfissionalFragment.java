@@ -32,27 +32,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class HorarioProfissionalFragment extends Fragment {
 
+    //variaveis globais
     private SharedPreferences preferences;
     private String conteudo;
-    private int id = 0;
+    private int id;
     private List<Horario> agendaProfissional;
+
+    //componentes da tela
     private HorarioProfissionalAdapter agendaProfissionalAdapter;
     private OnHorarioProfissionalnteractionListener listener;
-    private ViewHolder viewHolder = new ViewHolder();
+    private ViewHolder viewHolder;
     private View view;
     private Context context;
 
     @Nullable
     @Override
-    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
 
         getActivity().setTitle("Horários atendimento");
         view = inflater.inflate(R.layout.fragment_horario_atendimento,container,false);
         context = view.getContext();
+        viewHolder = new ViewHolder();
 
         viewHolder.recyclerViewAgendaProfissional = view.findViewById(R.id.recycler_view_horario_atendimento);
         viewHolder.recyclerViewAgendaProfissional.setLayoutManager(new LinearLayoutManager(context));
 
+        //adiciona eventos aos itens da lista
         listener = new OnHorarioProfissionalnteractionListener() {
             @Override
             public void onListClick(Horario agendaProfissional) {
@@ -85,7 +90,6 @@ public class HorarioProfissionalFragment extends Fragment {
         if (preferences.contains("idProfissional"))
             id = preferences.getInt("idProfissional", 0);
 
-        selecionarAgendaProfissional(id);
         return view;
     }
 
@@ -104,20 +108,6 @@ public class HorarioProfissionalFragment extends Fragment {
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
         requestHttp.setParametro("idProfissional", String.valueOf(id));
-
-        mytask.execute(requestHttp);
-
-    }
-
-    private void excluirAgendaProfissional(int id) {
-
-        String uri = "http://vitorsilva.xyz/napp/agendaProfissional/excluirAgendaProfissional.php";
-        RequestHttp requestHttp = new RequestHttp();
-        ExcluirAgendaProfissional mytask = new ExcluirAgendaProfissional();
-
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-        requestHttp.setParametro("idHorario", String.valueOf(id));
 
         mytask.execute(requestHttp);
 
@@ -151,6 +141,20 @@ public class HorarioProfissionalFragment extends Fragment {
             agendaProfissionalAdapter = new HorarioProfissionalAdapter(agendaProfissional, listener);
             viewHolder.recyclerViewAgendaProfissional.setAdapter(agendaProfissionalAdapter);
         }
+
+    }
+
+    private void excluirAgendaProfissional(int id) {
+
+        String uri = "http://vitorsilva.xyz/napp/agendaProfissional/excluirAgendaProfissional.php";
+        RequestHttp requestHttp = new RequestHttp();
+        ExcluirAgendaProfissional mytask = new ExcluirAgendaProfissional();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+        requestHttp.setParametro("idHorario", String.valueOf(id));
+
+        mytask.execute(requestHttp);
 
     }
 

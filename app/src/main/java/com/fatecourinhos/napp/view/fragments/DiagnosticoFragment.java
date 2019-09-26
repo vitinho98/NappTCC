@@ -29,10 +29,13 @@ import java.util.List;
 
 public class DiagnosticoFragment extends Fragment {
 
+    //variaveis globais
     private boolean sucesso;
     private String conteudo;
     private List<Diagnostico> diagnosticos;
-    private ViewHolder viewHolder = new ViewHolder();
+
+    //componentes da tela
+    private ViewHolder viewHolder;
     private OnDiagnosticoInteractionListener listener;
     private DiagnosticoAdapter diagnosticoAdapter;
     private View view;
@@ -40,15 +43,17 @@ public class DiagnosticoFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance){
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
 
         getActivity().setTitle("Diagnosticos");
         view = inflater.inflate(R.layout.fragment_diagnostico,container,false);
         context = view.getContext();
+        viewHolder = new ViewHolder();
 
         viewHolder.recyclerViewDiagnosticos = view.findViewById(R.id.recycler_view_diagnostico);
         viewHolder.recyclerViewDiagnosticos.setLayoutManager(new LinearLayoutManager(context));
 
+        //adiciona eventos aos itens da lista
         listener = new OnDiagnosticoInteractionListener() {
             @Override
             public void onListClick(Diagnostico diagnostico) {
@@ -78,7 +83,6 @@ public class DiagnosticoFragment extends Fragment {
             }
         };
 
-        selecionarDiagnosticos();
         return view;
     }
 
@@ -86,20 +90,6 @@ public class DiagnosticoFragment extends Fragment {
     public void onResume() {
         super.onResume();
         selecionarDiagnosticos();
-    }
-
-    private void excluirDiagnostico(int id) {
-
-        String uri = "http://vitorsilva.xyz/napp/diagnostico/excluirDiagnostico.php";
-        ExcluirDiagnostico task = new ExcluirDiagnostico();
-        RequestHttp requestHttp = new RequestHttp();
-
-        requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-        requestHttp.setParametro("idDiagnostico", String.valueOf(id));
-
-        task.execute(requestHttp);
-
     }
 
     private void selecionarDiagnosticos() {
@@ -138,6 +128,20 @@ public class DiagnosticoFragment extends Fragment {
             diagnosticoAdapter = new DiagnosticoAdapter(diagnosticos, listener);
             viewHolder.recyclerViewDiagnosticos.setAdapter(diagnosticoAdapter);
         }
+
+    }
+
+    private void excluirDiagnostico(int id) {
+
+        String uri = "http://vitorsilva.xyz/napp/diagnostico/excluirDiagnostico.php";
+        ExcluirDiagnostico task = new ExcluirDiagnostico();
+        RequestHttp requestHttp = new RequestHttp();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+        requestHttp.setParametro("idDiagnostico", String.valueOf(id));
+
+        task.execute(requestHttp);
 
     }
 
