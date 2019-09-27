@@ -69,7 +69,11 @@ public class ProfissionalExternoFragment extends Fragment {
                 intent.putExtra("endereco", profissionalExterno.getEndereco());
                 intent.putExtra("celularProfissionalExterno", profissionalExterno.getCelularProfissionalExterno());
                 intent.putExtra("telefoneProfissionalExterno", profissionalExterno.getTelefoneProfissionalExterno());
+
+                intent.putExtra("idCampoAtuacao", profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao());
                 intent.putExtra("nomeCampoAtuacao", profissionalExterno.getFkCampoAtuacao().getNomeCampoAtuacao());
+
+                intent.putExtra("idResponsavel", profissionalExterno.getFkResponsavel().getIdResponsavel());
                 intent.putExtra("nomeResponsavel", profissionalExterno.getFkResponsavel().getNomeResponsavel());
 
                 getActivity().startActivity(intent);
@@ -79,8 +83,8 @@ public class ProfissionalExternoFragment extends Fragment {
             public void onDeleteClick(final ProfissionalExterno profissionalExterno) {
 
                 new AlertDialog.Builder(context)
-                        .setTitle("Remover responsável")
-                        .setMessage("Deseja remover o responsável?")
+                        .setTitle("Remover profissional externo")
+                        .setMessage("Deseja remover o profissional externo?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -142,7 +146,7 @@ public class ProfissionalExternoFragment extends Fragment {
 
     private void excluirProfissionalExterno(int id) {
 
-        String uri = "http://vitorsilva.xyz/napp/responsavel/excluirProfissionalExterno.php";
+        String uri = "http://vitorsilva.xyz/napp/profissionalExterno/excluirProfExterno.php";
         ExcluirProfissionalExterno task = new ExcluirProfissionalExterno();
         RequestHttp requestHttp = new RequestHttp();
 

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestHttp {
+
     private String url;
     private String metodo = "GET";
     private Map<String, String> parametros = new HashMap<>();
@@ -59,4 +60,5 @@ public class RequestHttp {
 
         return stringBuilder.toString();
     }
+
 }

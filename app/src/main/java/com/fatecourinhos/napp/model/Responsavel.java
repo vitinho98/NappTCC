@@ -2,7 +2,7 @@ package com.fatecourinhos.napp.model;
 
 public class Responsavel {
 
-    private int idResponsavel;
+    private Integer idResponsavel;
     private String nomeResponsavel;
     private String celularResponsavel;
     private String telefoneResponsavel;
@@ -12,11 +12,11 @@ public class Responsavel {
 
     }
 
-    public int getIdResponsavel() {
+    public Integer getIdResponsavel() {
         return idResponsavel;
     }
 
-    public void setIdResponsavel(int idResponsavel) {
+    public void setIdResponsavel(Integer idResponsavel) {
         this.idResponsavel = idResponsavel;
     }
 
