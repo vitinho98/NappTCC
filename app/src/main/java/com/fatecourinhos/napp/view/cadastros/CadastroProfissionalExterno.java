@@ -229,7 +229,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
                     System.out.println(campoAtuacaoCA.getIdCampoAtuacao() + " " + campoAtuacaoCA.getNomeCampoAtuacao());
                     for (CampoAtuacao campoAtuacao : camposAtuacao)
                         if (campoAtuacao.getNomeCampoAtuacao().equals(campoAtuacaoCA.getNomeCampoAtuacao()))
-                            spinnerCampoAtuacao.setSelection(adapterResponsavel.getPosition(campoAtuacaoCA.getNomeCampoAtuacao()));
+                            spinnerCampoAtuacao.setSelection(adapterCampoAtuacao.getPosition(campoAtuacaoCA.getNomeCampoAtuacao()));
 
                 } else
                     spinnerCampoAtuacao.setSelection(0);
@@ -243,7 +243,6 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
                     for (Responsavel responsavel : responsaveis)
                         if (responsavel.getNomeResponsavel().equals(responsavelR.getNomeResponsavel()))
                             spinnerResponsavel.setSelection(adapterResponsavel.getPosition(responsavelR.getNomeResponsavel()));
-
 
                 } else
                     spinnerResponsavel.setSelection(0);
