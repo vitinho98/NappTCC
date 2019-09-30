@@ -72,7 +72,7 @@ public class ProfissionalExternoFragment extends Fragment {
 
                 intent.putExtra("idCampoAtuacao", profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao());
                 intent.putExtra("nomeCampoAtuacao", profissionalExterno.getFkCampoAtuacao().getNomeCampoAtuacao());
-
+                System.out.println(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao());
                 intent.putExtra("idResponsavel", profissionalExterno.getFkResponsavel().getIdResponsavel());
                 intent.putExtra("nomeResponsavel", profissionalExterno.getFkResponsavel().getNomeResponsavel());
 

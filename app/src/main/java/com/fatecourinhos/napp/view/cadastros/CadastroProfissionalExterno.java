@@ -30,8 +30,11 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
     //variaveis globais
     private ProfissionalExterno profissionalExterno = new ProfissionalExterno();
-    private CampoAtuacao campoAtuacao = new CampoAtuacao();
-    private Responsavel responsavel = new Responsavel();
+    private CampoAtuacao campoAtuacaoCA = new CampoAtuacao();
+    private Responsavel responsavelR = new Responsavel();
+
+    private ArrayAdapter<String> adapterResponsavel;
+    private ArrayAdapter<String> adapterCampoAtuacao;
 
     private List<CampoAtuacao> camposAtuacao = new ArrayList<>();
     private List<Responsavel> responsaveis = new ArrayList<>();
@@ -68,18 +71,13 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             editTextCelularProfissionalExterno.setText(getIntent().getExtras().getString("celularProfissionalExterno"));
             editTextEmailProfissionalExterno.setText(getIntent().getExtras().getString("emailProfissionalExterno"));
 
-            campoAtuacao.setIdCampoAtuacao(getIntent().getExtras().getInt("idCampoAtuacao"));
-            responsavel.setIdResponsavel(getIntent().getExtras().getInt("idResponsavel"));
-
             profissionalExterno.setIdProfissionalExterno(getIntent().getExtras().getInt("idProfissionalExterno"));
-            profissionalExterno.setFkCampoAtuacao(campoAtuacao);
-            profissionalExterno.setFkResponsavel(responsavel);
 
             btnCadastrarResponsavel.setText(R.string.btn_salvar);
             btnCadastrarResponsavel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    enviarDados(false, camposAtuacao, responsaveis);
+                    enviarDados(false);
                 }
             });
 
@@ -88,55 +86,9 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             btnCadastrarResponsavel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    enviarDados(true, camposAtuacao, responsaveis);
+                    enviarDados(true);
                 }
             });
-        }
-
-    }
-
-    //carrega os sppiners com os dados do banco
-    private void carregarSpinners() {
-
-        progressBar.setVisibility(ProgressBar.VISIBLE);
-
-        nomesCampos.add("Selecione o campo de atuação");
-        nomesCampos.add("Nenhum");
-
-        nomesResponsaveis.add("Selecione o responsável");
-        nomesResponsaveis.add("Nenhum");
-
-        spinnerResponsavel.setSelection(0);
-        spinnerCampoAtuacao.setSelection(0);
-
-        selecionarCamposAtuacao();
-
-
-
-
-
-
-
-
-
-
-        if (getIntent().getExtras() != null) {
-
-            campoAtuacao.setNomeCampoAtuacao(getIntent().getExtras().getString("nomeCampoAtuacao"));
-            responsavel.setNomeResponsavel(getIntent().getExtras().getString("nomeResponsavel"));
-
-            for (int i = 0; i < responsaveis.size(); i++) {
-                Responsavel responsavel = responsaveis.get(i);
-                if (responsavel.getNomeResponsavel().equals(this.responsavel.getNomeResponsavel()))
-                    spinnerResponsavel.setSelection(i + 2);
-            }
-
-            for (int i = 0; i < camposAtuacao.size(); i++) {
-                CampoAtuacao campoAtuacao = camposAtuacao.get(i);
-                if (campoAtuacao.getNomeCampoAtuacao().equals(this.campoAtuacao.getNomeCampoAtuacao()))
-                    spinnerCampoAtuacao.setSelection(i + 2);
-            }
-
         }
 
     }
@@ -169,12 +121,15 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
     }
 
-    private boolean conferirDados(ProfissionalExterno profissionalExterno){
+    //carrega os sppiners com os dados do banco
+    private void carregarSpinners() {
 
-        if (profissionalExterno.getNomeProfissionalExterno().isEmpty())
-            return false;
-        else
-            return true;
+        progressBar.setVisibility(ProgressBar.VISIBLE);
+
+        nomesCampos.add("Nenhum");
+        nomesResponsaveis.add("Nenhum");
+
+        selecionarCamposAtuacao();
 
     }
 
@@ -214,7 +169,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             for (CampoAtuacao campoAtuacao : camposAtuacao)
                 nomesCampos.add(campoAtuacao.getNomeCampoAtuacao());
 
-            ArrayAdapter<String> adapterCampoAtuacao = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, nomesCampos);
+            adapterCampoAtuacao = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, nomesCampos);
             spinnerCampoAtuacao.setAdapter(adapterCampoAtuacao);
 
             selecionarResponsaveis();
@@ -252,19 +207,69 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(final List<Responsavel> responsaveis) {
+        protected void onPostExecute(List<Responsavel> responsaveis) {
             super.onPostExecute(responsaveis);
 
-            for ( Responsavel responsavel: responsaveis)
+            for (Responsavel responsavel : responsaveis)
                 nomesResponsaveis.add(responsavel.getNomeResponsavel());
 
-            ArrayAdapter<String> adapterResponsavel =  new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, nomesResponsaveis);
+            adapterResponsavel =  new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, nomesResponsaveis);
             spinnerResponsavel.setAdapter(adapterResponsavel);
+
+            //------------------------------------------------------------------------------------//
+
+            if (getIntent().getExtras() != null) {
+
+                if (getIntent().getExtras().get("idCampoAtuacao") != null) {
+
+                    responsavelR.setIdResponsavel(getIntent().getExtras().getInt("idResponsavel"));
+                    responsavelR.setNomeResponsavel(getIntent().getExtras().getString("nomeResponsavel"));
+                    profissionalExterno.setFkResponsavel(responsavelR);
+                    System.out.println(campoAtuacaoCA.getIdCampoAtuacao() + " " + campoAtuacaoCA.getNomeCampoAtuacao());
+                    for (CampoAtuacao campoAtuacao : camposAtuacao)
+                        if (campoAtuacao.getNomeCampoAtuacao().equals(campoAtuacaoCA.getNomeCampoAtuacao()))
+                            spinnerCampoAtuacao.setSelection(adapterResponsavel.getPosition(campoAtuacaoCA.getNomeCampoAtuacao()));
+
+                } else
+                    spinnerCampoAtuacao.setSelection(0);
+
+                if (getIntent().getExtras().get("idResponsavel") != null) {
+
+                    campoAtuacaoCA.setIdCampoAtuacao(getIntent().getExtras().getInt("idCampoAtuacao"));
+                    campoAtuacaoCA.setNomeCampoAtuacao(getIntent().getExtras().getString("nomeCampoAtuacao"));
+                    profissionalExterno.setFkCampoAtuacao(campoAtuacaoCA);
+
+                    for (Responsavel responsavel : responsaveis)
+                        if (responsavel.getNomeResponsavel().equals(responsavelR.getNomeResponsavel()))
+                            spinnerResponsavel.setSelection(adapterResponsavel.getPosition(responsavelR.getNomeResponsavel()));
+
+
+                } else
+                    spinnerResponsavel.setSelection(0);
+
+            } else {
+
+                spinnerCampoAtuacao.setSelection(0);
+                spinnerResponsavel.setSelection(0);
+
+            }
+
+            progressBar.setVisibility(ProgressBar.INVISIBLE);
+
         }
 
     }
 
-    private void enviarDados(boolean inserir, List<CampoAtuacao> camposAtuacao, List<Responsavel> responsaveis){
+    private boolean conferirDados(ProfissionalExterno profissionalExterno){
+
+        if (profissionalExterno.getNomeProfissionalExterno().isEmpty())
+            return false;
+        else
+            return true;
+
+    }
+
+    private void enviarDados(boolean inserir) {
 
         profissionalExterno.setEndereco(editTextEndereco.getText().toString());
         profissionalExterno.setBairro(editTextBairro.getText().toString());
