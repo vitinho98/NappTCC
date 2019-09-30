@@ -70,8 +70,8 @@ public class ProfissionalExternoFragment extends Fragment {
                 intent.putExtra("celularProfissionalExterno", profissionalExterno.getCelularProfissionalExterno());
                 intent.putExtra("telefoneProfissionalExterno", profissionalExterno.getTelefoneProfissionalExterno());
 
-                intent.putExtra("idCampoAtuacao", profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao());
-                intent.putExtra("nomeCampoAtuacao", profissionalExterno.getFkCampoAtuacao().getNomeCampoAtuacao());
+                intent.putExtra("idC", profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao());
+                intent.putExtra("nomeC", profissionalExterno.getFkCampoAtuacao().getNomeCampoAtuacao());
                 System.out.println(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao());
                 intent.putExtra("idResponsavel", profissionalExterno.getFkResponsavel().getIdResponsavel());
                 intent.putExtra("nomeResponsavel", profissionalExterno.getFkResponsavel().getNomeResponsavel());

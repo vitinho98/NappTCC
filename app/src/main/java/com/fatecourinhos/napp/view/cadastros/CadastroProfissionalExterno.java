@@ -220,11 +220,12 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
             if (getIntent().getExtras() != null) {
 
-                if (getIntent().getExtras().get("idCampoAtuacao") != null) {
+                if (getIntent().getExtras().get("idC") != null) {
 
-                    responsavelR.setIdResponsavel(getIntent().getExtras().getInt("idResponsavel"));
-                    responsavelR.setNomeResponsavel(getIntent().getExtras().getString("nomeResponsavel"));
-                    profissionalExterno.setFkResponsavel(responsavelR);
+                    campoAtuacaoCA.setIdCampoAtuacao(getIntent().getExtras().getInt("idC"));
+                    campoAtuacaoCA.setNomeCampoAtuacao(getIntent().getExtras().getString("nomeC"));
+                    profissionalExterno.setFkCampoAtuacao(campoAtuacaoCA);
+
                     System.out.println(campoAtuacaoCA.getIdCampoAtuacao() + " " + campoAtuacaoCA.getNomeCampoAtuacao());
                     for (CampoAtuacao campoAtuacao : camposAtuacao)
                         if (campoAtuacao.getNomeCampoAtuacao().equals(campoAtuacaoCA.getNomeCampoAtuacao()))
@@ -235,9 +236,9 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
                 if (getIntent().getExtras().get("idResponsavel") != null) {
 
-                    campoAtuacaoCA.setIdCampoAtuacao(getIntent().getExtras().getInt("idCampoAtuacao"));
-                    campoAtuacaoCA.setNomeCampoAtuacao(getIntent().getExtras().getString("nomeCampoAtuacao"));
-                    profissionalExterno.setFkCampoAtuacao(campoAtuacaoCA);
+                    responsavelR.setIdResponsavel(getIntent().getExtras().getInt("idResponsavel"));
+                    responsavelR.setNomeResponsavel(getIntent().getExtras().getString("nomeResponsavel"));
+                    profissionalExterno.setFkResponsavel(responsavelR);
 
                     for (Responsavel responsavel : responsaveis)
                         if (responsavel.getNomeResponsavel().equals(responsavelR.getNomeResponsavel()))
