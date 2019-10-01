@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,15 +38,23 @@ public class CadastroAgendamento extends AppCompatActivity {
     String conteudo;
     List<Profissional> profissionais = new ArrayList<>();
     List<String> nomes = new ArrayList<>();
+    ProgressBar pgBarAgendaAluno;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agendamento_aluno);
+        pgBarAgendaAluno = findViewById(R.id.pgBarAgendaAluno);
 
         listener = new OnHorarioProfissionalnteractionListener() {
             @Override
-            public void onListClick(Horario agendaProfissional) {
+            public void onListClick(Horario agendaProfissional){
+                pgBarAgendaAluno.setVisibility(View.VISIBLE);
+                Profissional profissional = new Profissional();
+                //PEGAR O ID E CADASTRAR O HORARIO NO BAAANCO
+                Toast.makeText(CadastroAgendamento.this, spinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
 
             }
 
