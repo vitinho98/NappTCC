@@ -135,7 +135,7 @@ public class ProfissionalExternoFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(final List<ProfissionalExterno> profissionaisExternos) {
+        protected void onPostExecute(List<ProfissionalExterno> profissionaisExternos) {
             super.onPostExecute(profissionaisExternos);
 
             profissionalExternoAdapter = new ProfissionalExternoAdapter(profissionaisExterno, listener);

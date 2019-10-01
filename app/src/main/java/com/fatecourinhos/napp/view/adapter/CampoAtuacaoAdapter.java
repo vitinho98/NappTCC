@@ -35,17 +35,17 @@ public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CampoAtuacaoViewHolder holder, final int position) {
-        CampoAtuacao campoAtuacao = this.camposAtuacao.get(position);
+    public void onBindViewHolder(@NonNull CampoAtuacaoViewHolder holder, int position) {
+        CampoAtuacao campoAtuacao = camposAtuacao.get(position);
         holder.bindData(campoAtuacao, listener);
     }
 
     @Override
     public int getItemCount() {
-        if (this.camposAtuacao == null)
-            return 0;
+        if (camposAtuacao != null)
+            return camposAtuacao.size();
         else
-            return this.camposAtuacao.size();
+            return 0;
     }
 
 }

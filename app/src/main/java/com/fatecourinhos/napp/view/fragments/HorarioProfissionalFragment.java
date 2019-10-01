@@ -36,10 +36,10 @@ public class HorarioProfissionalFragment extends Fragment {
     private SharedPreferences preferences;
     private String conteudo;
     private int id;
-    private List<Horario> agendaProfissional;
+    private List<Horario> horarios;
 
     //componentes da tela
-    private HorarioProfissionalAdapter agendaProfissionalAdapter;
+    private HorarioProfissionalAdapter horarioProfissionalAdapter;
     private OnHorarioProfissionalnteractionListener listener;
     private ViewHolder viewHolder;
     private View view;
@@ -60,17 +60,17 @@ public class HorarioProfissionalFragment extends Fragment {
         //adiciona eventos aos itens da lista
         listener = new OnHorarioProfissionalnteractionListener() {
             @Override
-            public void onListClick(Horario agendaProfissional) {
+            public void onListClick(Horario horario) {
 
                 Intent intent = new Intent(getActivity(), CadastroHorario.class);
-                intent.putExtra("idHorario", agendaProfissional.getIdAgendaProfissional());
-                intent.putExtra("dataHora", agendaProfissional.getData());
+                intent.putExtra("idHorario", horario.getIdAgendaProfissional());
+                intent.putExtra("dataHora", horario.getData());
 
                 startActivity(intent);
             }
 
             @Override
-            public void onDeleteClick(final Horario agendaProfissional) {
+            public void onDeleteClick(final Horario horario) {
 
                 new AlertDialog.Builder(context)
                         .setTitle("Remover horário")
@@ -78,7 +78,7 @@ public class HorarioProfissionalFragment extends Fragment {
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                excluirAgendaProfissional(agendaProfissional.getIdAgendaProfissional());
+                                excluirAgendaProfissional(horario.getIdAgendaProfissional());
                             }
                         })
                         .setNeutralButton("Não", null)
@@ -130,16 +130,16 @@ public class HorarioProfissionalFragment extends Fragment {
                 conteudo = null;
             }
 
-            agendaProfissional = HorarioProfissionalJSONParser.parseDados(conteudo);
-            return agendaProfissional;
+            horarios = HorarioProfissionalJSONParser.parseDados(conteudo);
+            return horarios;
         }
 
         @Override
-        protected void onPostExecute(final List<Horario> agendasProfissional) {
+        protected void onPostExecute(List<Horario> agendasProfissional) {
             super.onPostExecute(agendasProfissional);
 
-            agendaProfissionalAdapter = new HorarioProfissionalAdapter(agendaProfissional, listener);
-            viewHolder.recyclerViewAgendaProfissional.setAdapter(agendaProfissionalAdapter);
+            horarioProfissionalAdapter = new HorarioProfissionalAdapter(horarios, listener);
+            viewHolder.recyclerViewAgendaProfissional.setAdapter(horarioProfissionalAdapter);
         }
 
     }

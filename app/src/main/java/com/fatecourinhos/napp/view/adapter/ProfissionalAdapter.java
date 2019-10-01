@@ -34,7 +34,7 @@ public class ProfissionalAdapter extends RecyclerView.Adapter<ProfissionalViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProfissionalViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ProfissionalViewHolder holder, int position) {
         Profissional profissional = profissionais.get(position);
         holder.bindData(profissional, listener);
     }

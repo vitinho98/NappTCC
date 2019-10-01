@@ -82,7 +82,7 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    private class isAtivo extends AsyncTask<RequestHttp, String, String> {
+    private class isAtivo extends AsyncTask<RequestHttp, Void, Boolean> {
 
         @Override
         protected void onPreExecute() {
@@ -90,7 +90,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(RequestHttp... params) {
+        protected Boolean doInBackground(RequestHttp... params) {
 
             try {
 
@@ -105,12 +105,12 @@ public class SplashActivity extends AppCompatActivity {
                 ativo = false;
             }
 
-            return conteudo;
+            return ativo;
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(Boolean b) {
+            super.onPostExecute(b);
 
             if (ativo) {
                 startActivity(new Intent(SplashActivity.this, MenuProfissionalActivity.class));

@@ -120,7 +120,7 @@ public class CadastroHorario extends AppCompatActivity {
 
     public void inserirAgendaProfissional(Horario agendaProfissional) {
 
-        String uri = "http://vitorsilva.xyz/napp/agendaProfissional/inserirAgendaProfissional.php";
+        String uri = "http://vitorsilva.xyz/napp/horarioProfissional/inserirHorarioProfissional.php";
         RequestHttp requestHttp = new RequestHttp();
         InserirAgendaProfissional task = new InserirAgendaProfissional();
 

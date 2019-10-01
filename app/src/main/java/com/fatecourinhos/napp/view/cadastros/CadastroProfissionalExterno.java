@@ -226,7 +226,6 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
                     campoAtuacaoCA.setNomeCampoAtuacao(getIntent().getExtras().getString("nomeC"));
                     profissionalExterno.setFkCampoAtuacao(campoAtuacaoCA);
 
-                    System.out.println(campoAtuacaoCA.getIdCampoAtuacao() + " " + campoAtuacaoCA.getNomeCampoAtuacao());
                     for (CampoAtuacao campoAtuacao : camposAtuacao)
                         if (campoAtuacao.getNomeCampoAtuacao().equals(campoAtuacaoCA.getNomeCampoAtuacao()))
                             spinnerCampoAtuacao.setSelection(adapterCampoAtuacao.getPosition(campoAtuacaoCA.getNomeCampoAtuacao()));
@@ -291,14 +290,12 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             if (spinnerResponsavel.getSelectedItem().equals(responsavel.getNomeResponsavel()))
                 profissionalExterno.setFkResponsavel(responsavel);
 
-        if (conferirDados(profissionalExterno)) {
-
+        if (conferirDados(profissionalExterno))
             if (inserir)
                 inserirProfissionalExterno(profissionalExterno);
             else
                 alterarProfissionalExterno(profissionalExterno);
-
-        } else
+        else
             Toast.makeText(this, "Insira todos os campos corretamente!", Toast.LENGTH_LONG);
 
     }

@@ -35,14 +35,14 @@ public class ResponsavelAdapter extends RecyclerView.Adapter<ResponsavelViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ResponsavelViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ResponsavelViewHolder holder, int position) {
         Responsavel responsavel = responsaveis.get(position);
         holder.bindData(responsavel, listener);
     }
 
     @Override
     public int getItemCount() {
-        if(responsaveis != null)
+        if (responsaveis != null)
             return responsaveis.size();
         else
             return 0;

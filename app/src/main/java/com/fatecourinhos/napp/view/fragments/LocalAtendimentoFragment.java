@@ -123,7 +123,7 @@ public class LocalAtendimentoFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(final List<LocalAtendimento> locaisAtendimento) {
+        protected void onPostExecute(List<LocalAtendimento> locaisAtendimento) {
             super.onPostExecute(locaisAtendimento);
 
             localAtendimentoAdapter = new LocalAtendimentoAdapter(locaisAtendimento, listener);

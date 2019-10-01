@@ -36,8 +36,8 @@ public class DiagnosticoAdapter extends RecyclerView.Adapter<DiagnosticoViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DiagnosticoViewHolder holder, final int position) {
-        Diagnostico diagnostico = this.diagnosticos.get(position);
+    public void onBindViewHolder(@NonNull DiagnosticoViewHolder holder, int position) {
+        Diagnostico diagnostico = diagnosticos.get(position);
         holder.bindData(diagnostico, listener);
     }
 

@@ -35,7 +35,7 @@ public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimen
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LocalAtendimentoViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull LocalAtendimentoViewHolder holder, int position) {
         LocalAtendimento localAtendimento = locaisAtendimento.get(position);
         holder.bindData(localAtendimento, listener);
     }

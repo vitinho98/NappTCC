@@ -45,7 +45,7 @@ public class DiagnosticoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
 
-        getActivity().setTitle("Diagnosticos");
+        getActivity().setTitle("Diagnósticos");
         view = inflater.inflate(R.layout.fragment_diagnostico,container,false);
         context = view.getContext();
         viewHolder = new ViewHolder();
@@ -122,7 +122,7 @@ public class DiagnosticoFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(final List<Diagnostico> diagnosticos) {
+        protected void onPostExecute(List<Diagnostico> diagnosticos) {
             super.onPostExecute(diagnosticos);
 
             diagnosticoAdapter = new DiagnosticoAdapter(diagnosticos, listener);

@@ -134,7 +134,7 @@ public class CampoAtuacaoFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(final List<CampoAtuacao> camposAtuacao) {
+        protected void onPostExecute(List<CampoAtuacao> camposAtuacao) {
             super.onPostExecute(camposAtuacao);
 
             campoAtuacaoAdapter = new CampoAtuacaoAdapter(camposAtuacao, listener);

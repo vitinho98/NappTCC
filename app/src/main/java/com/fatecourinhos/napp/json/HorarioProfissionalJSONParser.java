@@ -41,7 +41,7 @@ public class HorarioProfissionalJSONParser {
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia), Integer.parseInt(hora), Integer.parseInt(minuto));
 
-                agendaProfissional.setIdAgendaProfissional(jsonObject.getInt("idAgendaProfissional"));
+                agendaProfissional.setIdAgendaProfissional(jsonObject.getInt("idHorarioProfissional"));
                 agendaProfissional.setData(calendar.getTime());
 
                 agendaProfissionalList.add(agendaProfissional);

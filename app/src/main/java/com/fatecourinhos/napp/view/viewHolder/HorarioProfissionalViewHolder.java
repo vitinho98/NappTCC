@@ -26,25 +26,25 @@ public class HorarioProfissionalViewHolder extends RecyclerView.ViewHolder {
         this.textViewHora = itemView.findViewById(R.id.txt_horario_lista);
     }
 
-    public void bindData(final Horario agendaProfissional, final OnHorarioProfissionalnteractionListener listener) {
+    public void bindData(final Horario horario, final OnHorarioProfissionalnteractionListener listener) {
 
         SimpleDateFormat dataFormater = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat horaFormater = new SimpleDateFormat("hh:mm");
 
-        textViewData.setText(dataFormater.format(agendaProfissional.getData()));
-        textViewHora.setText(horaFormater.format(agendaProfissional.getData()));
+        textViewData.setText(dataFormater.format(horario.getData()));
+        textViewHora.setText(horaFormater.format(horario.getData()));
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onListClick(agendaProfissional);
+                listener.onListClick(horario);
             }
         });
 
         cardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                listener.onDeleteClick(agendaProfissional);
+                listener.onDeleteClick(horario);
                 return true;
             }
         });

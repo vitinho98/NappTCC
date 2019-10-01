@@ -17,11 +17,11 @@ import java.util.List;
 
 public class HorarioProfissionalAdapter extends RecyclerView.Adapter<HorarioProfissionalViewHolder> {
 
-    private List<Horario> agendaProfissional;
+    private List<Horario> horarios;
     private OnHorarioProfissionalnteractionListener listener;
 
-    public HorarioProfissionalAdapter(List<Horario> agendaProfissional, OnHorarioProfissionalnteractionListener listener) {
-        this.agendaProfissional = agendaProfissional;
+    public HorarioProfissionalAdapter(List<Horario> horarios, OnHorarioProfissionalnteractionListener listener) {
+        this.horarios = horarios;
         this.listener = listener;
     }
 
@@ -36,16 +36,16 @@ public class HorarioProfissionalAdapter extends RecyclerView.Adapter<HorarioProf
 
     @Override
     public void onBindViewHolder(@NonNull HorarioProfissionalViewHolder holder, int position) {
-        Horario agendaProfissional = this.agendaProfissional.get(position);
-        holder.bindData(agendaProfissional, listener);
+        Horario horarioProfissional = horarios.get(position);
+        holder.bindData(horarioProfissional, listener);
     }
 
     @Override
     public int getItemCount() {
-        if (agendaProfissional == null)
-            return 0;
+        if (horarios != null)
+            return horarios.size();
         else
-            return agendaProfissional.size();
+            return 0;
     }
 
 }
