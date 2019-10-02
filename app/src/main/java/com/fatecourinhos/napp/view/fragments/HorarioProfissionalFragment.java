@@ -86,7 +86,7 @@ public class HorarioProfissionalFragment extends Fragment {
             }
         };
 
-        preferences = this.getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
+        preferences = getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
         if (preferences.contains("idProfissional"))
             id = preferences.getInt("idProfissional", 0);
 
@@ -101,7 +101,7 @@ public class HorarioProfissionalFragment extends Fragment {
 
     private void selecionarAgendaProfissional(int id) {
 
-        String uri = "http://vitorsilva.xyz/napp/agendaProfissional/selecionarAgendaProfissional.php";
+        String uri = "http://vitorsilva.xyz/napp/horarioProfissional/selecionarHorarioProfissional.php";
         RequestHttp requestHttp = new RequestHttp();
         SelecionarAgendaProfissional mytask = new SelecionarAgendaProfissional();
 
@@ -146,7 +146,7 @@ public class HorarioProfissionalFragment extends Fragment {
 
     private void excluirAgendaProfissional(int id) {
 
-        String uri = "http://vitorsilva.xyz/napp/agendaProfissional/excluirAgendaProfissional.php";
+        String uri = "http://vitorsilva.xyz/napp/horarioProfissional/excluirHorarioProfissional.php";
         RequestHttp requestHttp = new RequestHttp();
         ExcluirAgendaProfissional mytask = new ExcluirAgendaProfissional();
 

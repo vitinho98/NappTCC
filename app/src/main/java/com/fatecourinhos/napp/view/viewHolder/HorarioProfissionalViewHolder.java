@@ -29,7 +29,7 @@ public class HorarioProfissionalViewHolder extends RecyclerView.ViewHolder {
     public void bindData(final Horario horario, final OnHorarioProfissionalnteractionListener listener) {
 
         SimpleDateFormat dataFormater = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat horaFormater = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat horaFormater = new SimpleDateFormat("HH:mm");
 
         textViewData.setText(dataFormater.format(horario.getData()));
         textViewHora.setText(horaFormater.format(horario.getData()));

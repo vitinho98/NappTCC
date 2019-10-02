@@ -10,7 +10,6 @@ public class Profissional {
     private String celularProfissional;
     private String emailProfissional;
     private Usuario fkUsuario;
-    private List<Date> horarios;
 
     public Profissional() {
 
@@ -54,14 +53,6 @@ public class Profissional {
 
     public void setFkUsuario(Usuario fkUsuario) {
         this.fkUsuario = fkUsuario;
-    }
-
-    public List<Date> getHorarios() {
-        return horarios;
-    }
-
-    public void setHorarios(List<Date> horarios) {
-        this.horarios = horarios;
     }
 
 }
