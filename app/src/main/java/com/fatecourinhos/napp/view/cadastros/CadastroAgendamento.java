@@ -36,8 +36,10 @@ public class CadastroAgendamento extends AppCompatActivity {
     List<Horario> agendaProfissional;
     Spinner spinner;
     String conteudo;
+    boolean sucesso;
     List<Profissional> profissionais = new ArrayList<>();
     List<String> nomes = new ArrayList<>();
+    List<String> ids = new ArrayList<>();
     ProgressBar pgBarAgendaAluno;
 
 
@@ -51,11 +53,7 @@ public class CadastroAgendamento extends AppCompatActivity {
         listener = new OnHorarioProfissionalnteractionListener() {
             @Override
             public void onListClick(Horario agendaProfissional){
-                pgBarAgendaAluno.setVisibility(View.VISIBLE);
-                Profissional profissional = new Profissional();
-                //PEGAR O ID E CADASTRAR O HORARIO NO BAAANCO
-                Toast.makeText(CadastroAgendamento.this, spinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-
+                cadastrarAgendamento(profissionais.get(spinner.getSelectedItemPosition()).getIdProfissional());
             }
 
             @Override
@@ -74,6 +72,7 @@ public class CadastroAgendamento extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 selecionarDatas(profissionais.get(spinner.getSelectedItemPosition()).getIdProfissional());
+
             }
 
             @Override
@@ -89,7 +88,6 @@ public class CadastroAgendamento extends AppCompatActivity {
         String uri = "http://vitorsilva.xyz/napp/agendamento/selecionarDatas.php";
         SelecionarDatas mytask = new SelecionarDatas();
         RequestHttp requestHttp = new RequestHttp();
-
         requestHttp.setUrl(uri);
         requestHttp.setMetodo("GET");
         requestHttp.setParametro("id", String.valueOf(id));
@@ -138,6 +136,19 @@ public class CadastroAgendamento extends AppCompatActivity {
 
     }
 
+    private void cadastrarAgendamento(Integer id){
+        String uri = "http://vitorsilva.xyz/napp/agendamento/cadastrarAgendamento.php";
+        CadastrarAgendamento mytask = new CadastrarAgendamento();
+        RequestHttp requestHttp = new RequestHttp();
+
+        requestHttp.setUrl(uri);
+        requestHttp.setMetodo("GET");
+        requestHttp.setParametro("id", String.valueOf(id));
+
+        pgBarAgendaAluno.setVisibility(View.VISIBLE);
+        mytask.execute(requestHttp);
+    }
+
     private class SelecionarProfissionais extends AsyncTask<String, String, List<Profissional>> {
 
         @Override
@@ -162,12 +173,55 @@ public class CadastroAgendamento extends AppCompatActivity {
         protected void onPostExecute(List<Profissional> profissionais) {
             super.onPostExecute(profissionais);
 
-            for (Profissional profissional : profissionais)
+            for (Profissional profissional : profissionais) {
                 nomes.add(profissional.getNomeProfissional());
+                ids.add(String.valueOf(profissional.getIdProfissional()));
+            }
+
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, nomes);
             spinner.setAdapter(adapter);
 
+        }
+
+    }
+
+    private class CadastrarAgendamento extends AsyncTask<RequestHttp, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @Override
+        protected String doInBackground(RequestHttp... params) {
+
+            try {
+
+                conteudo =  HttpManager.getDados(params[0]);
+
+                if (conteudo.contains("Sucesso"))
+                    sucesso = true;
+                else
+                    sucesso = false;
+
+            } catch (Exception e) {
+                sucesso = false;
+            }
+
+            return conteudo;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (sucesso) {
+                Toast.makeText(getApplicationContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                finish();
+            } else
+                Toast.makeText(getApplicationContext(), "Erro ao cadastrar", Toast.LENGTH_SHORT).show();
         }
 
     }
