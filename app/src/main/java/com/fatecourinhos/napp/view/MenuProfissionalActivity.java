@@ -83,6 +83,7 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
 
                     case("HORARIO"):
                         startActivity(new Intent(MenuProfissionalActivity.this, CadastroHorario.class));
+                        break;
 
                     case("LOCAL"):
                         startActivity(new Intent(MenuProfissionalActivity.this, CadastroLocalAtendimento.class));

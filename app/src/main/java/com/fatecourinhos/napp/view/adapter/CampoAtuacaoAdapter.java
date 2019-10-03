@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,15 +15,19 @@ import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
 import com.fatecourinhos.napp.view.viewHolder.CampoAtuacaoViewHolder;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHolder> {
+public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHolder> implements Filterable {
 
     private List<CampoAtuacao> camposAtuacao;
+    private List<CampoAtuacao> camposAtuacaoFull;
     private OnCampoAtuacaoInteractionListener listener;
 
     public CampoAtuacaoAdapter(List<CampoAtuacao> camposAtuacao, OnCampoAtuacaoInteractionListener listener) {
         this.camposAtuacao = camposAtuacao;
+        camposAtuacaoFull = new ArrayList<>(camposAtuacao);
         this.listener = listener;
     }
 
@@ -35,17 +41,53 @@ public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CampoAtuacaoViewHolder holder, final int position) {
-        CampoAtuacao campoAtuacao = this.camposAtuacao.get(position);
+    public void onBindViewHolder(@NonNull CampoAtuacaoViewHolder holder, int position) {
+        CampoAtuacao campoAtuacao = camposAtuacao.get(position);
         holder.bindData(campoAtuacao, listener);
     }
 
     @Override
     public int getItemCount() {
-        if (this.camposAtuacao == null)
-            return 0;
+        if (camposAtuacao != null)
+            return camposAtuacao.size();
         else
-            return this.camposAtuacao.size();
+            return 0;
     }
+
+    @Override
+    public Filter getFilter() {
+        return filtro;
+    }
+
+    private Filter filtro = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<CampoAtuacao> listaFiltrada = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0) {
+                listaFiltrada.addAll(camposAtuacaoFull);
+            } else {
+                String filtro = charSequence.toString().toLowerCase().trim();
+
+                for (CampoAtuacao campoAtuacao : camposAtuacaoFull) {
+
+                    if (campoAtuacao.getNomeCampoAtuacao().toLowerCase().contains(charSequence)){
+                        listaFiltrada.add(campoAtuacao);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = listaFiltrada;
+
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            camposAtuacao.clear();
+            camposAtuacao.addAll((List<CampoAtuacao>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
 }

@@ -125,7 +125,7 @@ public class ResponsavelFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(final List<Responsavel> responsaveis) {
+        protected void onPostExecute(List<Responsavel> responsaveis) {
             super.onPostExecute(responsaveis);
 
             responsavelAdapter = new ResponsavelAdapter(responsaveis, listener);

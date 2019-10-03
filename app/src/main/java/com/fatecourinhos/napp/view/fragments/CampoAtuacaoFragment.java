@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
@@ -34,6 +35,7 @@ public class CampoAtuacaoFragment extends Fragment {
     private List<CampoAtuacao> camposAtuacao;
 
     //componentes da tela
+    private SearchView searchView;
     private OnCampoAtuacaoInteractionListener listener;
     private ViewHolder viewHolder;
     private CampoAtuacaoAdapter campoAtuacaoAdapter;
@@ -47,6 +49,19 @@ public class CampoAtuacaoFragment extends Fragment {
         getActivity().setTitle("Campos de Atuação");
         view = inflater.inflate(R.layout.fragment_area_atuacao,container,false);
         context = view.getContext();
+        searchView = view.findViewById(R.id.search_view_campo_atuacao);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                campoAtuacaoAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
         viewHolder = new ViewHolder();
 
         viewHolder.recyclerViewCampoAtuacao = view.findViewById(R.id.recycler_view_area_atuacao);
@@ -134,7 +149,7 @@ public class CampoAtuacaoFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(final List<CampoAtuacao> camposAtuacao) {
+        protected void onPostExecute(List<CampoAtuacao> camposAtuacao) {
             super.onPostExecute(camposAtuacao);
 
             campoAtuacaoAdapter = new CampoAtuacaoAdapter(camposAtuacao, listener);

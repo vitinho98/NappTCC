@@ -1,5 +1,6 @@
 package com.fatecourinhos.napp.view.cadastros;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
@@ -21,6 +22,7 @@ import com.fatecourinhos.napp.util.RequestHttp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class CadastroHorario extends AppCompatActivity {
@@ -28,9 +30,10 @@ public class CadastroHorario extends AppCompatActivity {
     //variaveis globais
     private SharedPreferences preferences;
     private Profissional profissional;
-    private Horario agendaProfissional;
+    private Horario horario;
     private String conteudo;
     private boolean sucesso;
+    private Calendar calendar;
 
     //componentes da tela
     private Button btnCadastrar;
@@ -41,7 +44,8 @@ public class CadastroHorario extends AppCompatActivity {
     //formatadores de data
     private SimpleDateFormat formatDataHora = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private SimpleDateFormat formatData = new SimpleDateFormat("dd/MM/yyyy");
-    private SimpleDateFormat formatHora = new SimpleDateFormat("hh:mm");
+    private SimpleDateFormat formatHora = new SimpleDateFormat("HH:mm");
+    private SimpleDateFormat formatDiferenciado = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +55,9 @@ public class CadastroHorario extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
 
-            agendaProfissional.setData((Date) getIntent().getExtras().get("dataHora"));
-            calendario.setDate(agendaProfissional.getData().getTime());
-            editTextHorario.setText(formatHora.format(agendaProfissional.getData()));
+            horario.setData((Date) getIntent().getExtras().get("dataHora"));
+            calendario.setDate(horario.getData().getTime());
+            editTextHorario.setText(formatHora.format(horario.getData()));
 
         } else {
 
@@ -64,24 +68,19 @@ public class CadastroHorario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (preferences.contains("idProfissional"))
-                    profissional.setIdProfissional(preferences.getInt("idProfissional", 0));
+                if (!editTextHorario.getText().toString().isEmpty()) {
 
-                String data = formatData.format(new Date(calendario.getDate()));
-                String hora = editTextHorario.getText().toString();
+                    if (preferences.contains("idProfissional"))
+                        profissional.setIdProfissional(preferences.getInt("idProfissional", 0));
 
-                try {
+                    horario.setFkProfissional(profissional);
+                    horario.setData(calendar.getTime());
+                    System.out.println(formatDiferenciado.format(horario.getData()));
 
-                    agendaProfissional.setFkProfissional(profissional);
-                    agendaProfissional.setData(formatDataHora.parse(data + " " + hora));
-                    System.out.println(formatDataHora.format(agendaProfissional.getData()));
+                    inserirAgendaProfissional(horario);
 
-                } catch (ParseException e) {
-                    agendaProfissional.setData(null);
-                }
-
-                inserirAgendaProfissional(agendaProfissional);
-
+                } else
+                    Toast.makeText(getApplicationContext(), "Insira o horário!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -92,7 +91,9 @@ public class CadastroHorario extends AppCompatActivity {
                 timePickerDialog = new TimePickerDialog(CadastroHorario.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        editTextHorario.setText(String.format("%02d",hourOfDay) + ":" + String.format("%02d", minute));
+                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendar.set(Calendar.MINUTE, minute);
+                        editTextHorario.setText(String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute));
                     }
                 }, 23, 06, true);
 
@@ -107,26 +108,33 @@ public class CadastroHorario extends AppCompatActivity {
 
         preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
 
+        calendar = Calendar.getInstance();
+        horario = new Horario();
+        profissional = new Profissional();
+
         editTextHorario = findViewById(R.id.edit_text_hora);
         btnCadastrar = findViewById(R.id.btn_salvar_horario);
 
         calendario = findViewById(R.id.calendarView);
         calendario.setMinDate(System.currentTimeMillis());
-
-        agendaProfissional = new Horario();
-        profissional = new Profissional();
+        calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                calendar.set(year, month, dayOfMonth);
+            }
+        });
 
     }
 
     public void inserirAgendaProfissional(Horario agendaProfissional) {
 
-        String uri = "http://vitorsilva.xyz/napp/agendaProfissional/inserirAgendaProfissional.php";
+        String uri = "http://vitorsilva.xyz/napp/horarioProfissional/inserirHorarioProfissional.php";
         RequestHttp requestHttp = new RequestHttp();
         InserirAgendaProfissional task = new InserirAgendaProfissional();
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-        requestHttp.setParametro("data", formatDataHora.format(agendaProfissional.getData()));
+        requestHttp.setParametro("data", formatDiferenciado.format(agendaProfissional.getData()));
         requestHttp.setParametro("idProfissional", String.valueOf(agendaProfissional.getFkProfissional().getIdProfissional()));
 
         task.execute(requestHttp);

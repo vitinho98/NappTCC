@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.service.voice.VoiceInteractionService;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -241,7 +242,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //tarefa assincrona que recebe os dados do banco de dados
-    private class autenticarUsuario extends AsyncTask<RequestHttp, String, String> {
+    private class autenticarUsuario extends AsyncTask<RequestHttp, Void, String> {
 
         @Override
         protected void onPreExecute() {

@@ -36,7 +36,7 @@ public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlu
 
     @Override
     public void onBindViewHolder(@NonNull AgendamentoAlunoViewHolder holder, int position) {
-        Agendamento agendamento = this.agendamentos.get(position);
+        Agendamento agendamento = agendamentos.get(position);
         holder.bindData(agendamento, listener);
     }
 
