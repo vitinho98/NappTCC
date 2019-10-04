@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 
 import com.fatecourinhos.napp.R;
@@ -33,6 +35,8 @@ public class ProfissionalFragment extends Fragment {
     private List<Profissional> profissionais;
 
     //componentes da tela
+    private SearchView searchView;
+    private ProgressBar progressBar;
     private OnProfissionalInteractionListener listener;
     private ProfissionalAdapter profissionalAdapter;
     private ViewHolder viewHolder;
@@ -47,6 +51,21 @@ public class ProfissionalFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_profissional,container,false);
         context = view.getContext();
         viewHolder = new ViewHolder();
+
+        progressBar = view.findViewById(R.id.progressBarProfissional);
+        searchView = view.findViewById(R.id.searchViewProfissional);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                profissionalAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
 
         viewHolder.recyclerViewProfissionais = view.findViewById(R.id.recycler_view_profissional);
         viewHolder.recyclerViewProfissionais.setLayoutManager(new LinearLayoutManager(context));
@@ -101,6 +120,7 @@ public class ProfissionalFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -122,6 +142,7 @@ public class ProfissionalFragment extends Fragment {
 
             profissionalAdapter = new ProfissionalAdapter(profissionais, listener);
             viewHolder.recyclerViewProfissionais.setAdapter(profissionalAdapter);
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
     }

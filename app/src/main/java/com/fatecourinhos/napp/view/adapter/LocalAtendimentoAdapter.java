@@ -4,24 +4,29 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.LocalAtendimento;
 import com.fatecourinhos.napp.view.listener.OnLocalAtendimentoInteractionListener;
 import com.fatecourinhos.napp.view.viewHolder.LocalAtendimentoViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimentoViewHolder> {
+public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimentoViewHolder> implements Filterable {
 
     private List<LocalAtendimento> locaisAtendimento;
+    private List<LocalAtendimento> locaisAtendimentoCompleto;
     private OnLocalAtendimentoInteractionListener listener;
 
     public LocalAtendimentoAdapter(List<LocalAtendimento> locaisAtendimento, OnLocalAtendimentoInteractionListener listener) {
         this.locaisAtendimento = locaisAtendimento;
+        this.locaisAtendimentoCompleto = new ArrayList<>(locaisAtendimento);
         this.listener = listener;
     }
 
@@ -47,5 +52,39 @@ public class LocalAtendimentoAdapter extends RecyclerView.Adapter<LocalAtendimen
         else
             return 0;
     }
+
+    @Override
+    public Filter getFilter() {
+        return filtro;
+    }
+
+    private Filter filtro = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+
+            List<LocalAtendimento> listaFiltrada = new ArrayList<>();
+
+            if (charSequence == null || charSequence.length() == 0)
+                listaFiltrada.addAll(locaisAtendimentoCompleto);
+
+            else
+                for (LocalAtendimento localAtendimento : locaisAtendimentoCompleto)
+                    if (localAtendimento.getNomeLocal().toLowerCase().contains(charSequence)
+                            || localAtendimento.getNomeBloco().toLowerCase().contains(charSequence))
+                        listaFiltrada.add(localAtendimento);
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = listaFiltrada;
+
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            locaisAtendimento.clear();
+            locaisAtendimento.addAll((List<LocalAtendimento>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
 }

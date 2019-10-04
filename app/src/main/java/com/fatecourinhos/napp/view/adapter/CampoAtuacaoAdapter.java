@@ -16,18 +16,17 @@ import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
 import com.fatecourinhos.napp.view.viewHolder.CampoAtuacaoViewHolder;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHolder> implements Filterable {
 
     private List<CampoAtuacao> camposAtuacao;
-    private List<CampoAtuacao> camposAtuacaoFull;
+    private List<CampoAtuacao> camposAtuacaoCompleta;
     private OnCampoAtuacaoInteractionListener listener;
 
     public CampoAtuacaoAdapter(List<CampoAtuacao> camposAtuacao, OnCampoAtuacaoInteractionListener listener) {
         this.camposAtuacao = camposAtuacao;
-        camposAtuacaoFull = new ArrayList<>(camposAtuacao);
+        this.camposAtuacaoCompleta = new ArrayList<>(camposAtuacao);
         this.listener = listener;
     }
 
@@ -62,19 +61,16 @@ public class CampoAtuacaoAdapter extends RecyclerView.Adapter<CampoAtuacaoViewHo
     private Filter filtro = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
+
             List<CampoAtuacao> listaFiltrada = new ArrayList<>();
-            if (charSequence == null || charSequence.length() == 0) {
-                listaFiltrada.addAll(camposAtuacaoFull);
-            } else {
-                String filtro = charSequence.toString().toLowerCase().trim();
 
-                for (CampoAtuacao campoAtuacao : camposAtuacaoFull) {
+            if (charSequence == null || charSequence.length() == 0)
+                listaFiltrada.addAll(camposAtuacaoCompleta);
 
-                    if (campoAtuacao.getNomeCampoAtuacao().toLowerCase().contains(charSequence)){
+            else
+                for (CampoAtuacao campoAtuacao : camposAtuacaoCompleta)
+                    if (campoAtuacao.getNomeCampoAtuacao().toLowerCase().contains(charSequence))
                         listaFiltrada.add(campoAtuacao);
-                    }
-                }
-            }
 
             FilterResults filterResults = new FilterResults();
             filterResults.values = listaFiltrada;

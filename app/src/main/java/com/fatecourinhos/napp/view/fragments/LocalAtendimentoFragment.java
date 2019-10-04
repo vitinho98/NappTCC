@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
@@ -36,6 +38,8 @@ public class LocalAtendimentoFragment extends Fragment {
     private List<LocalAtendimento> locaisAtendimento;
 
     //componentes da tela
+    private SearchView searchView;
+    private ProgressBar progressBar;
     private OnLocalAtendimentoInteractionListener listener;
     private ViewHolder viewHolder;
     private LocalAtendimentoAdapter localAtendimentoAdapter;
@@ -50,6 +54,21 @@ public class LocalAtendimentoFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_local_atendimento,container,false);
         context = view.getContext();
         viewHolder = new ViewHolder();
+
+        progressBar = view.findViewById(R.id.progressBarLocalAtendimento);
+        searchView = view.findViewById(R.id.searchViewLocalAtendimento);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                localAtendimentoAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
 
         viewHolder.recyclerViewLocaisAtendimento = view.findViewById(R.id.recycler_view_local_atendimento);
         viewHolder.recyclerViewLocaisAtendimento.setLayoutManager(new LinearLayoutManager(context));
@@ -107,6 +126,7 @@ public class LocalAtendimentoFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -128,6 +148,7 @@ public class LocalAtendimentoFragment extends Fragment {
 
             localAtendimentoAdapter = new LocalAtendimentoAdapter(locaisAtendimento, listener);
             viewHolder.recyclerViewLocaisAtendimento.setAdapter(localAtendimentoAdapter);
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
     }

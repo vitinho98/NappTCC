@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,15 +15,18 @@ import com.fatecourinhos.napp.model.Diagnostico;
 import com.fatecourinhos.napp.view.listener.OnDiagnosticoInteractionListener;
 import com.fatecourinhos.napp.view.viewHolder.DiagnosticoViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class DiagnosticoAdapter extends RecyclerView.Adapter<DiagnosticoViewHolder> {
+public class DiagnosticoAdapter extends RecyclerView.Adapter<DiagnosticoViewHolder> implements Filterable {
 
     private List<Diagnostico> diagnosticos;
+    private List<Diagnostico> diagnosticosCompleto;
     private OnDiagnosticoInteractionListener listener;
 
     public DiagnosticoAdapter(List<Diagnostico> diagnosticos, OnDiagnosticoInteractionListener listener) {
         this.diagnosticos = diagnosticos;
+        this.diagnosticosCompleto = new ArrayList<>(diagnosticos);
         this.listener = listener;
     }
 
@@ -49,4 +54,37 @@ public class DiagnosticoAdapter extends RecyclerView.Adapter<DiagnosticoViewHold
             return 0;
     }
 
+    @Override
+    public Filter getFilter() {
+        return filtro;
+    }
+
+    private Filter filtro = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+
+            List<Diagnostico> listaFiltrada = new ArrayList<>();
+
+            if (charSequence == null || charSequence.length() == 0)
+                listaFiltrada.addAll(diagnosticosCompleto);
+
+            else
+                for (Diagnostico diagnostico : diagnosticosCompleto)
+                    if (diagnostico.getNomeDiagnostico().toLowerCase().contains(charSequence))
+                        listaFiltrada.add(diagnostico);
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = listaFiltrada;
+
+            return filterResults;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            diagnosticos.clear();
+            diagnosticos.addAll((List<Diagnostico>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }

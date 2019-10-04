@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class CampoAtuacaoFragment extends Fragment {
     private List<CampoAtuacao> camposAtuacao;
 
     //componentes da tela
+    private ProgressBar progressBar;
     private SearchView searchView;
     private OnCampoAtuacaoInteractionListener listener;
     private ViewHolder viewHolder;
@@ -49,6 +51,9 @@ public class CampoAtuacaoFragment extends Fragment {
         getActivity().setTitle("Campos de Atuação");
         view = inflater.inflate(R.layout.fragment_area_atuacao,container,false);
         context = view.getContext();
+        viewHolder = new ViewHolder();
+
+        progressBar = view.findViewById(R.id.progressBar_campo_atuacao);
         searchView = view.findViewById(R.id.search_view_campo_atuacao);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -62,7 +67,6 @@ public class CampoAtuacaoFragment extends Fragment {
                 return false;
             }
         });
-        viewHolder = new ViewHolder();
 
         viewHolder.recyclerViewCampoAtuacao = view.findViewById(R.id.recycler_view_area_atuacao);
         viewHolder.recyclerViewCampoAtuacao.setLayoutManager(new LinearLayoutManager(context));
@@ -133,6 +137,7 @@ public class CampoAtuacaoFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(ProgressBar.VISIBLE);
         }
 
         @Override
@@ -154,6 +159,7 @@ public class CampoAtuacaoFragment extends Fragment {
 
             campoAtuacaoAdapter = new CampoAtuacaoAdapter(camposAtuacao, listener);
             viewHolder.recyclerViewCampoAtuacao.setAdapter(campoAtuacaoAdapter);
+            progressBar.setVisibility(ProgressBar.INVISIBLE);
         }
 
     }

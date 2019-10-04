@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
@@ -35,6 +37,8 @@ public class ResponsavelFragment extends Fragment {
     private List<Responsavel> responsaveis;
 
     //componentes da tela
+    private SearchView searchView;
+    private ProgressBar progressBar;
     private ResponsavelAdapter responsavelAdapter;
     private OnResponsavelInteractionListener listener;
     private ViewHolder viewHolder;
@@ -49,6 +53,21 @@ public class ResponsavelFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_responsavel,container,false);
         context = view.getContext();
         viewHolder = new ViewHolder();
+
+        progressBar = view.findViewById(R.id.progressBarResponsavel);
+        searchView = view.findViewById(R.id.searchViewResponsavel);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                responsavelAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
 
         viewHolder.recyclerViewResponsaveis = view.findViewById(R.id.recycler_view_responsavel);
         viewHolder.recyclerViewResponsaveis.setLayoutManager(new LinearLayoutManager(context));
@@ -109,6 +128,7 @@ public class ResponsavelFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -130,6 +150,7 @@ public class ResponsavelFragment extends Fragment {
 
             responsavelAdapter = new ResponsavelAdapter(responsaveis, listener);
             viewHolder.recyclerViewResponsaveis.setAdapter(responsavelAdapter);
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
     }

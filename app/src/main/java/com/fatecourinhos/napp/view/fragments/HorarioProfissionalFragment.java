@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
@@ -39,6 +40,7 @@ public class HorarioProfissionalFragment extends Fragment {
     private List<Horario> horarios;
 
     //componentes da tela
+    private ProgressBar progressBar;
     private HorarioProfissionalAdapter horarioProfissionalAdapter;
     private OnHorarioProfissionalnteractionListener listener;
     private ViewHolder viewHolder;
@@ -53,6 +55,8 @@ public class HorarioProfissionalFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_horario_atendimento,container,false);
         context = view.getContext();
         viewHolder = new ViewHolder();
+
+        progressBar = view.findViewById(R.id.progressBarHorario);
 
         viewHolder.recyclerViewAgendaProfissional = view.findViewById(R.id.recycler_view_horario_atendimento);
         viewHolder.recyclerViewAgendaProfissional.setLayoutManager(new LinearLayoutManager(context));
@@ -78,7 +82,7 @@ public class HorarioProfissionalFragment extends Fragment {
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                excluirAgendaProfissional(horario.getIdAgendaProfissional());
+                                excluirHorarioProfissional(horario.getIdAgendaProfissional());
                             }
                         })
                         .setNeutralButton("Não", null)
@@ -96,14 +100,14 @@ public class HorarioProfissionalFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        selecionarAgendaProfissional(id);
+        selecionarHorarioProfissional(id);
     }
 
-    private void selecionarAgendaProfissional(int id) {
+    private void selecionarHorarioProfissional(int id) {
 
         String uri = "http://vitorsilva.xyz/napp/horarioProfissional/selecionarHorarioProfissional.php";
         RequestHttp requestHttp = new RequestHttp();
-        SelecionarAgendaProfissional mytask = new SelecionarAgendaProfissional();
+        SelecionarHorarioProfissional mytask = new SelecionarHorarioProfissional();
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
@@ -113,11 +117,12 @@ public class HorarioProfissionalFragment extends Fragment {
 
     }
 
-    private class SelecionarAgendaProfissional extends AsyncTask<RequestHttp, String, List<Horario>> {
+    private class SelecionarHorarioProfissional extends AsyncTask<RequestHttp, String, List<Horario>> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -140,15 +145,16 @@ public class HorarioProfissionalFragment extends Fragment {
 
             horarioProfissionalAdapter = new HorarioProfissionalAdapter(horarios, listener);
             viewHolder.recyclerViewAgendaProfissional.setAdapter(horarioProfissionalAdapter);
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
     }
 
-    private void excluirAgendaProfissional(int id) {
+    private void excluirHorarioProfissional(int id) {
 
         String uri = "http://vitorsilva.xyz/napp/horarioProfissional/excluirHorarioProfissional.php";
         RequestHttp requestHttp = new RequestHttp();
-        ExcluirAgendaProfissional mytask = new ExcluirAgendaProfissional();
+        ExcluirHorarioProfissional mytask = new ExcluirHorarioProfissional();
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
@@ -158,7 +164,7 @@ public class HorarioProfissionalFragment extends Fragment {
 
     }
 
-    private class ExcluirAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
+    private class ExcluirHorarioProfissional extends AsyncTask<RequestHttp, String, String> {
 
         @Override
         protected void onPreExecute() {
@@ -183,7 +189,7 @@ public class HorarioProfissionalFragment extends Fragment {
 
             if (conteudo.contains("Sucesso")) {
                 Toast.makeText(view.getContext(), "Excluído com sucesso", Toast.LENGTH_SHORT).show();
-                selecionarAgendaProfissional(id);
+                selecionarHorarioProfissional(id);
             } else
                 Toast.makeText(view.getContext(),"Erro ao excluir", Toast.LENGTH_SHORT).show();
         }

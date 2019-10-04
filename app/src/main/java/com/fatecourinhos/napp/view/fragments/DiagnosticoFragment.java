@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -35,6 +37,8 @@ public class DiagnosticoFragment extends Fragment {
     private List<Diagnostico> diagnosticos;
 
     //componentes da tela
+    private SearchView searchView;
+    private ProgressBar progressBar;
     private ViewHolder viewHolder;
     private OnDiagnosticoInteractionListener listener;
     private DiagnosticoAdapter diagnosticoAdapter;
@@ -49,6 +53,21 @@ public class DiagnosticoFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_diagnostico,container,false);
         context = view.getContext();
         viewHolder = new ViewHolder();
+
+        progressBar = view.findViewById(R.id.progressBarDiagnostico);
+        searchView = view.findViewById(R.id.search_view_diagnostico);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                diagnosticoAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
 
         viewHolder.recyclerViewDiagnosticos = view.findViewById(R.id.recycler_view_diagnostico);
         viewHolder.recyclerViewDiagnosticos.setLayoutManager(new LinearLayoutManager(context));
@@ -106,6 +125,7 @@ public class DiagnosticoFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -127,6 +147,7 @@ public class DiagnosticoFragment extends Fragment {
 
             diagnosticoAdapter = new DiagnosticoAdapter(diagnosticos, listener);
             viewHolder.recyclerViewDiagnosticos.setAdapter(diagnosticoAdapter);
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
     }

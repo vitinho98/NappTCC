@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
@@ -35,6 +37,8 @@ public class ProfissionalExternoFragment extends Fragment {
     private List<ProfissionalExterno> profissionaisExterno;
 
     //componentes da tela
+    private SearchView searchView;
+    private ProgressBar progressBar;
     private ProfissionalExternoAdapter profissionalExternoAdapter;
     private OnProfissionalExternoInteractionListener listener;
     private ViewHolder viewHolder;
@@ -49,6 +53,21 @@ public class ProfissionalExternoFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_profissional_externo,container,false);
         context = view.getContext();
         viewHolder = new ViewHolder();
+
+        progressBar = view.findViewById(R.id.progressBarProfExterno);
+        searchView = view.findViewById(R.id.searchViewProfExterno);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                profissionalExternoAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
 
         viewHolder.recyclerViewProfissionaisExternos = view.findViewById(R.id.recycler_view_profissional_externo);
         viewHolder.recyclerViewProfissionaisExternos.setLayoutManager(new LinearLayoutManager(context));
@@ -119,6 +138,7 @@ public class ProfissionalExternoFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -140,6 +160,7 @@ public class ProfissionalExternoFragment extends Fragment {
 
             profissionalExternoAdapter = new ProfissionalExternoAdapter(profissionaisExterno, listener);
             viewHolder.recyclerViewProfissionaisExternos.setAdapter(profissionalExternoAdapter);
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
     }
