@@ -19,7 +19,7 @@ public class CadastroLocalAtendimento extends AppCompatActivity {
 
     //componentes da tela
     private AppCompatEditText editTextNomeBloco, editTextNomeLocal;
-    private Button botao;
+    private Button btnCadastrar;
 
     //variaveis gloabais
     private LocalAtendimento localAtendimento;
@@ -30,11 +30,7 @@ public class CadastroLocalAtendimento extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro_activity_local);
-
-        editTextNomeBloco = findViewById(R.id.edit_text_nome_bloco);
-        editTextNomeLocal = findViewById(R.id.edit_text_nome_sala);
-        botao = findViewById(R.id.btn_cadastrar_local);
-        localAtendimento = new LocalAtendimento();
+        getComponentes();
 
         if (getIntent().getExtras() != null) {
 
@@ -42,8 +38,8 @@ public class CadastroLocalAtendimento extends AppCompatActivity {
             editTextNomeBloco.setText(getIntent().getExtras().getString("nomeBloco"));
             editTextNomeLocal.setText(getIntent().getExtras().getString("nomeLocal"));
 
-            botao.setText(R.string.btn_salvar);
-            botao.setOnClickListener(new View.OnClickListener() {
+            btnCadastrar.setText(R.string.btn_salvar);
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -60,7 +56,7 @@ public class CadastroLocalAtendimento extends AppCompatActivity {
 
         } else {
 
-            botao.setOnClickListener(new View.OnClickListener() {
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -71,11 +67,18 @@ public class CadastroLocalAtendimento extends AppCompatActivity {
                         localAtendimento.setNomeBloco(editTextNomeBloco.getText().toString());
                         inserirLocalAtendimento(localAtendimento);
                     }
-
                 }
             });
-
         }
+    }
+
+    private void getComponentes() {
+
+        localAtendimento = new LocalAtendimento();
+
+        editTextNomeBloco = findViewById(R.id.edit_text_nome_bloco);
+        editTextNomeLocal = findViewById(R.id.edit_text_nome_sala);
+        btnCadastrar = findViewById(R.id.btn_cadastrar_local);
 
     }
 

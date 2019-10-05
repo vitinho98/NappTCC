@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Horario {
 
-    private int idAgendaProfissional;
+    private int idHorarioProfissional;
     private Date dataHora;
     private Profissional fkProfissional;
 
@@ -12,12 +12,12 @@ public class Horario {
 
     }
 
-    public int getIdAgendaProfissional() {
-        return idAgendaProfissional;
+    public int getIdHorarioProfissional() {
+        return idHorarioProfissional;
     }
 
-    public void setIdAgendaProfissional(int idAgendaProfissional) {
-        this.idAgendaProfissional = idAgendaProfissional;
+    public void setIdHorarioProfissional(int idHorarioProfissional) {
+        this.idHorarioProfissional = idHorarioProfissional;
     }
 
     public Date getData() {

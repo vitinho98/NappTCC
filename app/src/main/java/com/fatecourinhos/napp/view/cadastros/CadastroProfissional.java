@@ -24,15 +24,15 @@ import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 public class CadastroProfissional extends AppCompatActivity {
 
     //variaveis gloabaais
-    private Profissional profissional = new Profissional();
-    private Usuario usuario = new Usuario();
+    private Profissional profissional;
+    private Usuario usuario;
     private String conteudo;
-    boolean sucesso;
+    private boolean sucesso;
 
     //componentes da tela
     private AppCompatEditText editTextNome, editTextCel, editTextEmail, editTextLogin, editTextSenha;
     private Spinner spinnerProf;
-    private Button btn_cadastrar_profissional;
+    private Button btnCadastrar;
     private Switch switchProf;
 
     @Override
@@ -57,9 +57,10 @@ public class CadastroProfissional extends AppCompatActivity {
 
             editTextCel.setText(profissional.getCelularProfissional());
             editTextEmail.setText(profissional.getEmailProfissional());
-            editTextLogin.setText(profissional.getFkUsuario().getLogin());
-            editTextSenha.setText(profissional.getFkUsuario().getSenha());
             editTextNome.setText(profissional.getNomeProfissional());
+
+            editTextLogin.setEnabled(false);
+            editTextSenha.setEnabled(false);
 
             if (profissional.getFkUsuario().getTipoUsuario().equals("Administrador"))
                 spinnerProf.setSelection(0);
@@ -77,7 +78,8 @@ public class CadastroProfissional extends AppCompatActivity {
                 switchProf.setChecked(false);
             }
 
-            btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
+            btnCadastrar.setText(R.string.btn_salvar);
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     enviarDados(false);
@@ -86,7 +88,7 @@ public class CadastroProfissional extends AppCompatActivity {
 
         } else {
 
-            btn_cadastrar_profissional.setOnClickListener(new View.OnClickListener() {
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     enviarDados(true);
@@ -98,6 +100,9 @@ public class CadastroProfissional extends AppCompatActivity {
 
     private void getComponentes() {
 
+        usuario = new Usuario();
+        profissional = new Profissional();
+
         editTextNome = findViewById(R.id.edit_text_nome_profissional);
         editTextCel = findViewById(R.id.edit_text_celular_profissional);
         editTextEmail = findViewById(R.id.edit_text_email_profissional);
@@ -108,7 +113,7 @@ public class CadastroProfissional extends AppCompatActivity {
         MaskTextWatcher mtwCelular = new MaskTextWatcher(editTextCel, maskCelular);
         editTextCel.addTextChangedListener(mtwCelular);
 
-        btn_cadastrar_profissional = findViewById(R.id.btn_salvar_profissional);
+        btnCadastrar = findViewById(R.id.btn_salvar_profissional);
         switchProf = findViewById(R.id.switchStatus);
 
         spinnerProf = findViewById(R.id.spinnerTipoUsuario);

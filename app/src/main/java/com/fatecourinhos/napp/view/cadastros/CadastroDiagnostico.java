@@ -19,7 +19,7 @@ public class CadastroDiagnostico extends AppCompatActivity {
 
     //componente da tela
     private AppCompatEditText editTextNomeDiagnostico;
-    private Button botao;
+    private Button btnCadastrar;
 
     //variaveis globais
     private Diagnostico diagnostico;
@@ -30,18 +30,16 @@ public class CadastroDiagnostico extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro_activity_diagnostico);
-
-        editTextNomeDiagnostico = findViewById(R.id.edit_text_nome_diagnostico);
-        botao = findViewById(R.id.btn_cadastrar_diagnostico);
-        diagnostico = new Diagnostico();
+        getComponentes();
 
         if (getIntent().getExtras() != null) {
 
-            editTextNomeDiagnostico.setText(getIntent().getExtras().getString("nomeDiagnostico"));
             diagnostico.setIdDiagnostico(getIntent().getExtras().getInt("idDiagnostico"));
 
-            botao.setText(R.string.btn_salvar);
-            botao.setOnClickListener(new View.OnClickListener() {
+            editTextNomeDiagnostico.setText(getIntent().getExtras().getString("nomeDiagnostico"));
+
+            btnCadastrar.setText(R.string.btn_salvar);
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -51,13 +49,12 @@ public class CadastroDiagnostico extends AppCompatActivity {
                         diagnostico.setNomeDiagnostico(editTextNomeDiagnostico.getText().toString());
                         alterarDiagnostico(diagnostico);
                     }
-
                 }
             });
 
         } else {
 
-            botao.setOnClickListener(new View.OnClickListener() {
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -67,11 +64,17 @@ public class CadastroDiagnostico extends AppCompatActivity {
                         diagnostico.setNomeDiagnostico(editTextNomeDiagnostico.getText().toString());
                         inserirDiagnostico(diagnostico);
                     }
-
                 }
             });
-
         }
+    }
+
+    private void getComponentes() {
+
+        diagnostico = new Diagnostico();
+
+        editTextNomeDiagnostico = findViewById(R.id.edit_text_nome_diagnostico);
+        btnCadastrar = findViewById(R.id.btn_cadastrar_diagnostico);
 
     }
 

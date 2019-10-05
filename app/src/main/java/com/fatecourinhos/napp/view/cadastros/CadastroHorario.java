@@ -20,10 +20,8 @@ import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class CadastroHorario extends AppCompatActivity {
 
@@ -42,27 +40,36 @@ public class CadastroHorario extends AppCompatActivity {
     private TimePickerDialog timePickerDialog;
 
     //formatadores de data
-    private SimpleDateFormat formatDataHora = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    private SimpleDateFormat formatData = new SimpleDateFormat("dd/MM/yyyy");
-    private SimpleDateFormat formatHora = new SimpleDateFormat("HH:mm");
-    private SimpleDateFormat formatDiferenciado = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private SimpleDateFormat formatadorDataHora;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_horario);
         getComponentes();
+        setOnClicks();
+    }
 
-        if (getIntent().getExtras() != null) {
+    private void getComponentes() {
 
-            horario.setData((Date) getIntent().getExtras().get("dataHora"));
-            calendario.setDate(horario.getData().getTime());
-            editTextHorario.setText(formatHora.format(horario.getData()));
+        preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
+        formatadorDataHora = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        } else {
+        horario = new Horario();
+        profissional = new Profissional();
 
+        editTextHorario = findViewById(R.id.edit_text_hora);
+        btnCadastrar = findViewById(R.id.btn_salvar_horario);
 
-        }
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.SECOND, 0);
+
+        calendario = findViewById(R.id.calendarView);
+        calendario.setMinDate(System.currentTimeMillis());
+
+    }
+
+    private void setOnClicks() {
 
         btnCadastrar.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -75,12 +82,18 @@ public class CadastroHorario extends AppCompatActivity {
 
                     horario.setFkProfissional(profissional);
                     horario.setData(calendar.getTime());
-                    System.out.println(formatDiferenciado.format(horario.getData()));
 
-                    inserirAgendaProfissional(horario);
+                    inserirHorarioProfissional(horario);
 
                 } else
                     Toast.makeText(getApplicationContext(), "Insira o horário!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                calendar.set(year, month, dayOfMonth);
             }
         });
 
@@ -95,7 +108,7 @@ public class CadastroHorario extends AppCompatActivity {
                         calendar.set(Calendar.MINUTE, minute);
                         editTextHorario.setText(String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute));
                     }
-                }, 23, 06, true);
+                }, 0, 0, true);
 
                 timePickerDialog.show();
 
@@ -104,44 +117,22 @@ public class CadastroHorario extends AppCompatActivity {
 
     }
 
-    private void getComponentes() {
-
-        preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
-
-        calendar = Calendar.getInstance();
-        horario = new Horario();
-        profissional = new Profissional();
-
-        editTextHorario = findViewById(R.id.edit_text_hora);
-        btnCadastrar = findViewById(R.id.btn_salvar_horario);
-
-        calendario = findViewById(R.id.calendarView);
-        calendario.setMinDate(System.currentTimeMillis());
-        calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                calendar.set(year, month, dayOfMonth);
-            }
-        });
-
-    }
-
-    public void inserirAgendaProfissional(Horario agendaProfissional) {
+    public void inserirHorarioProfissional(Horario agendaProfissional) {
 
         String uri = "http://vitorsilva.xyz/napp/horarioProfissional/inserirHorarioProfissional.php";
         RequestHttp requestHttp = new RequestHttp();
-        InserirAgendaProfissional task = new InserirAgendaProfissional();
+        InserirHorarioProfissional task = new InserirHorarioProfissional();
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-        requestHttp.setParametro("data", formatDiferenciado.format(agendaProfissional.getData()));
+        requestHttp.setParametro("data", formatadorDataHora.format(agendaProfissional.getData()));
         requestHttp.setParametro("idProfissional", String.valueOf(agendaProfissional.getFkProfissional().getIdProfissional()));
 
         task.execute(requestHttp);
 
     }
 
-    private class InserirAgendaProfissional extends AsyncTask<RequestHttp, String, String> {
+    private class InserirHorarioProfissional extends AsyncTask<RequestHttp, String, String> {
 
         @Override
         protected void onPreExecute() {
@@ -152,16 +143,9 @@ public class CadastroHorario extends AppCompatActivity {
         protected String doInBackground(RequestHttp... params) {
 
             try {
-
                 conteudo = HttpManager.getDados(params[0]);
-
-                if (conteudo.contains("Sucesso"))
-                    sucesso = true;
-                else
-                    sucesso = false;
-
             } catch (Exception e) {
-                sucesso = false;
+                conteudo = null;
             }
 
             return conteudo;
@@ -171,10 +155,12 @@ public class CadastroHorario extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (sucesso) {
+            if (conteudo.contains("Sucesso")) {
                 Toast.makeText(getApplicationContext(), "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
                 finish();
-            } else
+            } else if (conteudo.contains("Cadastrado"))
+                Toast.makeText(getApplicationContext(), "Horário já cadatrado!", Toast.LENGTH_SHORT).show();
+            else
                 Toast.makeText(getApplicationContext(), "Erro ao cadastrar!", Toast.LENGTH_SHORT).show();
         }
 

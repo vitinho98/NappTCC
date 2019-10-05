@@ -74,9 +74,9 @@ public class AgendamentoJSONParser {
                 minuto = data.substring(14,16);
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia), Integer.parseInt(hora), Integer.parseInt(minuto));
+                calendar.set(Integer.parseInt(ano), Integer.parseInt(mes) - 1, Integer.parseInt(dia), Integer.parseInt(hora), Integer.parseInt(minuto));
 
-                horario.setIdAgendaProfissional(jsonObject.getInt("idAgendaProfissional"));
+                horario.setIdHorarioProfissional(jsonObject.getInt("idHorarioProfissional"));
                 horario.setData(calendar.getTime());
                 horario.setFkProfissional(profissional);
                 agendamento.setFkHorario(horario);

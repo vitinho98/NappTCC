@@ -33,6 +33,7 @@ public class CadastroAluno extends AppCompatActivity {
         setContentView(R.layout.cadastro_activity_aluno);
 
         usuario = new Usuario();
+
         editTextCpf = findViewById(R.id.edit_text_cpf_aluno);
         editTextRa = findViewById(R.id.edit_text_ra_aluno);
 
@@ -53,7 +54,6 @@ public class CadastroAluno extends AppCompatActivity {
 
             }
         });
-
     }
 
     private boolean conferirDados() {

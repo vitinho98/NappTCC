@@ -20,10 +20,9 @@ public class CadastroResponsavel extends AppCompatActivity {
 
     //componentes da tela
     private AppCompatEditText editTextNomeResponsavel, editTextEmailResponsavel, editTextCelularResponsavel, editTextTelefoneResponsavel;
-    private Button btn_cadastrar_responsavel;
+    private Button btnCadastrar;
 
     //variaveis globais
-    private View view;
     private Responsavel responsavel;
     private String conteudo;
     private boolean sucesso;
@@ -42,9 +41,9 @@ public class CadastroResponsavel extends AppCompatActivity {
             editTextNomeResponsavel.setText(getIntent().getExtras().getString("nomeResponsavel"));
             editTextCelularResponsavel.setText(getIntent().getExtras().getString("celularResponsavel"));
             editTextEmailResponsavel.setText(getIntent().getExtras().getString("emailResponsavel"));
-            btn_cadastrar_responsavel.setText(R.string.btn_salvar);
 
-            btn_cadastrar_responsavel.setOnClickListener(new View.OnClickListener() {
+            btnCadastrar.setText(R.string.btn_salvar);
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -65,7 +64,7 @@ public class CadastroResponsavel extends AppCompatActivity {
 
         } else {
 
-            btn_cadastrar_responsavel.setOnClickListener(new View.OnClickListener() {
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -90,13 +89,13 @@ public class CadastroResponsavel extends AppCompatActivity {
     //pega os componentes da tela
     private void getComponentes(){
 
+        responsavel = new Responsavel();
+
         editTextCelularResponsavel = findViewById(R.id.edit_text_celular_responsavel);
         editTextEmailResponsavel = findViewById(R.id.edit_text_email_responsavel);
         editTextNomeResponsavel = findViewById(R.id.edit_text_nome_responsavel);
         editTextTelefoneResponsavel = findViewById(R.id.edit_text_telefone_responsavel);
-
-        btn_cadastrar_responsavel = findViewById(R.id.btn_salvar_responsavel);
-        responsavel = new Responsavel();
+        btnCadastrar = findViewById(R.id.btn_salvar_responsavel);
 
         SimpleMaskFormatter maskCelular = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
         SimpleMaskFormatter maskTelefone = new SimpleMaskFormatter("(NN) NNNN-NNNN");

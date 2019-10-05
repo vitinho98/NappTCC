@@ -29,6 +29,12 @@
             android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 
+        <TextView
+            android:id="@+id/txt_status_profissional_lista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

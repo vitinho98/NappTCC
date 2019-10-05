@@ -19,7 +19,7 @@ public class CadastroCampoAtuacao extends AppCompatActivity {
 
     //componente da tela
     private AppCompatEditText editTextNomeCampo;
-    private Button botao;
+    private Button btnCadastrar;
 
     //variaveis globais
     private CampoAtuacao campoAtuacao;
@@ -30,18 +30,15 @@ public class CadastroCampoAtuacao extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro_activity_area_atuacao);
-
-        editTextNomeCampo = findViewById(R.id.edit_text_nome_area);
-        botao = findViewById(R.id.btn_cadastrar_campo_atuacao);
-        campoAtuacao = new CampoAtuacao();
+        getComponentes();
 
         if (getIntent().getExtras() != null) {
 
             editTextNomeCampo.setText(getIntent().getExtras().getString("nomeCampoAtuacao"));
             campoAtuacao.setIdCampoAtuacao(getIntent().getExtras().getInt("idCampoAtuacao"));
 
-            botao.setText(R.string.btn_salvar);
-            botao.setOnClickListener(new View.OnClickListener() {
+            btnCadastrar.setText(R.string.btn_salvar);
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -57,7 +54,7 @@ public class CadastroCampoAtuacao extends AppCompatActivity {
 
         } else {
 
-            botao.setOnClickListener(new View.OnClickListener() {
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -67,11 +64,17 @@ public class CadastroCampoAtuacao extends AppCompatActivity {
                         campoAtuacao.setNomeCampoAtuacao(editTextNomeCampo.getText().toString());
                         inserirCampoAtuacao(campoAtuacao);
                     }
-
                 }
             });
-
         }
+    }
+
+    private void getComponentes() {
+
+        campoAtuacao = new CampoAtuacao();
+
+        editTextNomeCampo = findViewById(R.id.edit_text_nome_area);
+        btnCadastrar = findViewById(R.id.btn_cadastrar_campo_atuacao);
 
     }
 
