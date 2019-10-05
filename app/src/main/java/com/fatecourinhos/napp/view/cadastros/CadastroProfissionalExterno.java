@@ -50,7 +50,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
     private AppCompatEditText editTextNomeProfissionalExterno, editTextTelefoneProfissionalExterno, editTextCelularProfissionalExterno,
     editTextBairro, editTextNumero, editTextCidadeProfissionalExterno, editTextEndereco, editTextEmailProfissionalExterno;
     private Spinner spinnerCampoAtuacao, spinnerResponsavel;
-    private Button btnCadastrarResponsavel;
+    private Button btnCadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +73,8 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
             profissionalExterno.setIdProfissionalExterno(getIntent().getExtras().getInt("idProfissionalExterno"));
 
-            btnCadastrarResponsavel.setText(R.string.btn_salvar);
-            btnCadastrarResponsavel.setOnClickListener(new View.OnClickListener() {
+            btnCadastrar.setText(R.string.btn_salvar);
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     enviarDados(false);
@@ -83,7 +83,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
         } else {
 
-            btnCadastrarResponsavel.setOnClickListener(new View.OnClickListener() {
+            btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     enviarDados(true);
@@ -107,7 +107,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
         spinnerResponsavel = findViewById(R.id.spinnerResponsavel);
         spinnerCampoAtuacao = findViewById(R.id.spinnerCampoAtuacao);
-        btnCadastrarResponsavel = findViewById(R.id.btn_salvar_profissional_externo);
+        btnCadastrar = findViewById(R.id.btn_salvar_profissional_externo);
         progressBar = findViewById(R.id.progressBarCadResponsavel);
 
         SimpleMaskFormatter maskCelular = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
