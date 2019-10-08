@@ -379,7 +379,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             try {
 
                 conteudo = HttpManager.getDados(params[0]);
-                System.out.println(conteudo);
+
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
                 else
@@ -418,7 +418,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             try {
 
                 conteudo = HttpManager.getDados(params[0]);
-                System.out.println(conteudo);
+
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
                 else

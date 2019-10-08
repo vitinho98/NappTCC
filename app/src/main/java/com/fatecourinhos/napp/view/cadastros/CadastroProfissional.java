@@ -86,8 +86,7 @@ public class CadastroProfissional extends AppCompatActivity {
                 }
             });
 
-        } else {
-
+        } else
             btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -95,7 +94,6 @@ public class CadastroProfissional extends AppCompatActivity {
                 }
             });
 
-        }
     }
 
     private void getComponentes() {
@@ -160,19 +158,17 @@ public class CadastroProfissional extends AppCompatActivity {
 
         profissional.setFkUsuario(usuario);
 
-        if (conferirDados(profissional)) {
-
+        if (conferirDados(profissional, inserir))
             if (inserir)
                 inserirProfissional(profissional);
             else
                 alterarProfissional(profissional);
-
-        } else
+        else
             Toast.makeText(this, "Insira todos os campos corretamente!", Toast.LENGTH_LONG).show();
 
     }
 
-    public boolean conferirDados(Profissional profissional) {
+    public boolean conferirDados(Profissional profissional, boolean inserir) {
 
         boolean retorno = true;
 
@@ -182,10 +178,15 @@ public class CadastroProfissional extends AppCompatActivity {
             retorno = false;
         else if (profissional.getNomeProfissional().isEmpty())
             retorno = false;
-        else if (profissional.getFkUsuario().getLogin().isEmpty())
-            retorno = false;
-        else if (profissional.getFkUsuario().getSenha().isEmpty())
-            retorno = false;
+
+        if (inserir) {
+
+            if (profissional.getFkUsuario().getLogin().isEmpty())
+                retorno = false;
+            else if (profissional.getFkUsuario().getSenha().isEmpty())
+                retorno = false;
+
+        }
 
         return retorno;
 
@@ -222,12 +223,12 @@ public class CadastroProfissional extends AppCompatActivity {
         requestHttp.setUrl(uri);
 
         requestHttp.setParametro("idProfissional", String.valueOf(profissional.getIdProfissional()));
+        requestHttp.setParametro("fkUsuario", String.valueOf(profissional.getFkUsuario().getIdUsuario()));
         requestHttp.setParametro("nomeProfissional", profissional.getNomeProfissional());
         requestHttp.setParametro("celProfissional", profissional.getCelularProfissional());
         requestHttp.setParametro("emailProfissional", profissional.getEmailProfissional());
         requestHttp.setParametro("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
         requestHttp.setParametro("statusProfissional", String.valueOf(profissional.getFkUsuario().getStatus()));
-        requestHttp.setParametro("fkUsuario", String.valueOf(profissional.getFkUsuario().getIdUsuario()));
 
         task.execute(requestHttp);
 
@@ -308,7 +309,6 @@ public class CadastroProfissional extends AppCompatActivity {
             } else
                 Toast.makeText(getApplicationContext(), "Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
-
     }
 
 }
