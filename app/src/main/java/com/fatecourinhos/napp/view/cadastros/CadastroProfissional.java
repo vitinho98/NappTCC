@@ -225,8 +225,6 @@ public class CadastroProfissional extends AppCompatActivity {
         requestHttp.setParametro("nomeProfissional", profissional.getNomeProfissional());
         requestHttp.setParametro("celProfissional", profissional.getCelularProfissional());
         requestHttp.setParametro("emailProfissional", profissional.getEmailProfissional());
-        requestHttp.setParametro("loginProfissional", profissional.getFkUsuario().getLogin());
-        requestHttp.setParametro("senhaProfissional", profissional.getFkUsuario().getSenha());
         requestHttp.setParametro("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
         requestHttp.setParametro("statusProfissional", String.valueOf(profissional.getFkUsuario().getStatus()));
         requestHttp.setParametro("fkUsuario", String.valueOf(profissional.getFkUsuario().getIdUsuario()));

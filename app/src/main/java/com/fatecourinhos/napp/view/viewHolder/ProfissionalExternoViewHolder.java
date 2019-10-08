@@ -31,7 +31,8 @@ public class ProfissionalExternoViewHolder extends RecyclerView.ViewHolder {
         textViewNome.setText(profissionalExterno.getNomeProfissionalExterno());
         textViewCidade.setText(profissionalExterno.getCidadeProfissionalExterno());
         textViewTelefone.setText(profissionalExterno.getTelefoneProfissionalExterno());
-        textViewCampoAtuacao.setText(profissionalExterno.getFkCampoAtuacao().getNomeCampoAtuacao());
+        textViewCampoAtuacao.setText(
+                profissionalExterno.getFkCampoAtuacao() != null ? profissionalExterno.getFkCampoAtuacao().getNomeCampoAtuacao() : "Nenhum");
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

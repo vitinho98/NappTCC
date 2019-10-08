@@ -41,17 +41,29 @@ public class ProfissionalExternoJSONParser {
                 profissionalExterno.setTelefoneProfissionalExterno(jsonObject.getString("telefoneProfissionalExterno"));
                 profissionalExterno.setCelularProfissionalExterno(jsonObject.getString("celularProfissionalExterno"));
 
-                campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
-                campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
-                profissionalExterno.setFkCampoAtuacao(campoAtuacao);
+                try {
 
-                responsavel.setIdResponsavel(jsonObject.getInt("idResponsavel"));
-                responsavel.setCelularResponsavel(jsonObject.getString("celularResponsavel"));
-                responsavel.setEmailResponsavel(jsonObject.getString("emailResponsavel"));
-                responsavel.setNomeResponsavel(jsonObject.getString("nomeResponsavel"));
-                responsavel.setTelefoneResponsavel(jsonObject.getString("telefoneResponsavel"));
-                profissionalExterno.setFkResponsavel(responsavel);
+                    campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
+                    campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
+                    profissionalExterno.setFkCampoAtuacao(campoAtuacao);
 
+                } catch (Exception e) {
+                    profissionalExterno.setFkCampoAtuacao(null);
+                }
+
+                try {
+
+                    responsavel.setIdResponsavel(jsonObject.getInt("idResponsavel"));
+                    responsavel.setCelularResponsavel(jsonObject.getString("celularResponsavel"));
+                    responsavel.setEmailResponsavel(jsonObject.getString("emailResponsavel"));
+                    responsavel.setNomeResponsavel(jsonObject.getString("nomeResponsavel"));
+                    responsavel.setTelefoneResponsavel(jsonObject.getString("telefoneResponsavel"));
+                    profissionalExterno.setFkResponsavel(responsavel);
+
+                } catch (Exception e) {
+                    profissionalExterno.setFkResponsavel(null);
+                }
+                
                 profissionaisExternos.add(profissionalExterno);
 
             }

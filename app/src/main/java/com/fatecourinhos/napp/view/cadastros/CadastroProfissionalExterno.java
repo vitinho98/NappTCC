@@ -290,6 +290,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             if (spinnerResponsavel.getSelectedItem().equals(responsavel.getNomeResponsavel()))
                 profissionalExterno.setFkResponsavel(responsavel);
 
+
         if (conferirDados(profissionalExterno))
             if (inserir)
                 inserirProfissionalExterno(profissionalExterno);
@@ -321,12 +322,12 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         if (profissionalExterno.getFkCampoAtuacao() != null)
             requestHttp.setParametro("fkCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
         else
-            requestHttp.setParametro("fkCampoAtuacao", null);
+            requestHttp.setParametro("fkCampoAtuacao", "null");
 
         if (profissionalExterno.getFkResponsavel() != null)
             requestHttp.setParametro("fkResponsavel", String.valueOf(profissionalExterno.getFkResponsavel().getIdResponsavel()));
         else
-            requestHttp.setParametro("fkCampoAtuacao", null);
+            requestHttp.setParametro("fkResponsavel", "null");
 
         task.execute(requestHttp);
 
@@ -347,11 +348,19 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
         requestHttp.setParametro("celularProfissionalExterno", profissionalExterno.getCelularProfissionalExterno());
         requestHttp.setParametro("telefoneProfissionalExterno", profissionalExterno.getTelefoneProfissionalExterno());
         requestHttp.setParametro("cidadeProfissionalExterno", profissionalExterno.getCidadeProfissionalExterno());
-        requestHttp.setParametro("idResponsavel", String.valueOf(profissionalExterno.getFkResponsavel().getIdResponsavel()));
         requestHttp.setParametro("enderecoProfissionalExterno", profissionalExterno.getEndereco());
         requestHttp.setParametro("emailProfissionalExterno", profissionalExterno.getEmailProfissionalExterno());
         requestHttp.setParametro("numeroProfissionalExterno", profissionalExterno.getNumero());
-        requestHttp.setParametro("idCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
+
+        if (profissionalExterno.getFkCampoAtuacao() != null)
+            requestHttp.setParametro("fkCampoAtuacao", String.valueOf(profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao()));
+        else
+            requestHttp.setParametro("fkCampoAtuacao", "null");
+
+        if (profissionalExterno.getFkResponsavel() != null)
+            requestHttp.setParametro("fkResponsavel", String.valueOf(profissionalExterno.getFkResponsavel().getIdResponsavel()));
+        else
+            requestHttp.setParametro("fkResponsavel", "null");
 
         task.execute(requestHttp);
 
@@ -370,14 +379,14 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             try {
 
                 conteudo = HttpManager.getDados(params[0]);
-
+                System.out.println(conteudo);
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
                 else
                     sucesso = false;
 
             } catch (Exception e) {
-                conteudo = null;
+                sucesso = false;
             }
 
             return conteudo;
@@ -409,14 +418,14 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             try {
 
                 conteudo = HttpManager.getDados(params[0]);
-
-                if (conteudo.equals("Sucesso"))
+                System.out.println(conteudo);
+                if (conteudo.contains("Sucesso"))
                     sucesso = true;
                 else
                     sucesso = false;
 
             } catch (Exception e) {
-                conteudo = null;
+                sucesso = false;
             }
 
             return conteudo;
@@ -432,7 +441,6 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             } else
                 Toast.makeText(getApplicationContext(), "Erro ao alterar", Toast.LENGTH_SHORT).show();
         }
-
     }
 
 }

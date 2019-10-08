@@ -89,11 +89,16 @@ public class ProfissionalExternoFragment extends Fragment {
                 intent.putExtra("celularProfissionalExterno", profissionalExterno.getCelularProfissionalExterno());
                 intent.putExtra("telefoneProfissionalExterno", profissionalExterno.getTelefoneProfissionalExterno());
 
-                intent.putExtra("idC", profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao());
-                intent.putExtra("nomeC", profissionalExterno.getFkCampoAtuacao().getNomeCampoAtuacao());
+                if (profissionalExterno.getFkCampoAtuacao() != null) {
+                    intent.putExtra("idC", profissionalExterno.getFkCampoAtuacao().getIdCampoAtuacao());
+                    intent.putExtra("nomeC", profissionalExterno.getFkCampoAtuacao().getNomeCampoAtuacao());
 
-                intent.putExtra("idResponsavel", profissionalExterno.getFkResponsavel().getIdResponsavel());
-                intent.putExtra("nomeResponsavel", profissionalExterno.getFkResponsavel().getNomeResponsavel());
+                }
+
+                if (profissionalExterno.getFkResponsavel() != null) {
+                    intent.putExtra("idResponsavel", profissionalExterno.getFkResponsavel().getIdResponsavel());
+                    intent.putExtra("nomeResponsavel", profissionalExterno.getFkResponsavel().getNomeResponsavel());
+                }
 
                 getActivity().startActivity(intent);
             }
