@@ -301,7 +301,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
     }
 
-    public void inserirProfissionalExterno(ProfissionalExterno profissionalExterno) {
+    private void inserirProfissionalExterno(ProfissionalExterno profissionalExterno) {
 
         String uri = "http://vitorsilva.xyz/napp/profissionalExterno/inserirProfExterno.php";
         CadastrarProfissionalExterno task = new CadastrarProfissionalExterno();
@@ -333,7 +333,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
 
     }
 
-    public void alterarProfissionalExterno(ProfissionalExterno profissionalExterno) {
+    private void alterarProfissionalExterno(ProfissionalExterno profissionalExterno) {
 
         String uri = "http://vitorsilva.xyz/napp/profissionalExterno/alterarProfExterno.php";
         AlterarProfissionalExterno task = new AlterarProfissionalExterno();

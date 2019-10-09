@@ -117,7 +117,7 @@ public class CadastroHorario extends AppCompatActivity {
 
     }
 
-    public void inserirHorarioProfissional(Horario agendaProfissional) {
+    private void inserirHorarioProfissional(Horario agendaProfissional) {
 
         String uri = "http://vitorsilva.xyz/napp/horarioProfissional/inserirHorarioProfissional.php";
         RequestHttp requestHttp = new RequestHttp();

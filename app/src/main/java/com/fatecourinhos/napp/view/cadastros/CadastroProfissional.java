@@ -168,7 +168,7 @@ public class CadastroProfissional extends AppCompatActivity {
 
     }
 
-    public boolean conferirDados(Profissional profissional, boolean inserir) {
+    private boolean conferirDados(Profissional profissional, boolean inserir) {
 
         boolean retorno = true;
 
@@ -192,7 +192,7 @@ public class CadastroProfissional extends AppCompatActivity {
 
     }
 
-    public void inserirProfissional(Profissional profissional) {
+    private void inserirProfissional(Profissional profissional) {
 
         String uri = "http://vitorsilva.xyz/napp/profissional/inserirProfissional.php";
         RequestHttp requestHttp = new RequestHttp();
@@ -213,7 +213,7 @@ public class CadastroProfissional extends AppCompatActivity {
 
     }
 
-    public void alterarProfissional(Profissional profissional) {
+    private void alterarProfissional(Profissional profissional) {
 
         String uri = "http://vitorsilva.xyz/napp/profissional/alterarProfissional.php";
         RequestHttp requestHttp = new RequestHttp();

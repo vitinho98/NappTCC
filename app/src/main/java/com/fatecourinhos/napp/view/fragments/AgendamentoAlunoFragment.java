@@ -22,7 +22,7 @@ import com.fatecourinhos.napp.model.Agendamento;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.adapter.AgendamentoAlunoAdapter;
-import com.fatecourinhos.napp.view.cadastros.CadastroAgendamento;
+import com.fatecourinhos.napp.view.cadastros.CadastroAgendamentoAluno;
 import com.fatecourinhos.napp.view.listener.OnAgendamentoAlunoInteractionListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -52,7 +52,7 @@ public class AgendamentoAlunoFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CadastroAgendamento.class));
+                startActivity(new Intent(getActivity(), CadastroAgendamentoAluno.class));
             }
         });
 
