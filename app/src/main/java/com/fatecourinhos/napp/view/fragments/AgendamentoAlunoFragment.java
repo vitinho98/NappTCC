@@ -1,6 +1,8 @@
 package com.fatecourinhos.napp.view.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -34,7 +36,7 @@ public class AgendamentoAlunoFragment extends Fragment {
     private String conteudo;
     private int id = 0;
     private OnAgendamentoAlunoInteractionListener listener;
-    private ViewHolder viewHolder = new ViewHolder();
+    private ViewHolder viewHolder;
     private View view;
     private Context context;
     private List<Agendamento> agendamentos;
@@ -47,6 +49,7 @@ public class AgendamentoAlunoFragment extends Fragment {
         getActivity().setTitle("Agendamento");
         view = inflater.inflate(R.layout.fragment_agendamento_aluno,container,false);
         context = view.getContext();
+        viewHolder = new ViewHolder();
 
         FloatingActionButton floatingActionButton = view.findViewById(R.id.fab_agendamento_aluno);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -68,10 +71,22 @@ public class AgendamentoAlunoFragment extends Fragment {
             @Override
             public void onDeleteClick(Agendamento agendamento) {
 
+                new AlertDialog.Builder(context)
+                        .setTitle("Cancelar agendamento")
+                        .setMessage("Deseja realmente cancelar o agendamento?")
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //excluirLocalAtendimento(localAtendimento.getIdLocalAtendimento());
+                            }
+                        })
+                        .setNeutralButton("Não", null)
+                        .show();
+
             }
         };
 
-        preferences = this.getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
+        preferences = getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
         if (preferences.contains("idAluno"))
             id = preferences.getInt("idAluno", 0);
 

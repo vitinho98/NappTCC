@@ -1,6 +1,7 @@
 package com.fatecourinhos.napp.view.viewHolder;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,24 +16,38 @@ import java.text.SimpleDateFormat;
 
 public class AgendamentoAlunoViewHolder extends RecyclerView.ViewHolder {
 
-    private CardView cardView;
-    private TextView textViewProfissional, textViewHorario, textViewLocal;
+    private ImageView imageView;
+    private TextView textViewProfissional, textViewHorario, textViewLocal, textViewBloco;
 
     public AgendamentoAlunoViewHolder(@NonNull View itemView) {
         super(itemView);
 
+        imageView = itemView.findViewById(R.id.img_cancelar);
         textViewProfissional = itemView.findViewById(R.id.txt_nome_profissional_ag_aluno);
         textViewHorario = itemView.findViewById(R.id.txt_data_hora_ag_aluno);
         textViewLocal = itemView.findViewById(R.id.txt_local_ag_aluno);
+        textViewBloco = itemView.findViewById(R.id.txt_bloco_ag_aluno);
     }
 
-    public void bindData(Agendamento agendamento, OnAgendamentoAlunoInteractionListener listener) {
+    public void bindData(final Agendamento agendamento, final OnAgendamentoAlunoInteractionListener listener) {
 
         SimpleDateFormat dataHoraFormater = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
         textViewProfissional.setText(agendamento.getFkHorario().getFkProfissional().getNomeProfissional());
         textViewHorario.setText(dataHoraFormater.format(agendamento.getFkHorario().getData()));
-        textViewLocal.setText(agendamento.getFkLocalAtendimento().getNomeLocal() + " " + agendamento.getFkLocalAtendimento().getNomeBloco());
+        textViewLocal.setText(agendamento.getFkLocalAtendimento().getNomeLocal() != null ?
+                "Local: " + agendamento.getFkLocalAtendimento().getNomeLocal() :
+                "A definir");
+        textViewBloco.setText(agendamento.getFkLocalAtendimento().getNomeBloco() != null ?
+                "Bloco: " + agendamento.getFkLocalAtendimento().getNomeBloco() :
+                "A definir");
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onDeleteClick(agendamento);
+            }
+        });
 
     }
 
