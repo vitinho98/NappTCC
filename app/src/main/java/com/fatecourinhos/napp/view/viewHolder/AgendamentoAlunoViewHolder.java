@@ -5,7 +5,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
@@ -22,7 +21,7 @@ public class AgendamentoAlunoViewHolder extends RecyclerView.ViewHolder {
     public AgendamentoAlunoViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        imageView = itemView.findViewById(R.id.img_cancelar);
+        imageView = itemView.findViewById(R.id.img_cancelar_ag_aluno);
         textViewProfissional = itemView.findViewById(R.id.txt_nome_profissional_ag_aluno);
         textViewHorario = itemView.findViewById(R.id.txt_data_hora_ag_aluno);
         textViewLocal = itemView.findViewById(R.id.txt_local_ag_aluno);
