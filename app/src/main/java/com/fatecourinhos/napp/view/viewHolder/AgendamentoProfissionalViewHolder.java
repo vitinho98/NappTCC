@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.Agendamento;
-import com.fatecourinhos.napp.view.listener.OnAgendamentoAlunoInteractionListener;
+import com.fatecourinhos.napp.view.listener.OnAgendamentoInteractionListener;
 
 import java.text.SimpleDateFormat;
 
@@ -28,7 +28,7 @@ public class AgendamentoProfissionalViewHolder extends RecyclerView.ViewHolder {
         textViewBloco = itemView.findViewById(R.id.txt_bloco_ag_prof);
     }
 
-    public void bindData(final Agendamento agendamento, final OnAgendamentoAlunoInteractionListener listener) {
+    public void bindData(final Agendamento agendamento, final OnAgendamentoInteractionListener listener) {
 
         SimpleDateFormat dataHoraFormater = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 

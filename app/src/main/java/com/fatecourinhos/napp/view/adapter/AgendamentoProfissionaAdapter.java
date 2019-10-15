@@ -11,31 +11,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.Agendamento;
 import com.fatecourinhos.napp.view.listener.OnAgendamentoInteractionListener;
-import com.fatecourinhos.napp.view.viewHolder.AgendamentoAlunoViewHolder;
+import com.fatecourinhos.napp.view.viewHolder.AgendamentoProfissionalViewHolder;
 
 import java.util.List;
 
-public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlunoViewHolder>{
+public class AgendamentoProfissionaAdapter extends RecyclerView.Adapter<AgendamentoProfissionalViewHolder>{
 
     private List<Agendamento> agendamentos;
     private OnAgendamentoInteractionListener listener;
 
-    public AgendamentoAlunoAdapter(List<Agendamento> agendamentos, OnAgendamentoInteractionListener listener){
+    public AgendamentoProfissionaAdapter(List<Agendamento> agendamentos, OnAgendamentoInteractionListener listener){
         this.listener = listener;
         this.agendamentos = agendamentos;
     }
 
     @NonNull
     @Override
-    public AgendamentoAlunoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AgendamentoProfissionalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.view_holder_agendamento_aluno, parent, false);
-        return new AgendamentoAlunoViewHolder(view);
+        return new AgendamentoProfissionalViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AgendamentoAlunoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AgendamentoProfissionalViewHolder holder, int position) {
         Agendamento agendamento = agendamentos.get(position);
         holder.bindData(agendamento, listener);
     }
@@ -47,5 +47,6 @@ public class AgendamentoAlunoAdapter extends RecyclerView.Adapter<AgendamentoAlu
         else
             return 0;
     }
+
 
 }

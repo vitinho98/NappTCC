@@ -30,7 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class AgendamentoAlunoFragment extends Fragment {
+public class AgendamentoProfissionalFragment extends Fragment {
 
     private SharedPreferences preferences;
     private String conteudo;
@@ -47,19 +47,11 @@ public class AgendamentoAlunoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstance) {
 
         getActivity().setTitle("Agendamentos");
-        view = inflater.inflate(R.layout.fragment_agendamento_aluno,container,false);
+        view = inflater.inflate(R.layout.fragment_agendamento_profissional,container,false);
         context = view.getContext();
         viewHolder = new ViewHolder();
 
-        FloatingActionButton floatingActionButton = view.findViewById(R.id.fab_agendamento_aluno);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CadastroAgendamentoAluno.class));
-            }
-        });
-
-        viewHolder.recyclerViewAgendamento = view.findViewById(R.id.recycler_view_agendamentos_aluno);
+        viewHolder.recyclerViewAgendamento = view.findViewById(R.id.recycler_view_agendamentos_prof);
         viewHolder.recyclerViewAgendamento.setLayoutManager(new LinearLayoutManager(context));
 
         listener = new OnAgendamentoInteractionListener() {
@@ -87,34 +79,33 @@ public class AgendamentoAlunoFragment extends Fragment {
         };
 
         preferences = getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
-        if (preferences.contains("idAluno"))
-            id = preferences.getInt("idAluno", 0);
+        if (preferences.contains("idProfissional"))
+            id = preferences.getInt("idProfissional", 0);
 
-        selecionarAgendaAluno(id);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        selecionarAgendaAluno(id);
+        selecionarAgendaProfissional(id);
     }
 
-    private void selecionarAgendaAluno(int id) {
+    private void selecionarAgendaProfissional(int id) {
 
-        String uri = "http://vitorsilva.xyz/napp/agendamento/selecionarAgendamentoAluno.php";
+        String uri = "http://vitorsilva.xyz/napp/agendamento/selecionarAgendamentoProfissional.php";
         RequestHttp requestHttp = new RequestHttp();
-        SelecionarAgendaAluno mytask = new SelecionarAgendaAluno();
+        SelecionarAgendaProfissional mytask = new SelecionarAgendaProfissional();
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-        requestHttp.setParametro("idAluno", String.valueOf(id));
+        requestHttp.setParametro("idProfissional", String.valueOf(id));
 
         mytask.execute(requestHttp);
 
     }
 
-    private class SelecionarAgendaAluno extends AsyncTask<RequestHttp, String, List<Agendamento>> {
+    private class SelecionarAgendaProfissional extends AsyncTask<RequestHttp, String, List<Agendamento>> {
 
         @Override
         protected void onPreExecute() {
