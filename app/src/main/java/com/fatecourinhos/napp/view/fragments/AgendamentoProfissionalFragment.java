@@ -3,7 +3,6 @@ package com.fatecourinhos.napp.view.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -24,9 +23,8 @@ import com.fatecourinhos.napp.model.Agendamento;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.adapter.AgendamentoAlunoAdapter;
-import com.fatecourinhos.napp.view.cadastros.CadastroAgendamentoAluno;
+import com.fatecourinhos.napp.view.adapter.AgendamentoProfissionaAdapter;
 import com.fatecourinhos.napp.view.listener.OnAgendamentoInteractionListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -40,7 +38,7 @@ public class AgendamentoProfissionalFragment extends Fragment {
     private View view;
     private Context context;
     private List<Agendamento> agendamentos;
-    private AgendamentoAlunoAdapter agendamentoAlunoAdapter;
+    private AgendamentoProfissionaAdapter agendamentoProfissionaAdapter;
 
     @Nullable
     @Override
@@ -118,6 +116,7 @@ public class AgendamentoProfissionalFragment extends Fragment {
 
             try {
                 conteudo = HttpManager.getDados(params[0]);
+                System.out.println(conteudo);
             } catch (Exception e) {
                 conteudo = null;
             }
@@ -127,11 +126,11 @@ public class AgendamentoProfissionalFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(final List<Agendamento> agendamentos) {
+        protected void onPostExecute(List<Agendamento> agendamentos) {
             super.onPostExecute(agendamentos);
 
-            agendamentoAlunoAdapter = new AgendamentoAlunoAdapter(agendamentos, listener);
-            viewHolder.recyclerViewAgendamento.setAdapter(agendamentoAlunoAdapter);
+            agendamentoProfissionaAdapter = new AgendamentoProfissionaAdapter(agendamentos, listener);
+            viewHolder.recyclerViewAgendamento.setAdapter(agendamentoProfissionaAdapter);
         }
 
     }

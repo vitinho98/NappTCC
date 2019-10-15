@@ -30,7 +30,7 @@ public class AgendamentoAlunoViewHolder extends RecyclerView.ViewHolder {
 
     public void bindData(final Agendamento agendamento, final OnAgendamentoInteractionListener listener) {
 
-        SimpleDateFormat dataHoraFormater = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        SimpleDateFormat dataHoraFormater = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
         textViewProfissional.setText(agendamento.getFkHorario().getFkProfissional().getNomeProfissional());
         textViewHorario.setText(dataHoraFormater.format(agendamento.getFkHorario().getData()));

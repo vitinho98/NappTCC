@@ -30,9 +30,9 @@ public class AgendamentoProfissionalViewHolder extends RecyclerView.ViewHolder {
 
     public void bindData(final Agendamento agendamento, final OnAgendamentoInteractionListener listener) {
 
-        SimpleDateFormat dataHoraFormater = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        SimpleDateFormat dataHoraFormater = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-        textViewAluno.setText(agendamento.getFkHorario().getFkProfissional().getNomeProfissional());
+        textViewAluno.setText(agendamento.getFkAluno().getNomeAluno());
         textViewHorario.setText(dataHoraFormater.format(agendamento.getFkHorario().getData()));
         textViewLocal.setText(agendamento.getFkLocalAtendimento().getNomeLocal() != null ?
                 "Local: " + agendamento.getFkLocalAtendimento().getNomeLocal() :
@@ -49,6 +49,5 @@ public class AgendamentoProfissionalViewHolder extends RecyclerView.ViewHolder {
         });
 
     }
-
 
 }

@@ -30,7 +30,7 @@ public class AgendamentoProfissionaAdapter extends RecyclerView.Adapter<Agendame
     public AgendamentoProfissionalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.view_holder_agendamento_aluno, parent, false);
+        View view = layoutInflater.inflate(R.layout.view_holder_ag_prof, parent, false);
         return new AgendamentoProfissionalViewHolder(view);
     }
 

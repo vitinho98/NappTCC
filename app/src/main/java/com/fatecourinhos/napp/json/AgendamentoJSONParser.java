@@ -29,42 +29,43 @@ public class AgendamentoJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<Agendamento> agendamentos = new ArrayList<>();
 
-            LocalAtendimento localAtendimento = new LocalAtendimento();
-            Agendamento agendamento = new Agendamento();
-            Aluno aluno = new Aluno();
-            Horario horario = new Horario();
-            Profissional profissional = new Profissional();
-
             for (int i=0; i<jsonArray.length(); i++) {
 
+                LocalAtendimento localAtendimento = new LocalAtendimento();
+                Agendamento agendamento = new Agendamento();
+                Aluno aluno = new Aluno();
+                Horario horario = new Horario();
+                Profissional profissional = new Profissional();
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                localAtendimento.setIdLocalAtendimento(jsonObject.getInt("idLocalAtendimento"));
-                localAtendimento.setNomeBloco(jsonObject.getString("nomeBloco"));
-                localAtendimento.setNomeLocal(jsonObject.getString("nomeLocal"));
-                agendamento.setFkLocalAtendimento(localAtendimento);
+                //-------------------------------------------------------------------------------------------------------------------------//
+
+                try {
+
+                    localAtendimento.setIdLocalAtendimento(jsonObject.getInt("idLocalAtendimento"));
+                    localAtendimento.setNomeBloco(jsonObject.getString("nomeBloco"));
+                    localAtendimento.setNomeLocal(jsonObject.getString("nomeLocal"));
+                    agendamento.setFkLocalAtendimento(localAtendimento);
+
+                } catch (Exception e) {
+                    localAtendimento.setIdLocalAtendimento(null);
+                    localAtendimento.setNomeBloco(null);
+                    localAtendimento.setNomeLocal(null);
+                    agendamento.setFkLocalAtendimento(localAtendimento);
+                }
 
                 //-------------------------------------------------------------------------------------------------------------------------//
 
                 aluno.setIdAluno(jsonObject.getInt("idAluno"));
                 aluno.setNomeAluno(jsonObject.getString("nomeAluno"));
-                aluno.setAnoEntrada(jsonObject.getString("anoEntrada"));
-                aluno.setCelularAluno(jsonObject.getString("celularAluno"));
-                aluno.setSexo(jsonObject.getString("sexo"));
-                aluno.setCidadeAluno(jsonObject.getString("cidadeAluno"));
-                aluno.setCpf(jsonObject.getString("cpf"));
-                aluno.setDataNascimento(jsonObject.getString("dataNascimento"));
-                aluno.setEmailAluno(jsonObject.getString("emailAluno"));
-                aluno.setCurso(jsonObject.getString("curso"));
-                aluno.setSemestre(jsonObject.getInt("semestre"));
-                aluno.setRa(jsonObject.getString("ra"));
-                aluno.setEstadoCivil(jsonObject.getString("estadoCivil"));
                 agendamento.setFkAluno(aluno);
 
                 //-------------------------------------------------------------------------------------------------------------------------//
 
                 profissional.setIdProfissional(jsonObject.getInt("idProfissional"));
                 profissional.setNomeProfissional(jsonObject.getString("nomeProfissional"));
+
+                //-------------------------------------------------------------------------------------------------------------------------//
 
                 String data = jsonObject.getString("dataHora");
                 ano = data.substring(0,4);
@@ -79,10 +80,11 @@ public class AgendamentoJSONParser {
                 horario.setIdHorarioProfissional(jsonObject.getInt("idHorarioProfissional"));
                 horario.setData(calendar.getTime());
                 horario.setFkProfissional(profissional);
-                agendamento.setFkHorario(horario);
 
                 //-------------------------------------------------------------------------------------------------------------------------//
 
+                agendamento.setFkHorario(horario);
+                agendamento.setIdAgendamento(jsonObject.getInt("idAgendamento"));
                 agendamentos.add(agendamento);
             }
 

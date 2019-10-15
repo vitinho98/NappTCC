@@ -15,6 +15,7 @@ import com.fatecourinhos.napp.view.cadastros.CadastroLocalAtendimento;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissional;
 import com.fatecourinhos.napp.view.cadastros.CadastroProfissionalExterno;
 import com.fatecourinhos.napp.view.cadastros.CadastroResponsavel;
+import com.fatecourinhos.napp.view.fragments.AgendamentoProfissionalFragment;
 import com.fatecourinhos.napp.view.fragments.CampoAtuacaoFragment;
 
 import com.fatecourinhos.napp.view.fragments.DiagnosticoFragment;
@@ -162,6 +163,15 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
         Fragment fragment = null;
 
         switch (itemid) {
+
+            case R.id.nav_agendamento:
+                fragment = new AgendamentoProfissionalFragment();
+                if (fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_layout_nav, fragment,"AGENDAMENTO");
+                    ft.commit();
+                }
+                break;
 
             case R.id.nav_profissional:
                 fragment = new ProfissionalFragment();

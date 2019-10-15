@@ -2,7 +2,7 @@ package com.fatecourinhos.napp.model;
 
 public class LocalAtendimento {
 
-    private int idLocalAtendimento;
+    private Integer idLocalAtendimento;
     private String nomeLocal;
     private String nomeBloco;
 
@@ -10,11 +10,11 @@ public class LocalAtendimento {
 
     }
 
-    public int getIdLocalAtendimento() {
+    public Integer getIdLocalAtendimento() {
         return idLocalAtendimento;
     }
 
-    public void setIdLocalAtendimento(int idLocalAtendimento) {
+    public void setIdLocalAtendimento(Integer idLocalAtendimento) {
         this.idLocalAtendimento = idLocalAtendimento;
     }
 
