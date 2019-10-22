@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private AppCompatEditText editTextLogin, editTextSenha;
     private TextInputLayout textInputLayoutLogin, textInputLayoutSenha;
     private ImageView imgSobre;
-    private TextView txtCadastrar;
+    private TextView txtCadastrar, txtRecuperarSenha;
     private Button btnLogin;
     private ProgressBar pgBar;
 
@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btn_entrar);
         txtCadastrar = findViewById(R.id.txt_cadastrar);
+        txtRecuperarSenha = findViewById(R.id.txt_esqueci_senha);
         imgSobre = findViewById(R.id.img_sobre);
 
         textInputLayoutLogin = findViewById(R.id.txt_layout_login);
@@ -104,6 +105,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, CadastroAluno.class));
+            }
+        });
+
+        txtRecuperarSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RecuperarSenhaActivity.class));
             }
         });
 
