@@ -102,13 +102,13 @@ public class AlterarSenha extends AppCompatDialogFragment {
 
         if (bol)
             if (editTextNovaSenha2.getText().toString().equals(editTextNovaSenha.getText().toString()))
-                alterarSenha(idUsuario, editTextNovaSenha2.getText().toString());
+                alterarSenha(idUsuario, editTextSenhaAtual.getText().toString() ,editTextNovaSenha.getText().toString());
             else
                 Toast.makeText(getContext(), "Senhas diferentes!", Toast.LENGTH_LONG).show();
 
     }
 
-    private void alterarSenha(int id, String senha) {
+    private void alterarSenha(int id, String senhaAtual, String senhaNova) {
 
         String uri = "http://vitorsilva.xyz/napp/usuario/alterarSenha.php";
         RequestHttp requestHttp = new RequestHttp();
@@ -116,9 +116,9 @@ public class AlterarSenha extends AppCompatDialogFragment {
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-        System.out.println(id);
         requestHttp.setParametro("idUsuario", String.valueOf(id));
-        requestHttp.setParametro("senha", senha);
+        requestHttp.setParametro("senhaAtual", senhaAtual);
+        requestHttp.setParametro("senhaNova", senhaNova);
 
         task.execute(requestHttp);
 
@@ -137,7 +137,7 @@ public class AlterarSenha extends AppCompatDialogFragment {
             try {
 
                 conteudo = HttpManager.getDados(params[0]);
-                System.out.println(conteudo);
+
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
                 else
