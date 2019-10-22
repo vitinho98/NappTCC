@@ -34,6 +34,7 @@
     <string name="item_horario_atendimento">Horário de Atendimento</string>
     <string name="item_responsavel">Responsavel</string>
     <string name="item_sair">Sair</string>
+    <string name="item_alterar_senha">Alterar Senha</string>
     <string name="item_diagnostico">Diagnóstico</string>
     <string name="item_campo_atuacao">Campo de atuação</string>
 

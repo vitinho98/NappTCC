@@ -71,9 +71,9 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
                 FragmentManager fragmentManager = MenuProfissionalActivity.this.getSupportFragmentManager();
                 List<Fragment> fragments = fragmentManager.getFragments();
 
-                if(fragments != null)
-                    for(Fragment fragment : fragments)
-                        if(fragment != null && fragment.isVisible())
+                if (fragments != null)
+                    for (Fragment fragment : fragments)
+                        if (fragment != null && fragment.isVisible())
                             ativo = fragment;
 
                 switch (ativo.getTag()) {
@@ -144,6 +144,12 @@ public class MenuProfissionalActivity extends AppCompatActivity implements Navig
 
             startActivity(new Intent(MenuProfissionalActivity.this, LoginActivity.class));
             finish();
+
+        } else  if (id == R.id.trocar_senha) {
+
+            AlterarSenha dialog = new AlterarSenha();
+            dialog.show(getSupportFragmentManager(), "ALTERAR SENHA");
+
         }
 
         return super.onOptionsItemSelected(item);

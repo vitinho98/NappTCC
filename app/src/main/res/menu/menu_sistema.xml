@@ -2,9 +2,17 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/trocar_senha"
+        android:orderInCategory="100"
+        android:title="@string/item_alterar_senha"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/sair"
         android:orderInCategory="100"
         android:title="@string/item_sair"
         app:showAsAction="never" />
+
 </menu>

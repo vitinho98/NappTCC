@@ -92,6 +92,11 @@ public class MenuAlunoActivity extends AppCompatActivity {
 
             startActivity(new Intent(MenuAlunoActivity.this, LoginActivity.class));
             finish();
+        } else  if (id == R.id.trocar_senha) {
+
+            AlterarSenha dialog = new AlterarSenha();
+            dialog.show(getSupportFragmentManager(), "ALTERAR SENHA");
+
         }
 
         return super.onOptionsItemSelected(item);

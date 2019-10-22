@@ -36,10 +36,10 @@ public class AgendamentoProfissionalViewHolder extends RecyclerView.ViewHolder {
         textViewHorario.setText(dataHoraFormater.format(agendamento.getFkHorario().getData()));
         textViewLocal.setText(agendamento.getFkLocalAtendimento().getNomeLocal() != null ?
                 "Local: " + agendamento.getFkLocalAtendimento().getNomeLocal() :
-                "A definir");
+                "Local: A definir");
         textViewBloco.setText(agendamento.getFkLocalAtendimento().getNomeBloco() != null ?
                 "Bloco: " + agendamento.getFkLocalAtendimento().getNomeBloco() :
-                "A definir");
+                "Bloco: A definir");
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
