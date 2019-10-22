@@ -18,6 +18,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:padding="16dp"
             android:layout_width="299dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -32,26 +33,30 @@
                 android:id="@+id/txt_nome_aluno_ag_prof"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:layout_marginBottom="5dp"/>
 
             <TextView
                 android:id="@+id/txt_data_hora_ag_prof"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:layout_marginBottom="5dp"/>
 
             <TextView
                 android:id="@+id/txt_local_ag_prof"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:layout_marginBottom="5dp"/>
 
 
             <TextView
                 android:id="@+id/txt_bloco_ag_prof"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:layout_marginBottom="5dp"/>
 
         </LinearLayout>
 
