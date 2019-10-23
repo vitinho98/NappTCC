@@ -102,7 +102,7 @@ public class AlterarSenha extends AppCompatDialogFragment {
 
         if (bol)
             if (editTextNovaSenha2.getText().toString().equals(editTextNovaSenha.getText().toString()))
-                alterarSenha(idUsuario, editTextSenhaAtual.getText().toString() ,editTextNovaSenha.getText().toString());
+                alterarSenha(idUsuario, editTextSenhaAtual.getText().toString(), editTextNovaSenha.getText().toString());
             else
                 Toast.makeText(getContext(), "Senhas diferentes!", Toast.LENGTH_LONG).show();
 
