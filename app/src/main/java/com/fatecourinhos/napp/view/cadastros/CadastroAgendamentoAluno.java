@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CadastroAgendamentoAluno extends AppCompatActivity {
+
     boolean sucesso;
     Aluno aluno;
     Profissional profissional;
@@ -84,11 +85,11 @@ public class CadastroAgendamentoAluno extends AppCompatActivity {
                 agendamento = new Agendamento();
                 aluno = new Aluno();
 
-                profissional = profissionais.get(spinner.getSelectedItemPosition());
-                horario.setFkProfissional(profissional);
-
                 if (preferences.contains("idAluno"))
                     aluno.setIdAluno(preferences.getInt("idAluno", 0));
+
+                profissional = profissionais.get(spinner.getSelectedItemPosition());
+                horario.setFkProfissional(profissional);
 
                 agendamento.setFkHorario(horario);
                 agendamento.setFkAluno(aluno);
@@ -138,6 +139,7 @@ public class CadastroAgendamentoAluno extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(ProgressBar.VISIBLE);
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -160,6 +162,7 @@ public class CadastroAgendamentoAluno extends AppCompatActivity {
 
             adapter = new HorarioProfissionalAdapter(agendaProfissional, listener);
             viewHolder.recyclerViewHorarios.setAdapter(adapter);
+            progressBar.setVisibility(ProgressBar.INVISIBLE);
         }
 
     }
