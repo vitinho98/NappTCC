@@ -30,7 +30,7 @@ public class AlunoJSONParser {
 
                 aluno.setIdAluno(jsonObject.getInt("idAluno"));
                 aluno.setNomeAluno(jsonObject.getString("nomeAluno"));
-                aluno.setAnoEntrada(jsonObject.getString("anoEntrada"));
+                /*aluno.setAnoEntrada(jsonObject.getString("anoEntrada"));
                 aluno.setCelularAluno(jsonObject.getString("celularAluno"));
                 aluno.setSexo(jsonObject.getString("sexo"));
                 aluno.setCidadeAluno(jsonObject.getString("cidadeAluno"));
@@ -47,7 +47,7 @@ public class AlunoJSONParser {
                 usuario.setSenha(jsonObject.getString("senha"));
                 usuario.setTipoUsuario(jsonObject.getString("tipoUsuario"));
                 usuario.setStatus(jsonObject.getInt("status"));
-                aluno.setFkUsuario(usuario);
+                aluno.setFkUsuario(usuario);*/
 
                 alunos.add(aluno);
 

@@ -1,7 +1,6 @@
 package com.fatecourinhos.napp.view.cadastros;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -11,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,26 +28,23 @@ import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.adapter.HorarioProfissionalAdapter;
 import com.fatecourinhos.napp.view.listener.OnHorarioProfissionalnteractionListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CadastroAgendamentoAluno extends AppCompatActivity {
 
-    boolean sucesso;
     Aluno aluno;
     Profissional profissional;
     Agendamento agendamento;
+
     OnHorarioProfissionalnteractionListener listener;
     HorarioProfissionalAdapter adapter;
     private SharedPreferences preferences;
     ViewHolder viewHolder = new ViewHolder();
 
     String conteudo;
-    SimpleDateFormat dataFormater = new SimpleDateFormat("dd/MM");
-    SimpleDateFormat horaFormater = new SimpleDateFormat("HH:mm");
 
-    List<Horario> agendaProfissional;
+    List<Horario> horarios;
     List<Profissional> profissionais ;
     List<String> nomes = new ArrayList<>();
 
@@ -94,18 +89,13 @@ public class CadastroAgendamentoAluno extends AppCompatActivity {
                 agendamento.setFkHorario(horario);
                 agendamento.setFkAluno(aluno);
 
-                new AlertDialog.Builder(CadastroAgendamentoAluno.this)
-                        .setTitle("Confirmar agendamento")
-                        .setMessage("Deseja confirmar o agendamento com " + agendamento.getFkHorario().getFkProfissional().getNomeProfissional() +
-                                    " no dia " + dataFormater.format(horario.getData()) + " às " + horaFormater.format(horario.getData()) + "?")
-                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                cadastrarAgendamento(agendamento);
-                            }
-                        })
-                        .setNeutralButton("Não", null)
-                        .show();
+                Intent intent = new Intent(CadastroAgendamentoAluno.this, ConfirmarCadastroAgendamento.class);
+                intent.putExtra("idAluno", aluno.getIdAluno());
+                intent.putExtra("idHorario", agendamento.getFkHorario().getIdHorarioProfissional());
+                intent.putExtra("dataHora", agendamento.getFkHorario().getData().getTime());
+                intent.putExtra("nomeProfissional", agendamento.getFkHorario().getFkProfissional().getNomeProfissional());
+
+                startActivity(intent);
 
             }
 
@@ -152,15 +142,15 @@ public class CadastroAgendamentoAluno extends AppCompatActivity {
                 conteudo = null;
             }
 
-            agendaProfissional = HorarioProfissionalJSONParser.parseDados(conteudo);
-            return agendaProfissional;
+            horarios = HorarioProfissionalJSONParser.parseDados(conteudo);
+            return horarios;
         }
 
         @Override
         protected void onPostExecute(final List<Horario> agendasProfissional) {
             super.onPostExecute(agendasProfissional);
 
-            adapter = new HorarioProfissionalAdapter(agendaProfissional, listener);
+            adapter = new HorarioProfissionalAdapter(horarios, listener);
             viewHolder.recyclerViewHorarios.setAdapter(adapter);
             progressBar.setVisibility(ProgressBar.INVISIBLE);
         }
@@ -206,60 +196,6 @@ public class CadastroAgendamentoAluno extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, nomes);
             spinner.setAdapter(adapter);
 
-        }
-
-    }
-
-    private void cadastrarAgendamento(Agendamento agendamento) {
-
-        String uri = "http://vitorsilva.xyz/napp/agendamento/cadastrarAgendamento.php";
-        CadastrarAgendamento mytask = new CadastrarAgendamento();
-        RequestHttp requestHttp = new RequestHttp();
-
-        requestHttp.setUrl(uri);
-        requestHttp.setMetodo("GET");
-        requestHttp.setParametro("idHorario", String.valueOf(agendamento.getFkHorario().getIdHorarioProfissional()));
-        requestHttp.setParametro("idAluno", String.valueOf(agendamento.getFkAluno().getIdAluno()));
-
-        mytask.execute(requestHttp);
-
-    }
-
-    private class CadastrarAgendamento extends AsyncTask<RequestHttp, String, String> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(RequestHttp... params) {
-
-            try {
-
-                conteudo = HttpManager.getDados(params[0]);
-
-                if (conteudo.contains("Sucesso"))
-                    sucesso = true;
-                else
-                    sucesso = false;
-
-            } catch (Exception e) {
-                sucesso = false;
-            }
-
-            return conteudo;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            if (sucesso) {
-                Toast.makeText(getApplicationContext(), "Agendamento cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-                finish();
-            } else
-                Toast.makeText(getApplicationContext(),"Erro ao cadastrar o agendamento", Toast.LENGTH_SHORT).show();
         }
 
     }

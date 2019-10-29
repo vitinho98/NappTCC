@@ -6,6 +6,8 @@ public class Agendamento {
     private Aluno fkAluno;
     private LocalAtendimento fkLocalAtendimento;
     private Horario fkHorario;
+    private String motivo;
+    private String observacao;
 
     public Agendamento() {
 
@@ -41,6 +43,22 @@ public class Agendamento {
 
     public void setFkHorario(Horario fkHorario) {
         this.fkHorario = fkHorario;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
 }

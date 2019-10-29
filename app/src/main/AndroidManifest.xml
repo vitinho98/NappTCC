@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.fatecourinhos.napp">
 
@@ -16,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.RecuperarSenhaActivity"></activity>
+
         <activity android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.MenuProfissionalActivity"
             android:label="@string/title_activity_menu_profissional"
@@ -31,7 +33,12 @@
         <activity
             android:name=".view.MenuAlunoActivity"
             android:label="@string/title_activity_menu_aluno" />
+
+        <activity android:name=".view.RecuperarSenhaActivity"/>
         <activity android:name=".view.cadastros.CadastroHorario" />
+        <activity android:name=".view.cadastros.CadastroMensagem" />
+        <activity android:name=".view.cadastros.CadastroMensagem2" />
+        <activity android:name=".view.cadastros.ConfirmarCadastroAgendamento" />
         <activity android:name=".view.cadastros.CadastroAluno" />
         <activity android:name=".view.cadastros.CadastroProfissional" />
         <activity android:name=".view.cadastros.CadastroLocalAtendimento" />
@@ -42,6 +49,7 @@
         <activity android:name=".view.SobreActivity" />
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.cadastros.CadastroAgendamentoAluno" />
+
     </application>
 
 </manifest>

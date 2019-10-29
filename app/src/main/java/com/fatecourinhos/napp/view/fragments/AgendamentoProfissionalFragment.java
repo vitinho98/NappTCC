@@ -116,7 +116,6 @@ public class AgendamentoProfissionalFragment extends Fragment {
 
             try {
                 conteudo = HttpManager.getDados(params[0]);
-                System.out.println(conteudo);
             } catch (Exception e) {
                 conteudo = null;
             }
