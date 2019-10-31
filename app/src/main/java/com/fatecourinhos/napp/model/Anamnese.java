@@ -1,6 +1,6 @@
 package com.fatecourinhos.napp.model;
 
-public class AnamneseModel {
+public class Anamnese {
 
     private int idAnamnese;
     private Aluno fkAluno;
@@ -13,13 +13,8 @@ public class AnamneseModel {
     private int questao7;
     private int questao8;
     private int questao9;
-    private int questao10;
-    private int questao11;
-    private int questao12;
-    private int questao13;
-    private int questao14;
 
-    public AnamneseModel() {
+    public Anamnese() {
     }
 
     public int getIdAnamnese() {
@@ -108,45 +103,5 @@ public class AnamneseModel {
 
     public void setQuestao9(int questao9) {
         this.questao9 = questao9;
-    }
-
-    public int getQuestao10() {
-        return questao10;
-    }
-
-    public void setQuestao10(int questao10) {
-        this.questao10 = questao10;
-    }
-
-    public int getQuestao11() {
-        return questao11;
-    }
-
-    public void setQuestao11(int questao11) {
-        this.questao11 = questao11;
-    }
-
-    public int getQuestao12() {
-        return questao12;
-    }
-
-    public void setQuestao12(int questao12) {
-        this.questao12 = questao12;
-    }
-
-    public int getQuestao13() {
-        return questao13;
-    }
-
-    public void setQuestao13(int questao13) {
-        this.questao13 = questao13;
-    }
-
-    public int getQuestao14() {
-        return questao14;
-    }
-
-    public void setQuestao14(int questao14) {
-        this.questao14 = questao14;
     }
 }
