@@ -1,5 +1,7 @@
 package com.fatecourinhos.napp.view.cadastros;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -27,8 +29,10 @@ public class CadastroMensagem2 extends AppCompatActivity {
     private ProgressBar progressBar;
     private Button btnEnviarMsg;
 
+    private SharedPreferences preferences;
     private List<Aluno> alunos;
     private String conteudo;
+    private int idProfissional;
     private boolean sucesso;
     private String mensagem;
 
@@ -39,6 +43,10 @@ public class CadastroMensagem2 extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enviar_mensagem2);
+
+        preferences = getSharedPreferences("user_settings", Context.MODE_PRIVATE);
+        if (preferences.contains("idProfissional"))
+            idProfissional = preferences.getInt("idProfissional", 0);
 
         if (getIntent().getExtras() != null) {
             mensagem = getIntent().getExtras().getString("msg");
@@ -117,19 +125,21 @@ public class CadastroMensagem2 extends AppCompatActivity {
 
     private void inserirMensagens(){
 
-        String uri = "http://vitorsilva.xyz/napp/diagnostico/inserirDiagnostico.php";
+        String uri = "http://vitorsilva.xyz/napp/mensagem/inserirMensagem.php";
         RequestHttp requestHttp = new RequestHttp();
-        InserirDiagnostico task = new InserirDiagnostico();
+        InserirMensagem task = new InserirMensagem();
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-        requestHttp.setParametro("nomeDiagnostico", String.valueOf(ids));
+        requestHttp.setParametro("mensagem", mensagem);
+        requestHttp.setParametro("ids", String.valueOf(ids));
+        requestHttp.setParametro("idProfissional", String.valueOf(idProfissional));
 
         task.execute(requestHttp);
 
     }
 
-    private class InserirDiagnostico extends AsyncTask<RequestHttp, String, String> {
+    private class InserirMensagem extends AsyncTask<RequestHttp, String, String> {
 
         @Override
         protected void onPreExecute() {
