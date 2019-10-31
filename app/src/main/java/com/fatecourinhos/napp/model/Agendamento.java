@@ -8,6 +8,7 @@ public class Agendamento {
     private Horario fkHorario;
     private String motivo;
     private String observacao;
+    private String status;
 
     public Agendamento() {
 
@@ -59,6 +60,14 @@ public class Agendamento {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

@@ -194,10 +194,10 @@ public class ConfirmarCadastroAgendamento extends AppCompatActivity {
             super.onPostExecute(s);
 
             if (sucesso) {
-                Toast.makeText(getApplicationContext(), "Agendamento cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Agendamento cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
                 finish();
             } else
-                Toast.makeText(getApplicationContext(),"Erro ao cadastrar o agendamento", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Você já possui um agendamento com esse profissional!", Toast.LENGTH_SHORT).show();
         }
 
     }

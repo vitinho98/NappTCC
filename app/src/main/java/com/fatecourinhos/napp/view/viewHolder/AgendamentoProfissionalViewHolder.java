@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
@@ -15,12 +16,14 @@ import java.text.SimpleDateFormat;
 
 public class AgendamentoProfissionalViewHolder extends RecyclerView.ViewHolder {
 
+    private CardView cardView;
     private ImageView imageView;
     private TextView textViewAluno, textViewHorario, textViewLocal, textViewBloco;
 
     public AgendamentoProfissionalViewHolder(@NonNull View itemView) {
         super(itemView);
 
+        cardView = itemView.findViewById(R.id.card_view_ag_prof);
         imageView = itemView.findViewById(R.id.img_cancelar_ag_prof);
         textViewAluno = itemView.findViewById(R.id.txt_nome_aluno_ag_prof);
         textViewHorario = itemView.findViewById(R.id.txt_data_hora_ag_prof);
@@ -41,10 +44,10 @@ public class AgendamentoProfissionalViewHolder extends RecyclerView.ViewHolder {
                 "Bloco: " + agendamento.getFkLocalAtendimento().getNomeBloco() :
                 "Bloco: A definir");
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+        cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                listener.onDeleteClick(agendamento);
+            public void onClick(View view) {
+                listener.onListClick(agendamento);
             }
         });
 

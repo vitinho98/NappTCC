@@ -52,18 +52,18 @@ public class AlterarSenha extends AppCompatDialogFragment {
         editTextNovaSenha2 = view.findViewById(R.id.edit_text_senha_nova2);
 
         dialog.setView(view).setTitle("Alterar Senha")
-
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
 
-                }).setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                conferirDados();
-            }
+                })
+                .setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        conferirDados();
+                    }
         });
 
         return dialog.create();

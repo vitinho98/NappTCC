@@ -1,9 +1,10 @@
-package com.fatecourinhos.napp.view.cadastros;
+package com.fatecourinhos.napp.view;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,74 +12,69 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.json.AlunoJSONParser;
+import com.fatecourinhos.napp.json.DiagnosticoJSONParser;
 import com.fatecourinhos.napp.model.Aluno;
+import com.fatecourinhos.napp.model.Diagnostico;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
+import com.fatecourinhos.napp.view.adapter.DiagnosticoAdapter;
+import com.fatecourinhos.napp.view.cadastros.CadastroMensagem2;
+import com.fatecourinhos.napp.view.fragments.DiagnosticoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CadastroMensagem2 extends AppCompatActivity {
+public class DefinirDiagnostico extends Activity {
 
     private LinearLayout linearLayout;
     private ProgressBar progressBar;
-    private Button btnEnviarMsg;
-
-    private SharedPreferences preferences;
-    private List<Aluno> alunos;
-    private String conteudo;
-    private int idProfissional;
-    private boolean sucesso;
-    private String mensagem;
+    private Button btnConfirmar;
 
     private CheckBox cb;
+    private List<Diagnostico> diagnosticos;
     private List<Integer> ids = new ArrayList<>();
+
+    private boolean sucesso;
+    private View view;
+    private String conteudo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.enviar_mensagem2);
+        setContentView(R.layout.definir_diagnostico);
 
-        preferences = getSharedPreferences("user_settings", Context.MODE_PRIVATE);
-        if (preferences.contains("idProfissional"))
-            idProfissional = preferences.getInt("idProfissional", 0);
+        progressBar = findViewById(R.id.progressBarDefinirDiagnostico);
+        linearLayout = findViewById(R.id.layout_diagnosticos);
+        btnConfirmar = findViewById(R.id.btn_confirmar_diagnostico);
 
-        if (getIntent().getExtras() != null) {
-            mensagem = getIntent().getExtras().getString("msg");
-        }
-
-        progressBar = findViewById(R.id.progressBarEnviarMsg);
-        linearLayout = findViewById(R.id.layout_checks);
-        btnEnviarMsg = findViewById(R.id.btn_enviar_msg);
-
-        selecionarAlunos();
-
+        selecionarDiagnosticos();
     }
 
-    private void selecionarAlunos() {
+    private void selecionarDiagnosticos() {
 
-        String uri = "http://vitorsilva.xyz/napp/aluno/selecionarAlunos.php";
-        SelecionarAlunos task = new SelecionarAlunos();
+        String uri = "http://vitorsilva.xyz/napp/diagnostico/selecionarDiagnosticos.php";
+        SelecionarDiagnosticos task = new SelecionarDiagnosticos();
 
         task.execute(uri);
 
     }
 
-    private class SelecionarAlunos extends AsyncTask<String, String, List<Aluno>> {
+    private class SelecionarDiagnosticos extends AsyncTask<String, String, List<Diagnostico>> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(ProgressBar.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
-        protected List<Aluno> doInBackground(String... params) {
+        protected List<Diagnostico> doInBackground(String... params) {
 
             try {
                 conteudo = HttpManager.getDados(params[0]);
@@ -86,37 +82,38 @@ public class CadastroMensagem2 extends AppCompatActivity {
                 conteudo = null;
             }
 
-            alunos = AlunoJSONParser.parseDados(conteudo);
-            return alunos;
+            diagnosticos = DiagnosticoJSONParser.parseDados(conteudo);
+            return diagnosticos;
         }
 
         @Override
-        protected void onPostExecute(final List<Aluno> alunos) {
-            super.onPostExecute(alunos);
+        protected void onPostExecute(final List<Diagnostico> diagnosticos) {
+            super.onPostExecute(diagnosticos);
 
-            for (Aluno aluno : alunos) {
+            for (Diagnostico diagnostico : diagnosticos) {
 
                 CheckBox checkBox = new CheckBox(getApplicationContext());
-                checkBox.setText(aluno.getNomeAluno());
-                checkBox.setId(aluno.getIdAluno());
+                checkBox.setText(diagnostico.getNomeDiagnostico());
+                checkBox.setId(diagnostico.getIdDiagnostico());
                 linearLayout.addView(checkBox);
 
             }
 
             progressBar.setVisibility(ProgressBar.INVISIBLE);
 
-            btnEnviarMsg.setOnClickListener(new View.OnClickListener() {
+            btnConfirmar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    for (Aluno aluno : alunos) {
+                    for (Diagnostico diagnostico : diagnosticos) {
                         cb = new CheckBox(getApplicationContext());
-                        cb = findViewById(aluno.getIdAluno());
+                        cb = findViewById(diagnostico.getIdDiagnostico());
                         if (cb.isChecked())
                             ids.add(cb.getId());
                     }
 
-                    inserirMensagens();
+                    if (!ids.isEmpty())
+                        definirDiagnostico();
 
                 }
             });
@@ -124,23 +121,22 @@ public class CadastroMensagem2 extends AppCompatActivity {
 
     }
 
-    private void inserirMensagens(){
+    private void definirDiagnostico(){
 
-        String uri = "http://vitorsilva.xyz/napp/mensagem/inserirMensagem.php";
+        String uri = "http://vitorsilva.xyz/napp/atendimento/definirDiagnostico.php";
         RequestHttp requestHttp = new RequestHttp();
-        InserirMensagem task = new InserirMensagem();
+        DefinirDiagnosticoo task = new DefinirDiagnosticoo();
 
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
-        requestHttp.setParametro("mensagem", mensagem);
+        requestHttp.setParametro("idAgendamento", String.valueOf(getIntent().getExtras().getInt("idAgendamento")));
         requestHttp.setParametro("ids", String.valueOf(ids));
-        requestHttp.setParametro("idProfissional", String.valueOf(idProfissional));
 
         task.execute(requestHttp);
 
     }
 
-    private class InserirMensagem extends AsyncTask<RequestHttp, String, String> {
+    private class DefinirDiagnosticoo extends AsyncTask<RequestHttp, String, String> {
 
         @Override
         protected void onPreExecute() {
@@ -172,7 +168,6 @@ public class CadastroMensagem2 extends AppCompatActivity {
 
             if (sucesso) {
                 Toast.makeText(getApplicationContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-                finish();
             } else
                 Toast.makeText(getApplicationContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
         }

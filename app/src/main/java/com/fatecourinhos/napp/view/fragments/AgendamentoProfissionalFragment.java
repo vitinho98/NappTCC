@@ -22,6 +22,7 @@ import com.fatecourinhos.napp.json.AgendamentoJSONParser;
 import com.fatecourinhos.napp.model.Agendamento;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
+import com.fatecourinhos.napp.view.ConfirmarAgendamentoProfissional;
 import com.fatecourinhos.napp.view.adapter.AgendamentoAlunoAdapter;
 import com.fatecourinhos.napp.view.adapter.AgendamentoProfissionaAdapter;
 import com.fatecourinhos.napp.view.listener.OnAgendamentoInteractionListener;
@@ -56,22 +57,17 @@ public class AgendamentoProfissionalFragment extends Fragment {
             @Override
             public void onListClick(Agendamento agendamento) {
 
+                ConfirmarAgendamentoProfissional dialog = new ConfirmarAgendamentoProfissional();
+                Bundle bundle = new Bundle();
+                bundle.putInt("idAgendamento", agendamento.getIdAgendamento());
+                bundle.putString("statusAgendamento", agendamento.getStatus());
+                dialog.setArguments(bundle);
+                dialog.show(getFragmentManager(), "CONFIRMAR AGENDAMENTO");
+
             }
 
             @Override
             public void onDeleteClick(Agendamento agendamento) {
-
-                new AlertDialog.Builder(context)
-                        .setTitle("Cancelar agendamento")
-                        .setMessage("Deseja realmente cancelar o agendamento?")
-                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //excluirLocalAtendimento(localAtendimento.getIdLocalAtendimento());
-                            }
-                        })
-                        .setNeutralButton("Não", null)
-                        .show();
 
             }
         };
