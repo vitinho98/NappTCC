@@ -54,7 +54,7 @@ public class CancelarAtendimento extends AppCompatDialogFragment {
 
     private void cancelarAtendimento(String motivo) {
 
-        String uri = "http://vitorsilva.xyz/napp/usuario/alterarSenha.php";
+        String uri = "http://vitorsilva.xyz/napp/agendamento/cancelarAgendamento.php";
         RequestHttp requestHttp = new RequestHttp();
         CancelarAtendimentoo task = new CancelarAtendimentoo();
 

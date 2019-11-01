@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +60,7 @@ public class ConfirmarCadastroAgendamento extends AppCompatActivity {
 
             agendamento.setFkAluno(aluno);
             agendamento.setFkHorario(horario);
-            agendamento.setMotivo(null);
+            agendamento.setMotivoAgendamento(null);
 
             txtNomeProfissional.setText(profissional.getNomeProfissional());
             txtDataHora.setText(dataFormater.format(agendamento.getFkHorario().getData()) + " às " + horaFormater.format(agendamento.getFkHorario().getData()));
@@ -89,17 +88,17 @@ public class ConfirmarCadastroAgendamento extends AppCompatActivity {
 
                 switch (id) {
                     case R.id.radio_btn_psicologico :
-                        agendamento.setMotivo("Psicologico");
+                        agendamento.setMotivoAgendamento("Psicologico");
                         editTextOutros.setVisibility(EditText.INVISIBLE);
                         break;
 
                     case R.id.radio_btn_familiares :
-                        agendamento.setMotivo("Familiar");
+                        agendamento.setMotivoAgendamento("Familiar");
                         editTextOutros.setVisibility(EditText.INVISIBLE);
                         break;
 
                     case R.id.radio_btn_pedagógico :
-                        agendamento.setMotivo("Pedagógico");
+                        agendamento.setMotivoAgendamento("Pedagógico");
                         editTextOutros.setVisibility(EditText.INVISIBLE);
                         break;
 
@@ -131,11 +130,11 @@ public class ConfirmarCadastroAgendamento extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Descreva o motivo!", Toast.LENGTH_SHORT).show();
                 return false;
             } else {
-                agendamento.setMotivo(editTextOutros.getText().toString());
+                agendamento.setMotivoAgendamento(editTextOutros.getText().toString());
                 return true;
             }
 
-        } else if (agendamento.getMotivo().isEmpty()) {
+        } else if (agendamento.getMotivoAgendamento().isEmpty()) {
             Toast.makeText(getApplicationContext(), "Selecione o motivo!", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -156,7 +155,7 @@ public class ConfirmarCadastroAgendamento extends AppCompatActivity {
         requestHttp.setMetodo("GET");
         requestHttp.setParametro("idHorario", String.valueOf(agendamento.getFkHorario().getIdHorarioProfissional()));
         requestHttp.setParametro("idAluno", String.valueOf(agendamento.getFkAluno().getIdAluno()));
-        requestHttp.setParametro("motivo", agendamento.getMotivo());
+        requestHttp.setParametro("motivo", agendamento.getMotivoAgendamento());
         requestHttp.setParametro("observacao", agendamento.getObservacao());
 
         mytask.execute(requestHttp);

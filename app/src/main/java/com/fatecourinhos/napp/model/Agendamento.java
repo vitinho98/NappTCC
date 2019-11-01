@@ -6,7 +6,8 @@ public class Agendamento {
     private Aluno fkAluno;
     private LocalAtendimento fkLocalAtendimento;
     private Horario fkHorario;
-    private String motivo;
+    private String motivoAgendamento;
+    private String motivoCancelamento;
     private String observacao;
     private String status;
 
@@ -46,12 +47,21 @@ public class Agendamento {
         this.fkHorario = fkHorario;
     }
 
-    public String getMotivo() {
-        return motivo;
+    public String getMotivoAgendamento() {
+        return motivoAgendamento;
     }
 
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
+    public void setMotivoAgendamento(String motivoAgendamento) {
+        this.motivoAgendamento = motivoAgendamento;
+    }
+
+
+    public String getMotivoCancelamento() {
+        return motivoCancelamento;
+    }
+
+    public void setMotivoCancelamento(String motivoCancelamento) {
+        this.motivoCancelamento = motivoCancelamento;
     }
 
     public String getObservacao() {

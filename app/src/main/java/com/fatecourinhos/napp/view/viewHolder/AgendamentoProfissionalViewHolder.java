@@ -3,6 +3,7 @@ package com.fatecourinhos.napp.view.viewHolder;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -44,10 +45,20 @@ public class AgendamentoProfissionalViewHolder extends RecyclerView.ViewHolder {
                 "Bloco: " + agendamento.getFkLocalAtendimento().getNomeBloco() :
                 "Bloco: A definir");
 
+        if(agendamento.getStatus().equals("Confirmado"))
+            imageView.setImageResource(R.drawable.ic_agendado);
+        else if(agendamento.getStatus().equals("Cancelado"))
+            imageView.setImageResource(R.drawable.ic_cancelado);
+        else if(agendamento.getStatus().equals("Atendido"))
+            imageView.setImageResource(R.drawable.ic_atendido);
+        else
+            imageView.setImageResource(R.drawable.ic_pendente);
+
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onListClick(agendamento);
+                if(!agendamento.getStatus().equals("Cancelado"))
+                    listener.onListClick(agendamento);
             }
         });
 
