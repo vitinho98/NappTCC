@@ -48,7 +48,9 @@ public class Atendimento extends AppCompatDialogFragment {
         btnPrognostico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), DefinirPrognostico.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

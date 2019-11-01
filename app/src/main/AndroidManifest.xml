@@ -28,6 +28,7 @@
             android:label="@string/title_activity_menu_aluno" />
         <activity android:name=".view.RecuperarSenhaActivity" />
         <activity android:name=".view.DefinirDiagnostico" />
+        <activity android:name=".view.DefinirPrognostico" />
         <activity android:name=".view.DefinirEncaminhamento" />
         <activity android:name=".view.cadastros.CadastroHorario" />
         <activity android:name=".view.cadastros.CadastroMensagem" />
