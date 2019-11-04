@@ -105,7 +105,10 @@ public class DefinirDiagnostico extends Activity {
                 @Override
                 public void onClick(View view) {
 
+                    ids.clear();
+
                     for (Diagnostico diagnostico : diagnosticos) {
+
                         cb = new CheckBox(getApplicationContext());
                         cb = findViewById(diagnostico.getIdDiagnostico());
                         if (cb.isChecked())
@@ -123,7 +126,8 @@ public class DefinirDiagnostico extends Activity {
 
     private void definirDiagnostico(){
 
-        String uri = "http://vitorsilva.xyz/napp/atendimento/definirDiagnostico.php";
+        //String uri = "http://vitorsilva.xyz/napp/atendimento/inserirDiagnostico.php";
+        String uri = "http://vitorsilva.xyz/napp/teste.php";
         RequestHttp requestHttp = new RequestHttp();
         DefinirDiagnosticoo task = new DefinirDiagnosticoo();
 
@@ -131,6 +135,7 @@ public class DefinirDiagnostico extends Activity {
         requestHttp.setUrl(uri);
         requestHttp.setParametro("idAgendamento", String.valueOf(getIntent().getExtras().getInt("idAgendamento")));
         requestHttp.setParametro("ids", String.valueOf(ids));
+        System.out.println(String.valueOf(ids));
 
         task.execute(requestHttp);
 
@@ -149,7 +154,7 @@ public class DefinirDiagnostico extends Activity {
             try {
 
                 conteudo = HttpManager.getDados(params[0]);
-
+                System.out.println(conteudo);
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
                 else
