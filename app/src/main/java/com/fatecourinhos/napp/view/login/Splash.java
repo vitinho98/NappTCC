@@ -11,6 +11,7 @@ import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.model.Usuario;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
+import com.fatecourinhos.napp.view.cadastros.aluno.CadastroAnamnese;
 import com.fatecourinhos.napp.view.menu.MenuAluno;
 import com.fatecourinhos.napp.view.menu.MenuProfissional;
 
@@ -35,10 +36,16 @@ public class Splash extends AppCompatActivity {
         if (validarShared()) {
 
             String tipoUsuario = preferences.getString("tipoUsuario", null);
+            int primeiroLogin = preferences.getInt("primeiroLogin", 0);
 
             if (tipoUsuario.contains("Aluno")) {
 
-                startActivity(new Intent(Splash.this, MenuAluno.class));
+                if(primeiroLogin == 1){
+                    startActivity(new Intent(Splash.this, MenuAluno.class));
+                }else{
+                    startActivity(new Intent(Splash.this, CadastroAnamnese.class));
+                }
+
                 finish();
 
             } else if (tipoUsuario.contains("Profissional") || tipoUsuario.contains("Administrador")) {

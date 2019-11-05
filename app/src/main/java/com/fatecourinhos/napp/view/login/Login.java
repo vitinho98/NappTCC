@@ -18,10 +18,12 @@ import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.json.AlunoJSONParser;
 import com.fatecourinhos.napp.json.ProfissionalJSONParser;
 import com.fatecourinhos.napp.model.Aluno;
+import com.fatecourinhos.napp.model.Anamnese;
 import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.model.Usuario;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
+import com.fatecourinhos.napp.view.cadastros.aluno.CadastroAnamnese;
 import com.fatecourinhos.napp.view.menu.MenuAluno;
 import com.fatecourinhos.napp.view.menu.MenuProfissional;
 import com.fatecourinhos.napp.view.senha.RecuperarSenha;
@@ -216,8 +218,13 @@ public class Login extends AppCompatActivity {
 
             adicionarPreferences(aluno);
 
-            startActivity(new Intent(Login.this, MenuAluno.class));
-            finish();
+            if(aluno.getFkUsuario().getPrimeiroLogin() == 1){
+                startActivity(new Intent(Login.this, MenuAluno.class));
+                finish();
+            }else{
+                startActivity(new Intent(Login.this, CadastroAnamnese.class));
+                finish();
+            }
 
         } else {
 

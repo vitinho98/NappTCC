@@ -7,6 +7,7 @@ public class Usuario {
     private String senha;
     private String tipoUsuario;
     private int status;
+    private int primeiroLogin;
 
     public Usuario() {
 
@@ -52,4 +53,11 @@ public class Usuario {
         this.status = status;
     }
 
+    public int getPrimeiroLogin() {
+        return primeiroLogin;
+    }
+
+    public void setPrimeiroLogin(int primeiroLogin) {
+        this.primeiroLogin = primeiroLogin;
+    }
 }
