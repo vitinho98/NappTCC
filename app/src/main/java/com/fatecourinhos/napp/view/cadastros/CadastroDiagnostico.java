@@ -23,6 +23,7 @@ public class CadastroDiagnostico extends AppCompatActivity {
 
     //variaveis globais
     private Diagnostico diagnostico;
+    private boolean inserir = true;
     private String conteudo;
     private boolean sucesso;
 
@@ -35,38 +36,31 @@ public class CadastroDiagnostico extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
 
             diagnostico.setIdDiagnostico(getIntent().getExtras().getInt("idDiagnostico"));
+            inserir = false;
 
             editTextNomeDiagnostico.setText(getIntent().getExtras().getString("nomeDiagnostico"));
-
             btnCadastrar.setText(R.string.btn_salvar);
-            btnCadastrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    if (editTextNomeDiagnostico.getText().toString().isEmpty())
-                        Toast.makeText(getApplicationContext(),"Insira o nome do diagnóstico", Toast.LENGTH_SHORT).show();
-                    else {
-                        diagnostico.setNomeDiagnostico(editTextNomeDiagnostico.getText().toString());
-                        alterarDiagnostico(diagnostico);
-                    }
-                }
-            });
-
-        } else {
-
-            btnCadastrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    if (editTextNomeDiagnostico.getText().toString().isEmpty())
-                        Toast.makeText(getApplicationContext(),"Insira o nome do diagnóstico", Toast.LENGTH_SHORT).show();
-                    else {
-                        diagnostico.setNomeDiagnostico(editTextNomeDiagnostico.getText().toString());
-                        inserirDiagnostico(diagnostico);
-                    }
-                }
-            });
         }
+
+
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (editTextNomeDiagnostico.getText().toString().isEmpty())
+                    Toast.makeText(getApplicationContext(),"Insira o nome do diagnóstico", Toast.LENGTH_SHORT).show();
+
+                else {
+                    diagnostico.setNomeDiagnostico(editTextNomeDiagnostico.getText().toString());
+
+                    if (inserir)
+                        inserirDiagnostico(diagnostico);
+                    else
+                        alterarDiagnostico(diagnostico);
+                }
+            }
+        });
+
     }
 
     private void getComponentes() {

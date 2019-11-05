@@ -30,9 +30,8 @@ public class MensagemAlunoViewHolder extends RecyclerView.ViewHolder {
     public void bindData(final Mensagem mensagem, final OnMensagemInteractionListener listener) {
 
         SimpleDateFormat dataHoraFormater = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
         textViewMsg.setText(mensagem.getMensagem());
-        textViewEnviadoPor.setText(mensagem.getFkProfissional().getNomeProfissional());
+        textViewEnviadoPor.setText("Enviado por: " + mensagem.getFkProfissional().getNomeProfissional());
         textViewDataHora.setText(dataHoraFormater.format(mensagem.getDataHora()));
 
         cardView.setOnClickListener(new View.OnClickListener() {

@@ -119,7 +119,7 @@ public class DefinirEncaminhamento extends Activity {
 
     private void definirEncaminhamento(){
 
-        String uri = "http://vitorsilva.xyz/napp/atendimento/definirEncaminhamento.php";
+        String uri = "http://vitorsilva.xyz/napp/atendimento/inserirEncaminhamento.php";
         RequestHttp requestHttp = new RequestHttp();
         DefinirEncaminhamentoo task = new DefinirEncaminhamentoo();
 

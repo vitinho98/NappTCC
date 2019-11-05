@@ -25,6 +25,7 @@ public class CadastroResponsavel extends AppCompatActivity {
     //variaveis globais
     private Responsavel responsavel;
     private String conteudo;
+    private boolean inserir = true;
     private boolean sucesso;
 
     @Override
@@ -35,54 +36,37 @@ public class CadastroResponsavel extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
 
+            inserir = false;
             responsavel.setIdResponsavel(getIntent().getExtras().getInt("idResponsavel"));
 
             editTextTelefoneResponsavel.setText(getIntent().getExtras().getString("telefoneResponsavel"));
             editTextNomeResponsavel.setText(getIntent().getExtras().getString("nomeResponsavel"));
             editTextCelularResponsavel.setText(getIntent().getExtras().getString("celularResponsavel"));
             editTextEmailResponsavel.setText(getIntent().getExtras().getString("emailResponsavel"));
-
             btnCadastrar.setText(R.string.btn_salvar);
-            btnCadastrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    if (conferirDados()) {
+        }
 
-                        responsavel.setTelefoneResponsavel(editTextTelefoneResponsavel.getText().toString());
-                        responsavel.setNomeResponsavel(editTextNomeResponsavel.getText().toString());
-                        responsavel.setEmailResponsavel(editTextEmailResponsavel.getText().toString());
-                        responsavel.setCelularResponsavel(editTextCelularResponsavel.getText().toString());
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                if (conferirDados()) {
+
+                    responsavel.setTelefoneResponsavel(editTextTelefoneResponsavel.getText().toString());
+                    responsavel.setNomeResponsavel(editTextNomeResponsavel.getText().toString());
+                    responsavel.setEmailResponsavel(editTextEmailResponsavel.getText().toString());
+                    responsavel.setCelularResponsavel(editTextCelularResponsavel.getText().toString());
+
+                    if (inserir)
+                        inserirResponsavel(responsavel);
+                    else
                         alterarResponsavel(responsavel);
 
-                    } else
-                        Toast.makeText(CadastroResponsavel.this,"Insira todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-        } else {
-
-            btnCadastrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if (conferirDados()) {
-
-                        responsavel.setTelefoneResponsavel(editTextTelefoneResponsavel.getText().toString());
-                        responsavel.setNomeResponsavel(editTextNomeResponsavel.getText().toString());
-                        responsavel.setEmailResponsavel(editTextEmailResponsavel.getText().toString());
-                        responsavel.setCelularResponsavel(editTextCelularResponsavel.getText().toString());
-
-                        inserirResponsavel(responsavel);
-
-                    } else
-                        Toast.makeText(CadastroResponsavel.this,"Insira todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-        }
+                } else
+                    Toast.makeText(CadastroResponsavel.this,"Insira todos os campos obrigatórios!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

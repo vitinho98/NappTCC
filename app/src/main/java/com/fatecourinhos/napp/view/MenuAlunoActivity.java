@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.view.fragments.AgendamentoAlunoFragment;
+import com.fatecourinhos.napp.view.fragments.FeedbackFragment;
+import com.fatecourinhos.napp.view.fragments.MensagemAlunoFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +38,7 @@ public class MenuAlunoActivity extends AppCompatActivity {
                     ft.commit();
                     return true;
 
-               /* case R.id.nav_mensagem:
+               case R.id.nav_mensagem:
 
                     fragment = new MensagemAlunoFragment();
                     ft.replace(R.id.frame_layout_aluno, fragment);
@@ -45,10 +47,10 @@ public class MenuAlunoActivity extends AppCompatActivity {
 
                 case R.id.nav_feedback:
 
-                    fragment = new Feedback();
+                    fragment = new FeedbackFragment();
                     ft.replace(R.id.frame_layout_aluno, fragment);
                     ft.commit();
-                    return true; */
+                    return true;
             }
 
             return false;
@@ -92,6 +94,7 @@ public class MenuAlunoActivity extends AppCompatActivity {
 
             startActivity(new Intent(MenuAlunoActivity.this, LoginActivity.class));
             finish();
+
         } else  if (id == R.id.trocar_senha) {
 
             AlterarSenha dialog = new AlterarSenha();

@@ -1,35 +1,33 @@
 package com.fatecourinhos.napp.view.fragments;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.json.MensagemJSONParser;
-import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.Mensagem;
 import com.fatecourinhos.napp.util.HttpManager;
-import com.fatecourinhos.napp.view.adapter.CampoAtuacaoAdapter;
+import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.adapter.MensagemAlunoAdapter;
-import com.fatecourinhos.napp.view.cadastros.CadastroCampoAtuacao;
-import com.fatecourinhos.napp.view.listener.OnCampoAtuacaoInteractionListener;
 import com.fatecourinhos.napp.view.listener.OnMensagemInteractionListener;
 
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MensagemAlunoFragment extends Fragment {
 
@@ -37,6 +35,8 @@ public class MensagemAlunoFragment extends Fragment {
     private boolean sucesso;
     private String conteudo;
     private List<Mensagem> mensagens;
+    private SharedPreferences preferences;
+    int id;
 
     //componentes da tela
     private ProgressBar progressBar;
@@ -49,10 +49,12 @@ public class MensagemAlunoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         getActivity().setTitle("Mensagens");
         view = inflater.inflate(R.layout.fragment_mensagens,container,false);
         context = view.getContext();
         viewHolder = new ViewHolder();
+        preferences = context.getSharedPreferences("user_settings", MODE_PRIVATE);
 
         progressBar = view.findViewById(R.id.progressBarMensagem);
 
@@ -83,8 +85,18 @@ public class MensagemAlunoFragment extends Fragment {
 
     private void selecionarMensagens() {
 
+        if (preferences.contains("idAluno")) {
+            id = preferences.getInt("idAluno", 0);
+        }
+
         String uri = "http://vitorsilva.xyz/napp/mensagem/selecionarMensagens.php";
         SelecionarMensagens task = new SelecionarMensagens();
+        RequestHttp requestHttp = new RequestHttp();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+        System.out.println(id);
+        requestHttp.setParametro("idAluno", String.valueOf(id));
 
         task.execute(uri);
 
@@ -98,11 +110,13 @@ public class MensagemAlunoFragment extends Fragment {
             progressBar.setVisibility(ProgressBar.VISIBLE);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         protected List<Mensagem> doInBackground(String... params) {
 
             try {
                 conteudo = HttpManager.getDados(params[0]);
+                System.out.println(conteudo);
             } catch (Exception e) {
                 conteudo = null;
             }

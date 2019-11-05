@@ -23,6 +23,7 @@ public class CadastroCampoAtuacao extends AppCompatActivity {
 
     //variaveis globais
     private CampoAtuacao campoAtuacao;
+    private boolean inserir = true;
     private String conteudo;
     private boolean sucesso;
 
@@ -34,39 +35,31 @@ public class CadastroCampoAtuacao extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
 
-            editTextNomeCampo.setText(getIntent().getExtras().getString("nomeCampoAtuacao"));
             campoAtuacao.setIdCampoAtuacao(getIntent().getExtras().getInt("idCampoAtuacao"));
+            inserir = false;
 
+            editTextNomeCampo.setText(getIntent().getExtras().getString("nomeCampoAtuacao"));
             btnCadastrar.setText(R.string.btn_salvar);
+        }
+
             btnCadastrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     if (editTextNomeCampo.getText().toString().isEmpty())
                         Toast.makeText(getApplicationContext(),"Insira o nome do campo de atuação", Toast.LENGTH_SHORT).show();
+
                     else {
                         campoAtuacao.setNomeCampoAtuacao(editTextNomeCampo.getText().toString());
-                        alterarCampoAtuacao(campoAtuacao);
+
+                        if (inserir)
+                            inserirCampoAtuacao(campoAtuacao);
+                        else
+                            alterarCampoAtuacao(campoAtuacao);
                     }
 
                 }
             });
-
-        } else {
-
-            btnCadastrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    if (editTextNomeCampo.getText().toString().isEmpty())
-                        Toast.makeText(getApplicationContext(), "Insira o nome do campo de atuação", Toast.LENGTH_SHORT).show();
-                    else {
-                        campoAtuacao.setNomeCampoAtuacao(editTextNomeCampo.getText().toString());
-                        inserirCampoAtuacao(campoAtuacao);
-                    }
-                }
-            });
-        }
     }
 
     private void getComponentes() {

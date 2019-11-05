@@ -1,8 +1,5 @@
 package com.fatecourinhos.napp.model;
 
-import java.util.Date;
-import java.util.List;
-
 public class Profissional {
 
     private int idProfissional;

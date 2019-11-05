@@ -36,6 +36,7 @@ public class CampoAtuacaoJSONParser {
         } catch (Exception e) {
             return null;
         }
+
     }
 
 }

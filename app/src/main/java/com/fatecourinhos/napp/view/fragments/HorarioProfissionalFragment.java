@@ -66,13 +66,6 @@ public class HorarioProfissionalFragment extends Fragment {
             @Override
             public void onListClick(Horario horario) {
 
-                /*
-                Intent intent = new Intent(getActivity(), CadastroHorario.class);
-                intent.putExtra("idHorario", horario.getIdHorarioProfissional());
-                intent.putExtra("dataHora", horario.getData());
-
-                startActivity(intent);
-                */
             }
 
             @Override

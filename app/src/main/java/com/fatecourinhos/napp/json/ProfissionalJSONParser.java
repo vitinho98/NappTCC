@@ -18,7 +18,7 @@ public class ProfissionalJSONParser {
             JSONArray jsonArray = new JSONArray(content);
             List<Profissional> profissionais = new ArrayList<>();
             Usuario usuario;
-            Profissional profissional ;
+            Profissional profissional;
 
             for (int i=0; i<jsonArray.length(); i++) {
 
@@ -47,6 +47,7 @@ public class ProfissionalJSONParser {
         } catch (Exception e) {
             return null;
         }
+
     }
 
 }

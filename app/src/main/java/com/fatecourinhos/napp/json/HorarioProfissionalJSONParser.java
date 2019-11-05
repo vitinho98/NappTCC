@@ -53,6 +53,7 @@ public class HorarioProfissionalJSONParser {
         } catch (Exception e) {
             return null;
         }
+
     }
 
 }

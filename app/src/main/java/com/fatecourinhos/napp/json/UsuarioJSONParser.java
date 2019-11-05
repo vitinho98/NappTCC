@@ -24,6 +24,7 @@ public class UsuarioJSONParser {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                 usuario = new Usuario();
+
                 usuario.setIdUsuario(jsonObject.getInt("idUsuario"));
                 usuario.setLogin(jsonObject.getString("login"));
                 usuario.setSenha(jsonObject.getString("senha"));
@@ -39,6 +40,7 @@ public class UsuarioJSONParser {
         } catch (Exception e) {
             return null;
         }
+
     }
 
 }

@@ -30,7 +30,6 @@ public class CadastroHorario extends AppCompatActivity {
     private Profissional profissional;
     private Horario horario;
     private String conteudo;
-    private boolean sucesso;
     private Calendar calendar;
 
     //componentes da tela

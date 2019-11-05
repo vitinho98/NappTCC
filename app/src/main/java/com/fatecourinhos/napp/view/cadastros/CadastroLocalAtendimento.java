@@ -24,6 +24,7 @@ public class CadastroLocalAtendimento extends AppCompatActivity {
     //variaveis gloabais
     private LocalAtendimento localAtendimento;
     private String conteudo;
+    private boolean inserir = true;
     private boolean sucesso;
 
     @Override
@@ -34,42 +35,32 @@ public class CadastroLocalAtendimento extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
 
+            inserir = false;
             localAtendimento.setIdLocalAtendimento(getIntent().getExtras().getInt("idLocalAtendimento"));
+
             editTextNomeBloco.setText(getIntent().getExtras().getString("nomeBloco"));
             editTextNomeLocal.setText(getIntent().getExtras().getString("nomeLocal"));
-
             btnCadastrar.setText(R.string.btn_salvar);
-            btnCadastrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    if (editTextNomeBloco.getText().toString().isEmpty() || editTextNomeLocal.getText().toString().isEmpty())
-                        Toast.makeText(getApplicationContext(), "Insira todos os campos", Toast.LENGTH_SHORT).show();
-                    else {
-                        localAtendimento.setNomeBloco(editTextNomeBloco.getText().toString());
-                        localAtendimento.setNomeLocal(editTextNomeLocal.getText().toString());
-                        alterarLocalAtendimento(localAtendimento);
-                    }
-
-                }
-            });
-
-        } else {
-
-            btnCadastrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    if (editTextNomeBloco.getText().toString().isEmpty() || editTextNomeLocal.getText().toString().isEmpty())
-                        Toast.makeText(getApplicationContext(), "Insira todos os campos", Toast.LENGTH_SHORT).show();
-                    else {
-                        localAtendimento.setNomeLocal(editTextNomeLocal.getText().toString());
-                        localAtendimento.setNomeBloco(editTextNomeBloco.getText().toString());
-                        inserirLocalAtendimento(localAtendimento);
-                    }
-                }
-            });
         }
+
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editTextNomeBloco.getText().toString().isEmpty() || editTextNomeLocal.getText().toString().isEmpty())
+                    Toast.makeText(getApplicationContext(), "Insira todos os campos", Toast.LENGTH_SHORT).show();
+                else {
+
+                    localAtendimento.setNomeBloco(editTextNomeBloco.getText().toString());
+                    localAtendimento.setNomeLocal(editTextNomeLocal.getText().toString());
+
+                    if (inserir)
+                        inserirLocalAtendimento(localAtendimento);
+                    else
+                        alterarLocalAtendimento(localAtendimento);
+                }
+            }
+        });
+
     }
 
     private void getComponentes() {

@@ -1,12 +1,11 @@
 package com.fatecourinhos.napp.model;
 
 import java.util.Date;
-import java.util.List;
 
 public class Mensagem {
 
     private int idMensagem;
-    private List<Aluno> fkAluno;
+    private Aluno fkAluno;
     private Profissional fkProfissional;
     private String mensagem;
     private Date dataHora;
@@ -23,11 +22,11 @@ public class Mensagem {
         this.idMensagem = idMensagem;
     }
 
-    public List<Aluno> getFkAluno() {
+    public Aluno getFkAluno() {
         return fkAluno;
     }
 
-    public void setFkAluno(List<Aluno> fkAluno) {
+    public void setFkAluno(Aluno fkAluno) {
         this.fkAluno = fkAluno;
     }
 

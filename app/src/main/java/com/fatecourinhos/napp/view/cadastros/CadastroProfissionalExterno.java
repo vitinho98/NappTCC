@@ -43,6 +43,7 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
     private List<String> nomesResponsaveis = new ArrayList<>();
 
     private boolean sucesso;
+    private boolean inserir = true;
     private String conteudo;
 
     //componentes da tela
@@ -74,22 +75,19 @@ public class CadastroProfissionalExterno extends AppCompatActivity {
             profissionalExterno.setIdProfissionalExterno(getIntent().getExtras().getInt("idProfissionalExterno"));
 
             btnCadastrar.setText(R.string.btn_salvar);
-            btnCadastrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    enviarDados(false);
-                }
-            });
+            inserir = false;
 
-        } else {
-
-            btnCadastrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    enviarDados(true);
-                }
-            });
         }
+
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (inserir)
+                    enviarDados(true);
+                else
+                    enviarDados(false);
+            }
+        });
 
     }
 

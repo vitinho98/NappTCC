@@ -46,11 +46,15 @@ public class SplashActivity extends AppCompatActivity {
 
                 isAtivo(usuario);
 
-            } else
+            } else {
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                finish();
+            }
 
-        } else
+        } else {
             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            finish();
+        }
 
     }
 
@@ -115,8 +119,11 @@ public class SplashActivity extends AppCompatActivity {
             if (ativo) {
                 startActivity(new Intent(SplashActivity.this, MenuProfissionalActivity.class));
                 finish();
-            } else
+            } else {
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                finish();
+            }
+
         }
 
     }

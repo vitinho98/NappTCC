@@ -83,8 +83,6 @@ public class ProfissionalFragment extends Fragment {
                 intent.putExtra("celularProfissional", profissional.getCelularProfissional());
 
                 intent.putExtra("idUsuario", profissional.getFkUsuario().getIdUsuario());
-                intent.putExtra("loginProfissional", profissional.getFkUsuario().getLogin());
-                intent.putExtra("senhaProfissional", profissional.getFkUsuario().getSenha());
                 intent.putExtra("tipoProfissional", profissional.getFkUsuario().getTipoUsuario());
                 intent.putExtra("statusProfissional", profissional.getFkUsuario().getStatus());
 

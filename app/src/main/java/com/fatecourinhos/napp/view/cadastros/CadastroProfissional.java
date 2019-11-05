@@ -27,6 +27,7 @@ public class CadastroProfissional extends AppCompatActivity {
     private Profissional profissional;
     private Usuario usuario;
     private String conteudo;
+    private boolean inserir = true;
     private boolean sucesso;
 
     //componentes da tela
@@ -43,16 +44,13 @@ public class CadastroProfissional extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
 
+            usuario.setTipoUsuario((String) getIntent().getExtras().get("tipoProfissional"));
+            usuario.setStatus((Integer) getIntent().getExtras().get("statusProfissional"));
+
             profissional.setNomeProfissional((String) getIntent().getExtras().get("nomeProfissional"));
             profissional.setCelularProfissional((String) getIntent().getExtras().get("celularProfissional"));
             profissional.setEmailProfissional((String) getIntent().getExtras().get("emailProfissional"));
             profissional.setIdProfissional(getIntent().getExtras().getInt("idProfissional"));
-
-            usuario.setLogin((String) getIntent().getExtras().get("loginProfissional"));
-            usuario.setSenha((String) getIntent().getExtras().get("senhaProfissional"));
-            usuario.setTipoUsuario((String) getIntent().getExtras().get("tipoProfissional"));
-            usuario.setStatus((Integer) getIntent().getExtras().get("statusProfissional"));
-
             profissional.setFkUsuario(usuario);
 
             editTextCel.setText(profissional.getCelularProfissional());
@@ -79,20 +77,18 @@ public class CadastroProfissional extends AppCompatActivity {
             }
 
             btnCadastrar.setText(R.string.btn_salvar);
-            btnCadastrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    enviarDados(false);
-                }
-            });
+            inserir = false;
+        }
 
-        } else
-            btnCadastrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (inserir)
                     enviarDados(true);
-                }
-            });
+                else
+                    enviarDados(false);
+            }
+        });
 
     }
 

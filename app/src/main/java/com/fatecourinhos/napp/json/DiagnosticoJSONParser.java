@@ -35,6 +35,7 @@ public class DiagnosticoJSONParser {
         } catch (Exception e) {
             return null;
         }
+
     }
     
 }

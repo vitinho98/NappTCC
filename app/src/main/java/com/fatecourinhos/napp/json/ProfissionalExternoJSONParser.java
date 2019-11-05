@@ -73,6 +73,7 @@ public class ProfissionalExternoJSONParser {
         } catch (Exception e) {
             return null;
         }
+
     }
 
 }

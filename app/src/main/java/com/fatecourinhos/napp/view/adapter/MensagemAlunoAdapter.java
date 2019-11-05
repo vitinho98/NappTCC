@@ -38,6 +38,7 @@ public class MensagemAlunoAdapter extends RecyclerView.Adapter<MensagemAlunoView
     public void onBindViewHolder(@NonNull MensagemAlunoViewHolder holder, int position) {
         Mensagem mensagem = mensagens.get(position);
         holder.bindData(mensagem, listener);
+
     }
 
     @Override
