@@ -55,7 +55,6 @@ public class Agendamento {
         this.motivoAgendamento = motivoAgendamento;
     }
 
-
     public String getMotivoCancelamento() {
         return motivoCancelamento;
     }
