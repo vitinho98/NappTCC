@@ -56,6 +56,7 @@ public class ConfirmarCadastroAgendamento extends AppCompatActivity {
             d.setTime(getIntent().getExtras().getLong("dataHora", -1));
 
             horario.setData(d);
+            horario.setIdHorarioProfissional(getIntent().getExtras().getInt("idHorario"));
             horario.setFkProfissional(profissional);
 
             agendamento.setFkAluno(aluno);
@@ -153,6 +154,10 @@ public class ConfirmarCadastroAgendamento extends AppCompatActivity {
 
         requestHttp.setUrl(uri);
         requestHttp.setMetodo("GET");
+        System.out.println(String.valueOf(agendamento.getFkHorario().getIdHorarioProfissional()));
+        System.out.println(String.valueOf(agendamento.getFkAluno().getIdAluno()));
+        System.out.println(agendamento.getMotivoAgendamento());
+        System.out.println(agendamento.getObservacao());
         requestHttp.setParametro("idHorario", String.valueOf(agendamento.getFkHorario().getIdHorarioProfissional()));
         requestHttp.setParametro("idAluno", String.valueOf(agendamento.getFkAluno().getIdAluno()));
         requestHttp.setParametro("motivo", agendamento.getMotivoAgendamento());

@@ -137,7 +137,7 @@ public class AgendamentoAlunoFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(final List<Agendamento> agendamentos) {
+        protected void onPostExecute(List<Agendamento> agendamentos) {
             super.onPostExecute(agendamentos);
 
             agendamentoAlunoAdapter = new AgendamentoAlunoAdapter(agendamentos, listener);

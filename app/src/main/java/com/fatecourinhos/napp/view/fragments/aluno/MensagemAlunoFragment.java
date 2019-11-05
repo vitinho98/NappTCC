@@ -18,10 +18,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.json.AgendamentoJSONParser;
 import com.fatecourinhos.napp.json.MensagemJSONParser;
+import com.fatecourinhos.napp.model.Agendamento;
 import com.fatecourinhos.napp.model.Mensagem;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
+import com.fatecourinhos.napp.view.adapter.aluno.AgendamentoAlunoAdapter;
 import com.fatecourinhos.napp.view.adapter.aluno.MensagemAlunoAdapter;
 import com.fatecourinhos.napp.view.listener.OnMensagemInteractionListener;
 
@@ -94,15 +97,14 @@ public class MensagemAlunoFragment extends Fragment {
         RequestHttp requestHttp = new RequestHttp();
 
         requestHttp.setMetodo("GET");
-        requestHttp.setUrl(uri);
-        System.out.println(id);
         requestHttp.setParametro("idAluno", String.valueOf(id));
+        requestHttp.setUrl(uri);
 
-        task.execute(uri);
+        task.execute(requestHttp);
 
     }
 
-    private class SelecionarMensagens extends AsyncTask<String, String, List<Mensagem>> {
+    private class SelecionarMensagens extends AsyncTask<RequestHttp, String, List<Mensagem>> {
 
         @Override
         protected void onPreExecute() {
@@ -112,11 +114,10 @@ public class MensagemAlunoFragment extends Fragment {
 
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
-        protected List<Mensagem> doInBackground(String... params) {
+        protected List<Mensagem> doInBackground(RequestHttp... params) {
 
             try {
                 conteudo = HttpManager.getDados(params[0]);
-                System.out.println(conteudo);
             } catch (Exception e) {
                 conteudo = null;
             }
