@@ -11,8 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.cadastros.AnamneseActivity"></activity>
-        <activity android:name=".view.SplashActivity">
+        <activity android:name=".view.cadastros.aluno.CadastroAnamnese"></activity>
+        <activity android:name=".view.login.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,30 +20,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.MenuProfissionalActivity"
+            android:name=".view.menu.MenuProfissional"
             android:label="@string/title_activity_menu_profissional"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.MenuAlunoActivity"
+            android:name=".view.menu.MenuAluno"
             android:label="@string/title_activity_menu_aluno" />
-        <activity android:name=".view.RecuperarSenhaActivity" />
-        <activity android:name=".view.DefinirDiagnostico" />
-        <activity android:name=".view.DefinirPrognostico" />
-        <activity android:name=".view.DefinirEncaminhamento" />
-        <activity android:name=".view.cadastros.CadastroHorario" />
-        <activity android:name=".view.cadastros.CadastroMensagem" />
-        <activity android:name=".view.cadastros.CadastroMensagem2" />
-        <activity android:name=".view.cadastros.ConfirmarCadastroAgendamento" />
-        <activity android:name=".view.cadastros.CadastroAluno" />
-        <activity android:name=".view.cadastros.CadastroProfissional" />
-        <activity android:name=".view.cadastros.CadastroLocalAtendimento" />
-        <activity android:name=".view.cadastros.CadastroDiagnostico" />
-        <activity android:name=".view.cadastros.CadastroCampoAtuacao" />
-        <activity android:name=".view.cadastros.CadastroProfissionalExterno" />
-        <activity android:name=".view.cadastros.CadastroResponsavel" />
-        <activity android:name=".view.SobreActivity" />
-        <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.cadastros.CadastroAgendamentoAluno" />
+        <activity android:name=".view.senha.RecuperarSenha" />
+        <activity android:name=".view.atendimento.DefinirDiagnostico" />
+        <activity android:name=".view.atendimento.DefinirPrognostico" />
+        <activity android:name=".view.atendimento.DefinirEncaminhamento" />
+        <activity android:name=".view.cadastros.profissional.CadastroHorario" />
+        <activity android:name=".view.cadastros.profissional.CadastroMensagem" />
+        <activity android:name=".view.cadastros.profissional.CadastroMensagem2" />
+        <activity android:name=".view.cadastros.aluno.ConfirmarCadastroAgendamento" />
+        <activity android:name=".view.cadastros.aluno.CadastroAluno" />
+        <activity android:name=".view.cadastros.profissional.CadastroProfissional" />
+        <activity android:name=".view.cadastros.profissional.CadastroLocalAtendimento" />
+        <activity android:name=".view.cadastros.profissional.CadastroDiagnostico" />
+        <activity android:name=".view.cadastros.profissional.CadastroCampoAtuacao" />
+        <activity android:name=".view.cadastros.profissional.CadastroProfissionalExterno" />
+        <activity android:name=".view.cadastros.profissional.CadastroResponsavel" />
+        <activity android:name=".view.login.Sobre" />
+        <activity android:name=".view.login.Login" />
+        <activity android:name=".view.cadastros.aluno.CadastroAgendamentoAluno" />
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

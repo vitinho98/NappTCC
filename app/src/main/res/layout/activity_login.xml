@@ -12,7 +12,7 @@
             android:id="@+id/layout_tela_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".view.LoginActivity">
+            tools:context=".view.login.Login">
 
                 <Button
                     android:id="@+id/btn_entrar"

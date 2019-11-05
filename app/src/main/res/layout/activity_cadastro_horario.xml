@@ -11,7 +11,7 @@
         android:id="@+id/layout_tela_cadastro_horario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".view.LoginActivity">
+        tools:context=".view.login.Login">
 
         <CalendarView
             android:id="@+id/calendarView"

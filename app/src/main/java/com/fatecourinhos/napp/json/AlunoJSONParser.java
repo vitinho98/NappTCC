@@ -65,6 +65,7 @@ public class AlunoJSONParser {
         } catch (Exception e) {
             return null;
         }
+
     }
 
 }

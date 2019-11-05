@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".view.MenuAlunoActivity"
-    tools:showIn="@layout/activity_menu_aluno"
+    tools:context=".view.menu.MenuAluno"
+    tools:showIn="@layout/menu_aluno"
     android:padding="1dp"
     android:id="@+id/frame_layout_aluno"/>

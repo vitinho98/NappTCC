@@ -105,6 +105,7 @@ public class AgendamentoJSONParser {
         } catch (Exception e) {
             return null;
         }
+
     }
 
 }

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.MenuProfissionalActivity"
+    tools:context=".view.menu.MenuProfissional"
     tools:showIn="@layout/menu_profissional_tela"
     android:id="@+id/layout_tela_do_frame"
     android:layout_width="match_parent"
