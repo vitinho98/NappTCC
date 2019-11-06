@@ -99,6 +99,7 @@ public class CancelarAgendamento extends AppCompatDialogFragment {
 
             if (sucesso) {
                 Toast.makeText(view.getContext(), "Atendimento cancelado!", Toast.LENGTH_SHORT).show();
+                dismiss();
             } else
                 Toast.makeText(view.getContext(), "Erro ao cancelar o atendimento!", Toast.LENGTH_SHORT).show();
         }

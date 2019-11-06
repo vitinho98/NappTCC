@@ -154,6 +154,7 @@ public class DefinirLocalAtendimento extends AppCompatDialogFragment {
 
             if (sucesso) {
                 Toast.makeText(view.getContext(), "Local de atendimento definido!", Toast.LENGTH_SHORT).show();
+                dismiss();
             } else
                 Toast.makeText(view.getContext(), "Erro ao definir o local de atendimento!", Toast.LENGTH_SHORT).show();
         }

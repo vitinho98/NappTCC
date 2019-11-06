@@ -1,6 +1,5 @@
 package com.fatecourinhos.napp.json;
 
-import com.fatecourinhos.napp.model.Aluno;
 import com.fatecourinhos.napp.model.CampoAtuacao;
 import com.fatecourinhos.napp.model.Encaminhamento;
 import com.fatecourinhos.napp.model.Profissional;
@@ -38,7 +37,6 @@ public class EncaminhamentoJSONParser {
                 campoAtuacao = new CampoAtuacao();
                 profissionalExterno = new ProfissionalExterno();
 
-                profissionalExterno.setIdProfissionalExterno(jsonObject.getInt("idProfissionalExterno"));
                 profissionalExterno.setNomeProfissionalExterno(jsonObject.getString("nomeProfissionalExterno"));
                 profissionalExterno.setCidadeProfissionalExterno(jsonObject.getString("cidadeProfissionalExterno"));
                 profissionalExterno.setBairro(jsonObject.getString("bairro"));
@@ -50,7 +48,6 @@ public class EncaminhamentoJSONParser {
 
                 try {
 
-                    campoAtuacao.setIdCampoAtuacao(jsonObject.getInt("idCampoAtuacao"));
                     campoAtuacao.setNomeCampoAtuacao(jsonObject.getString("nomeCampoAtuacao"));
                     profissionalExterno.setFkCampoAtuacao(campoAtuacao);
 
@@ -60,7 +57,6 @@ public class EncaminhamentoJSONParser {
 
                 try {
 
-                    responsavel.setIdResponsavel(jsonObject.getInt("idResponsavel"));
                     responsavel.setCelularResponsavel(jsonObject.getString("celularResponsavel"));
                     responsavel.setEmailResponsavel(jsonObject.getString("emailResponsavel"));
                     responsavel.setNomeResponsavel(jsonObject.getString("nomeResponsavel"));
@@ -76,6 +72,7 @@ public class EncaminhamentoJSONParser {
                 encaminhamento.setFkProfissional(profissional);
                 encaminhamento.setFkProfissionalExterno(profissionalExterno);
 
+                encaminhamentos.add(encaminhamento);
             }
 
             return encaminhamentos;

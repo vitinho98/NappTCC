@@ -51,7 +51,7 @@ public class EncaminhamentoAlunoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        getActivity().setTitle("Mensagens");
+        getActivity().setTitle("Encaminhamentos");
         view = inflater.inflate(R.layout.fragment_encaminhamento,container,false);
         context = view.getContext();
         viewHolder = new ViewHolder();
@@ -80,14 +80,15 @@ public class EncaminhamentoAlunoFragment extends Fragment {
                 intent.putExtra("telefoneProfissionalExterno", encaminhamento.getFkProfissionalExterno().getTelefoneProfissionalExterno());
 
                 if (encaminhamento.getFkProfissionalExterno().getFkCampoAtuacao() != null) {
-                    intent.putExtra("idC", encaminhamento.getFkProfissionalExterno().getFkCampoAtuacao().getIdCampoAtuacao());
                     intent.putExtra("nomeC", encaminhamento.getFkProfissionalExterno().getFkCampoAtuacao().getNomeCampoAtuacao());
-
                 }
 
                 if (encaminhamento.getFkProfissionalExterno().getFkResponsavel() != null) {
-                    intent.putExtra("idResponsavel", encaminhamento.getFkProfissionalExterno().getFkResponsavel().getIdResponsavel());
                     intent.putExtra("nomeResponsavel", encaminhamento.getFkProfissionalExterno().getFkResponsavel().getNomeResponsavel());
+                    intent.putExtra("emailResponsavel", encaminhamento.getFkProfissionalExterno().getFkResponsavel().getEmailResponsavel());
+                    intent.putExtra("celularResponsavel", encaminhamento.getFkProfissionalExterno().getFkResponsavel().getCelularResponsavel());
+                    intent.putExtra("telefoneResponsavel", encaminhamento.getFkProfissionalExterno().getFkResponsavel().getTelefoneResponsavel());
+
                 }
 
                 intent.putExtra("nomeProfissional", encaminhamento.getFkProfissional().getNomeProfissional());
@@ -117,7 +118,7 @@ public class EncaminhamentoAlunoFragment extends Fragment {
             id = preferences.getInt("idAluno", 0);
         }
 
-        String uri = "http://vitorsilva.xyz/napp/mensagem/selecionarMensagens.php";
+        String uri = "http://vitorsilva.xyz/napp/encaminhamento/selecionarEncaminhamentos.php";
         SelecionarEncaminhamentos task = new SelecionarEncaminhamentos();
         RequestHttp requestHttp = new RequestHttp();
 

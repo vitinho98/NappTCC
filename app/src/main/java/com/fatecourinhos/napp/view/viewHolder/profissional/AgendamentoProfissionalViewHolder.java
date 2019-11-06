@@ -1,5 +1,6 @@
 package com.fatecourinhos.napp.view.viewHolder.profissional;
 
+import android.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,13 +20,14 @@ public class AgendamentoProfissionalViewHolder extends RecyclerView.ViewHolder {
 
     private CardView cardView;
     private ImageView imageView;
-    private TextView textViewAluno, textViewHorario, textViewLocal, textViewBloco;
+    private TextView textViewAluno, textViewHorario, textViewLocal, textViewBloco, textViewMotivoAg;
 
     public AgendamentoProfissionalViewHolder(@NonNull View itemView) {
         super(itemView);
 
         cardView = itemView.findViewById(R.id.card_view_ag_prof);
         imageView = itemView.findViewById(R.id.img_cancelar_ag_prof);
+        textViewMotivoAg = itemView.findViewById(R.id.txt_motivo_ag);
         textViewAluno = itemView.findViewById(R.id.txt_nome_aluno_ag_prof);
         textViewHorario = itemView.findViewById(R.id.txt_data_hora_ag_prof);
         textViewLocal = itemView.findViewById(R.id.txt_local_ag_prof);
@@ -36,6 +38,7 @@ public class AgendamentoProfissionalViewHolder extends RecyclerView.ViewHolder {
 
         SimpleDateFormat dataHoraFormater = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
+        textViewMotivoAg.setText("Motivo: " + agendamento.getMotivoAgendamento());
         textViewAluno.setText(agendamento.getFkAluno().getNomeAluno());
         textViewHorario.setText(dataHoraFormater.format(agendamento.getFkHorario().getData()));
         textViewLocal.setText(agendamento.getFkLocalAtendimento().getNomeLocal() != null ?
@@ -54,13 +57,25 @@ public class AgendamentoProfissionalViewHolder extends RecyclerView.ViewHolder {
         else
             imageView.setImageResource(R.drawable.ic_pendente);
 
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!agendamento.getStatus().equals("Cancelado"))
+        if (agendamento.getStatus().equals("Cancelado")) {
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(itemView.getContext());
+                    dialog.setTitle("Motivo Cancelamento");
+                    dialog.setMessage(agendamento.getMotivoCancelamento());
+                    dialog.setNeutralButton("Ok", null);
+                    dialog.show();
+                }
+            });
+        } else if (!agendamento.getStatus().equals("Atendido")){
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     listener.onListClick(agendamento);
-            }
-        });
+                }
+            });
+        }
 
     }
 

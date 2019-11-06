@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.cadastros.aluno.CadastroAnamnese"></activity>
+        <activity android:name=".view.atendimento.ReagendarHorario"></activity>
+        <activity android:name=".view.cadastros.aluno.CadastroAnamnese" />
         <activity android:name=".view.login.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,9 +48,9 @@
         <activity android:name=".view.login.Login" />
         <activity android:name=".view.cadastros.aluno.CadastroAgendamentoAluno" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <dist:module dist:instant="true" />
 

@@ -86,15 +86,16 @@ public class AgendamentoJSONParser {
                 agendamento.setFkHorario(horario);
                 agendamento.setIdAgendamento(jsonObject.getInt("idAgendamento"));
                 agendamento.setStatus(jsonObject.getString("status"));
+                agendamento.setMotivoCancelamento(jsonObject.getString("motivoCancelamento"));
+                agendamento.setObservacao(jsonObject.getString("observacao"));
 
                 try {
 
                     agendamento.setMotivoAgendamento(jsonObject.getString("motivoAgendamento"));
-                    agendamento.setMotivoCancelamento(jsonObject.getString("motivoCancelamento"));
-                    agendamento.setObservacao(jsonObject.getString("observacao"));
+
 
                 } catch (Exception e) {
-                    System.out.println("tnc");
+
                 }
 
                 agendamentos.add(agendamento);

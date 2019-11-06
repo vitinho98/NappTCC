@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -32,6 +35,8 @@ public class AgendamentoProfissionalFragment extends Fragment {
     private String conteudo;
     private int id = 0;
 
+    private Spinner spinner;
+
     private OnAgendamentoInteractionListener listener;
     private ViewHolder viewHolder;
     private View view;
@@ -50,6 +55,25 @@ public class AgendamentoProfissionalFragment extends Fragment {
 
         viewHolder.recyclerViewAgendamento = view.findViewById(R.id.recycler_view_agendamentos_prof);
         viewHolder.recyclerViewAgendamento.setLayoutManager(new LinearLayoutManager(context));
+
+        preferences = getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
+        if (preferences.contains("idProfissional"))
+            id = preferences.getInt("idProfissional", 0);
+
+        spinner = view.findViewById(R.id.spinnerAgProf);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.filtro_array, android.R.layout.simple_spinner_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selecionarAgendaProfissional(id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         listener = new OnAgendamentoInteractionListener() {
             @Override
@@ -70,10 +94,6 @@ public class AgendamentoProfissionalFragment extends Fragment {
             }
         };
 
-        preferences = getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
-        if (preferences.contains("idProfissional"))
-            id = preferences.getInt("idProfissional", 0);
-
         return view;
     }
 
@@ -92,6 +112,7 @@ public class AgendamentoProfissionalFragment extends Fragment {
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
         requestHttp.setParametro("idProfissional", String.valueOf(id));
+        requestHttp.setParametro("filtro", String.valueOf(spinner.getSelectedItemPosition()));
 
         mytask.execute(requestHttp);
 

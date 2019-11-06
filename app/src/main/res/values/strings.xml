@@ -86,10 +86,17 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="item_encaminhamento">Encaminhamento</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string-array name="tipo_prof_array">
         <item>Administrador</item>
         <item>Profissional</item>
+    </string-array>
+
+    <string-array name="filtro_array">
+        <item>Todos</item>
+        <item>Pendentes</item>
+        <item>Confirmados</item>
+        <item>Atendidos</item>
+        <item>Cancelados</item>
     </string-array>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.fatecourinhos.napp.view.atendimento;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import com.fatecourinhos.napp.R;
 public class ConfirmarAgendamentoProfissional extends AppCompatDialogFragment {
 
     private Bundle bundle;
-    private Button btnLocal, btnCancelar, btnAtendimento;
+    private Button btnLocal, btnCancelar, btnAtendimento, btnReagendar;
     private View view;
 
     @NonNull
@@ -31,6 +32,7 @@ public class ConfirmarAgendamentoProfissional extends AppCompatDialogFragment {
         bundle = new Bundle();
         bundle.putInt("idAgendamento", getArguments().getInt("idAgendamento"));
 
+        btnReagendar = view.findViewById(R.id.btn_reagendar);
         btnCancelar = view.findViewById(R.id.btn_cancelar_agendamento_prof);
         btnLocal = view.findViewById(R.id.btn_definir_local);
         btnAtendimento = view.findViewById(R.id.btn_atendimento);
@@ -41,6 +43,7 @@ public class ConfirmarAgendamentoProfissional extends AppCompatDialogFragment {
                 RealizarAtendimento atendimento = new RealizarAtendimento();
                 atendimento.setArguments(bundle);
                 atendimento.show(getFragmentManager(), "ATENDIMENTO");
+                dismiss();
             }
         });
 
@@ -50,6 +53,7 @@ public class ConfirmarAgendamentoProfissional extends AppCompatDialogFragment {
                 DefinirLocalAtendimento definirLocalAtendimento = new DefinirLocalAtendimento();
                 definirLocalAtendimento.setArguments(bundle);
                 definirLocalAtendimento.show(getFragmentManager(), "DEFINIR LOCAL ATENDIMENTO");
+                dismiss();
             }
         });
 
@@ -59,6 +63,17 @@ public class ConfirmarAgendamentoProfissional extends AppCompatDialogFragment {
                 CancelarAgendamento cancelarAtendimento = new CancelarAgendamento();
                 cancelarAtendimento.setArguments(bundle);
                 cancelarAtendimento.show(getFragmentManager(), "CANCELAR ATENDIMENTO");
+                dismiss();
+            }
+        });
+
+        btnReagendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ReagendarHorario.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                dismiss();
             }
         });
 

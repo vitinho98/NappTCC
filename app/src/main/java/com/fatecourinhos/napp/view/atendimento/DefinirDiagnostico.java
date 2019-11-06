@@ -162,6 +162,7 @@ public class DefinirDiagnostico extends Activity {
 
             if (sucesso) {
                 Toast.makeText(getApplicationContext(), "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                finish();
             } else
                 Toast.makeText(getApplicationContext(),"Erro ao cadastrar", Toast.LENGTH_SHORT).show();
         }

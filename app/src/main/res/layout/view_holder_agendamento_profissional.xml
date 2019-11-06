@@ -58,6 +58,13 @@
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
                 android:layout_marginBottom="5dp"/>
 
+            <TextView
+                android:id="@+id/txt_motivo_ag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:layout_marginBottom="5dp"/>
+
         </LinearLayout>
 
         <ImageView

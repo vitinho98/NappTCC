@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -24,6 +27,7 @@ import com.fatecourinhos.napp.model.Agendamento;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
 import com.fatecourinhos.napp.view.adapter.aluno.AgendamentoAlunoAdapter;
+import com.fatecourinhos.napp.view.atendimento.CancelarAgendamento;
 import com.fatecourinhos.napp.view.cadastros.aluno.CadastroAgendamentoAluno;
 import com.fatecourinhos.napp.view.listener.OnAgendamentoInteractionListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,6 +39,9 @@ public class AgendamentoAlunoFragment extends Fragment {
     private SharedPreferences preferences;
     private String conteudo;
     private int id = 0;
+
+    private FloatingActionButton floatingActionButton;
+    private Spinner spinner;
 
     private OnAgendamentoInteractionListener listener;
     private ViewHolder viewHolder;
@@ -52,7 +59,26 @@ public class AgendamentoAlunoFragment extends Fragment {
         context = view.getContext();
         viewHolder = new ViewHolder();
 
-        FloatingActionButton floatingActionButton = view.findViewById(R.id.fab_agendamento_aluno);
+        preferences = getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
+        if (preferences.contains("idAluno"))
+            id = preferences.getInt("idAluno", 0);
+
+        spinner = view.findViewById(R.id.spinnerAgAluno);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.filtro_array, android.R.layout.simple_spinner_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selecionarAgendaAluno(id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        floatingActionButton = view.findViewById(R.id.fab_agendamento_aluno);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,8 +91,26 @@ public class AgendamentoAlunoFragment extends Fragment {
 
         listener = new OnAgendamentoInteractionListener() {
             @Override
-            public void onListClick(Agendamento agendamento) {
+            public void onListClick(final Agendamento agendamento) {
 
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                dialog.setTitle("Cancelar Agendamento");
+                dialog.setMessage("Deseja cancelar o agendamento?");
+                dialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("idAgendamento", agendamento.getIdAgendamento());
+
+                        CancelarAgendamento cancelarAgendamento = new CancelarAgendamento();
+                        cancelarAgendamento.setArguments(bundle);
+                        cancelarAgendamento.show(getFragmentManager(), "CANCELAR AGENDAMENTO");
+                    }
+                });
+                dialog.setNegativeButton("Não", null);
+
+                dialog.show();
             }
 
             @Override
@@ -74,10 +118,6 @@ public class AgendamentoAlunoFragment extends Fragment {
 
             }
         };
-
-        preferences = getActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE);
-        if (preferences.contains("idAluno"))
-            id = preferences.getInt("idAluno", 0);
 
         selecionarAgendaAluno(id);
         return view;
@@ -98,6 +138,7 @@ public class AgendamentoAlunoFragment extends Fragment {
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
         requestHttp.setParametro("idAluno", String.valueOf(id));
+        requestHttp.setParametro("filtro", String.valueOf(spinner.getSelectedItemPosition()));
 
         mytask.execute(requestHttp);
 

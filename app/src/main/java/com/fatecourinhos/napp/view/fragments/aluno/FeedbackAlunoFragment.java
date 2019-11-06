@@ -21,7 +21,7 @@ public class FeedbackAlunoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        getActivity().setTitle("Horários atendimento");
+        getActivity().setTitle("Feedback");
         view = inflater.inflate(R.layout.fragment_feedback_nucleo,container,false);
         context = view.getContext();
 

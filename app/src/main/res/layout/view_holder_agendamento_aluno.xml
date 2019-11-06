@@ -18,11 +18,10 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="299dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_margin="5dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toStartOf="@+id/img_cancelar_ag_aluno"
             app:layout_constraintStart_toStartOf="parent"
