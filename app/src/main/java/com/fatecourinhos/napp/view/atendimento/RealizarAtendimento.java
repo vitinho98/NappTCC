@@ -40,6 +40,7 @@ public class RealizarAtendimento extends AppCompatDialogFragment {
         bundle = new Bundle();
         bundle.putInt("idAgendamento", getArguments().getInt("idAgendamento"));
 
+        btnConfirmarAtendimento = view.findViewById(R.id.btn_confirmar_atendimento);
         btnDiagnostico = view.findViewById(R.id.btn_diagnostico);
         btnPrognostico = view.findViewById(R.id.btn_prognostico);
         btnEncaminhamento = view.findViewById(R.id.btn_encaminhamento);
@@ -101,6 +102,7 @@ public class RealizarAtendimento extends AppCompatDialogFragment {
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
         requestHttp.setParametro("idAgendamento", String.valueOf(id));
+        System.out.println(id);
 
         task.execute(requestHttp);
 
@@ -119,7 +121,7 @@ public class RealizarAtendimento extends AppCompatDialogFragment {
             try {
 
                 conteudo = HttpManager.getDados(params[0]);
-
+                System.out.println(conteudo);
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
                 else

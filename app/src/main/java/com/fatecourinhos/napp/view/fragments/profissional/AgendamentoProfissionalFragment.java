@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
@@ -37,6 +38,7 @@ public class AgendamentoProfissionalFragment extends Fragment {
 
     private Spinner spinner;
 
+    private ProgressBar progressBar;
     private OnAgendamentoInteractionListener listener;
     private ViewHolder viewHolder;
     private View view;
@@ -53,6 +55,7 @@ public class AgendamentoProfissionalFragment extends Fragment {
         context = view.getContext();
         viewHolder = new ViewHolder();
 
+        progressBar = view.findViewById(R.id.progressBarAgProf);
         viewHolder.recyclerViewAgendamento = view.findViewById(R.id.recycler_view_agendamentos_prof);
         viewHolder.recyclerViewAgendamento.setLayoutManager(new LinearLayoutManager(context));
 
@@ -123,6 +126,7 @@ public class AgendamentoProfissionalFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -145,6 +149,7 @@ public class AgendamentoProfissionalFragment extends Fragment {
 
             agendamentoProfissionaAdapter = new AgendamentoProfissionaAdapter(agendamentos, listener);
             viewHolder.recyclerViewAgendamento.setAdapter(agendamentoProfissionaAdapter);
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
     }
