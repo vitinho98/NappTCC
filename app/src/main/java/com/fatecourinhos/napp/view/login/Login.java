@@ -166,6 +166,7 @@ public class Login extends AppCompatActivity {
         editor.putString("tipoUsuario", aluno.getFkUsuario().getTipoUsuario());
         editor.putInt("status", aluno.getFkUsuario().getStatus());
         editor.putInt("idAluno", aluno.getIdAluno());
+        editor.putInt("primeiroLogin", aluno.getFkUsuario().getPrimeiroLogin());
         editor.putBoolean("conected", true);
 
         editor.commit();

@@ -45,6 +45,13 @@ public class AlunoJSONParser {
                     aluno.setRa(jsonObject.getString("ra"));
                     aluno.setEstadoCivil(jsonObject.getString("estadoCivil"));
 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+
+                    usuario.setPrimeiroLogin(jsonObject.getInt("primeiroLogin"));
                     usuario.setIdUsuario(jsonObject.getInt("idUsuario"));
                     usuario.setLogin(jsonObject.getString("login"));
                     usuario.setSenha(jsonObject.getString("senha"));
@@ -53,7 +60,7 @@ public class AlunoJSONParser {
                     aluno.setFkUsuario(usuario);
 
                 } catch (Exception e) {
-
+                    aluno.setFkUsuario(null);
                 }
 
                 alunos.add(aluno);

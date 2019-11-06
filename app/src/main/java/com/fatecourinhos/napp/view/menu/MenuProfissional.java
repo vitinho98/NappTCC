@@ -1,5 +1,6 @@
 package com.fatecourinhos.napp.view.menu;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,6 +48,8 @@ import java.util.List;
 
 public class MenuProfissional extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +68,7 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = findViewById(R.id.nav_view_profissional);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,6 +134,18 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
         return true;
     }
 
+    @SuppressLint("RestrictedApi")
+    private void desabilitarFloat() {
+        fab.setEnabled(false);
+        fab.setVisibility(View.INVISIBLE);
+    }
+
+    @SuppressLint("RestrictedApi")
+    private void habilitarFloat() {
+        fab.setEnabled(true);
+        fab.setVisibility(View.VISIBLE);
+    }
+
     //quando clica no menu 3 pontinhos na toolbar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -179,7 +194,16 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frame_layout_nav, fragment,"AGENDAMENTO");
                     ft.commit();
+                    desabilitarFloat();
                 }
+                break;
+
+            case R.id.nav_alunos:
+                desabilitarFloat();
+                break;
+
+            case R.id.nav_relatorios:
+                desabilitarFloat();
                 break;
 
             case R.id.nav_indicacoes:
@@ -192,6 +216,7 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frame_layout_nav, fragment,"PROFISSIONAL");
                     ft.commit();
+                    habilitarFloat();
                 }
                 break;
 
@@ -201,6 +226,7 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frame_layout_nav, fragment,"HORARIO");
                     ft.commit();
+                    habilitarFloat();
                 }
                 break;
 
@@ -210,6 +236,7 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frame_layout_nav, fragment, "LOCAL");
                     ft.commit();
+                    habilitarFloat();
                 }
                 break;
 
@@ -219,6 +246,7 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frame_layout_nav, fragment, "EXTERNO");
                     ft.commit();
+                    habilitarFloat();
                 }
                 break;
 
@@ -228,6 +256,7 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frame_layout_nav, fragment, "DIAGNOSTICO");
                     ft.commit();
+                    habilitarFloat();
                 }
                 break;
 
@@ -237,6 +266,7 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frame_layout_nav, fragment, "CAMPOATUACAO");
                     ft.commit();
+                    habilitarFloat();
                 }
                 break;
 
@@ -246,6 +276,7 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frame_layout_nav, fragment, "RESPONSAVEL");
                     ft.commit();
+                    habilitarFloat();
                 }
                 break;
 
