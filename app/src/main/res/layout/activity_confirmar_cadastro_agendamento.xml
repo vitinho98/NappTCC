@@ -10,7 +10,7 @@
         android:id="@+id/txt_motivo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Qual o motivoAgendamento do agendamento?"
+        android:text="Qual o motivo do agendamento?"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/background_dark" />
