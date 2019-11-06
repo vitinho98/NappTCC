@@ -72,18 +72,6 @@ public class AgendamentoAlunoFragment extends Fragment {
             @Override
             public void onDeleteClick(Agendamento agendamento) {
 
-                new AlertDialog.Builder(context)
-                        .setTitle("Cancelar agendamento")
-                        .setMessage("Deseja realmente cancelar o agendamento?")
-                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //excluirLocalAtendimento(localAtendimento.getIdLocalAtendimento());
-                            }
-                        })
-                        .setNeutralButton("Não", null)
-                        .show();
-
             }
         };
 

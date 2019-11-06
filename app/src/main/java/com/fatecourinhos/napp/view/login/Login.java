@@ -218,10 +218,10 @@ public class Login extends AppCompatActivity {
 
             adicionarPreferences(aluno);
 
-            if(aluno.getFkUsuario().getPrimeiroLogin() == 1){
+            if (aluno.getFkUsuario().getPrimeiroLogin() == 1) {
                 startActivity(new Intent(Login.this, MenuAluno.class));
                 finish();
-            }else{
+            } else {
                 startActivity(new Intent(Login.this, CadastroAnamnese.class));
                 finish();
             }

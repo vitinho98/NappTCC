@@ -35,6 +35,8 @@
         <activity android:name=".view.cadastros.profissional.CadastroMensagem2" />
         <activity android:name=".view.cadastros.aluno.ConfirmarCadastroAgendamento" />
         <activity android:name=".view.cadastros.aluno.CadastroAluno" />
+        <activity android:name=".view.fragments.aluno.VisualizarEncaminhamentoAluno" />
+        <activity android:name=".view.fragments.aluno.VisualizarMensagemAluno" />
         <activity android:name=".view.cadastros.profissional.CadastroProfissional" />
         <activity android:name=".view.cadastros.profissional.CadastroLocalAtendimento" />
         <activity android:name=".view.cadastros.profissional.CadastroDiagnostico" />

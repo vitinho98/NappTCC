@@ -40,11 +40,13 @@ public class Splash extends AppCompatActivity {
 
             if (tipoUsuario.contains("Aluno")) {
 
-                if(primeiroLogin == 1){
-                    startActivity(new Intent(Splash.this, MenuAluno.class));
-                }else{
+                startActivity(new Intent(Splash.this, MenuAluno.class));
+
+                /*if (primeiroLogin == 1) {
+
+                } else {
                     startActivity(new Intent(Splash.this, CadastroAnamnese.class));
-                }
+                }*/
 
                 finish();
 

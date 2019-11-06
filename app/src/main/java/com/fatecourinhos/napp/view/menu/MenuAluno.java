@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
 import com.fatecourinhos.napp.view.fragments.aluno.AgendamentoAlunoFragment;
-import com.fatecourinhos.napp.view.fragments.aluno.FeedbackFragment;
+import com.fatecourinhos.napp.view.fragments.aluno.FeedbackAlunoFragment;
 import com.fatecourinhos.napp.view.fragments.aluno.MensagemAlunoFragment;
 import com.fatecourinhos.napp.view.login.Login;
 import com.fatecourinhos.napp.view.senha.AlterarSenha;
@@ -49,9 +49,12 @@ public class MenuAluno extends AppCompatActivity {
 
                 case R.id.nav_feedback:
 
-                    fragment = new FeedbackFragment();
+                    fragment = new FeedbackAlunoFragment();
                     ft.replace(R.id.frame_layout_aluno, fragment);
                     ft.commit();
+                    return true;
+
+                case R.id.nav_encaminhamento:
                     return true;
             }
 

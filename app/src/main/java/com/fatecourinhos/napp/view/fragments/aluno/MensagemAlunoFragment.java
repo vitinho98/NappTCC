@@ -1,6 +1,7 @@
 package com.fatecourinhos.napp.view.fragments.aluno;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -51,7 +52,7 @@ public class MensagemAlunoFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         getActivity().setTitle("Mensagens");
         view = inflater.inflate(R.layout.fragment_mensagens,container,false);
@@ -69,6 +70,12 @@ public class MensagemAlunoFragment extends Fragment {
             @Override
             public void onListClick(Mensagem mensagem) {
 
+                Intent intent = new Intent(getActivity(),VisualizarMensagemAluno.class);
+                intent.putExtra("mensagem", mensagem.getMensagem());
+                intent.putExtra("dataHora", mensagem.getDataHora().getTime());
+                intent.putExtra("nomeProfissional", mensagem.getFkProfissional().getNomeProfissional());
+
+                startActivity(intent);
             }
 
             @Override

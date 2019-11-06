@@ -12,6 +12,11 @@
         android:title="@string/item_mensagem" />
 
     <item
+        android:id="@+id/nav_encaminhamento"
+        android:icon="@drawable/ic_encaminhamento"
+        android:title="@string/item_encaminhamento" />
+
+    <item
         android:id="@+id/nav_feedback"
         android:icon="@drawable/ic_feedback"
         android:title="@string/item_feedback" />

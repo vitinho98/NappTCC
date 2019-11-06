@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.fatecourinhos.napp.R;
 
-public class FeedbackFragment extends Fragment {
+public class FeedbackAlunoFragment extends Fragment {
 
     private View view;
     private Context context;

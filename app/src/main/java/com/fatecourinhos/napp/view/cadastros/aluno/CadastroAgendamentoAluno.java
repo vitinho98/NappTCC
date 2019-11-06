@@ -96,6 +96,7 @@ public class CadastroAgendamentoAluno extends AppCompatActivity {
                 intent.putExtra("nomeProfissional", agendamento.getFkHorario().getFkProfissional().getNomeProfissional());
 
                 startActivity(intent);
+                finish();
 
             }
 
