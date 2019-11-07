@@ -46,7 +46,7 @@ public class AlunoJSONParser {
                     aluno.setEstadoCivil(jsonObject.getString("estadoCivil"));
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
 
                 try {
@@ -60,7 +60,6 @@ public class AlunoJSONParser {
                     aluno.setFkUsuario(usuario);
 
                 } catch (Exception e) {
-                    e.printStackTrace();
                     aluno.setFkUsuario(null);
                 }
 

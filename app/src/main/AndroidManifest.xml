@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.consultaraluno.DadosPessoaisALuno"></activity>
+        <activity android:name=".view.consultaraluno.DadosPessoaisAluno"></activity>
         <activity android:name=".view.atendimento.ReagendarHorario" />
         <activity android:name=".view.cadastros.aluno.CadastroAnamnese" />
         <activity android:name=".view.login.Splash">

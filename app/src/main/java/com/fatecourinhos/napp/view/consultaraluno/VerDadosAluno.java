@@ -13,10 +13,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.fatecourinhos.napp.R;
-import com.fatecourinhos.napp.view.atendimento.CancelarAgendamento;
-import com.fatecourinhos.napp.view.atendimento.DefinirLocalAtendimento;
-import com.fatecourinhos.napp.view.atendimento.ReagendarHorario;
-import com.fatecourinhos.napp.view.atendimento.RealizarAtendimento;
 
 public class VerDadosAluno extends AppCompatDialogFragment {
 
@@ -43,7 +39,10 @@ public class VerDadosAluno extends AppCompatDialogFragment {
         btnDadosPessoais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), DadosPessoaisAluno.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                dismiss();
             }
         });
 
