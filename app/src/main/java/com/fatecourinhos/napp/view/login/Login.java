@@ -216,7 +216,7 @@ public class Login extends AppCompatActivity {
             System.out.println(tipoUsuario);
             List<Aluno> alunos = AlunoJSONParser.parseDados(conteudo);
             Aluno aluno = alunos.get(0);
-
+            
             adicionarPreferences(aluno);
 
             startActivity(new Intent(Login.this, MenuAluno.class));

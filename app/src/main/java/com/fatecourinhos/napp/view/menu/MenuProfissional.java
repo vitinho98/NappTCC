@@ -18,6 +18,7 @@ import com.fatecourinhos.napp.view.cadastros.profissional.CadastroProfissional;
 import com.fatecourinhos.napp.view.cadastros.profissional.CadastroProfissionalExterno;
 import com.fatecourinhos.napp.view.cadastros.profissional.CadastroResponsavel;
 import com.fatecourinhos.napp.view.fragments.profissional.AgendamentoProfissionalFragment;
+import com.fatecourinhos.napp.view.fragments.profissional.AlunoFragment;
 import com.fatecourinhos.napp.view.fragments.profissional.CampoAtuacaoFragment;
 
 import com.fatecourinhos.napp.view.fragments.profissional.DiagnosticoFragment;
@@ -199,6 +200,12 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
                 break;
 
             case R.id.nav_alunos:
+                fragment = new AlunoFragment();
+                if (fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_layout_nav, fragment,"ALUNOS");
+                    ft.commit();
+                }
                 desabilitarFloat();
                 break;
 

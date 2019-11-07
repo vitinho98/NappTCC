@@ -7,44 +7,29 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btn_diagnostico"
+        android:id="@+id/btn_dados_pessoais"
         android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_customizado"
         android:textColor="@drawable/btn_customizado"
-        android:text="DIAGNÓSTICO" />
+        android:text="DADOS PESSOAIS" />
 
     <Button
-        android:id="@+id/btn_prognostico"
+        android:id="@+id/btn_anamnese"
+        android:layout_width="match_parent"
         android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_customizado"
         android:textColor="@drawable/btn_customizado"
-        android:text="PROGNÓSTICO" />
+        android:text="ANAMNESE" />
 
     <Button
-        android:id="@+id/btn_encaminhamento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/btn_customizado"
-        android:textColor="@drawable/btn_customizado"
-        android:text="ENCAMINHAMENTO" />
-
-    <EditText
-        android:id="@+id/edittextobsatendimento"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:hint="Observações do atendimento"/>
-
-    <Button
-        android:id="@+id/btn_confirmar_atendimento"
+        android:id="@+id/btn_atendimentos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_customizado"
         android:textColor="@drawable/btn_customizado"
-        android:text="CONFIRMAR ATENDIMENTO" />
+        android:text="ATENDIMENTOS" />
 
 </LinearLayout>

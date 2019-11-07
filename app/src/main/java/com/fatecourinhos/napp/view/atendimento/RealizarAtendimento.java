@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class RealizarAtendimento extends AppCompatDialogFragment {
     private String conteudo;
 
     private Bundle bundle;
+    private EditText obs;
     private Button btnDiagnostico, btnPrognostico, btnEncaminhamento, btnConfirmarAtendimento;
     private View view;
 
@@ -40,6 +42,7 @@ public class RealizarAtendimento extends AppCompatDialogFragment {
         bundle = new Bundle();
         bundle.putInt("idAgendamento", getArguments().getInt("idAgendamento"));
 
+        obs = view.findViewById(R.id.edittextobsatendimento);
         btnConfirmarAtendimento = view.findViewById(R.id.btn_confirmar_atendimento);
         btnDiagnostico = view.findViewById(R.id.btn_diagnostico);
         btnPrognostico = view.findViewById(R.id.btn_prognostico);
@@ -102,7 +105,7 @@ public class RealizarAtendimento extends AppCompatDialogFragment {
         requestHttp.setMetodo("GET");
         requestHttp.setUrl(uri);
         requestHttp.setParametro("idAgendamento", String.valueOf(id));
-        System.out.println(id);
+        requestHttp.setParametro("obs", obs.getText().toString());
 
         task.execute(requestHttp);
 
@@ -121,7 +124,7 @@ public class RealizarAtendimento extends AppCompatDialogFragment {
             try {
 
                 conteudo = HttpManager.getDados(params[0]);
-                System.out.println(conteudo);
+
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
                 else
