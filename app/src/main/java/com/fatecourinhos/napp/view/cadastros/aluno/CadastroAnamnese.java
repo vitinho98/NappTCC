@@ -7,21 +7,29 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.json.AlunoJSONParser;
+import com.fatecourinhos.napp.json.AnamneseJSONParser;
 import com.fatecourinhos.napp.model.Aluno;
 import com.fatecourinhos.napp.model.Anamnese;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
+import com.fatecourinhos.napp.view.consultaraluno.DadosPessoaisAluno;
+
+import java.util.List;
 
 public class CadastroAnamnese extends AppCompatActivity {
 
     private RadioGroup rg1,rg2,rg3,rg4,rg5,rg6,rg7,rg8,rg9;
     private Button btnAnamnese;
+    private ProgressBar progressBar;
 
     private SharedPreferences preferences;
+    private List<Anamnese> anamneseList;
     private String conteudo;
     private boolean sucesso;
 
@@ -33,9 +41,11 @@ public class CadastroAnamnese extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
 
-            int idAluno = getIntent().getExtras().getInt("idAluno");
             btnAnamnese.setEnabled(false);
             btnAnamnese.setVisibility(View.INVISIBLE);
+
+            int idAluno = getIntent().getExtras().getInt("idAluno");
+            selecionarAnamnese(idAluno);
 
         } else
             btnAnamnese.setOnClickListener(new View.OnClickListener() {
@@ -66,10 +76,68 @@ public class CadastroAnamnese extends AppCompatActivity {
 
     }
 
+    private void mostrarAnamnese(Anamnese anamnese) {
+
+        if (anamnese.getQuestao1() == 1)
+            rg1.check();
+
+    }
+
+    private void selecionarAnamnese(int idAluno) {
+
+        String uri = "http://vitorsilva.xyz/napp/anamnese/selecionarAnamnese.php";
+        RequestHttp requestHttp = new RequestHttp();
+        SelecionarAnamnese task = new SelecionarAnamnese();
+
+        requestHttp.setMetodo("GET");
+        requestHttp.setUrl(uri);
+        requestHttp.setParametro("idAluno", String.valueOf(idAluno));
+
+        task.execute(requestHttp);
+
+}
+
+    private class SelecionarAnamnese extends AsyncTask<RequestHttp, String, List<Anamnese>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected List<Anamnese> doInBackground(RequestHttp... params) {
+
+            try {
+                conteudo = HttpManager.getDados(params[0]);
+            } catch (Exception e) {
+                conteudo = null;
+            }
+
+            anamneseList = AnamneseJSONParser.parseDados(conteudo);
+            return anamneseList;
+        }
+
+        @Override
+        protected void onPostExecute(List<Anamnese> anamneseList) {
+            super.onPostExecute(anamneseList);
+
+            try {
+                mostrarAnamnese(anamneseList.get(0));
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Ocorreu um erro, tente novamente!", Toast.LENGTH_LONG).show();
+                finish();
+            }
+
+        }
+
+    }
+
     private void getComponentes() {
 
         preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
         btnAnamnese = findViewById(R.id.btn_anamnese);
+        progressBar = findViewById(R.id.progressBarAnamnese);
         rg1 = findViewById(R.id.rg1);
         rg2 = findViewById(R.id.rg2);
         rg3 = findViewById(R.id.rg3);

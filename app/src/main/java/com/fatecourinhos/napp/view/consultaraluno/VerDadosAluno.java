@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.view.cadastros.aluno.CadastroAnamnese;
 
 public class VerDadosAluno extends AppCompatDialogFragment {
 
@@ -49,14 +50,20 @@ public class VerDadosAluno extends AppCompatDialogFragment {
         btnAtendimentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), AtendimentosAluno.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                dismiss();
             }
         });
 
         btnAnamnese.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), CadastroAnamnese.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                dismiss();
             }
         });
 
