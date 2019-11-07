@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import java.util.List;
 public class CadastroAnamnese extends AppCompatActivity {
 
     private RadioGroup rg1,rg2,rg3,rg4,rg5,rg6,rg7,rg8,rg9;
+    private RadioButton rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8, rb9;
     private Button btnAnamnese;
     private ProgressBar progressBar;
 
@@ -51,6 +54,25 @@ public class CadastroAnamnese extends AppCompatActivity {
             btnAnamnese.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    int id1 = rg1.getCheckedRadioButtonId();
+                    int id2 = rg2.getCheckedRadioButtonId();
+                    int id3 = rg3.getCheckedRadioButtonId();
+                    int id4 = rg4.getCheckedRadioButtonId();
+                    int id5 = rg5.getCheckedRadioButtonId();
+                    int id6 = rg6.getCheckedRadioButtonId();
+                    int id7 = rg7.getCheckedRadioButtonId();
+                    int id8 = rg8.getCheckedRadioButtonId();
+                    int id9 = rg9.getCheckedRadioButtonId();
+
+                    rb1 = (RadioButton) findViewById(id1);
+                    rb2 = (RadioButton) findViewById(id2);
+                    rb3 = (RadioButton) findViewById(id3);
+                    rb4 = (RadioButton) findViewById(id4);
+                    rb5 = (RadioButton) findViewById(id5);
+                    rb6 = (RadioButton) findViewById(id6);
+                    rb7 = (RadioButton) findViewById(id7);
+                    rb8 = (RadioButton) findViewById(id8);
+                    rb9 = (RadioButton) findViewById(id9);
 
                     Anamnese anamnese = new Anamnese();
                     Aluno aluno = new Aluno();
@@ -60,17 +82,19 @@ public class CadastroAnamnese extends AppCompatActivity {
                         anamnese.setFkAluno(aluno);
                     }
 
-                    anamnese.setQuestao1(rg1.getCheckedRadioButtonId());
-                    anamnese.setQuestao2(rg2.getCheckedRadioButtonId());
-                    anamnese.setQuestao3(rg3.getCheckedRadioButtonId());
-                    anamnese.setQuestao4(rg4.getCheckedRadioButtonId());
-                    anamnese.setQuestao5(rg5.getCheckedRadioButtonId());
-                    anamnese.setQuestao6(rg6.getCheckedRadioButtonId());
-                    anamnese.setQuestao7(rg7.getCheckedRadioButtonId());
-                    anamnese.setQuestao8(rg8.getCheckedRadioButtonId());
-                    anamnese.setQuestao9(rg9.getCheckedRadioButtonId());
+                    anamnese.setQuestao1(String.valueOf(rb1.getText()));
+                    anamnese.setQuestao2(String.valueOf(rb2.getText()));
+                    anamnese.setQuestao3(String.valueOf(rb3.getText()));
+                    anamnese.setQuestao4(String.valueOf(rb4.getText()));
+                    anamnese.setQuestao5(String.valueOf(rb5.getText()));
+                    anamnese.setQuestao6(String.valueOf(rb6.getText()));
+                    anamnese.setQuestao7(String.valueOf(rb7.getText()));
+                    anamnese.setQuestao8(String.valueOf(rb8.getText()));
+                    anamnese.setQuestao9(String.valueOf(rb9.getText()));
 
                     cadastrarAnamnese(anamnese);
+
+
                 }
             });
 
@@ -78,8 +102,8 @@ public class CadastroAnamnese extends AppCompatActivity {
 
     private void mostrarAnamnese(Anamnese anamnese) {
 
-        if (anamnese.getQuestao1() == 1)
-            rg1.check();
+        //if (anamnese.getQuestao1() == 1)
+        //    rg1.check(anamnese.getQuestao1());
 
     }
 
@@ -152,22 +176,22 @@ public class CadastroAnamnese extends AppCompatActivity {
 
     private void cadastrarAnamnese(Anamnese anamnese){
 
-        String uri = "http://vitorsilva.xyz/napp/agendamento/cadastrarAnamnese.php";
+        String uri = "http://vitorsilva.xyz/napp/anamnese/inserirAnamnese.php";
         CadastrarAnamnese mytask = new CadastrarAnamnese();
         RequestHttp requestHttp = new RequestHttp();
 
         requestHttp.setUrl(uri);
         requestHttp.setMetodo("GET");
         requestHttp.setParametro("fkAluno",  String.valueOf(anamnese.getFkAluno().getIdAluno()));
-        requestHttp.setParametro("Questao1", String.valueOf(anamnese.getQuestao1()));
-        requestHttp.setParametro("Questao2", String.valueOf(anamnese.getQuestao2()));
-        requestHttp.setParametro("Questao3", String.valueOf(anamnese.getQuestao3()));
-        requestHttp.setParametro("Questao4", String.valueOf(anamnese.getQuestao4()));
-        requestHttp.setParametro("Questao5", String.valueOf(anamnese.getQuestao5()));
-        requestHttp.setParametro("Questao6", String.valueOf(anamnese.getQuestao6()));
-        requestHttp.setParametro("Questao7", String.valueOf(anamnese.getQuestao7()));
-        requestHttp.setParametro("Questao8", String.valueOf(anamnese.getQuestao8()));
-        requestHttp.setParametro("Questao9", String.valueOf(anamnese.getQuestao9()));
+        requestHttp.setParametro("Questao1", anamnese.getQuestao1());
+        requestHttp.setParametro("Questao2", anamnese.getQuestao2());
+        requestHttp.setParametro("Questao3", anamnese.getQuestao3());
+        requestHttp.setParametro("Questao4", anamnese.getQuestao4());
+        requestHttp.setParametro("Questao5", anamnese.getQuestao5());
+        requestHttp.setParametro("Questao6", anamnese.getQuestao6());
+        requestHttp.setParametro("Questao7", anamnese.getQuestao7());
+        requestHttp.setParametro("Questao8", anamnese.getQuestao8());
+        requestHttp.setParametro("Questao9", anamnese.getQuestao9());
 
         mytask.execute(requestHttp);
 
@@ -186,7 +210,7 @@ public class CadastroAnamnese extends AppCompatActivity {
             try {
 
                 conteudo = HttpManager.getDados(params[0]);
-
+                Log.e("TESTE - ", conteudo);
                 if (conteudo.contains("Sucesso"))
                     sucesso = true;
                 else

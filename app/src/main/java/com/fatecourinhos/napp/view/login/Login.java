@@ -222,13 +222,13 @@ public class Login extends AppCompatActivity {
             startActivity(new Intent(Login.this, MenuAluno.class));
             finish();
 
-            /*if (aluno.getFkUsuario().getPrimeiroLogin() == 1) {
+            if (aluno.getFkUsuario().getPrimeiroLogin() == 1) {
                 startActivity(new Intent(Login.this, MenuAluno.class));
                 finish();
             } else {
                 startActivity(new Intent(Login.this, CadastroAnamnese.class));
                 finish();
-            }*/
+            }
 
         } else {
 
