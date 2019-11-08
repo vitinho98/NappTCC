@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.consultaraluno.DetalhesAtendimento"></activity>
+        <activity android:name=".view.consultaraluno.VisualizarAtendimento"></activity>
+        <activity android:name=".view.consultaraluno.DetalhesAtendimento" />
         <activity android:name=".view.consultaraluno.AtendimentosAluno" />
         <activity android:name=".view.consultaraluno.DadosPessoaisAluno" />
         <activity android:name=".view.atendimento.ReagendarHorario" />
@@ -51,9 +52,9 @@
         <activity android:name=".view.login.Login" />
         <activity android:name=".view.cadastros.aluno.CadastroAgendamentoAluno" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <dist:module dist:instant="true" />
 

@@ -50,7 +50,7 @@ public class DadosPessoaisAluno extends AppCompatActivity {
         estadoCivil = findViewById(R.id.editTextEstadoCivil);
         progressBar = findViewById(R.id.progressBarDadosAluno);
 
-        /*nome.setEnabled(false);
+        nome.setEnabled(false);
         celular.setEnabled(false);
         email.setEnabled(false);
         semestre.setEnabled(false);
@@ -60,7 +60,7 @@ public class DadosPessoaisAluno extends AppCompatActivity {
         anoEntrada.setEnabled(false);
         sexo.setEnabled(false);
         cidade.setEnabled(false);
-        estadoCivil.setEnabled(false);*/
+        estadoCivil.setEnabled(false);
 
     }
 

@@ -64,15 +64,15 @@ public class CadastroAnamnese extends AppCompatActivity {
                     int id8 = rg8.getCheckedRadioButtonId();
                     int id9 = rg9.getCheckedRadioButtonId();
 
-                    rb1 = (RadioButton) findViewById(id1);
-                    rb2 = (RadioButton) findViewById(id2);
-                    rb3 = (RadioButton) findViewById(id3);
-                    rb4 = (RadioButton) findViewById(id4);
-                    rb5 = (RadioButton) findViewById(id5);
-                    rb6 = (RadioButton) findViewById(id6);
-                    rb7 = (RadioButton) findViewById(id7);
-                    rb8 = (RadioButton) findViewById(id8);
-                    rb9 = (RadioButton) findViewById(id9);
+                    rb1 = findViewById(id1);
+                    rb2 = findViewById(id2);
+                    rb3 = findViewById(id3);
+                    rb4 = findViewById(id4);
+                    rb5 = findViewById(id5);
+                    rb6 = findViewById(id6);
+                    rb7 = findViewById(id7);
+                    rb8 = findViewById(id8);
+                    rb9 = findViewById(id9);
 
                     Anamnese anamnese = new Anamnese();
                     Aluno aluno = new Aluno();
@@ -94,7 +94,6 @@ public class CadastroAnamnese extends AppCompatActivity {
 
                     cadastrarAnamnese(anamnese);
 
-
                 }
             });
 
@@ -102,8 +101,103 @@ public class CadastroAnamnese extends AppCompatActivity {
 
     private void mostrarAnamnese(Anamnese anamnese) {
 
-        //if (anamnese.getQuestao1() == 1)
-        //    rg1.check(anamnese.getQuestao1());
+        if (anamnese.getQuestao1().equals("Sim"))
+            ((RadioButton)rg1.getChildAt(0)).setChecked(true);
+        else if (anamnese.getQuestao1().equals("Não"))
+            ((RadioButton)rg1.getChildAt(1)).setChecked(true);
+        else
+            ((RadioButton)rg1.getChildAt(2)).setChecked(true);
+
+        if (anamnese.getQuestao2().equals("Sim"))
+            ((RadioButton)rg2.getChildAt(0)).setChecked(true);
+        else if (anamnese.getQuestao2().equals("Não"))
+            ((RadioButton)rg2.getChildAt(1)).setChecked(true);
+        else
+            ((RadioButton)rg2.getChildAt(2)).setChecked(true);
+
+        if (anamnese.getQuestao3().equals("Sim"))
+            ((RadioButton)rg3.getChildAt(0)).setChecked(true);
+        else if (anamnese.getQuestao3().equals("Não"))
+            ((RadioButton)rg3.getChildAt(1)).setChecked(true);
+        else
+            ((RadioButton)rg3.getChildAt(2)).setChecked(true);
+
+        if (anamnese.getQuestao4().equals("Sim"))
+            ((RadioButton)rg4.getChildAt(0)).setChecked(true);
+        else if (anamnese.getQuestao4().equals("Não"))
+            ((RadioButton)rg4.getChildAt(1)).setChecked(true);
+        else
+            ((RadioButton)rg4.getChildAt(2)).setChecked(true);
+
+        if (anamnese.getQuestao5().equals("Sim"))
+            ((RadioButton)rg5.getChildAt(0)).setChecked(true);
+        else if (anamnese.getQuestao5().equals("Não"))
+            ((RadioButton)rg5.getChildAt(1)).setChecked(true);
+        else
+            ((RadioButton)rg5.getChildAt(2)).setChecked(true);
+
+        if (anamnese.getQuestao6().equals("Sim"))
+            ((RadioButton)rg6.getChildAt(0)).setChecked(true);
+        else if (anamnese.getQuestao6().equals("Não"))
+            ((RadioButton)rg6.getChildAt(1)).setChecked(true);
+        else
+            ((RadioButton)rg6.getChildAt(2)).setChecked(true);
+
+        if (anamnese.getQuestao7().equals("Sim"))
+            ((RadioButton)rg7.getChildAt(0)).setChecked(true);
+        else if (anamnese.getQuestao7().equals("Não"))
+            ((RadioButton)rg7.getChildAt(1)).setChecked(true);
+        else
+            ((RadioButton)rg7.getChildAt(2)).setChecked(true);
+
+        if (anamnese.getQuestao8().equals("Sim"))
+            ((RadioButton)rg8.getChildAt(0)).setChecked(true);
+        else if (anamnese.getQuestao8().equals("Não"))
+            ((RadioButton)rg8.getChildAt(1)).setChecked(true);
+        else
+            ((RadioButton)rg8.getChildAt(2)).setChecked(true);
+
+        if (anamnese.getQuestao9().equals("Sim"))
+            ((RadioButton)rg9.getChildAt(0)).setChecked(true);
+        else if (anamnese.getQuestao9().equals("Não"))
+            ((RadioButton)rg9.getChildAt(1)).setChecked(true);
+        else
+            ((RadioButton)rg9.getChildAt(2)).setChecked(true);
+
+
+        desabilitarRadioButton();
+        progressBar.setVisibility(View.INVISIBLE);
+
+    }
+
+    private void desabilitarRadioButton() {
+
+        for (int i = 0; i < rg1.getChildCount(); i++)
+            (rg1.getChildAt(i)).setEnabled(false);
+
+        for (int i = 0; i < rg2.getChildCount(); i++)
+            (rg2.getChildAt(i)).setEnabled(false);
+
+        for (int i = 0; i < rg3.getChildCount(); i++)
+            (rg3.getChildAt(i)).setEnabled(false);
+
+        for (int i = 0; i < rg4.getChildCount(); i++)
+            (rg4.getChildAt(i)).setEnabled(false);
+
+        for (int i = 0; i < rg5.getChildCount(); i++)
+            (rg5.getChildAt(i)).setEnabled(false);
+
+        for (int i = 0; i < rg6.getChildCount(); i++)
+            (rg6.getChildAt(i)).setEnabled(false);
+
+        for (int i = 0; i < rg7.getChildCount(); i++)
+            (rg7.getChildAt(i)).setEnabled(false);
+
+        for (int i = 0; i < rg8.getChildCount(); i++)
+            (rg8.getChildAt(i)).setEnabled(false);
+
+        for (int i = 0; i < rg9.getChildCount(); i++)
+            (rg9.getChildAt(i)).setEnabled(false);
 
     }
 
@@ -119,7 +213,7 @@ public class CadastroAnamnese extends AppCompatActivity {
 
         task.execute(requestHttp);
 
-}
+    }
 
     private class SelecionarAnamnese extends AsyncTask<RequestHttp, String, List<Anamnese>> {
 
