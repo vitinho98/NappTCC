@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
@@ -23,23 +23,6 @@
             android:text="ENVIAR"
             android:textColor="@drawable/btn_customizado"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="349dp"
-            android:layout_height="107dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Observações adicionais (Opcional)"
-            android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radiogroup_problema" />
@@ -50,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +43,7 @@
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Não foi resolvido" />
+                android:text="Plenamente" />
 
             <RadioButton
                 android:layout_width="match_parent"
@@ -70,7 +53,7 @@
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Plenamente" />
+                android:text="Não foi resolvido" />
 
         </RadioGroup>
 
@@ -80,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,12 +78,12 @@
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Não foi resolvido" />
+                android:text="Parcialmente" />
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Parcialmente" />
+                android:text="Não foi resolvido" />
 
         </RadioGroup>
 
@@ -110,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:text="Se sentiu atendido?"
@@ -142,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:text="Seu problema foi resolvido?"

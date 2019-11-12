@@ -41,12 +41,13 @@ public class CadastroAnamnese extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_anamnese);
         getComponentes();
+        progressBar.setVisibility(View.INVISIBLE);
 
         if (getIntent().getExtras() != null) {
 
             btnAnamnese.setEnabled(false);
             btnAnamnese.setVisibility(View.INVISIBLE);
-
+            System.out.println("haha");
             int idAluno = getIntent().getExtras().getInt("idAluno");
             selecionarAnamnese(idAluno);
 

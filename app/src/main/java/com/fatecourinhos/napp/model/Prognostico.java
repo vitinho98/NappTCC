@@ -3,6 +3,8 @@ package com.fatecourinhos.napp.model;
 public class Prognostico {
 
     private int idPrognostico;
+    private String obs;
+    private Atendimento fkAtendimento;
     private int opcao1;
     private int opcao2;
     private int opcao3;
@@ -58,6 +60,22 @@ public class Prognostico {
 
     public void setOpcao5(int opcao5) {
         this.opcao5 = opcao5;
+    }
+
+    public String getObs() {
+        return obs;
+    }
+
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
+
+    public Atendimento getFkAtendimento() {
+        return fkAtendimento;
+    }
+
+    public void setFkAtendimento(Atendimento fkAtendimento) {
+        this.fkAtendimento = fkAtendimento;
     }
 
 }

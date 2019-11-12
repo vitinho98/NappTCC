@@ -71,7 +71,7 @@ public class DadosPessoaisAluno extends AppCompatActivity {
         email.setText(aluno.getEmailAluno());
         semestre.setText(Integer.toString(aluno.getSemestre()));
         curso.setText(aluno.getCurso().contains("Desenvolvimento") ? "ADS" : aluno.getCurso());
-        dataNascimento.setText(aluno.getDataNascimento());
+        dataNascimento.setText("08/11/1998");
         ra.setText(aluno.getRa());
         anoEntrada.setText(aluno.getAnoEntrada());
         sexo.setText(aluno.getSexo());

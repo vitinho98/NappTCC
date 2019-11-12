@@ -30,11 +30,12 @@ public class CadastroMensagem extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (editTextMsg.getText().toString().isEmpty())
-                    Toast.makeText(getApplicationContext(), "Insira a mensagem!", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Insira a mensagem!", Toast.LENGTH_SHORT).show();
                 else {
                     Intent intent = new Intent(CadastroMensagem.this, CadastroMensagem2.class);
                     intent.putExtra("msg", editTextMsg.getText().toString());
                     startActivity(intent);
+                    finish();
                 }
 
             }

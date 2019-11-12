@@ -10,4 +10,6 @@
 
     <color name="branco">#FFFFFF</color>
     <color name="cinza">#cccccc</color>
+
+    <color name="disable_color">#000000</color>
 </resources>

@@ -142,7 +142,6 @@ public class ReagendarHorario extends AppCompatActivity {
         requestHttp.setUrl(uri);
         requestHttp.setParametro("idAgendamento", String.valueOf(idAgendamento));
         requestHttp.setParametro("idHorario", String.valueOf(idHorario));
-        System.out.println(idAgendamento + "    " + idHorario);
 
         mytask.execute(requestHttp);
 

@@ -22,6 +22,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="#0A0A0A"
             android:id="@+id/textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,6 +36,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:textColor="@drawable/edit_text_selector"
                 android:id="@+id/editTextNomeAluno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,6 +45,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="#0A0A0A"
             android:id="@+id/textInputLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,6 +59,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:textColor="@drawable/edit_text_selector"
                 android:id="@+id/editTextRaAluno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,6 +68,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="#0A0A0A"
             android:id="@+id/textInputLayout3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -77,6 +82,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:textColor="@drawable/edit_text_selector"
                 android:id="@+id/editTextCelularAluno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,6 +92,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="#0A0A0A"
             android:id="@+id/textInputLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,6 +106,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:textColor="@drawable/edit_text_selector"
                 android:id="@+id/editTextCurso"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,6 +115,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="#0A0A0A"
             android:id="@+id/textInputLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -120,6 +129,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:textColor="@drawable/edit_text_selector"
                 android:id="@+id/editTextSemestre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,6 +138,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="#0A0A0A"
             android:id="@+id/textInputLayout6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -141,6 +152,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:textColor="@drawable/edit_text_selector"
                 android:id="@+id/editTextAnoEntrada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,6 +162,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout7"
+            android:textColorHint="#0A0A0A"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -162,6 +175,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
 
             <EditText
+                android:textColor="@drawable/edit_text_selector"
                 android:id="@+id/editTextDataNascimento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -171,6 +185,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout8"
+            android:textColorHint="#0A0A0A"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -183,6 +198,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:textColor="@drawable/edit_text_selector"
                 android:id="@+id/editTextSexo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -195,6 +211,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:textColorHint="#0A0A0A"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
@@ -204,6 +221,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:textColor="@drawable/edit_text_selector"
                 android:id="@+id/editTextCidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -214,6 +232,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="#0A0A0A"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
@@ -224,6 +243,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout9">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:textColor="@drawable/edit_text_selector"
                 android:id="@+id/editTextEstadoCivil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -232,6 +252,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="#0A0A0A"
             android:id="@+id/textInputLayout10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -245,6 +266,7 @@
             app:layout_constraintTop_toBottomOf="parent">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:textColor="@drawable/edit_text_selector"
                 android:id="@+id/editTextEmailAluno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
