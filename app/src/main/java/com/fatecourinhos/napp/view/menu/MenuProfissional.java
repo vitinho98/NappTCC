@@ -9,6 +9,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import com.fatecourinhos.napp.R;
+import com.fatecourinhos.napp.Relatorio;
+import com.fatecourinhos.napp.RelatoriosFragment;
 import com.fatecourinhos.napp.view.cadastros.profissional.CadastroCampoAtuacao;
 import com.fatecourinhos.napp.view.cadastros.profissional.CadastroDiagnostico;
 import com.fatecourinhos.napp.view.cadastros.profissional.CadastroHorario;
@@ -210,7 +212,14 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
                 break;
 
             case R.id.nav_relatorios:
+                fragment = new RelatoriosFragment();
+                if (fragment != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frame_layout_nav, fragment,"RELATORIOS");
+                    ft.commit();
+                }
                 desabilitarFloat();
+
                 break;
 
             case R.id.nav_indicacoes:

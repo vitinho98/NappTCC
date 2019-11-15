@@ -85,6 +85,9 @@
     <string name="msg_sucesso_cadastro">Cadastrado com sucesso</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="item_encaminhamento">Encaminhamento</string>
+    <string name="btn_relatorio_feedback">Feedback</string>
+    <string name="btn_relatorio_aluno">Aluno</string>
+    <string name="btn_relatorio_profissional">Profissional</string>
 
     <string-array name="tipo_prof_array">
         <item>Administrador</item>
