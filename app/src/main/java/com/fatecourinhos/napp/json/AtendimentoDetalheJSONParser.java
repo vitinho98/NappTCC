@@ -23,19 +23,33 @@ public class AtendimentoDetalheJSONParser {
                 atendimentoDetalhe = new AtendimentoDetalhe();
                 prognostico = new Prognostico();
 
-                atendimentoDetalhe.setObsAtendimento(jsonObject.getString("obsAtendimento"));
-                atendimentoDetalhe.setDiagnosticos(jsonObject.getString("diagnosticos"));
-                atendimentoDetalhe.setProfsExternos(jsonObject.getString("profExternos"));
+                try {
+                    atendimentoDetalhe.setObsAtendimento(jsonObject.getString("obsAtendimento"));
+                    atendimentoDetalhe.setDiagnosticos(jsonObject.getString("diagnosticos"));
+                    atendimentoDetalhe.setProfsExternos(jsonObject.getString("profExternos"));
+                } catch (Exception e) {
+                    atendimentoDetalhe.setObsAtendimento(null);
+                    atendimentoDetalhe.setDiagnosticos(null);
+                    atendimentoDetalhe.setProfsExternos(null);
+                }
 
-                prognostico.setOpcao1(jsonObject.getInt("opcao1"));
-                prognostico.setOpcao2(jsonObject.getInt("opcao2"));
-                prognostico.setOpcao3(jsonObject.getInt("opcao3"));
-                prognostico.setOpcao4(jsonObject.getInt("opcao4"));
-                prognostico.setOpcao5(jsonObject.getInt("opcao5"));
-                prognostico.setObs(jsonObject.getString("observacao"));
+                try {
+                    prognostico.setOpcao1(jsonObject.getInt("opcao1"));
+                    prognostico.setOpcao2(jsonObject.getInt("opcao2"));
+                    prognostico.setOpcao3(jsonObject.getInt("opcao3"));
+                    prognostico.setOpcao4(jsonObject.getInt("opcao4"));
+                    prognostico.setOpcao5(jsonObject.getInt("opcao5"));
+                    prognostico.setObs(jsonObject.getString("observacao"));
+                } catch (Exception e) {
+                    prognostico.setOpcao1(1);
+                    prognostico.setOpcao2(1);
+                    prognostico.setOpcao3(1);
+                    prognostico.setOpcao4(1);
+                    prognostico.setOpcao5(1);
+                    prognostico.setObs(null);
+                }
 
                 atendimentoDetalhe.setFkPrognostico(prognostico);
-
             }
 
             return atendimentoDetalhe;

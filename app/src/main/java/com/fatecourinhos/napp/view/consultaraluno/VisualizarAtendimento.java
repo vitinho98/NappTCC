@@ -77,24 +77,27 @@ public class VisualizarAtendimento extends AppCompatActivity {
         @Override
         protected void onPostExecute(AtendimentoDetalhe atendimentoDetalhe) {
             super.onPostExecute(atendimentoDetalhe);
+            System.out.println(atendimentoDetalhe.getDiagnosticos());
 
-            if (!atendimentoDetalhe.getDiagnosticos().equals("null"))
-                txtDiagnostico.setText("Diagnóstico(s): " + atendimentoDetalhe.getDiagnosticos());
-            else
+            if (atendimentoDetalhe.getDiagnosticos().equals("null"))
                 txtDiagnostico.setText("Não houve diagnóstico nesse atendimento.");
-
-            if (!atendimentoDetalhe.getProfsExternos().equals("null"))
-                txtEncaminhamento.setText("Encaminhamento para: " + atendimentoDetalhe.getProfsExternos());
             else
+                txtDiagnostico.setText("Diagnóstico(s): " + atendimentoDetalhe.getDiagnosticos());
+
+            if (atendimentoDetalhe.getProfsExternos().equals("null"))
                 txtEncaminhamento.setText("Não houve encaminhamento nesse atendimento.");
-
-            if (!atendimentoDetalhe.getObsAtendimento().equals("null"))
-                txtObsAtendimento.setText("Observações do atendimento: " + atendimentoDetalhe.getObsAtendimento());
             else
+                txtEncaminhamento.setText("Encaminhamento para: " + atendimentoDetalhe.getProfsExternos());
+
+            if (atendimentoDetalhe.getObsAtendimento().equals("null"))
                 txtObsAtendimento.setText("Não foi adicionada nenhuma observação nesse atendimento.");
+            else
+                txtObsAtendimento.setText("Observações do atendimento: " + atendimentoDetalhe.getObsAtendimento());
+
+            prognostico = "Prognóstico:\n";
 
             if (atendimentoDetalhe.getFkPrognostico().getOpcao1() == 0)
-                prognostico = "Prognóstico:\nAtendimento semanal para orientação. \n";
+                prognostico += "Atendimento semanal para orientação. \n";
 
             if (atendimentoDetalhe.getFkPrognostico().getOpcao2() == 0)
                 prognostico += "Atendimento quinzenal para orientação. \n";
@@ -108,7 +111,7 @@ public class VisualizarAtendimento extends AppCompatActivity {
             if (atendimentoDetalhe.getFkPrognostico().getOpcao5() == 0)
                 prognostico += "Contato com familiares. \n";
 
-            if (!atendimentoDetalhe.getFkPrognostico().getObs().equals("null"))
+            if (atendimentoDetalhe.getFkPrognostico().getObs() != null)
                 prognostico += "Observações do prognóstico: " + atendimentoDetalhe.getFkPrognostico().getObs();
             else
                 prognostico += "Não foi adicionada nenhuma observação nesse prognóstico.";
