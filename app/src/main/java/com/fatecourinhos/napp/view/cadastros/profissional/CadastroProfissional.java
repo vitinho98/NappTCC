@@ -3,6 +3,8 @@ package com.fatecourinhos.napp.view.cadastros.profissional;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.fatecourinhos.napp.model.Profissional;
 import com.fatecourinhos.napp.model.Usuario;
 import com.fatecourinhos.napp.util.HttpManager;
 import com.fatecourinhos.napp.util.RequestHttp;
+import com.fatecourinhos.napp.view.menu.MenuProfissional;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
@@ -31,6 +34,7 @@ public class CadastroProfissional extends AppCompatActivity {
     private boolean sucesso;
 
     //componentes da tela
+    private SharedPreferences preferences;
     private AppCompatEditText editTextNome, editTextCel, editTextEmail, editTextLogin, editTextSenha;
     private Spinner spinnerProf;
     private Button btnCadastrar;
@@ -136,6 +140,10 @@ public class CadastroProfissional extends AppCompatActivity {
 
         });
 
+        preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
+        if (preferences.contains("tipoUsuario"))
+            if (!preferences.getString("tipoUsuario", null).contains("Administrador"))
+                btnCadastrar.setEnabled(false);
     }
 
     private void enviarDados(boolean inserir) {
