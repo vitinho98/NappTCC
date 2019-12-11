@@ -46,12 +46,14 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
 public class MenuProfissional extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FloatingActionButton fab;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,13 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
 
         NavigationView navigationView = findViewById(R.id.nav_view_profissional);
         navigationView.setNavigationItemSelectedListener(this);
+
+        TextView textViewNome;
+        textViewNome = navigationView.getHeaderView(0).findViewById(R.id.txt_header);
+        preferences = getSharedPreferences("user_settings", MODE_PRIVATE);
+        if (preferences.contains("nome")) {
+            textViewNome.setText("Bem vindo(a) " + preferences.getString("nome", null));
+        }
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
