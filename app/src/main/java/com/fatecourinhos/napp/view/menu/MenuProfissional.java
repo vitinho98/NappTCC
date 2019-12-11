@@ -47,6 +47,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -97,7 +98,13 @@ public class MenuProfissional extends AppCompatActivity implements NavigationVie
                 switch (ativo.getTag()) {
 
                     case("PROFISSIONAL"):
-                        startActivity(new Intent(MenuProfissional.this, CadastroProfissional.class));
+                        if (preferences.contains("tipoUsuario")) {
+                            if (preferences.getString("tipoUsuario", null).contains("Administrador")) {
+                                startActivity(new Intent(MenuProfissional.this, CadastroProfissional.class));
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Somente administradores!", Toast.LENGTH_LONG).show();
+                            }
+                        }
                         break;
 
                     case("HORARIO"):
