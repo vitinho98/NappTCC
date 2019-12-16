@@ -5,11 +5,13 @@ public class RelatorioFeedback {
     private String nomeAluno;
     private String opcao1;
     private String opcao2;
+    private String data;
 
-    public RelatorioFeedback(String nomeAluno, String opcao1, String opcao2) {
+    public RelatorioFeedback(String nomeAluno, String opcao1, String opcao2, String data) {
         this.nomeAluno = nomeAluno;
         this.opcao1 = opcao1;
         this.opcao2 = opcao2;
+        this.data = data;
     }
 
     public RelatorioFeedback() {
@@ -37,5 +39,14 @@ public class RelatorioFeedback {
 
     public void setOpcao2(String opcao2) {
         this.opcao2 = opcao2;
+    }
+
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

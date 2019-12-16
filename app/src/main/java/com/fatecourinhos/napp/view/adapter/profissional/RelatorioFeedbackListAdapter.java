@@ -30,6 +30,7 @@ public class RelatorioFeedbackListAdapter extends ArrayAdapter<RelatorioFeedback
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+        String data = getItem(position).getData();
         String nomeAluno = getItem(position).getNomeAluno();
         String opcao1 = getItem(position).getOpcao1();
         String opcao2 = getItem(position).getOpcao2();
@@ -38,10 +39,12 @@ public class RelatorioFeedbackListAdapter extends ArrayAdapter<RelatorioFeedback
 
         convertView = inflater.inflate(mResource, parent, false);
 
+        TextView txtData = convertView.findViewById(R.id.txtDataFeedback);
         TextView txtNomeAluno = convertView.findViewById(R.id.txtRelatorioNomeFeedback);
         TextView txtOpcao1 = convertView.findViewById(R.id.txtRelatorioOpcao1Feedback);
         TextView txtOpcao2 = convertView.findViewById(R.id.txtRelatorioOpcao2Feedback);
 
+        txtData.setText(data);
         txtNomeAluno.setText(nomeAluno);
         txtOpcao1.setText(opcao1);
         txtOpcao2.setText(opcao2);

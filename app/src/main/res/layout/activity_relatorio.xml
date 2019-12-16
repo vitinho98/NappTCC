@@ -27,10 +27,32 @@
         tools:layout_editor_absoluteX="103dp" />
 
     <TextView
-        android:id="@+id/txtNome"
+        android:id="@+id/txtNomeProfissional"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/listaRelatorio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRelatorioTitulo" />
+
+    <TextView
+        android:id="@+id/txtNomeAluno"
+        android:paddingLeft="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="55dp"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/listaRelatorio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRelatorioTitulo" />
+
+    <TextView
+        android:id="@+id/txtNomeFeedback"
+        android:paddingLeft="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="105dp"
         android:text=""
         app:layout_constraintBottom_toTopOf="@+id/listaRelatorio"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="50dp"
-        android:text="Quantidade"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/listaRelatorio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRelatorioTitulo" />
@@ -51,8 +73,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
+        android:layout_marginLeft="130dp"
         app:layout_constraintBottom_toTopOf="@+id/listaRelatorio"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.564"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRelatorioTitulo"
+        app:layout_constraintVertical_bias="0.517" />
+
+    <TextView
+        android:id="@+id/txtOpcao2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/listaRelatorio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRelatorioTitulo" />
+
+    <TextView
+        android:id="@+id/txtData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/listaRelatorio"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRelatorioTitulo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
