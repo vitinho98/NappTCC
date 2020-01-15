@@ -213,7 +213,7 @@ public class Login extends AppCompatActivity {
 
         if (tipoUsuario.equals("aluno")) {
 
-            System.out.println(tipoUsuario);
+            System.out.println(conteudo);
             List<Aluno> alunos = AlunoJSONParser.parseDados(conteudo);
             Aluno aluno = alunos.get(0);
             

@@ -67,7 +67,7 @@ public class DadosPessoaisAluno extends AppCompatActivity {
     private void setarComponentes(Aluno aluno) {
 
         nome.setText(aluno.getNomeAluno());
-        celular.setText(aluno.getCelularAluno());
+        celular.setText("43984672245");
         email.setText(aluno.getEmailAluno());
         semestre.setText(Integer.toString(aluno.getSemestre()));
         curso.setText(aluno.getCurso().contains("Desenvolvimento") ? "ADS" : aluno.getCurso());

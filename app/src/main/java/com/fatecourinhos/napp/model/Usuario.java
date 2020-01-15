@@ -1,5 +1,7 @@
 package com.fatecourinhos.napp.model;
 
+import android.content.Intent;
+
 public class Usuario {
 
     private int idUsuario;
@@ -7,7 +9,7 @@ public class Usuario {
     private String senha;
     private String tipoUsuario;
     private int status;
-    private int primeiroLogin;
+    private Integer primeiroLogin;
 
     public Usuario() {
 
